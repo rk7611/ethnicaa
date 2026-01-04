@@ -1,25 +1,21 @@
 "use client";
 
+import { useEffect } from "react";
+
 export default function AdminPage() {
+
+  useEffect(() => {
+    alert("Admin page mounted - CLIENT COMPONENT CONFIRMED");
+  }, []);
 
   const handleClick = () => {
     alert("BUTTON CLICK WORKING");
   };
 
   return (
-    <div style={{ padding: "40px", fontFamily: "Arial" }}>
+    <div style={{ padding: 40 }}>
       <h1>Ethnicaa Admin Panel</h1>
-      <p>Welcome Admin</p>
-
-      <button
-        onClick={handleClick}
-        style={{
-          marginTop: "20px",
-          padding: "12px 20px",
-          fontSize: "16px",
-          cursor: "pointer"
-        }}
-      >
+      <button onClick={handleClick}>
         Fetch New Catalogs
       </button>
     </div>
