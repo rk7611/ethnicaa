@@ -20,6 +20,8 @@ import PriceBlock from "@/components/PriceBlock";
 import StructuredDescription from "@/components/StructuredDescription";
 import Link from "next/link";
 
+
+
 /* ============================================================
    ALT TEXT GENERATOR (NEW)
 ============================================================ */
@@ -37,6 +39,7 @@ function generateAltText(p) {
     category ? " | " + category : ""
   } | Ethnicaa Wholesale`;
 }
+
 
 /* ============================================================
    SEO UPDATE
@@ -116,6 +119,14 @@ export default function ProductClient({ slug }) {
   const [product, setProduct] = useState(null);
   const [similar, setSimilar] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+
+useEffect(() => {
+  const check = () => setIsMobile(window.innerWidth < 768);
+  check();
+  window.addEventListener("resize", check);
+  return () => window.removeEventListener("resize", check);
+}, []);
 
   /* LOAD PRODUCT */
   useEffect(() => {
@@ -406,10 +417,16 @@ const styles = {
   breadcrumbs: { fontSize: 14, marginBottom: 18 },
 
   main: {
-    display: "grid",
-    gridTemplateColumns: "1.2fr 1fr",
-    gap: 24,
+  display: "grid",
+  gridTemplateColumns: window.innerWidth < 768 ? "1fr" : "1.2fr 1fr",
+  gap: 16,
+},
+  
+  '@media (max-width: 768px)': {
+  main: {
+    display: "block",
   },
+},
 
   left: {
     background: "#fff",
