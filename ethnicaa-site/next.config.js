@@ -1,9 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export', // 🔥 THIS enables static export
-
   images: {
-    unoptimized: true, // 🔥 REQUIRED for export mode
 
     remotePatterns: [
       {
