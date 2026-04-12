@@ -112,9 +112,7 @@ async function fetchSimilarProducts(product, slug) {
 /* ============================================================
    PRODUCT PAGE
 ============================================================ */
-export default function ProductPage({ params }) {
-  const { slug } = params;
-
+export default function ProductClient({ slug }) {
   const [product, setProduct] = useState(null);
   const [similar, setSimilar] = useState([]);
   const [loading, setLoading] = useState(true);

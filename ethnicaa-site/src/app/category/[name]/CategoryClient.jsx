@@ -115,8 +115,8 @@ function applyCategorySEO(category, count) {
 /* ============================================================
    CATEGORY PAGE
 ============================================================ */
-export default function CategoryPage({ params, searchParams }) {
-  const categorySlug = decodeURIComponent(params.name);
+export default function CategoryClient({ name, searchParams }){
+  const categorySlug = decodeURIComponent(name);
   const sort = searchParams?.sort || "latest";
 
   const [category, setCategory] = useState(null);
