@@ -1,5 +1,5 @@
 import CategoryClient from "./CategoryClient";
-
+export const dynamic = "force-dynamic";
 export async function generateStaticParams() {
   return [];
 }
