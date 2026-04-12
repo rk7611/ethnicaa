@@ -218,6 +218,8 @@ export default function ProductClient({ slug }) {
       })),
     },
   ];
+  
+ 
 
   /* ============================================================
       UI
@@ -234,9 +236,11 @@ export default function ProductClient({ slug }) {
       {/* BREADCRUMB */}
       <div style={styles.breadcrumbs}>
         <Link href="/">Home</Link> /{" "}
-        <Link href={`/category/${product.category}`}>
-  {product.category}
-</Link>{" "}
+        {product.category && (
+  <Link href={`/category/${encodeURIComponent(product.category)}`}>
+    {product.category}
+  </Link>
+)}{" "}
         / {product.catalog || product.name}
       </div>
 
