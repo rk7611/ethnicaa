@@ -19,6 +19,9 @@ import EnquireButton from "@/components/EnquireButton";
 import PriceBlock from "@/components/PriceBlock";
 import StructuredDescription from "@/components/StructuredDescription";
 import Link from "next/link";
+import Image from "next/image";
+
+
 
 /* ============================================================
    ALT TEXT GENERATOR (NEW)
@@ -38,53 +41,6 @@ function generateAltText(p) {
   } | Ethnicaa Wholesale`;
 }
 
-/* ============================================================
-   SEO UPDATE
-============================================================ */
-function updateSEO(p) {
-  if (!p) return;
-
-  const title = p.seo_title || `${p.name} | Ethnicaa Wholesale`;
-  const desc = p.seo_description || p.description || p.name;
-
-  document.title = title;
-
-  const setMeta = (name, value) => {
-    let el = document.querySelector(`meta[name="${name}"]`);
-    if (!el) {
-      el = document.createElement("meta");
-      el.name = name;
-      document.head.appendChild(el);
-    }
-    el.content = value;
-  };
-
-  setMeta("description", desc);
-  setMeta("keywords", p.seo_keywords || `${p.name}, wholesale ${p.slug}`);
-
-  const setOG = (prop, value) => {
-    let el = document.querySelector(`meta[property="${prop}"]`);
-    if (!el) {
-      el = document.createElement("meta");
-      el.setAttribute("property", prop);
-      document.head.appendChild(el);
-    }
-    el.content = value;
-  };
-
-  setOG("og:title", title);
-  setOG("og:description", desc);
-  setOG("og:image", p.coverImage || p.images?.[0] || "");
-  setOG("og:url", window.location.href);
-
-  let canonical = document.querySelector(`link[rel="canonical"]`);
-  if (!canonical) {
-    canonical = document.createElement("link");
-    canonical.rel = "canonical";
-    document.head.appendChild(canonical);
-  }
-  canonical.href = window.location.href;
-}
 
 /* ============================================================
    FETCH SIMILAR PRODUCTS
@@ -116,6 +72,14 @@ export default function ProductClient({ slug }) {
   const [product, setProduct] = useState(null);
   const [similar, setSimilar] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+
+useEffect(() => {
+  const check = () => setIsMobile(window.innerWidth < 768);
+  check();
+  window.addEventListener("resize", check);
+  return () => window.removeEventListener("resize", check);
+}, []);
 
   /* LOAD PRODUCT */
   useEffect(() => {
@@ -156,7 +120,6 @@ export default function ProductClient({ slug }) {
 
       setProduct(normalized);
 
-      updateSEO(normalized);
 
       const sim = await fetchSimilarProducts(normalized, slug);
       setSimilar(sim);
@@ -218,6 +181,8 @@ export default function ProductClient({ slug }) {
       })),
     },
   ];
+  
+ 
 
   /* ============================================================
       UI
@@ -234,9 +199,11 @@ export default function ProductClient({ slug }) {
       {/* BREADCRUMB */}
       <div style={styles.breadcrumbs}>
         <Link href="/">Home</Link> /{" "}
-        <Link href={`/category/${product.category}`}>
-  {product.category}
-</Link>{" "}
+        {product.category && (
+  <Link href={`/category/${encodeURIComponent(product.category)}`}>
+    {product.category}
+  </Link>
+)}{" "}
         / {product.catalog || product.name}
       </div>
 
@@ -361,11 +328,15 @@ export default function ProductClient({ slug }) {
               <Link
                 key={p.slug}
                 href={`/product/${p.slug}`}
+                className="premium-card"
                 style={styles.similarCard}
               >
-                <img
+                <Image
                   src={p.images?.[0]}
                   alt={generateAltText(p)}   
+                  width={200}
+                  height={250}
+                  quality={100}
                   style={styles.similarImg}
                 />
                 <div style={styles.similarText}>
@@ -383,7 +354,7 @@ export default function ProductClient({ slug }) {
           product.catalog || product.name
         )}`}
         target="_blank"
-        style={styles.whatsapp}
+        className="pulsing-whatsapp"
       >
         💬
       </a>
@@ -402,10 +373,16 @@ const styles = {
   breadcrumbs: { fontSize: 14, marginBottom: 18 },
 
   main: {
-    display: "grid",
-    gridTemplateColumns: "1.2fr 1fr",
-    gap: 24,
+  display: "grid",
+  gridTemplateColumns: window.innerWidth < 768 ? "1fr" : "1.2fr 1fr",
+  gap: 16,
+},
+  
+  '@media (max-width: 768px)': {
+  main: {
+    display: "block",
   },
+},
 
   left: {
     background: "#fff",
@@ -466,8 +443,10 @@ const styles = {
 
   similarCard: {
     background: "#fff",
-    padding: 8,
-    borderRadius: 14,
+    borderRadius: 12,
+    padding: 10,
+    boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
+    border: "1px solid rgba(0,0,0,0.02)",
     textDecoration: "none",
     color: "#000",
   },

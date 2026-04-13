@@ -85,6 +85,12 @@ const globalSchema = {
   ],
 };
 
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { Inter } from "next/font/google";
+import Footer from "@/components/Footer";
+
+const inter = Inter({ subsets: ["latin"] });
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -101,9 +107,11 @@ export default function RootLayout({ children }) {
         />
       </head>
 
-      <body>
+      <body className={inter.className}>
         <Header />
         <main>{children}</main>
+        <Footer />
+        <GoogleAnalytics gaId="G-XF0XGW58DX" />
       </body>
     </html>
   );

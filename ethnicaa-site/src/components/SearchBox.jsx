@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { collection, query, where, orderBy, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import Link from "next/link";
+import Image from "next/image";
 
 /* -------------------------------------------------- */
 /* NORMALIZATION + SYNONYMS + FUZZY MATCH */
@@ -188,7 +189,7 @@ export default function SearchBox() {
               style={styles.item}
               onClick={() => setShow(false)}
             >
-              <img src={p.images?.[0]} style={styles.img} />
+              <Image src={p.images?.[0]} alt="thumb" width={50} height={50} quality={100} style={styles.img} />
               <div>
                 <div style={styles.text}>{p.catalog || p.name}</div>
                 <div style={styles.subtext}>

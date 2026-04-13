@@ -404,25 +404,32 @@ export default function HomePage() {
         }}
       />
 
-      {/* ====================== HEADER ====================== */}
-      <header style={styles.header}>
-        <div style={styles.logo}>Ethnicaa Wholesale</div>
-
-        <a
-          href="https://wa.me/9586346332"
-          target="_blank"
-          style={styles.whatsappTop}
-        >
-          WhatsApp: 9586346332
-        </a>
-      </header>
-
       {/* ====================== BANNERS ====================== */}
       {banners.length > 0 && (
-        <div style={{ marginBottom: 20 }}>
+        <div style={{ marginBottom: 20, marginTop: 10 }}>
           <BannerSlider banners={banners} />
         </div>
       )}
+
+      {/* ====================== TRUST BADGES ====================== */}
+      <div style={styles.trustStrip}>
+        <div className="premium-card" style={styles.trustBadge}>
+          <span style={styles.trustIcon}>🏢</span>
+          <span style={styles.trustText}>Direct Surat Manufacturer</span>
+        </div>
+        <div className="premium-card" style={styles.trustBadge}>
+          <span style={styles.trustIcon}>🔒</span>
+          <span style={styles.trustText}>100% Secure Payment</span>
+        </div>
+        <div className="premium-card" style={styles.trustBadge}>
+          <span style={styles.trustIcon}>📦</span>
+          <span style={styles.trustText}>Fast Global Dispatch</span>
+        </div>
+        <div className="premium-card" style={styles.trustBadge}>
+          <span style={styles.trustIcon}>✅</span>
+          <span style={styles.trustText}>Quality Assured</span>
+        </div>
+      </div>
 
       {/* ====================== CATEGORIES ====================== */}
       {categories.length > 0 && (
@@ -434,6 +441,7 @@ export default function HomePage() {
               <Link
                 key={c.slug}
                 href={`/category/${c.slug}`}
+                className="premium-card"
                 style={styles.categoryCard}
               >
                 {c.cover && (
@@ -469,7 +477,7 @@ export default function HomePage() {
                 </div>
               ))
           : products.map((p) => (
-              <div key={p.id} style={styles.card}>
+              <div key={p.id} className="premium-card" style={styles.card}>
                 <Link
                   href={`/product/${p.slug}`}
                   style={{ textDecoration: "none", color: "inherit" }}
@@ -522,11 +530,30 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* ====================== TESTIMONIALS ====================== */}
+      <div style={styles.testimonialSection}>
+        <h3 style={styles.testimonialHeading}>What Our Resellers Say</h3>
+        <div style={styles.testimonialGrid}>
+          <div className="premium-card" style={styles.testimonialCard}>
+            <p style={styles.testimonialText}>"Always brings the latest wholesale catalogs! My customers love the quality."</p>
+            <strong style={styles.testimonialAuthor}>- Riya, Mumbai</strong>
+          </div>
+          <div className="premium-card" style={styles.testimonialCard}>
+            <p style={styles.testimonialText}>"Best reseller margin and very fast dispatch perfectly packed."</p>
+            <strong style={styles.testimonialAuthor}>- Ayesha, Delhi</strong>
+          </div>
+          <div className="premium-card" style={styles.testimonialCard}>
+            <p style={styles.testimonialText}>"I only order my Kurtis and Lehenga from Ethnicaa. Top notch fabric!"</p>
+            <strong style={styles.testimonialAuthor}>- Pooja, Surat</strong>
+          </div>
+        </div>
+      </div>
+
       {/* ====================== WHATSAPP FLOAT BUTTON ====================== */}
       <a
         href="https://wa.me/9586346332"
         target="_blank"
-        style={styles.whatsappFloat}
+        className="pulsing-whatsapp"
       >
         💬
       </a>
@@ -596,7 +623,8 @@ const styles = {
     background: "#fff",
     borderRadius: 12,
     padding: 10,
-    boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
+    border: "1px solid rgba(0,0,0,0.02)",
   },
 
   cardImg: {
@@ -631,9 +659,9 @@ const styles = {
   seoBox: {
     marginTop: 35,
     padding: 20,
-    background: "#fafafa",
-    borderRadius: 10,
-    boxShadow: "0 1px 4px rgba(0,0,0,0.1)",
+    background: "#fff",
+    borderRadius: 12,
+    boxShadow: "0 4px 12px rgba(0,0,0,0.03)",
     lineHeight: 1.7,
   },
 
@@ -671,6 +699,62 @@ const styles = {
     marginTop: 10,
     background: "#ddd",
     borderRadius: 6,
+  },
+
+  trustStrip: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: 16,
+    justifyContent: "center",
+    padding: "20px 0",
+    marginBottom: 24,
+  },
+  trustBadge: {
+    display: "flex",
+    alignItems: "center",
+    gap: 8,
+    background: "#fff",
+    padding: "12px 20px",
+    borderRadius: 50,
+    boxShadow: "0 4px 10px rgba(0,0,0,0.04)",
+  },
+  trustIcon: {
+    fontSize: 20,
+  },
+  trustText: {
+    fontWeight: 600,
+    fontSize: 14,
+  },
+
+  testimonialSection: {
+    marginTop: 40,
+    marginBottom: 20,
+  },
+  testimonialHeading: {
+    fontSize: 22,
+    fontWeight: 700,
+    textAlign: "center",
+    marginBottom: 24,
+  },
+  testimonialGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+    gap: 20,
+  },
+  testimonialCard: {
+    background: "#fff",
+    padding: 24,
+    borderRadius: 16,
+    boxShadow: "0 6px 16px rgba(0,0,0,0.04)",
+  },
+  testimonialText: {
+    fontStyle: "italic",
+    color: "#444",
+    lineHeight: 1.6,
+    marginBottom: 16,
+  },
+  testimonialAuthor: {
+    color: "#000",
   },
 };
 

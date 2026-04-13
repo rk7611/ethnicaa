@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function Header() {
   const router = useRouter();
@@ -16,7 +17,9 @@ export default function Header() {
   return (
     <>
       <header style={styles.header}>
-        <div style={styles.logo}>Ethnicaa Wholesale</div>
+        <Link href="/" style={{ textDecoration: "none", color: "inherit" }}>
+          <div style={styles.logo}>Ethnicaa Wholesale</div>
+        </Link>
 
         <form onSubmit={handleSubmit} style={styles.searchForm}>
           <input
@@ -40,14 +43,16 @@ const styles = {
     position: "fixed",
     top: 0,
     width: "100%",
-    background: "#fff",
+    background: "rgba(255, 255, 255, 0.85)",
+    backdropFilter: "blur(12px)",
+    WebkitBackdropFilter: "blur(12px)",
     zIndex: 999,
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
     padding: "10px 16px",
-    borderBottom: "1px solid #eee",
-    boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
+    borderBottom: "1px solid rgba(0,0,0,0.05)",
+    boxShadow: "0 2px 6px rgba(0,0,0,0.02)",
   },
 
   logo: {

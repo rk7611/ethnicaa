@@ -14,6 +14,7 @@ import {
 import { db } from "@/lib/firebase";
 
 import Link from "next/link";
+import Image from "next/image";
 import EnquireButton from "@/components/EnquireButton";
 
 
@@ -53,63 +54,6 @@ function generateAltText(p) {
   return `${title}${
     fabric ? " in " + fabric : ""
   }${cat ? " | " + cat : ""} | Ethnicaa Wholesale`.trim();
-}
-
-/* ============================================================
-   APPLY SEO
-============================================================ */
-function applyCategorySEO(category, count) {
-  if (!category) return;
-
-  const title =
-    category.category_seo_title ||
-    `${category.name} Wholesale — ${count}+ Latest Catalogs | Ethnicaa`;
-
-  const desc =
-    category.category_seo_description ||
-    `Buy ${count}+ latest ${category.name} wholesale catalogs at best price. Daily new arrivals.`;
-
-  document.title = title;
-
-  const setMeta = (name, content) => {
-    let tag = document.querySelector(`meta[name="${name}"]`);
-    if (!tag) {
-      tag = document.createElement("meta");
-      tag.name = name;
-      document.head.appendChild(tag);
-    }
-    tag.content = content;
-  };
-
-  setMeta("description", desc);
-  setMeta(
-    "keywords",
-    category.category_seo_keywords ||
-      `${category.name}, wholesale ${category.slug}, ${category.name} catalog`
-  );
-
-  const setOG = (property, content) => {
-    let tag = document.querySelector(`meta[property="${property}"]`);
-    if (!tag) {
-      tag = document.createElement("meta");
-      tag.setAttribute("property", property);
-      document.head.appendChild(tag);
-    }
-    tag.content = content;
-  };
-
-  setOG("og:title", title);
-  setOG("og:description", desc);
-  setOG("og:type", "website");
-  setOG("og:url", window.location.href);
-
-  let canonical = document.querySelector(`link[rel="canonical"]`);
-  if (!canonical) {
-    canonical = document.createElement("link");
-    canonical.rel = "canonical";
-    document.head.appendChild(canonical);
-  }
-  canonical.href = window.location.href;
 }
 
 /* ============================================================
@@ -226,13 +170,6 @@ useEffect(() => {
   loadProducts();
 }, [sort, categorySlug]);
 
-  /* APPLY SEO */
-  useEffect(() => {
-    if (category && products.length > 0) {
-      applyCategorySEO(category, products.length);
-    }
-  }, [category, products]);
-
   /* ============================================================
       SCHEMAS
   ============================================================= */
@@ -327,12 +264,15 @@ useEffect(() => {
       <div style={styles.grid}>
         {!loading &&
           products.map((p) => (
-            <div key={p.id} style={styles.card}>
+            <div key={p.id} className="premium-card" style={styles.card}>
               <Link href={`/product/${p.slug}`}>
                 {p.images?.[0] && (
-                  <img
+                  <Image
                     src={p.images[0]}
                     alt={generateAltText(p)}
+                    width={300}
+                    height={380}
+                    quality={100}
                     style={styles.cardImg}
                   />
                 )}
@@ -452,7 +392,7 @@ useEffect(() => {
       <a
         href="https://wa.me/9586346332"
         target="_blank"
-        style={styles.whatsapp}
+        className="pulsing-whatsapp"
       >
         💬
       </a>
@@ -490,7 +430,8 @@ const styles = {
     background: "#fff",
     padding: 12,
     borderRadius: 14,
-    boxShadow: "0 1px 6px rgba(0,0,0,0.1)",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
+    border: "1px solid rgba(0,0,0,0.02)",
   },
 
   cardImg: {

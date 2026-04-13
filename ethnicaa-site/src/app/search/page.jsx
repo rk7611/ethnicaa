@@ -11,66 +11,8 @@ import {
 
 import { db } from "@/lib/firebase";
 import Link from "next/link";
+import Image from "next/image";
 import EnquireButton from "@/components/EnquireButton";
-
-/* ===================================================================
-    SEO UPDATE FUNCTION
-=================================================================== */
-function updateSearchSEO(keyword, resultCount) {
-  const cleanKeyword = keyword?.trim() || "";
-
-  const title = cleanKeyword
-    ? `Search: "${cleanKeyword}" — ${resultCount} Results | Ethnicaa Wholesale`
-    : `Search Products | Ethnicaa Wholesale`;
-
-  const desc = cleanKeyword
-    ? `Found ${resultCount} matching products for "${cleanKeyword}". Explore ethnic wear wholesale suits, sarees, kurtis, gowns and more.`
-    : `Search Ethnicaa Wholesale product catalog for suits, sarees, kurtis, gowns & more.`
-
-  document.title = title;
-
-  const set = (name, value) => {
-    let tag = document.querySelector(`meta[name="${name}"]`);
-    if (!tag) {
-      tag = document.createElement("meta");
-      tag.name = name;
-      document.head.appendChild(tag);
-    }
-    tag.content = value;
-  };
-
-  /* 🛑 Search pages must be NOINDEX */
-  set("robots", "noindex, follow");
-  set("description", desc);
-  set("keywords", `${cleanKeyword}, wholesale ethnic wear search`);
-
-  const setOg = (p, c) => {
-    let tag = document.querySelector(`meta[property="${p}"]`);
-    if (!tag) {
-      tag = document.createElement("meta");
-      tag.setAttribute("property", p);
-      document.head.appendChild(tag);
-    }
-    tag.content = c;
-  };
-
-  const url = typeof window !== "undefined" ? window.location.href : "";
-
-  setOg("og:title", title);
-  setOg("og:description", desc);
-  setOg("og:url", url);
-  setOg("og:image", "https://ethnicaa.com/logo.png");
-  setOg("og:type", "website");
-
-  /* Canonical (Search pages should NOT have parameters) */
-  let canonical = document.querySelector(`link[rel="canonical"]`);
-  if (!canonical) {
-    canonical = document.createElement("link");
-    canonical.rel = "canonical";
-    document.head.appendChild(canonical);
-  }
-  canonical.href = "https://ethnicaa.com/search";
-}
 
 /* ===================================================================
     NORMALIZATION HELPERS
@@ -173,9 +115,6 @@ export default function SearchPage({ searchParams }) {
 
       setProducts(results);
       setLoading(false);
-
-      /* APPLY SEO */
-      updateSearchSEO(keywordRaw, results.length);
     }
 
     load();
@@ -252,12 +191,15 @@ export default function SearchPage({ searchParams }) {
 
       <div style={styles.grid}>
         {products.map((p) => (
-          <div key={p.id} style={styles.card}>
+          <div key={p.id} className="premium-card" style={styles.card}>
             <Link href={`/product/${p.slug}`}>
               {p.images?.[0] && (
-                <img
+                <Image
                   src={p.images[0]}
                   alt={p.name}
+                  width={300}
+                  height={380}
+                  quality={100}
                   style={styles.cardImg}
                 />
               )}
@@ -271,10 +213,11 @@ export default function SearchPage({ searchParams }) {
         ))}
       </div>
 
+      {/* FLOAT WHATSAPP */}
       <a
         href="https://wa.me/9586346332"
         target="_blank"
-        style={styles.whatsappFloat}
+        className="pulsing-whatsapp"
       >
         💬
       </a>
@@ -298,7 +241,8 @@ const styles = {
     background: "#fff",
     borderRadius: 12,
     padding: 10,
-    boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
+    border: "1px solid rgba(0,0,0,0.02)",
   },
   cardImg: {
     width: "100%",
