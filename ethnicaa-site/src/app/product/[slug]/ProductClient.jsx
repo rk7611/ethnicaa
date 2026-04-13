@@ -18,6 +18,7 @@ import ImageGallery from "@/components/ImageGallery";
 import EnquireButton from "@/components/EnquireButton";
 import PriceBlock from "@/components/PriceBlock";
 import StructuredDescription from "@/components/StructuredDescription";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -197,15 +198,15 @@ useEffect(() => {
       />
 
       {/* BREADCRUMB */}
-      <div style={styles.breadcrumbs}>
-        <Link href="/">Home</Link> /{" "}
-        {product.category && (
-  <Link href={`/category/${encodeURIComponent(product.category)}`}>
-    {product.category}
-  </Link>
-)}{" "}
-        / {product.catalog || product.name}
-      </div>
+      <Breadcrumbs
+        items={[
+          {
+            name: product.category || "Catalog",
+            url: `/category/${encodeURIComponent(product.category)}`,
+          },
+          { name: product.catalog || product.name, url: "" },
+        ]}
+      />
 
       {/* MAIN GRID */}
       <div style={{ ...styles.main, gridTemplateColumns: isMobile ? "1fr" : "1.2fr 1fr" }}>

@@ -39,9 +39,32 @@ export default function Footer() {
             <h3 style={styles.title}>Support</h3>
             <ul style={styles.list}>
               <li><Link href="/how-to-order" style={styles.link}>How to Order</Link></li>
+              <li><Link href="/blog" style={styles.link}>Wholesale Blog</Link></li>
               <li><a href="https://wa.me/9586346332" target="_blank" rel="noopener noreferrer" style={styles.link}>WhatsApp: +91 9586346332</a></li>
               <li><a href="mailto:support@ethnicaa.com" style={styles.link}>support@ethnicaa.com</a></li>
             </ul>
+          </div>
+        </div>
+
+        {/* SEO INTERNAL LINK STRIP */}
+        <div style={styles.seoStrip}>
+          <div style={styles.seoColumn}>
+            <h4 style={styles.seoTitle}>Top Collections</h4>
+            <div style={styles.seoLinks}>
+              <Link href="/category/sarees" style={styles.link}>Wholesale Sarees Surat</Link>
+              <Link href="/category/kurtis" style={styles.link}>Kurti Manufacturer Surat</Link>
+              <Link href="/category/pakistani-suits" style={styles.link}>Pakistani Suits Wholesale</Link>
+              <Link href="/category/salwar-suits" style={styles.link}>Salwar Suits Bulk Price</Link>
+            </div>
+          </div>
+          <div style={styles.seoColumn}>
+            <h4 style={styles.seoTitle}>Trending Searches</h4>
+            <div style={styles.seoLinks}>
+              <Link href="/search?keyword=lawn+suits" style={styles.link}>Lawn Suits Wholesale India</Link>
+              <Link href="/search?keyword=cotton+kurtis" style={styles.link}>Cotton Kurtis for Resellers</Link>
+              <Link href="/search?keyword=bridal+lehenga" style={styles.link}>Bridal Lehenga Surat Market</Link>
+              <Link href="/search?keyword=party+wear+suits" style={styles.link}>Designer Party Wear Suits</Link>
+            </div>
           </div>
         </div>
         
@@ -102,5 +125,32 @@ const styles = {
     textAlign: "center",
     fontSize: 14,
     color: "#777",
+  },
+  seoStrip: {
+    borderTop: "1px solid #333",
+    paddingTop: 30,
+    marginTop: 20,
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+    gap: 30,
+    paddingBottom: 20,
+  },
+  seoColumn: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 12,
+  },
+  seoTitle: {
+    fontSize: 14,
+    fontWeight: "700",
+    color: "#fff",
+    textTransform: "uppercase",
+    letterSpacing: "0.5px",
+    marginBottom: 4,
+  },
+  seoLinks: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "10px 20px",
   },
 };

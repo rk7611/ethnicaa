@@ -15,15 +15,15 @@ export async function generateMetadata({ params }) {
   }
 
   const p = snap.data();
-  const title = p.seo_title || `${p.catalog || p.name} | Ethnicaa Wholesale`;
-  const description = p.seo_description || p.description || p.name;
+  const title = p.seo_title || `${p.catalog || p.name} — Surat Wholesale Catalog at Factory Price`;
+  const description = p.seo_description || `Buy ${p.catalog || p.name} legacy catalog at wholesale price direct from Surat. ${p.pcs ? p.pcs + " pieces set. " : ""}Latest collection for resellers with worldwide shipping and secure payment.`;
   const image = p.coverImage || p.images?.[0] || "https://ethnicaa.com/logo.png";
   const url = `https://ethnicaa.com/product/${slug}`;
 
   return {
     title,
     description,
-    keywords: p.seo_keywords || `${p.name}, wholesale ${slug}`,
+    keywords: p.seo_keywords || `${p.name} wholesale, ${p.catalog} Surat wholesale, ethnic wear manufacturers Surat, ${p.name} price per piece`,
     alternates: {
       canonical: url,
     },

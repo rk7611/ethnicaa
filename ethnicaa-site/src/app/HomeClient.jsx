@@ -16,6 +16,7 @@ import Link from "next/link";
 import Image from "next/image";
 import BannerSlider from "@/components/BannerSlider";
 import EnquireButton from "@/components/EnquireButton";
+import { blogs } from "@/lib/blog-data";
 
 const PAGE_SIZE = 12;
 
@@ -288,15 +289,14 @@ export default function HomePage() {
       <li>Support for global buyers</li>
     </ul>
 
-    <h3>Our Major Categories</h3>
+    <h3>Our Major Collections</h3>
     <ul>
-      <li>Wholesale Sarees</li>
-      <li>Wholesale Kurtis</li>
-      <li>Pakistani Suits</li>
-      <li>Salwar Suits</li>
-      <li>Gowns</li>
-      <li>Lehengas</li>
-      <li>Cord Sets</li>
+      <li><a href="/category/sarees">Wholesale Sarees Surat</a></li>
+      <li><a href="/category/kurtis">Wholesale Kurtis Surat</a></li>
+      <li><a href="/category/pakistani-suits">Pakistani Suits Wholesale</a></li>
+      <li><a href="/category/salwar-suits">Salwar Suits Manufacturer</a></li>
+      <li><a href="/category/gowns">Designer Gowns Wholesale</a></li>
+      <li><a href="/category/lehenga">Lehenga Choli Wholesale Surat</a></li>
     </ul>
 
     <h3>Why Resellers Prefer Ethnicaa?</h3>
@@ -467,9 +467,25 @@ export default function HomePage() {
         </button>
       )}
 
+      {/* ====================== BLOG SECTION ====================== */}
+      <h2 style={styles.heading}>From Our Blog</h2>
+      <div style={styles.blogGrid}>
+        {blogs.slice(0, 3).map((post) => (
+          <div key={post.slug} className="premium-card" style={styles.blogCard}>
+            <Link href={`/blog/${post.slug}`} style={{ textDecoration: "none", color: "inherit" }}>
+              <div style={styles.blogImageWrapper}>
+                <Image src={post.image} alt={post.title} fill style={{ objectFit: "cover", borderRadius: 12 }} />
+              </div>
+              <h3 style={styles.blogTitle}>{post.title}</h3>
+              <p style={styles.blogExcerpt}>{post.excerpt.substring(0, 100)}...</p>
+            </Link>
+          </div>
+        ))}
+      </div>
+
       {/* ====================== SEO CONTENT BLOCK ====================== */}
       <div style={styles.seoBox}>
-        <div dangerouslySetInnerHTML={{ __html: homepageSEOContent }} />
+        <div style={styles.htmlContent} dangerouslySetInnerHTML={{ __html: homepageSEOContent }} />
 
         {/* Visible FAQs */}
         <div style={{ marginTop: 20 }}>
@@ -702,5 +718,39 @@ const styles = {
   testimonialAuthor: {
     color: "#000",
   },
+  blogGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+    gap: 20,
+    marginBottom: 40,
+  },
+  blogCard: {
+    padding: 16,
+    background: "#fff",
+    borderRadius: 16,
+  },
+  blogImageWrapper: {
+    position: "relative",
+    width: "100%",
+    height: 180,
+    marginBottom: 12,
+  },
+  blogTitle: {
+    fontSize: 18,
+    fontWeight: "700",
+    marginBottom: 8,
+  },
+  blogExcerpt: {
+    fontSize: 14,
+    color: "#666",
+    lineHeight: 1.5,
+  },
+  htmlContent: {
+    "& a": {
+      color: "#0066cc",
+      fontWeight: "600",
+      textDecoration: "none",
+    }
+  }
 };
 

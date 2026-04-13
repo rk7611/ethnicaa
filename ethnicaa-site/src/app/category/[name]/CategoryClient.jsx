@@ -16,6 +16,7 @@ import { db } from "@/lib/firebase";
 import Link from "next/link";
 import Image from "next/image";
 import EnquireButton from "@/components/EnquireButton";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 
 const PAGE_SIZE = 50;
@@ -240,6 +241,10 @@ useEffect(() => {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaList) }}
+      />
+
+      <Breadcrumbs 
+        items={[{ name: category?.name || categorySlug.replace(/-/g, " "), url: "" }]} 
       />
 
       <h1 style={styles.pageTitle}>
