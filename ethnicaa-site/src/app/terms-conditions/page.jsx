@@ -9,7 +9,7 @@ export default function TermsConditionsPage() {
       <h1 style={styles.title}>Terms & Conditions</h1>
       
       <div style={styles.content}>
-        <p><em>Last Updated: {new Date().toLocaleDateString()}</em></p>
+        <p><em>Last Updated: April 13, 2026</em></p>
         <p>
           Welcome to Ethnicaa Wholesale (ethnicaa.com). By using our website and placing bulk orders with our team, you agree to be bound by the following wholesale Terms & Conditions.
         </p>

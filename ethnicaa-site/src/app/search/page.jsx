@@ -217,7 +217,9 @@ export default function SearchPage({ searchParams }) {
       <a
         href="https://wa.me/9586346332"
         target="_blank"
+        rel="noopener noreferrer"
         className="pulsing-whatsapp"
+        aria-label="Chat on WhatsApp"
       >
         💬
       </a>

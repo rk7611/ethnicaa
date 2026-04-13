@@ -208,7 +208,7 @@ useEffect(() => {
       </div>
 
       {/* MAIN GRID */}
-      <div style={styles.main}>
+      <div style={{ ...styles.main, gridTemplateColumns: isMobile ? "1fr" : "1.2fr 1fr" }}>
         <div style={styles.left}>
   {/* Image Gallery with SEO ALT TEXT */}
   <ImageGallery
@@ -355,6 +355,7 @@ useEffect(() => {
         )}`}
         target="_blank"
         className="pulsing-whatsapp"
+        aria-label="Chat on WhatsApp"
       >
         💬
       </a>
@@ -373,16 +374,9 @@ const styles = {
   breadcrumbs: { fontSize: 14, marginBottom: 18 },
 
   main: {
-  display: "grid",
-  gridTemplateColumns: window.innerWidth < 768 ? "1fr" : "1.2fr 1fr",
-  gap: 16,
-},
-  
-  '@media (max-width: 768px)': {
-  main: {
-    display: "block",
+    display: "grid",
+    gap: 16,
   },
-},
 
   left: {
     background: "#fff",
@@ -464,18 +458,4 @@ const styles = {
     fontWeight: 600,
   },
 
-  whatsapp: {
-    position: "fixed",
-    bottom: 20,
-    right: 20,
-    background: "#25D366",
-    width: 54,
-    height: 54,
-    borderRadius: "50%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: 26,
-    color: "#fff",
-  },
 };

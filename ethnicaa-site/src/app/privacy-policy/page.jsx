@@ -9,7 +9,7 @@ export default function PrivacyPolicyPage() {
       <h1 style={styles.title}>Privacy Policy</h1>
       
       <div style={styles.content}>
-        <p><em>Last Updated: {new Date().toLocaleDateString()}</em></p>
+        <p><em>Last Updated: April 13, 2026</em></p>
         <p>
           Ethnicaa Wholesale ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how your personal and business information is collected, used, and disclosed when you visit our website (ethnicaa.com).
         </p>

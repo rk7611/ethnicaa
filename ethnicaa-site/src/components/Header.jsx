@@ -74,21 +74,4 @@ const styles = {
     fontSize: 14,
   },
 
-  /* MOBILE OVERRIDES */
-  "@media (max-width: 600px)": {
-    header: {
-      flexDirection: "column",
-      alignItems: "stretch",
-      padding: 12,
-      gap: 8,
-    },
-    searchForm: {
-      width: "100%",
-      marginLeft: 0,
-    },
-    logo: {
-      fontSize: 18,
-      textAlign: "center",
-    },
-  },
 };

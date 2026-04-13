@@ -39,14 +39,14 @@ export default function Footer() {
             <h3 style={styles.title}>Support</h3>
             <ul style={styles.list}>
               <li><Link href="/how-to-order" style={styles.link}>How to Order</Link></li>
-              <li><a href="https://wa.me/9586346332" target="_blank" style={styles.link}>WhatsApp: +91 9586346332</a></li>
+              <li><a href="https://wa.me/9586346332" target="_blank" rel="noopener noreferrer" style={styles.link}>WhatsApp: +91 9586346332</a></li>
               <li><a href="mailto:support@ethnicaa.com" style={styles.link}>support@ethnicaa.com</a></li>
             </ul>
           </div>
         </div>
         
         <div style={styles.bottomBar}>
-          <p>&copy; {new Date().getFullYear()} Ethnicaa Wholesale. All Rights Reserved.</p>
+          <p>&copy; 2026 Ethnicaa Wholesale. All Rights Reserved.</p>
         </div>
       </div>
     </footer>
