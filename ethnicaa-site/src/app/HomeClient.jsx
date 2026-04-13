@@ -306,6 +306,26 @@ export default function HomePage() {
       shopkeepers, and boutique owners.
     </p>
 
+    <h3>The Legacy of Surat’s Textile Market</h3>
+    <p>
+      Surat is the undisputed global hub for ethnic wear manufacturing. Known as the 'Silk City' and 'Textile Hub of India,' it produces over 40% of India’s synthetic fabric. By sourcing your inventory directly from Surat through Ethnicaa, you are tapping into a century-old legacy of craftsmanship and industrial efficiency. This allows us to provide you with prices that are 20-30% lower than traditional regional wholesalers.
+    </p>
+
+    <h3>B2B Sourcing Guide for International Buyers</h3>
+    <p>
+      If you are a boutique owner in the USA, UK, Canada, or UAE, sourcing from India can be challenging. Ethnicaa simplifies this by providing a reliable B2B gateway. We handle quality inspection, professional packaging, and customs documentation, ensuring your wholesale Pakistani suits and Sarees reach you without any logistical hurdles. Our global shipping partners ensure doorstep delivery within 7-10 business days.
+    </p>
+
+    <h3>Quality Control & Fulfillment in Wholesale</h3>
+    <p>
+      In the wholesale business, consistency is key. At Ethnicaa, we have a multi-step quality check process. Before any catalog is dispatched from our Surat warehouse, our team inspects the fabric, embroidery, and stitch quality to ensure it matches the brand’s original catalog images. This commitment to quality has made us the trusted partner for over 5000+ resellers worldwide.
+    </p>
+
+    <h3>Sustainable Partnerships & Long-term Growth</h3>
+    <p>
+      We don't just sell catalogs; we build businesses. Our team provides resellers with high-resolution images and marketing materials to help them sell effectively on social media platforms like Instagram and WhatsApp. Whether you are a small home-based startup or a large retail chain, our scalable wholesale models are designed to grow with you.
+    </p>
+
     <h3>FAQs</h3>
   `;
 
@@ -380,7 +400,7 @@ export default function HomePage() {
       </div>
 
       {/* ====================== H1 HOMEPAGE ====================== */}
-      <h1 style={styles.pageH1}>Latest Wholesale Ethnic Wear Catalogs — Sarees, Kurtis, Suits & More</h1>
+      <h1 style={styles.pageH1}>Ethnicaa: Surat Wholesale Sarees, Kurtis & Pakistani Suits</h1>
 
       {/* ====================== CATEGORIES ====================== */}
       {categories.length > 0 && (

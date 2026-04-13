@@ -15,8 +15,8 @@ export async function generateMetadata({ params }) {
   }
 
   const p = snap.data();
-  const title = p.seo_title || `${p.catalog || p.name} — Surat Wholesale Catalog at Factory Price`;
-  const description = p.seo_description || `Buy ${p.catalog || p.name} legacy catalog at wholesale price direct from Surat. ${p.pcs ? p.pcs + " pieces set. " : ""}Latest collection for resellers with worldwide shipping and secure payment.`;
+  const title = p.seo_title || `${p.catalog || p.name} — Surat Wholesale at Factory Price`;
+  const description = p.seo_description || `Buy ${p.catalog || p.name} catalog at wholesale direct from Surat. ${p.pcs ? p.pcs + " pieces. " : ""}Latest collection for resellers with global shipping.`;
   const image = p.coverImage || p.images?.[0] || "https://ethnicaa.com/logo.png";
   const url = `https://ethnicaa.com/product/${slug}`;
 

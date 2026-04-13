@@ -19,8 +19,8 @@ export async function generateMetadata({ params }) {
     };
   }
 
-  const title = category.category_seo_title || `Latest ${category.name} Wholesale Catalog 2026 — Factory Price in Surat`;
-  const description = category.category_seo_description || `Explore the largest collection of ${category.name} at wholesale rates. Direct from Surat textile market manufacturers. Perfect for bulk buyers and resellers. Daily new arrivals with worldwide delivery.`;
+  const title = category.category_seo_title || `${category.name} Wholesale Catalog 2026 — Factory Price Surat`;
+  const description = category.category_seo_description || `Buy ${category.name} at wholesale rates direct from Surat manufacturers. Perfect for bulk buyers & resellers with worldwide delivery.`;
   const url = `https://ethnicaa.com/category/${categorySlug}`;
 
   return {
