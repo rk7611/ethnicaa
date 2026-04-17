@@ -54,6 +54,19 @@ export default function PriceBlock({ product }) {
             <b>Minimum Order:</b> {pcs} pcs
           </p>
         )}
+
+        {/* TRUST & SHIPPING */}
+        <div style={styles.trustInfo}>
+          <div style={styles.trustItem}>
+            <span>✅</span> Verified Surat Manufacturer
+          </div>
+          <div style={styles.trustItem}>
+            <span>🚀</span> Ships in 24-48 Hours
+          </div>
+          <div style={styles.trustItem}>
+            <span>🛡️</span> 100% Quality Assurance
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -64,29 +77,50 @@ export default function PriceBlock({ product }) {
 /* -------------------------------------- */
 const styles = {
   box: {
-    background: "#fafafa",
-    padding: "14px 16px",
-    borderRadius: 10,
-    marginBottom: 15,
+    background: "#fff",
+    padding: "18px 20px",
+    borderRadius: 16,
+    marginBottom: 20,
+    boxShadow: "0 4px 15px rgba(0,0,0,0.04)",
     border: "1px solid #eee",
   },
 
   mainPrice: {
-    fontSize: 24,
-    fontWeight: 700,
-    marginBottom: 6,
+    fontSize: 28,
+    fontWeight: 800,
+    marginBottom: 8,
+    color: "#d32f2f",
   },
 
   line: {
-    fontSize: 15,
-    margin: "4px 0",
-    color: "#444",
+    fontSize: 16,
+    margin: "6px 0",
+    color: "#333",
   },
 
   subNote: {
     fontSize: 14,
     marginTop: 5,
-    marginBottom: 8,
-    color: "#777",
+    marginBottom: 10,
+    color: "#666",
+    fontStyle: "italic",
+  },
+
+  trustInfo: {
+    marginTop: 18,
+    paddingTop: 15,
+    borderTop: "1px solid #eee",
+    display: "flex",
+    flexDirection: "column",
+    gap: 8,
+  },
+
+  trustItem: {
+    fontSize: 13,
+    fontWeight: 600,
+    color: "#2e7d32",
+    display: "flex",
+    alignItems: "center",
+    gap: 6,
   },
 };

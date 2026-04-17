@@ -20,6 +20,8 @@ export default function Footer() {
               <li><Link href="/about-us" style={styles.link}>About Us</Link></li>
               <li><Link href="/contact-us" style={styles.link}>Contact Us</Link></li>
               <li><Link href="/faq" style={styles.link}>FAQs</Link></li>
+              <li><Link href="/wholesale-manufacturers-in-surat" style={styles.link}>Surat Manufacturers</Link></li>
+              <li><Link href="/surat-wholesale-market-guide" style={styles.link}>Market Guide 2026</Link></li>
             </ul>
           </div>
 
@@ -64,6 +66,24 @@ export default function Footer() {
               <Link href="/search?keyword=cotton+kurtis" style={styles.link}>Cotton Kurtis for Resellers</Link>
               <Link href="/search?keyword=bridal+lehenga" style={styles.link}>Bridal Lehenga Surat Market</Link>
               <Link href="/search?keyword=party+wear+suits" style={styles.link}>Designer Party Wear Suits</Link>
+            </div>
+          </div>
+          <div style={styles.seoColumn}>
+            <h4 style={styles.seoTitle}>Wholesale Materials</h4>
+            <div style={styles.seoLinks}>
+              <Link href="/collections/silk-sarees" style={styles.link}>Wholesale Silk Sarees</Link>
+              <Link href="/collections/cotton-kurtis" style={styles.link}>Wholesale Cotton Kurtis</Link>
+              <Link href="/collections/organza-sarees" style={styles.link}>Organza Sarees Bulk</Link>
+              <Link href="/collections/georgette-suits" style={styles.link}>Georgette Suits Manufacturer</Link>
+            </div>
+          </div>
+          <div style={styles.seoColumn}>
+            <h4 style={styles.seoTitle}>Local Sourcing</h4>
+            <div style={styles.seoLinks}>
+              <Link href="/collections/sarees-in-mumbai" style={styles.link}>Wholesale Sarees in Mumbai</Link>
+              <Link href="/collections/kurtis-in-delhi" style={styles.link}>Wholesale Kurtis in Delhi</Link>
+              <Link href="/collections/suits-in-jaipur" style={styles.link}>Wholesale Suits in Jaipur</Link>
+              <Link href="/collections/sarees-in-kolkata" style={styles.link}>Wholesale Sarees in Kolkata</Link>
             </div>
           </div>
         </div>
@@ -131,7 +151,7 @@ const styles = {
     paddingTop: 30,
     marginTop: 20,
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
     gap: 30,
     paddingBottom: 20,
   },

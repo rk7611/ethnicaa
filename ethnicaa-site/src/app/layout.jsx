@@ -38,8 +38,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Ethnicaa Wholesale",
-    description:
-      "Latest wholesale ethnic wear with daily new catalog uploads.",
+    description: "Daily new arrivals of Surat wholesale ethnic wear. Factory prices for resellers.",
     images: ["https://ethnicaa.com/logo.png"],
   },
 
@@ -62,32 +61,60 @@ const globalSchema = {
       name: "Ethnicaa Wholesale",
       url: "https://ethnicaa.com",
       logo: "https://ethnicaa.com/logo.png",
+      sameAs: [
+        "https://www.instagram.com/rk7611",
+      ],
       contactPoint: {
         "@type": "ContactPoint",
         telephone: "+91-9586346332",
         contactType: "sales",
       },
-      sameAs: [
-        "https://www.instagram.com",
-        "https://www.facebook.com",
-      ],
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://ethnicaa.com/#localbusiness",
+      "name": "Ethnicaa Wholesale",
+      "image": "https://ethnicaa.com/logo.png",
+      "url": "https://ethnicaa.com",
+      "telephone": "+91-9586346332",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Ring Road",
+        "addressLocality": "Surat",
+        "addressRegion": "Gujarat",
+        "postalCode": "395002",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 21.1702,
+        "longitude": 72.8311
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "opens": "10:00",
+        "closes": "20:00"
+      }
     },
     {
       "@type": "WebSite",
-      name: "Ethnicaa Wholesale",
-      url: "https://ethnicaa.com",
-      potentialAction: {
+      "name": "Ethnicaa Wholesale",
+      "url": "https://ethnicaa.com",
+      "potentialAction": {
         "@type": "SearchAction",
-        target: "https://ethnicaa.com/search?keyword={search}",
-        "query-input": "required name=search",
-      },
-    },
+        "target": "https://ethnicaa.com/search?keyword={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
   ],
 };
 
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Inter } from "next/font/google";
 import Footer from "@/components/Footer";
+import WhatsAppPopup from "@/components/WhatsAppPopup";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -111,6 +138,7 @@ export default function RootLayout({ children }) {
         <Header />
         <main>{children}</main>
         <Footer />
+        <WhatsAppPopup />
         <GoogleAnalytics gaId="G-XF0XGW58DX" />
       </body>
     </html>

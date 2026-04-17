@@ -42,26 +42,31 @@ Please share more details.
   };
 
   return (
-    <button onClick={openWhatsApp} style={styles.button}>
-      WhatsApp
+    <button onClick={openWhatsApp} style={styles.button} className="pulse-button">
+      <span style={{ marginRight: 8 }}>💬</span>
+      Enquire on WhatsApp
     </button>
   );
 }
 
 const styles = {
   button: {
-    display: "block",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     width: "100%",
-    padding: "12px 18px",
-    borderRadius: 8,
-    background: "#25D366",
+    padding: "14px 18px",
+    borderRadius: 12,
+    background: "#25D366", // High-contrast WhatsApp Green
     color: "#fff",
     textAlign: "center",
-    fontSize: 16,
-    fontWeight: 600,
+    fontSize: 17,
+    fontWeight: 700,
     textDecoration: "none",
     border: "none",
     marginTop: 12,
     cursor: "pointer",
+    boxShadow: "0 6px 20px rgba(37, 211, 102, 0.3)",
+    transition: "transform 0.2s, box-shadow 0.2s",
   },
 };

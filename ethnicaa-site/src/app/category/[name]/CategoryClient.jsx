@@ -212,12 +212,20 @@ useEffect(() => {
   if (products.length > 0) {
     schemaList.push({
       "@context": "https://schema.org",
-      "@type": "ItemList",
-      itemListElement: products.map((p, i) => ({
-        "@type": "ListItem",
-        position: i + 1,
-        url: `https://ethnicaa.com/product/${p.slug}`,
-      })),
+      "@type": "CollectionPage",
+      name: category?.name || categorySlug,
+      url: `https://ethnicaa.com/category/${categorySlug}`,
+      description: category?.category_seo_description || `Wholesale collection of ${category?.name || categorySlug}.`,
+      mainEntity: {
+        "@type": "ItemList",
+        itemListElement: products.map((p, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          url: `https://ethnicaa.com/product/${p.slug}`,
+          name: p.catalog || p.name,
+          image: p.images?.[0] || "",
+        })),
+      },
     });
   }
 

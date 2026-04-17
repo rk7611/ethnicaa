@@ -189,7 +189,7 @@ export default function SearchBox() {
               style={styles.item}
               onClick={() => setShow(false)}
             >
-              <Image src={p.images?.[0]} alt="thumb" width={50} height={50} quality={100} style={styles.img} />
+              <Image src={p.images?.[0]} alt={p.catalog || p.name} width={50} height={50} quality={100} style={styles.img} />
               <div>
                 <div style={styles.text}>{p.catalog || p.name}</div>
                 <div style={styles.subtext}>

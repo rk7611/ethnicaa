@@ -17,6 +17,7 @@ import Image from "next/image";
 import BannerSlider from "@/components/BannerSlider";
 import EnquireButton from "@/components/EnquireButton";
 import { blogs } from "@/lib/blog-data";
+import TrustBadges from "@/components/TrustBadges";
 
 const PAGE_SIZE = 12;
 
@@ -380,24 +381,7 @@ export default function HomePage() {
       )}
 
       {/* ====================== TRUST BADGES ====================== */}
-      <div style={styles.trustStrip}>
-        <div className="premium-card" style={styles.trustBadge}>
-          <span style={styles.trustIcon}>🏢</span>
-          <span style={styles.trustText}>Direct Surat Manufacturer</span>
-        </div>
-        <div className="premium-card" style={styles.trustBadge}>
-          <span style={styles.trustIcon}>🔒</span>
-          <span style={styles.trustText}>100% Secure Payment</span>
-        </div>
-        <div className="premium-card" style={styles.trustBadge}>
-          <span style={styles.trustIcon}>📦</span>
-          <span style={styles.trustText}>Fast Global Dispatch</span>
-        </div>
-        <div className="premium-card" style={styles.trustBadge}>
-          <span style={styles.trustIcon}>✅</span>
-          <span style={styles.trustText}>Quality Assured</span>
-        </div>
-      </div>
+      <TrustBadges />
 
       {/* ====================== H1 HOMEPAGE ====================== */}
       <h1 style={styles.pageH1}>Ethnicaa: Surat Wholesale Sarees, Kurtis & Pakistani Suits</h1>

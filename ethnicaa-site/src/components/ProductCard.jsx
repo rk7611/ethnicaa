@@ -1,13 +1,18 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function ProductCard({ product }) {
   return (
     <Link href={`/product/${product.slug}`} style={styles.card}>
-      <img
-        src={product.cover || product.images?.[0]}
-        alt={product.name}
-        style={styles.image}
-      />
+      <div style={styles.imageWrapper}>
+        <Image
+          src={product.cover || product.images?.[0]}
+          alt={product.name}
+          fill
+          sizes="(max-width: 600px) 48vw, 220px"
+          style={styles.image}
+        />
+      </div>
 
       <div style={styles.info}>
         <div style={styles.name}>{product.catalog || product.name}</div>
@@ -26,9 +31,13 @@ const styles = {
     color: "#000",
     border: "1px solid #eee",
   },
-  image: {
+  imageWrapper: {
+    position: "relative",
     width: "100%",
     height: 220,
+    overflow: "hidden",
+  },
+  image: {
     objectFit: "cover",
   },
   info: {

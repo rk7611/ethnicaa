@@ -48,6 +48,29 @@ export default function BlogPost({ params }) {
     description: post.excerpt,
   };
 
+  // Automated Internal Linking Helper
+  function injectInternalLinks(content) {
+    if (!content) return "";
+    let linked = content;
+
+    const map = [
+      { key: "Sarees", url: "/category/sarees" },
+      { key: "Kurtis", url: "/category/kurtis" },
+      { key: "Pakistani Suits", url: "/category/pakistani-suits" },
+      { key: "Salwar Suits", url: "/category/salwar-suits" },
+      { key: "Lehengas", url: "/category/lehenga" },
+      { key: "Surat", url: "/wholesale-manufacturers-in-surat" },
+    ];
+
+    map.forEach(({ key, url }) => {
+      const regex = new RegExp(`\\b(${key})\\b`, "i");
+      // Only replace the first occurrence to avoid over-linking
+      linked = linked.replace(regex, `<a href="${url}" style="color: #d32f2f; font-weight: 600; text-decoration: underline;">$1</a>`);
+    });
+
+    return linked;
+  }
+
   return (
     <div style={styles.container}>
       {/* Article Schema */}
@@ -75,7 +98,7 @@ export default function BlogPost({ params }) {
       <main style={styles.content}>
         <div 
           style={styles.htmlContent} 
-          dangerouslySetInnerHTML={{ __html: post.content }} 
+          dangerouslySetInnerHTML={{ __html: injectInternalLinks(post.content) }} 
         />
       </main>
 
@@ -83,7 +106,7 @@ export default function BlogPost({ params }) {
         <div style={styles.ctaBox}>
           <h3>Want to grow your business?</h3>
           <p>Get direct factory prices on the latest Surat wholesale catalogs with Ethnicaa.</p>
-          <Link href="/" style={styles.ctaButton}>Wiew Latest Collections</Link>
+          <Link href="/" style={styles.ctaButton}>View Latest Collections</Link>
         </div>
       </footer>
     </div>

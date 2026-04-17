@@ -90,6 +90,23 @@ body {
   }
 }
 
+/* -------- PULSE BUTTON ANIMATION -------- */
+.pulse-button {
+  animation: pulse-border 2s infinite;
+}
+
+@keyframes pulse-border {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
 @media (max-width: 600px) {
   header[style*="fixed"] {
     flex-direction: column !important;

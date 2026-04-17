@@ -14,6 +14,10 @@ const nextConfig = {
         hostname: "firebasestorage.googleapis.com",
         port: "",
         pathname: "/v0/b/ethnicaa-8402c.firebasestorage.app/**",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
       }
     ],
   },

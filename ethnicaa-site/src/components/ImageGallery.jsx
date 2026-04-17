@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 
-export default function ImageGallery({ images = [], zoom = true }) {
+export default function ImageGallery({ images = [], zoom = true, altText = "product" }) {
   const safe = Array.isArray(images) ? images : [];
   const [active, setActive] = useState(0);
 
@@ -88,7 +88,7 @@ export default function ImageGallery({ images = [], zoom = true }) {
       >
         <Image
           src={safe[active]}
-          alt="product"
+          alt={altText}
           fill
           sizes="600px"
           style={styles.mainImage}
@@ -114,7 +114,7 @@ export default function ImageGallery({ images = [], zoom = true }) {
               src={img}
               width={70}
               height={70}
-              alt="thumb"
+              alt={`${altText} thumbnail ${i + 1}`}
               style={{ objectFit: "cover" }}
             />
           </div>
@@ -132,7 +132,7 @@ export default function ImageGallery({ images = [], zoom = true }) {
         >
           <img
             src={safe[active]}
-            alt="zoomed"
+            alt={`${altText} zoomed`}
             onClick={(e) => e.stopPropagation()}
             onDoubleClick={handleDoubleTap}
             style={{

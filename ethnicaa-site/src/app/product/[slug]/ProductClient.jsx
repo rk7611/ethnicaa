@@ -21,6 +21,7 @@ import StructuredDescription from "@/components/StructuredDescription";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Link from "next/link";
 import Image from "next/image";
+import TrustBadges from "@/components/TrustBadges";
 
 
 
@@ -162,14 +163,34 @@ useEffect(() => {
       name: product.name,
       image: product.images || [],
       description: product.seo_description || product.description || "",
-      sku: product.slug,
-      brand: { "@type": "Brand", name: "Ethnicaa" },
+      sku: product.sku || product.slug,
+      mpn: product.slug,
+      brand: { 
+        "@type": "Brand", 
+        name: "Ethnicaa" 
+      },
+      material: product.fabrics?.join(", ") || "",
+      color: product.color || "",
       offers: {
         "@type": "Offer",
         priceCurrency: "INR",
-        price: product.price || product.avgPrice || "",
+        price: product.price || product.avgPrice || "0",
+        itemCondition: "https://schema.org/NewCondition",
         availability: "https://schema.org/InStock",
         url: `https://ethnicaa.com/product/${product.slug}`,
+        priceValidUntil: "2026-12-31",
+        shippingDetails: {
+          "@type": "OfferShippingDetails",
+          "shippingRate": {
+            "@type": "MonetaryAmount",
+            "value": "0",
+            "currency": "INR"
+          },
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": "IN"
+          }
+        }
       },
     },
     {
@@ -307,6 +328,8 @@ useEffect(() => {
       {/* STRUCTURED DESCRIPTION */}
       <StructuredDescription product={product} />
 
+      <TrustBadges />
+
       {/* FAQ SECTION */}
       <div style={{ marginTop: 40 }}>
         <h3 style={styles.sectionTitle}>Frequently Asked Questions</h3>
@@ -321,29 +344,29 @@ useEffect(() => {
 
       {/* SIMILAR PRODUCTS */}
       {similar.length > 0 && (
-        <div>
-          <h3 style={styles.sectionTitle}>Similar Products</h3>
-
+        <div style={{ marginTop: 60 }}>
+          <h3 style={styles.sectionTitle}>You May Also Like</h3>
           <div style={styles.similarGrid}>
             {similar.map((p) => (
-              <Link
-                key={p.slug}
-                href={`/product/${p.slug}`}
-                className="premium-card"
-                style={styles.similarCard}
-              >
-                <Image
-                  src={p.images?.[0]}
-                  alt={generateAltText(p)}   
-                  width={200}
-                  height={250}
-                  quality={100}
-                  style={styles.similarImg}
-                />
-                <div style={styles.similarText}>
-                  {p.catalog || p.name}
-                </div>
-              </Link>
+              <div key={p.id} className="premium-card" style={styles.simCard}>
+                <Link href={`/product/${p.slug || p.id}`} style={{ textDecoration: "none" }}>
+                  <div style={styles.simImg}>
+                    <Image
+                      src={p.images?.[0] || "/placeholder.png"}
+                      alt={p.name}
+                      fill
+                      style={{ objectFit: "cover", borderRadius: 12 }}
+                    />
+                  </div>
+                  <div style={styles.simInfo}>
+                    <div style={styles.simCat}>
+                      {p.fabric} {p.category}
+                    </div>
+                    <div style={styles.simName}>{p.catalog || p.name}</div>
+                    <div style={styles.simPrice}>Wholesale Price</div>
+                  </div>
+                </Link>
+              </div>
             ))}
           </div>
         </div>

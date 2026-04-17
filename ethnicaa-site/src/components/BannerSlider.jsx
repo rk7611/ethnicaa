@@ -79,7 +79,7 @@ export default function BannerSlider({ banners = [] }) {
               className={`slide ${index === i ? "active" : ""}`}
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
-              alt="Banner"
+              alt={b.title || `Wholesale Ethnic Wear Banner ${i + 1}`}
             />
           </picture>
         </Link>
