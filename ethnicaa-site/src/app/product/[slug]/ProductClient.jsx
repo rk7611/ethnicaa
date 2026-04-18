@@ -348,9 +348,9 @@ useEffect(() => {
           <h3 style={styles.sectionTitle}>You May Also Like</h3>
           <div style={styles.similarGrid}>
             {similar.map((p) => (
-              <div key={p.id} className="premium-card" style={styles.simCard}>
+              <div key={p.id} className="premium-card" style={styles.similarCard}>
                 <Link href={`/product/${p.slug || p.id}`} style={{ textDecoration: "none" }}>
-                  <div style={styles.simImg}>
+                  <div style={styles.similarImg}>
                     <Image
                       src={p.images?.[0] || "/placeholder.png"}
                       alt={p.name}
@@ -358,12 +358,12 @@ useEffect(() => {
                       style={{ objectFit: "cover", borderRadius: 12 }}
                     />
                   </div>
-                  <div style={styles.simInfo}>
-                    <div style={styles.simCat}>
+                  <div style={styles.similarInfo}>
+                    <div style={styles.similarCat}>
                       {p.fabric} {p.category}
                     </div>
-                    <div style={styles.simName}>{p.catalog || p.name}</div>
-                    <div style={styles.simPrice}>Wholesale Price</div>
+                    <div style={styles.similarName}>{p.catalog || p.name}</div>
+                    <div style={styles.similarPrice}>Wholesale Price</div>
                   </div>
                 </Link>
               </div>
@@ -472,14 +472,38 @@ const styles = {
   similarImg: {
     width: "100%",
     height: 180,
-    objectFit: "cover",
+    position: "relative", // CRITICAL FIX
     borderRadius: 12,
+    overflow: "hidden"
   },
 
-  similarText: {
-    marginTop: 8,
-    textAlign: "center",
+  similarInfo: {
+    padding: "8px 4px",
+  },
+
+  similarCat: {
+    fontSize: 11,
+    textTransform: "uppercase",
+    color: "#666",
+    letterSpacing: 0.5,
+  },
+
+  similarName: {
+    fontSize: 14,
     fontWeight: 600,
+    marginTop: 4,
+    color: "#000",
+    display: "-webkit-box",
+    WebkitLineClamp: 2,
+    WebkitBoxOrient: "vertical",
+    overflow: "hidden",
+  },
+
+  similarPrice: {
+    fontSize: 13,
+    fontWeight: 700,
+    marginTop: 6,
+    color: "#D4AF37",
   },
 
 };

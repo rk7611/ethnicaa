@@ -307,8 +307,15 @@ export default function AddEditProduct({ mode }) {
       SAVE PRODUCT (MAIN LOGIC)
   ------------------------------------------------------ */
   const save = async (publish) => {
+    // PREVENT BLANK NAMES/PRICES
     if (!data.name || !data.price) {
-      alert("Name and Price required");
+      alert("⚠️ Name and Price are required!");
+      return;
+    }
+
+    // PREVENT BLANK CATEGORIES WHEN PUBLISHING
+    if (publish && categoryNames.length === 0) {
+      alert("❌ Please select at least one CATEGORY before publishing. Buyers need categories to find your products!");
       return;
     }
 
@@ -349,278 +356,259 @@ export default function AddEditProduct({ mode }) {
     });
 
     /* ---------- SAVE PRODUCT ---------- */
-    await setDoc(
-      doc(db, "products", finalSlug),
-      {
-        ...data,
+    setProgressText("Saving product...");
+    try {
+      await setDoc(
+        doc(db, "products", finalSlug),
+        {
+          ...data,
 
-        slug: finalSlug,
+          slug: finalSlug,
 
-        price: Number(data.price),
-        pcs: Number(data.pcs),
-        gst: Number(data.gst),
+          price: Number(data.price),
+          pcs: Number(data.pcs),
+          gst: Number(data.gst),
 
-        categoryNames: cleanedPretty,
-        categories: cleanedSlugs,
+          categoryNames: cleanedPretty,
+          categories: cleanedSlugs,
 
-        fabricNames: fabPretty,
-        fabrics: fabSlugs,
-        color: color || "",
+          fabricNames: fabPretty,
+          fabrics: fabSlugs,
+          color: color || "",
 
-        seo_title: seoTitle,
-        seo_description: seoDescription,
-        seo_keywords: seoKeywords,
-        seo_slug: finalSlug,
-        seo_alt: seoAlt,
+          seo_title: seoTitle,
+          seo_description: seoDescription,
+          seo_keywords: seoKeywords,
+          seo_slug: finalSlug,
+          seo_alt: seoAlt,
 
-        search_title,
-        search_category,
-        search_fabric,
-        search_text,
-        search_keywords,
+          search_title,
+          search_category,
+          search_fabric,
+          search_text,
+          search_keywords,
 
-        images,
-        coverImage: images[coverIdx] || "",
-        catalogAssets: { pdf: pdfUrl, zip: zipUrl },
+          images,
+          coverImage: images[coverIdx] || "",
+          catalogAssets: { pdf: pdfUrl, zip: zipUrl },
 
-        status: publish ? "published" : "draft",
-        updatedAt: serverTimestamp(),
-        ...(mode === "add" && { createdAt: serverTimestamp() }),
-      },
-      { merge: true }
-    );
+          status: publish ? "published" : "draft",
+          updatedAt: serverTimestamp(),
+          ...(mode === "add" && { createdAt: serverTimestamp() }),
+        },
+        { merge: true }
+      );
 
-    nav("/products");
+      nav("/products");
+    } catch (e) {
+      alert("Error saving: " + e.message);
+    } finally {
+      setProgressText("");
+    }
   };
 
   /* ---------------- UI ---------------- */
   return (
     <AdminLayout>
-      <h1>{mode === "add" ? "Add Product" : "Edit Product"}</h1>
-
-      <input
-        placeholder="Product Name *"
-        value={data.name}
-        onChange={(e) => setData({ ...data, name: e.target.value })}
-      />
-
-      <input
-        placeholder="Brand"
-        value={data.brand}
-        onChange={(e) => setData({ ...data, brand: e.target.value })}
-      />
-
-      <input
-        placeholder="Catalog"
-        value={data.catalog}
-        onChange={(e) => setData({ ...data, catalog: e.target.value })}
-      />
-
-      {/* ----- CATEGORY INPUT ----- */}
-      <TagInput
-        label="Categories"
-        suggestions={catList}
-        values={categoryNames}
-        setValues={setCategoryNames}
-      />
-
-      {/* ----- FABRIC INPUT ----- */}
-      <TagInput
-        label="Fabrics"
-        suggestions={fabList}
-        values={fabricNames}
-        setValues={setFabricNames}
-        onCreate={ensureFabric}
-      />
-
-      {/* ----- COLOR ----- */}
-      <input
-        placeholder="Color (Red, Blue, Black...)"
-        value={color}
-        onChange={(e) => setColor(e.target.value)}
-      />
-
-      {/* -------------------------------------------------
-           SEO SECTION UI (CLEAN BOX)
-      ---------------------------------------------------*/}
-      <div
-        style={{
-          marginTop: 30,
-          padding: 20,
-          border: "1px solid #ccc",
-          borderRadius: 10,
-          background: "#fafafa",
-        }}
-      >
-        <h2 style={{ marginBottom: 10 }}>SEO Settings</h2>
-
-        <input
-          placeholder="SEO Title"
-          value={seoTitle}
-          onChange={(e) => setSeoTitle(e.target.value)}
-        />
-
-        <input
-          placeholder="SEO Description"
-          value={seoDescription}
-          onChange={(e) => setSeoDescription(e.target.value)}
-        />
-
-        <input
-          placeholder="SEO Keywords (comma separated)"
-          value={seoKeywords}
-          onChange={(e) => setSeoKeywords(e.target.value)}
-        />
-
-        <input
-          placeholder="SEO Slug"
-          value={seoSlug}
-          onChange={(e) => setSeoSlug(e.target.value)}
-        />
-
-        <input
-          placeholder="Image ALT Text"
-          value={seoAlt}
-          onChange={(e) => setSeoAlt(e.target.value)}
-        />
+      <div style={styles.headerRow}>
+        <h1 style={styles.pageTitle}>{mode === "add" ? "Create Product" : "Edit Product"}</h1>
+        <div style={styles.actionRow}>
+          <button style={styles.btnDraft} onClick={() => save(false)}>Save Draft</button>
+          <button style={styles.btnPublish} onClick={() => save(true)}>Save & Publish</button>
+        </div>
       </div>
 
-      <h3>Pricing</h3>
-      <input
-        type="number"
-        placeholder="Price"
-        value={data.price}
-        onChange={(e) => setData({ ...data, price: e.target.value })}
-      />
+      <div style={styles.formGrid}>
+        {/* LEFT COLUMN: CORE DATA */}
+        <div style={styles.column}>
+          <div style={styles.sectionCard} className="premium-card">
+            <h3 style={styles.sectionHeading}>Basic Information</h3>
+            <div style={styles.fieldGroup}>
+              <label style={styles.label}>Product Name *</label>
+              <input
+                style={styles.input}
+                placeholder="Ex: Designer Silk Saree..."
+                value={data.name}
+                onChange={(e) => setData({ ...data, name: e.target.value })}
+              />
+            </div>
 
-      <input
-        type="number"
-        placeholder="PCS"
-        value={data.pcs}
-        onChange={(e) => setData({ ...data, pcs: e.target.value })}
-      />
+            <div style={styles.row}>
+               <div style={{ flex: 1 }}>
+                <label style={styles.label}>Brand</label>
+                <input
+                  style={styles.input}
+                  placeholder="Brand name"
+                  value={data.brand}
+                  onChange={(e) => setData({ ...data, brand: e.target.value })}
+                />
+              </div>
+              <div style={{ flex: 1 }}>
+                <label style={styles.label}>Catalog / Code</label>
+                <input
+                  style={styles.input}
+                  placeholder="Ex: ETH-101"
+                  value={data.catalog}
+                  onChange={(e) => setData({ ...data, catalog: e.target.value })}
+                />
+              </div>
+            </div>
 
-      <input
-        type="number"
-        placeholder="GST %"
-        value={data.gst}
-        onChange={(e) => setData({ ...data, gst: e.target.value })}
-      />
-
-      <button onClick={calculatePricing}>Calculate Pricing</button>
-
-      <input
-        placeholder="Avg Price"
-        value={data.avg_price}
-        onChange={(e) => setData({ ...data, avg_price: e.target.value })}
-      />
-
-      <input
-        placeholder="Full Price"
-        value={data.full_price}
-        onChange={(e) => setData({ ...data, full_price: e.target.value })}
-      />
-
-      <input
-        placeholder="Full Price With GST"
-        value={data.full_price_with_gst}
-        onChange={(e) => setData({ ...data, full_price_with_gst: e.target.value })}
-      />
-
-      <textarea
-        placeholder="Description"
-        value={data.description}
-        onChange={(e) => setData({ ...data, description: e.target.value })}
-      />
-
-      <textarea
-        placeholder="Raw Specs"
-        value={data.rawSpecs}
-        onChange={(e) => setData({ ...data, rawSpecs: e.target.value })}
-      />
-
-      <textarea
-        placeholder="Note"
-        value={data.note}
-        onChange={(e) => setData({ ...data, note: e.target.value })}
-      />
-
-      <input
-        placeholder="Availability"
-        value={data.availability}
-        onChange={(e) => setData({ ...data, availability: e.target.value })}
-      />
-
-      <input
-        placeholder="Dispatch Time"
-        value={data.dispatchTime}
-        onChange={(e) => setData({ ...data, dispatchTime: e.target.value })}
-      />
-
-      <label>
-        <input
-          type="checkbox"
-          checked={data.offer}
-          onChange={(e) => setData({ ...data, offer: e.target.checked })}
-        />
-        Offer Product
-      </label>
-
-      <h3>Images</h3>
-      <input
-        type="file"
-        multiple
-        onChange={(e) => setNewImages([...e.target.files])}
-      />
-      {newImages.length > 0 && <button onClick={uploadImages}>Upload Images</button>}
-
-      <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-        {images.map((u, i) => (
-          <div
-            key={u}
-            draggable
-            onDragStart={() => (dragIndex.current = i)}
-            onDragOver={(e) => e.preventDefault()}
-            onDrop={() => onDrop(i)}
-          >
-            <img
-              src={u}
-              onClick={() => setCoverIdx(i)}
-              style={{
-                width: 80,
-                height: 80,
-                border: coverIdx === i ? "3px solid gold" : "1px solid #444",
-              }}
+            <label style={styles.label}>Description</label>
+            <textarea
+              style={{ ...styles.input, height: 100 }}
+              placeholder="Full product story..."
+              value={data.description}
+              onChange={(e) => setData({ ...data, description: e.target.value })}
             />
-            <button onClick={() => removeImage(i)}>✕</button>
           </div>
-        ))}
+
+          <div style={styles.sectionCard} className="premium-card">
+            <h3 style={styles.sectionHeading}>Categorization & Specs</h3>
+            <TagInput
+              label="Categories *"
+              suggestions={catList}
+              values={categoryNames}
+              setValues={setCategoryNames}
+            />
+            <TagInput
+              label="Fabrics"
+              suggestions={fabList}
+              values={fabricNames}
+              setValues={setFabricNames}
+              onCreate={ensureFabric}
+            />
+            <label style={styles.label}>Dominant Color</label>
+            <input
+              style={styles.input}
+              placeholder="e.g. Royal Blue"
+              value={color}
+              onChange={(e) => setColor(e.target.value)}
+            />
+            <label style={styles.label}>Raw Specs (Technical Info)</label>
+            <textarea
+              style={{ ...styles.input, height: 80 }}
+              placeholder="Size, Weight, Packaging info..."
+              value={data.rawSpecs}
+              onChange={(e) => setData({ ...data, rawSpecs: e.target.value })}
+            />
+          </div>
+        </div>
+
+        {/* RIGHT COLUMN: PRICING & SEO */}
+        <div style={styles.column}>
+          <div style={styles.sectionCard} className="premium-card">
+            <h3 style={styles.sectionHeading}>Wholesale Pricing</h3>
+            <div style={styles.row}>
+              <div style={{ flex: 1 }}>
+                <label style={styles.label}>Price per PC *</label>
+                <input
+                  style={styles.input}
+                  type="number"
+                  value={data.price}
+                  onChange={(e) => setData({ ...data, price: e.target.value })}
+                />
+              </div>
+              <div style={{ flex: 1 }}>
+                <label style={styles.label}>Total PCS in Set</label>
+                <input
+                  style={styles.input}
+                  type="number"
+                  value={data.pcs}
+                  onChange={(e) => setData({ ...data, pcs: e.target.value })}
+                />
+              </div>
+            </div>
+            
+            <div style={styles.row}>
+               <div style={{ flex: 1 }}>
+                <label style={styles.label}>GST %</label>
+                <input
+                  style={styles.input}
+                  type="number"
+                  value={data.gst}
+                  onChange={(e) => setData({ ...data, gst: e.target.value })}
+                />
+              </div>
+              <div style={{ flex: 1, display: 'flex', alignItems: 'flex-end' }}>
+                <button style={styles.btnCalc} onClick={calculatePricing}>Auto Calculate</button>
+              </div>
+            </div>
+
+            <div style={{ ...styles.row, marginTop: 10 }}>
+              <div style={{ flex: 1 }}>
+                <label style={styles.label}>Full Set Price</label>
+                <input disabled style={styles.inputDisabled} value={data.full_price_with_gst} />
+              </div>
+            </div>
+          </div>
+
+          <div style={styles.sectionCard} className="premium-card">
+             <h3 style={styles.sectionHeading}>SEO Suite</h3>
+             <label style={styles.label}>SEO Title</label>
+             <input style={styles.input} value={seoTitle} onChange={e => setSeoTitle(e.target.value)} />
+             
+             <label style={styles.label}>Meta Description</label>
+             <textarea style={{...styles.input, height: 60}} value={seoDescription} onChange={e => setSeoDescription(e.target.value)} />
+
+             <div style={styles.row}>
+                <div style={{ flex: 1 }}>
+                  <label style={styles.label}>URL Slug</label>
+                  <input style={styles.input} value={seoSlug} onChange={e => setSeoSlug(e.target.value)} />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <label style={styles.label}>Image Alt</label>
+                  <input style={styles.input} value={seoAlt} onChange={e => setSeoAlt(e.target.value)} />
+                </div>
+             </div>
+          </div>
+
+          <div style={styles.sectionCard} className="premium-card">
+            <h3 style={styles.sectionHeading}>Media Attachments</h3>
+            <input type="file" multiple onChange={(e) => setNewImages([...e.target.files])} />
+            {newImages.length > 0 && <button style={styles.btnSmall} onClick={uploadImages}>Upload {newImages.length} Images</button>}
+            
+            <div style={styles.imageGrid}>
+              {images.map((u, i) => (
+                <div key={u} style={styles.imageBox}>
+                  <img
+                    src={u}
+                    onClick={() => setCoverIdx(i)}
+                    style={{ ...styles.thumb, border: coverIdx === i ? "3px solid #D4AF37" : "1px solid #333" }}
+                  />
+                  <button style={styles.removeBtn} onClick={() => removeImage(i)}>✕</button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
 
-      <h3>PDF</h3>
-      {pdfUrl && (
-        <a href={pdfUrl} target="_blank" rel="noreferrer">
-          Download PDF
-        </a>
-      )}
-      <input type="file" onChange={(e) => setPdfFile(e.target.files[0])} />
-      {pdfFile && <button onClick={uploadPDF}>Upload PDF</button>}
-
-      <h3>ZIP</h3>
-      {zipUrl && (
-        <a href={zipUrl} target="_blank" rel="noreferrer">
-          Download ZIP
-        </a>
-      )}
-      <input type="file" onChange={(e) => setZipFile(e.target.files[0])} />
-      {zipFile && <button onClick={uploadZIP}>Upload ZIP</button>}
-
-      {progressText && <p>{progressText}</p>}
-
-      <div style={{ marginTop: 20 }}>
-        <button onClick={() => save(false)}>Save Draft</button>
-        <button onClick={() => save(true)}>Save & Publish</button>
-      </div>
+      {progressText && <p style={styles.progress}>{progressText}</p>}
     </AdminLayout>
   );
 }
+
+const styles = {
+  headerRow: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 30, flexWrap: "wrap", gap: 20 },
+  pageTitle: { fontSize: 32, fontWeight: 800, color: "#D4AF37", margin: 0 },
+  actionRow: { display: "flex", gap: 12 },
+  formGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 25 },
+  column: { display: "flex", flexDirection: "column", gap: 25 },
+  sectionCard: { background: "#111", padding: 25, borderRadius: 20, border: "1px solid #222" },
+  sectionHeading: { fontSize: 18, color: "#fff", marginBottom: 20, borderBottom: "1px solid #333", paddingBottom: 10 },
+  fieldGroup: { marginBottom: 15 },
+  label: { display: "block", color: "#888", fontSize: 13, marginBottom: 8, fontWeight: 600 },
+  input: { width: "100%", background: "#1a1a1a", border: "1px solid #333", padding: "12px 15px", borderRadius: 10, color: "#fff", outline: "none", fontSize: 15 },
+  inputDisabled: { width: "100%", background: "#0c0c0c", border: "1px solid #222", padding: "12px 15px", borderRadius: 10, color: "#888", fontSize: 15 },
+  row: { display: "flex", gap: 15, marginBottom: 15 },
+  btnPublish: { background: "#D4AF37", color: "#000", padding: "12px 25px", borderRadius: 12, fontWeight: 700, border: "none", cursor: "pointer" },
+  btnDraft: { background: "#222", color: "#fff", padding: "12px 25px", borderRadius: 12, fontWeight: 600, border: "1px solid #333", cursor: "pointer" },
+  btnCalc: { background: "#333", color: "#D4AF37", padding: "10px 15px", borderRadius: 10, fontWeight: 600, border: "1px solid #444", cursor: "pointer", width: "100%" },
+  btnSmall: { marginTop: 10, background: "#333", color: "#fff", padding: "8px 15px", borderRadius: 8, border: "none", cursor: "pointer" },
+  imageGrid: { display: "flex", gap: 12, flexWrap: "wrap", marginTop: 20 },
+  imageBox: { position: "relative" },
+  thumb: { width: 75, height: 95, objectFit: "cover", borderRadius: 8, cursor: "pointer" },
+  removeBtn: { position: "absolute", top: -5, right: -5, background: "#ff4444", color: "#fff", border: "none", borderRadius: "50%", width: 22, height: 22, fontSize: 12, cursor: "pointer" },
+  progress: { textAlign: "center", color: "#D4AF37", marginTop: 20, fontWeight: 600 },
+};

@@ -1,43 +1,106 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import useMobile from "../hooks/useMobile";
 
-export default function Sidebar() {
+export default function Sidebar({ onClose }) {
+  const loc = useLocation();
+  const isMobile = useMobile(1024);
+
+  const isActive = (path) => loc.pathname === path;
+
   return (
     <div style={styles.sidebar}>
-      <h2 style={styles.brand}>ETHNICAA</h2>
+      <div style={styles.sidebarHeader}>
+        <h2 style={styles.brand}>ETHNICAA</h2>
+        {isMobile && (
+          <button style={styles.closeBtn} onClick={onClose}>✕</button>
+        )}
+      </div>
 
       <nav style={styles.menu}>
-        <Link to="/" style={styles.link}>Dashboard</Link>
-        <Link to="/products" style={styles.link}>Products</Link>
-        <Link to="/add-product" style={styles.link}>Add Product</Link>
-        <Link to="/profile" style={styles.link}>Profile Manager</Link>
-		<Link to="/Banners">Banners</Link>
+        <Link to="/" style={isActive("/") ? styles.activeLink : styles.link} onClick={onClose}>
+          Dashboard
+        </Link>
+        <Link to="/products" style={isActive("/products") ? styles.activeLink : styles.link} onClick={onClose}>
+          All Products
+        </Link>
+        <Link to="/add-product" style={isActive("/add-product") ? styles.activeLink : styles.link} onClick={onClose}>
+          Add New Product
+        </Link>
+        <Link to="/Banners" style={isActive("/Banners") ? styles.activeLink : styles.link} onClick={onClose}>
+          Banners & Promotions
+        </Link>
+        <Link to="/profile" style={isActive("/profile") ? styles.activeLink : styles.link} onClick={onClose}>
+          Store Profile
+        </Link>
       </nav>
+
+      <div style={styles.footer}>
+        <p style={styles.version}>v1.2.0 Production</p>
+      </div>
     </div>
   );
 }
 
 const styles = {
   sidebar: {
-    width: "220px",
+    height: "100%",
     background: "#0b0b0b",
-    borderRight: "1px solid #222",
-    minHeight: "100vh",
-    padding: "20px",
+    padding: "30px 20px",
+    display: "flex",
+    flexDirection: "column",
+  },
+  sidebarHeader: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: "40px",
   },
   brand: {
     color: "#D4AF37",
-    marginBottom: "30px",
-    letterSpacing: "2px",
+    margin: 0,
+    fontSize: 22,
+    fontWeight: 900,
+    letterSpacing: "3px",
+  },
+  closeBtn: {
+    background: "none",
+    border: "none",
+    color: "#444",
+    fontSize: 24,
+    cursor: "pointer",
   },
   menu: {
     display: "flex",
     flexDirection: "column",
-    gap: "15px",
+    gap: "10px",
+    flex: 1,
   },
   link: {
-    color: "#fff",
+    color: "#888",
     textDecoration: "none",
     fontSize: "15px",
-    opacity: 0.85,
+    padding: "12px 15px",
+    borderRadius: "10px",
+    transition: "all 0.2s",
   },
+  activeLink: {
+    color: "#fff",
+    background: "#1a1a1a",
+    textDecoration: "none",
+    fontSize: "15px",
+    padding: "12px 15px",
+    borderRadius: "10px",
+    fontWeight: 700,
+    borderLeft: "4px solid #D4AF37",
+  },
+  footer: {
+    marginTop: "auto",
+    paddingTop: "20px",
+    borderTop: "1px solid #222",
+  },
+  version: {
+    color: "#444",
+    fontSize: 12,
+    margin: 0,
+  }
 };

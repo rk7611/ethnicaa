@@ -14,6 +14,16 @@ export const AuthProvider = ({ children }) => {
 
   const auth = getAuth(app);
 
+  // Auto-re-authenticate with Firebase if admin flag is set
+  useEffect(() => {
+    if (isAdmin && !auth.currentUser) {
+      signInAnonymously(auth).catch(err => {
+        console.error("Auto-auth failed:", err);
+        setIsAdmin(false);
+      });
+    }
+  }, [isAdmin, auth]);
+
   const login = async (password) => {
     if (password !== ADMIN_PASSWORD) {
       return { success: false, message: "Invalid password" };
@@ -21,13 +31,9 @@ export const AuthProvider = ({ children }) => {
 
     try {
       setLoading(true);
-
-      // Silent Firebase auth (required for Storage write)
       await signInAnonymously(auth);
-
       localStorage.setItem("ethnicaa_admin", "true");
       setIsAdmin(true);
-
       return { success: true };
     } catch (err) {
       console.error(err);

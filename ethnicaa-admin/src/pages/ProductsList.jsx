@@ -31,15 +31,15 @@ export default function ProductsList() {
     bulkDelete,
   } = useProducts();
 
-  // Build unique category & fabric lists from data (safe even if empty)
-  const categories = useMemo(() => {
-    const set = new Set(products.map(p => p.category).filter(Boolean));
-    return Array.from(set);
+  // Build unique category & fabric lists from all products
+  const categoriesList = useMemo(() => {
+    const all = products.flatMap(p => p.categoryNames || []);
+    return [...new Set(all)].filter(Boolean).sort();
   }, [products]);
 
-  const fabrics = useMemo(() => {
-    const set = new Set(products.map(p => p.fabric).filter(Boolean));
-    return Array.from(set);
+  const fabricsList = useMemo(() => {
+    const all = products.flatMap(p => p.fabricNames || []);
+    return [...new Set(all)].filter(Boolean).sort();
   }, [products]);
 
   // Duplicate handler (deep copy + new slug)
@@ -73,12 +73,12 @@ export default function ProductsList() {
 
         <select value={category} onChange={(e) => setCategory(e.target.value)} style={styles.select}>
           <option value="">All Categories</option>
-          {categories.map(c => <option key={c} value={c}>{c}</option>)}
+          {categoriesList.map(c => <option key={c} value={c}>{c}</option>)}
         </select>
 
         <select value={fabric} onChange={(e) => setFabric(e.target.value)} style={styles.select}>
           <option value="">All Fabrics</option>
-          {fabrics.map(f => <option key={f} value={f}>{f}</option>)}
+          {fabricsList.map(f => <option key={f} value={f}>{f}</option>)}
         </select>
 
         <select value={status} onChange={(e) => setStatus(e.target.value)} style={styles.select}>

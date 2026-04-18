@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import useMobile from "../hooks/useMobile";
 
 export default function ProductTable({
   products,
@@ -14,6 +15,7 @@ export default function ProductTable({
   onBulkOfferOn,
   onBulkOfferOff
 }) {
+  const isMobile = useMobile(1024);
   const [selected, setSelected] = useState([]);
 
   // Toggle individual checkbox
@@ -41,314 +43,142 @@ export default function ProductTable({
     }
   };
 
+  const renderMobileCard = (p) => (
+    <div key={p.id} style={styles.card}>
+      <div style={styles.cardHeader}>
+        <input
+          type="checkbox"
+          checked={selected.includes(p.id)}
+          onChange={() => toggleSelect(p.id)}
+        />
+        <span style={p.status === "published" ? styles.statusBadgePub : styles.statusBadgeDraft}>
+          {p.status}
+        </span>
+      </div>
+      
+      <div style={styles.cardBody}>
+        <img src={p.coverImage || p.images?.[0]} style={styles.cardImg} />
+        <div style={styles.cardInfo}>
+          <h4 style={styles.cardName}>{p.name}</h4>
+          <p style={styles.cardPrice}>₹{p.price}</p>
+          <div style={styles.cardToggles}>
+             <button
+                style={p.offer ? styles.toggleOn : styles.toggleOff}
+                onClick={() => onToggleOffer(p.id, p.offer)}
+              >
+                Offer: {p.offer ? "ON" : "OFF"}
+              </button>
+          </div>
+        </div>
+      </div>
+
+      <div style={styles.cardActions}>
+         <Link to={`/edit-product/${p.id}`} style={styles.editBtn}>Edit</Link>
+         <button onClick={() => onDuplicate(p)} style={styles.dupBtn}>Copy</button>
+         <button onClick={() => confirmDelete(p)} style={styles.delBtn}>✕</button>
+      </div>
+    </div>
+  );
+
   return (
     <div style={styles.container}>
       {/* Bulk Action Bar */}
       {selected.length > 0 && (
         <div style={styles.bulkBar}>
-          <span style={styles.bulkText}>
-            {selected.length} selected
-          </span>
-
-          <button style={styles.bulkBtn} onClick={() => onBulkPublish(selected)}>
-            Publish
-          </button>
-
-          <button style={styles.bulkBtn} onClick={() => onBulkDraft(selected)}>
-            Draft
-          </button>
-
-          <button style={styles.bulkBtn} onClick={() => onBulkOfferOn(selected)}>
-            Offer ON
-          </button>
-
-          <button style={styles.bulkBtn} onClick={() => onBulkOfferOff(selected)}>
-            Offer OFF
-          </button>
-
-          <button
-            style={styles.bulkDelete}
-            onClick={() => {
-              if (window.confirm("Delete selected products permanently?")) {
-                onBulkDelete(products.filter(p => selected.includes(p.id)));
-              }
-            }}
-          >
-            Delete Selected
-          </button>
+          <span style={styles.bulkText}>{selected.length} selected</span>
+          <button style={styles.bulkBtn} onClick={() => onBulkPublish(selected)}>Publish</button>
+          <button style={styles.bulkBtn} onClick={() => onBulkDraft(selected)}>Draft</button>
+          <button style={styles.bulkDelete} onClick={() => {
+            if (window.confirm("Delete selected products permanently?")) {
+              onBulkDelete(products.filter(p => selected.includes(p.id)));
+            }
+          }}>Delete</button>
         </div>
       )}
 
-      {/* Table */}
-      <table style={styles.table}>
-        <thead>
-          <tr>
-            <th>
-              <input
-                type="checkbox"
-                checked={selected.length === products.length && products.length > 0}
-                onChange={toggleSelectAll}
-              />
-            </th>
-            <th>Cover</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Offer</th>
-            <th>Status</th>
-            <th>Created</th>
-            <th>Updated</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
+      {loading && <div style={styles.loading}>Updating products...</div>}
 
-        <tbody>
-          {loading && (
+      {isMobile ? (
+        <div style={styles.mobileList}>
+          {products.map(renderMobileCard)}
+        </div>
+      ) : (
+        <table style={styles.table}>
+          <thead>
             <tr>
-              <td colSpan="10" style={styles.loading}>Loading...</td>
+              <th><input type="checkbox" checked={selected.length === products.length && products.length > 0} onChange={toggleSelectAll} /></th>
+              <th>Cover</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Offer</th>
+              <th>Status</th>
+              <th>Actions</th>
             </tr>
-          )}
-
-          {!loading && products.length === 0 && (
-            <tr>
-              <td colSpan="10" style={styles.loading}>No products found</td>
-            </tr>
-          )}
-
-          {products.map((p) => (
-            <tr key={p.id}>
-              {/* Checkbox */}
-              <td>
-                <input
-                  type="checkbox"
-                  checked={selected.includes(p.id)}
-                  onChange={() => toggleSelect(p.id)}
-                />
-              </td>
-
-              {/* Cover Image */}
-              <td>
-                <img
-                  src={p.coverImage || p.images?.[0]}
-                  alt=""
-                  style={styles.image}
-                />
-              </td>
-
-              {/* Name */}
-              <td style={{ maxWidth: "220px" }}>
-                {p.name}
-                <div style={styles.slug}>{p.slug}</div>
-              </td>
-
-              {/* Price */}
-              <td>₹{p.price}</td>
-
-              {/* Offer Toggle */}
-              <td>
-                <button
-                  style={p.offer ? styles.toggleOn : styles.toggleOff}
-                  onClick={() => onToggleOffer(p.id, p.offer)}
-                >
-                  {p.offer ? "ON" : "OFF"}
-                </button>
-              </td>
-
-              {/* Publish Toggle */}
-              <td>
-                <button
-                  style={
-                    p.status === "published" ? styles.published : styles.draft
-                  }
-                  onClick={() => onToggleStatus(p.id, p.status)}
-                >
-                  {p.status}
-                </button>
-              </td>
-
-              {/* Created Date */}
-              <td>{p.createdAt?.seconds ? new Date(p.createdAt.seconds * 1000).toLocaleDateString() : "-"}</td>
-
-              {/* Updated Date */}
-              <td>{p.updatedAt?.seconds ? new Date(p.updatedAt.seconds * 1000).toLocaleDateString() : "-"}</td>
-
-              {/* Action Buttons */}
-              <td>
-                <div style={styles.actionRow}>
-                  
-                  {/* VIEW */}
-                  <a
-                    href={`/product/${p.slug}`}
-                    target="_blank"
-                    style={styles.viewBtn}
-                  >
-                    View
-                  </a>
-
-                  {/* EDIT */}
-                  <Link to={`/edit-product/${p.id}`} style={styles.editBtn}>
-                    Edit
-                  </Link>
-
-                  {/* DUPLICATE */}
-                  <button
-                    onClick={() => onDuplicate(p)}
-                    style={styles.dupBtn}
-                  >
-                    Copy
+          </thead>
+          <tbody>
+            {products.map((p) => (
+              <tr key={p.id}>
+                <td><input type="checkbox" checked={selected.includes(p.id)} onChange={() => toggleSelect(p.id)} /></td>
+                <td><img src={p.coverImage || p.images?.[0]} style={styles.image} /></td>
+                <td>
+                  <div style={styles.productName}>{p.name}</div>
+                  <div style={styles.slug}>{p.slug}</div>
+                </td>
+                <td>₹{p.price}</td>
+                <td>
+                  <button style={p.offer ? styles.toggleOn : styles.toggleOff} onClick={() => onToggleOffer(p.id, p.offer)}>
+                    {p.offer ? "ON" : "OFF"}
                   </button>
-
-                  {/* DELETE */}
-                  <button
-                    onClick={() => confirmDelete(p)}
-                    style={styles.delBtn}
-                  >
-                    ✕
+                </td>
+                <td>
+                  <button style={p.status === "published" ? styles.published : styles.draft} onClick={() => onToggleStatus(p.id, p.status)}>
+                    {p.status}
                   </button>
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                </td>
+                <td>
+                  <div style={styles.actionRow}>
+                    <Link to={`/edit-product/${p.id}`} style={styles.editBtn}>Edit</Link>
+                    <button onClick={() => onDuplicate(p)} style={styles.dupBtn}>Copy</button>
+                    <button onClick={() => confirmDelete(p)} style={styles.delBtn}>✕</button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 }
 
-//
-// STYLES
-//
 const styles = {
-  container: {
-    width: "100%",
-    overflowX: "auto",
-  },
-  table: {
-    width: "100%",
-    borderCollapse: "collapse",
-    color: "#fff",
-    background: "#111",
-  },
-  image: {
-    width: "80px",
-    height: "80px",
-    objectFit: "cover",
-    borderRadius: "6px",
-  },
-  loading: {
-    textAlign: "center",
-    padding: "20px",
-    opacity: 0.8,
-  },
-  slug: {
-    fontSize: "11px",
-    opacity: 0.6,
-  },
-  published: {
-    background: "green",
-    padding: "4px 10px",
-    borderRadius: "6px",
-    cursor: "pointer",
-    border: "none",
-    color: "#fff",
-    fontSize: "12px",
-  },
-  draft: {
-    background: "#555",
-    padding: "4px 10px",
-    borderRadius: "6px",
-    cursor: "pointer",
-    border: "none",
-    color: "#fff",
-    fontSize: "12px",
-  },
-  toggleOn: {
-    background: "#D4AF37",
-    padding: "4px 10px",
-    borderRadius: "6px",
-    cursor: "pointer",
-    border: "none",
-    color: "#000",
-    fontSize: "12px",
-    fontWeight: "bold",
-  },
-  toggleOff: {
-    background: "#444",
-    padding: "4px 10px",
-    borderRadius: "6px",
-    cursor: "pointer",
-    border: "none",
-    color: "#fff",
-    fontSize: "12px",
-  },
-  actionRow: {
-    display: "flex",
-    gap: "6px",
-  },
-  editBtn: {
-    background: "#D4AF37",
-    padding: "4px 8px",
-    borderRadius: "4px",
-    textDecoration: "none",
-    color: "#000",
-    fontSize: "12px",
-    fontWeight: "bold",
-  },
-  viewBtn: {
-    background: "#333",
-    padding: "4px 8px",
-    borderRadius: "4px",
-    textDecoration: "none",
-    color: "#fff",
-    fontSize: "12px",
-  },
-  dupBtn: {
-    background: "#0077ff",
-    padding: "4px 8px",
-    borderRadius: "4px",
-    color: "#fff",
-    border: "none",
-    cursor: "pointer",
-    fontSize: "12px",
-  },
-  delBtn: {
-    background: "#ff3333",
-    padding: "4px 8px",
-    borderRadius: "4px",
-    color: "#fff",
-    border: "none",
-    cursor: "pointer",
-    fontSize: "12px",
-  },
-
-  // Bulk bar
-  bulkBar: {
-    background: "#222",
-    padding: "10px",
-    marginBottom: "10px",
-    borderRadius: "8px",
-    display: "flex",
-    gap: "10px",
-    alignItems: "center",
-  },
-  bulkText: {
-    color: "#D4AF37",
-    fontWeight: "bold",
-  },
-  bulkBtn: {
-    background: "#D4AF37",
-    padding: "6px 10px",
-    borderRadius: "6px",
-    border: "none",
-    cursor: "pointer",
-    fontWeight: "bold",
-  },
-  bulkDelete: {
-    background: "#ff3333",
-    padding: "6px 10px",
-    borderRadius: "6px",
-    border: "none",
-    cursor: "pointer",
-    color: "#fff",
-    fontWeight: "bold",
-  },
+  container: { width: "100%" },
+  mobileList: { display: "flex", flexDirection: "column", gap: 15 },
+  card: { background: "#111", borderRadius: 15, padding: 15, border: "1px solid #222" },
+  cardHeader: { display: "flex", justifyContent: "space-between", marginBottom: 12 },
+  cardBody: { display: "flex", gap: 15, marginBottom: 12 },
+  cardImg: { width: 60, height: 80, objectFit: "cover", borderRadius: 8 },
+  cardInfo: { flex: 1 },
+  cardName: { margin: "0 0 5px 0", fontSize: 16, color: "#fff" },
+  cardPrice: { margin: 0, color: "#D4AF37", fontWeight: 700 },
+  cardActions: { display: "flex", gap: 10, borderTop: "1px solid #222", paddingTop: 12 },
+  statusBadgePub: { background: "rgba(0,128,0,0.2)", color: "green", padding: "2px 8px", borderRadius: 5, fontSize: 10, textTransform: "uppercase", fontWeight: 700 },
+  statusBadgeDraft: { background: "rgba(255,255,255,0.1)", color: "#888", padding: "2px 8px", borderRadius: 5, fontSize: 10, textTransform: "uppercase", fontWeight: 700 },
+  table: { width: "100%", borderCollapse: "collapse", color: "#fff", background: "#111", borderRadius: 15, overflow: "hidden" },
+  image: { width: "50px", height: "65px", objectFit: "cover", borderRadius: "5px" },
+  loading: { textAlign: "center", padding: "20px", color: "#D4AF37", fontWeight: 600 },
+  productName: { fontWeight: 600, color: "#fff" },
+  slug: { fontSize: "10px", opacity: 0.5 },
+  published: { background: "#006400", padding: "4px 10px", borderRadius: "6px", cursor: "pointer", border: "none", color: "#fff", fontSize: "11px" },
+  draft: { background: "#333", padding: "4px 10px", borderRadius: "6px", cursor: "pointer", border: "none", color: "#fff", fontSize: "11px" },
+  toggleOn: { background: "#D4AF37", padding: "4px 10px", borderRadius: "6px", cursor: "pointer", border: "none", color: "#000", fontSize: "11px", fontWeight: "bold" },
+  toggleOff: { background: "#222", padding: "4px 10px", borderRadius: "6px", cursor: "pointer", border: "1px solid #333", color: "#fff", fontSize: "11px" },
+  actionRow: { display: "flex", gap: "6px" },
+  editBtn: { background: "#D4AF37", padding: "6px 10px", borderRadius: "6px", textDecoration: "none", color: "#000", fontSize: "11px", fontWeight: "bold" },
+  dupBtn: { background: "#333", padding: "6px 10px", borderRadius: "6px", color: "#fff", border: "1px solid #444", cursor: "pointer", fontSize: "11px" },
+  delBtn: { background: "none", color: "#ff4444", border: "none", cursor: "pointer", fontSize: "16px", padding: "0 10px" },
+  bulkBar: { background: "#1a1a1a", padding: "12px 15px", marginBottom: "15px", borderRadius: "12px", border: "1px solid #D4AF37", display: "flex", gap: "10px", alignItems: "center" },
+  bulkText: { color: "#D4AF37", fontWeight: "bold", fontSize: 14 },
+  bulkBtn: { background: "#333", color: "#fff", padding: "6px 12px", borderRadius: "8px", border: "none", cursor: "pointer", fontSize: 12 },
+  bulkDelete: { background: "#ff4444", padding: "6px 12px", borderRadius: "8px", border: "none", cursor: "pointer", color: "#fff", fontSize: 12, fontWeight: "bold", marginLeft: "auto" },
 };
