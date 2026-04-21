@@ -17,6 +17,7 @@ import Link from "next/link";
 import Image from "next/image";
 import EnquireButton from "@/components/EnquireButton";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { isValidImageUrl } from "@/utils/imageUtils";
 
 
 const PAGE_SIZE = 50;
@@ -45,16 +46,18 @@ function generateAltText(p) {
 
   const title = p.catalog || p.name || "Ethnic wear";
   const fabric =
-    Array.isArray(p.fabrics) && p.fabrics.length > 0
-      ? p.fabrics.join(", ")
+    Array.isArray(p.fabricNames) && p.fabricNames.length > 0
+      ? p.fabricNames.join(", ")
       : "";
   
-  // FIXED: Use category string instead of categories array
-  const cat = p.category || "";
+  // FIXED: Use categoryNames array instead of legacy category string
+  const cats = Array.isArray(p.categoryNames) && p.categoryNames.length > 0
+    ? p.categoryNames.join(", ")
+    : "";
 
   return `${title}${
     fabric ? " in " + fabric : ""
-  }${cat ? " | " + cat : ""} | Ethnicaa Wholesale`.trim();
+  }${cats ? " | " + cats : ""} | Ethnicaa Wholesale`.trim();
 }
 
 /* ============================================================
@@ -110,34 +113,20 @@ useEffect(() => {
     setLoading(true);
 
     try {
-      // Get products with matching category (case-insensitive)
-      // We query all and filter in JS to handle case mismatches
+      // Get products with matching category using array-contains for performance
       const q = query(
         collection(db, "products"),
         where("status", "==", "published"),
-        limit(PAGE_SIZE * 5)
+        where("categories", "array-contains", categorySlug),
+        limit(PAGE_SIZE * 2) // Fetch a bit more for client-side sorting if needed
       );
 
       const snap = await getDocs(q);
       
-      let list = snap.docs
-        .map((d) => ({
-          id: d.id,
-          slug: d.data().slug,
-          ...d.data(),
-        }))
-        // Filter by category with case-insensitive matching
-        .filter((p) => {
-  let prodCategory = "";
-
-  if (typeof p.category === "string") {
-    prodCategory = p.category.toLowerCase();
-  }
-
-  const searchSlug = categorySlug.toLowerCase();
-
-  return prodCategory.includes(searchSlug);
-});
+      let list = snap.docs.map((d) => ({
+        id: d.id,
+        ...d.data(),
+      }));
 
       // Apply sorting
       if (sort === "low-high") {
@@ -279,7 +268,7 @@ useEffect(() => {
           products.map((p) => (
             <div key={p.id} className="premium-card" style={styles.card}>
               <Link href={`/product/${p.slug}`}>
-                {p.images?.[0] && (
+                {isValidImageUrl(p.images?.[0]) && (
                   <Image
                     src={p.images[0]}
                     alt={generateAltText(p)}

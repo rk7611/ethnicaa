@@ -1,4 +1,5 @@
-"use client";
+import { doc, updateDoc, increment } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
 export default function EnquireButton({ product }) {
   if (!product) return null;
@@ -36,7 +37,18 @@ Link: ${productUrl}
 Please share more details.
   `.trim();
 
-  const openWhatsApp = () => {
+  const openWhatsApp = async () => {
+    // Increment WhatsApp Clips (NEW)
+    try {
+      if (slug) {
+        await updateDoc(doc(db, "products", slug), {
+          whatsapp_clicks: increment(1)
+        });
+      }
+    } catch (err) {
+      console.error("Failed to increment clicks:", err);
+    }
+
     const url = `https://wa.me/9586346332?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
   };

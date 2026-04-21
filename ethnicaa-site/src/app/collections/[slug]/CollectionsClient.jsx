@@ -104,6 +104,7 @@ export default function CollectionsClient({ slug }) {
                   src={p.images?.[0] || "https://ethnicaa.com/logo.png"}
                   alt={p.catalog || p.name}
                   fill
+                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 220px"
                   style={styles.cardImg}
                 />
               </div>

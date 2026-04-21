@@ -1,7 +1,8 @@
+import { blogs } from "@/lib/blog-data";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { blogs } from "@/lib/blog-data";
 
 export async function generateMetadata({ params }) {
   const post = blogs.find((b) => b.slug === params.slug);
@@ -79,7 +80,12 @@ export default function BlogPost({ params }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
 
-      <Link href="/blog" style={styles.backLink}>← Back to Blog</Link>
+      <Breadcrumbs
+        items={[
+          { name: "Blog", url: "/blog" },
+          { name: post.title, url: "" },
+        ]}
+      />
 
       <header style={styles.header}>
         <time style={styles.date}>{post.date}</time>
@@ -91,6 +97,7 @@ export default function BlogPost({ params }) {
           src={post.image}
           alt={post.title}
           fill
+          sizes="(max-width: 1200px) 100vw, 800px"
           style={{ objectFit: "cover", borderRadius: 16 }}
         />
       </div>

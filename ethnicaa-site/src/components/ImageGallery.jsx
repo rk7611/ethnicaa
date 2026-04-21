@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { isValidImageUrl } from "@/utils/imageUtils";
 
 export default function ImageGallery({ images = [], zoom = true, altText = "product" }) {
-  const safe = Array.isArray(images) ? images : [];
+  const safe = Array.isArray(images) ? images.filter(isValidImageUrl) : [];
   const [active, setActive] = useState(0);
 
   const [zoomed, setZoomed] = useState(false);

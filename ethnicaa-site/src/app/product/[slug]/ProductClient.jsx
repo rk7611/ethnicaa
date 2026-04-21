@@ -10,6 +10,8 @@ import {
   limit,
   getDocs,
   orderBy,
+  updateDoc,
+  increment,
 } from "firebase/firestore";
 
 import { db } from "@/lib/firebase";
@@ -22,6 +24,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import Link from "next/link";
 import Image from "next/image";
 import TrustBadges from "@/components/TrustBadges";
+import { isValidImageUrl } from "@/utils/imageUtils";
 
 
 
@@ -32,11 +35,13 @@ function generateAltText(p) {
   if (!p) return "Ethnicaa product image";
 
   const name = p.catalog || p.name || "Ethnic wear";
-  const fabric = Array.isArray(p.fabrics)
-    ? p.fabrics.join(", ")
+  const fabric = Array.isArray(p.fabricNames)
+    ? p.fabricNames.join(", ")
     : p.fabric || "";
 
-  const category = p.category || "";
+  const category = Array.isArray(p.categoryNames)
+    ? p.categoryNames[0]
+    : p.category || "";
 
   return `${name}${fabric ? " in " + fabric : ""}${
     category ? " | " + category : ""
@@ -48,23 +53,22 @@ function generateAltText(p) {
    FETCH SIMILAR PRODUCTS
 ============================================================ */
 async function fetchSimilarProducts(product, slug) {
+  // Use first category for similarity
+  const mainCat = Array.isArray(product.categories) ? product.categories[0] : "";
+  if (!mainCat) return [];
+
   const q = query(
     collection(db, "products"),
     where("status", "==", "published"),
-    orderBy("createdAt", "desc"),
-    limit(80)
+    where("categories", "array-contains", mainCat),
+    limit(7)
   );
 
   const snap = await getDocs(q);
-  const all = snap.docs
+  return snap.docs
     .map((d) => ({ id: d.id, ...d.data() }))
-    .filter((p) => p.slug !== slug);
-
-  const byCategory = all.filter((p) =>
-  p.category === product.category
-);
-
-  return byCategory.slice(0, 6);
+    .filter((p) => p.slug !== slug)
+    .slice(0, 6);
 }
 
 /* ============================================================
@@ -127,6 +131,15 @@ useEffect(() => {
       setSimilar(sim);
 
       setLoading(false);
+
+      // INCREMENT VIEWS (NEW)
+      try {
+        await updateDoc(doc(db, "products", slug), {
+          views: increment(1)
+        });
+      } catch (err) {
+        console.error("Failed to increment views:", err);
+      }
     }
 
     load();
@@ -222,8 +235,8 @@ useEffect(() => {
       <Breadcrumbs
         items={[
           {
-            name: product.category || "Catalog",
-            url: `/category/${encodeURIComponent(product.category)}`,
+            name: product.categoryNames?.[0] || product.category || "Catalog",
+            url: `/category/${product.categories?.[0] || encodeURIComponent(product.category || "")}`,
           },
           { name: product.catalog || product.name, url: "" },
         ]}
@@ -271,10 +284,16 @@ useEffect(() => {
 
           {/* META */}
           <div style={styles.meta}>
-            <p><b>Category:</b> {product.category}</p>
+            <p><b>Category:</b> {product.categoryNames?.join(", ") || product.category}</p>
 
-            {product.fabrics.length > 0 && (
+            {product.fabricNames?.length > 0 && (
               <p>
+                <b>Fabric:</b> {product.fabricNames.join(", ")}
+              </p>
+            )}
+
+            {product.fabricNames?.length === 0 && product.fabrics?.length > 0 && (
+               <p>
                 <b>Fabric:</b> {product.fabrics.join(", ")}
               </p>
             )}
@@ -351,12 +370,15 @@ useEffect(() => {
               <div key={p.id} className="premium-card" style={styles.similarCard}>
                 <Link href={`/product/${p.slug || p.id}`} style={{ textDecoration: "none" }}>
                   <div style={styles.similarImg}>
-                    <Image
-                      src={p.images?.[0] || "/placeholder.png"}
-                      alt={p.name}
-                      fill
-                      style={{ objectFit: "cover", borderRadius: 12 }}
-                    />
+                    {isValidImageUrl(p.images?.[0]) && (
+                      <Image
+                        src={p.images[0]}
+                        alt={p.name}
+                        fill
+                        sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 150px"
+                        style={{ objectFit: "cover", borderRadius: 12 }}
+                      />
+                    )}
                   </div>
                   <div style={styles.similarInfo}>
                     <div style={styles.similarCat}>

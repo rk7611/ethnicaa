@@ -7,6 +7,8 @@ import {
   updateDoc,
   deleteDoc,
   doc,
+  setDoc,
+  serverTimestamp,
 } from "firebase/firestore";
 
 import { db, storage } from "../firebase";
@@ -206,6 +208,23 @@ export default function useProducts() {
     }
   };
 
+  const duplicateProduct = async (p) => {
+    const newSlug = `${p.slug}-copy-${Date.now()}`;
+    const copy = {
+      ...p,
+      name: `${p.name} (Copy)`,
+      slug: newSlug,
+      status: "draft",
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+    };
+    // Remove the original ID so it doesn't conflict
+    delete copy.id;
+    
+    await setDoc(doc(db, "products", newSlug), copy);
+    return true;
+  };
+
   return {
     products,
     loading,
@@ -239,5 +258,6 @@ export default function useProducts() {
     bulkOfferOn,
     bulkOfferOff,
     bulkDelete,
+    duplicateProduct,
   };
 }

@@ -4,7 +4,8 @@ export const blogs = [
     title: "Top 5 Wholesale Textile Markets in Surat — A Guide for Resellers",
     date: "April 13, 2026",
     excerpt: "Looking for the best wholesale textile markets in Surat? Check our list of the top 5 markets for sarees, kurtis, and lehengas to boost your reseller business profit.",
-    image: "https://images.unsplash.com/photo-1589118949245-7d38baf380d6?auto=format&fit=crop&q=80&w=800",
+    image: "https://storage.googleapis.com/ethnicaa-8402c.firebasestorage.app/products/1064-jute-crape-shop-trendy-kalamkari-saree-exports/e1105953-5ee9-4e26-a631-7118b0901bf1.jpeg",
+    sizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw",
     keywords: "Surat textile market, wholesale market Surat, sarees wholesale Surat, Millennium textile market, Surat dress material wholesale",
     content: `
       <h2>The Heart of India's Textile Industry: Surat</h2>
@@ -33,7 +34,8 @@ export const blogs = [
     title: "How to Start Your Online Reselling Business with Ethnicaa in 2026",
     date: "April 10, 2026",
     excerpt: "Learn how to build a profitable home-based ethnic wear business. Step-by-step guide to reselling via WhatsApp, Instagram, and Facebook using Ethnicaa catalogs.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
+    image: "https://storage.googleapis.com/ethnicaa-8402c.firebasestorage.app/products/1love-by-s4u-alia-cut-digital-printed-mul-cotton-readymade-anarkali-suit/0fa84bf0-7eae-4feb-b368-33dc014d638b.jpeg",
+    sizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw",
     keywords: "online reselling business, home business for women, reselling ethnic wear, work from home India, wholesale catalogs for resellers",
     content: `
       <h2>The Rise of Social Commerce in India</h2>
@@ -57,7 +59,8 @@ export const blogs = [
     title: "Why Pakistani Suits are Dominating the Wholesale Market in 2026",
     date: "April 05, 2026",
     excerpt: "From heavy embroidery to premium lawn fabric, explore why Pakistani suits are the top-selling category in the Surat wholesale market this year.",
-    image: "https://images.unsplash.com/photo-1583391733956-6c78276477e2?auto=format&fit=crop&q=80&w=800",
+    image: "https://storage.googleapis.com/ethnicaa-8402c.firebasestorage.app/products/20021-by-ziana-traditional-crunchy-silk-combo-pakistani-farsi-style-3pcs-dress/06b90adb-54d2-4ae8-bb0d-afba1ff147ba.jpeg",
+    sizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw",
     keywords: "Pakistani suits wholesale, original lawn suits, Pakistani suit manufacturers Surat, bulk Pakistani suits, ethnic wear trends 2026",
     content: `
       <h2>The Trend of the Year: Pakistani Suits</h2>

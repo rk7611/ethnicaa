@@ -1,6 +1,7 @@
+import { blogs } from "@/lib/blog-data";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import Link from "next/link";
 import Image from "next/image";
-import { blogs } from "@/lib/blog-data";
 
 export const metadata = {
   title: "Ethnicaa Blog — Wholesale Reselling Guide & Surat Market News",
@@ -11,6 +12,7 @@ export const metadata = {
 export default function BlogIndex() {
   return (
     <div style={styles.container}>
+      <Breadcrumbs items={[{ name: "Blog", url: "" }]} />
       <header style={styles.header}>
         <h1 style={styles.title}>Ethnicaa Wholesale Blog</h1>
         <p style={styles.subtitle}>
@@ -27,6 +29,7 @@ export default function BlogIndex() {
                   src={post.image}
                   alt={post.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   style={{ objectFit: "cover" }}
                 />
               </div>

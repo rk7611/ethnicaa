@@ -60,6 +60,10 @@ export default function ProductTable({
         <img src={p.coverImage || p.images?.[0]} style={styles.cardImg} />
         <div style={styles.cardInfo}>
           <h4 style={styles.cardName}>{p.name}</h4>
+          <div style={styles.assetBadges}>
+            {(p.catalogAssets?.pdf || p.catalog_assets?.pdf || p.pdf) && <span style={styles.assetBadgePdf}>PDF</span>}
+            {(p.catalogAssets?.zip || p.catalog_assets?.zip || p.zip) && <span style={styles.assetBadgeZip}>ZIP</span>}
+          </div>
           <p style={styles.cardPrice}>₹{p.price}</p>
           <div style={styles.cardToggles}>
              <button
@@ -100,6 +104,17 @@ export default function ProductTable({
 
       {isMobile ? (
         <div style={styles.mobileList}>
+          {products.length > 0 && (
+            <div style={styles.mobileSelectAll}>
+              <input 
+                type="checkbox" 
+                checked={selected.length === products.length && products.length > 0} 
+                onChange={toggleSelectAll} 
+                id="select-all-mobile"
+              />
+              <label htmlFor="select-all-mobile" style={styles.selectAllLabel}>Select All Products</label>
+            </div>
+          )}
           {products.map(renderMobileCard)}
         </div>
       ) : (
@@ -123,6 +138,10 @@ export default function ProductTable({
                 <td>
                   <div style={styles.productName}>{p.name}</div>
                   <div style={styles.slug}>{p.slug}</div>
+                  <div style={styles.assetBadges}>
+                    {(p.catalogAssets?.pdf || p.catalog_assets?.pdf || p.pdf) && <span style={styles.assetBadgePdf}>PDF</span>}
+                    {(p.catalogAssets?.zip || p.catalog_assets?.zip || p.zip) && <span style={styles.assetBadgeZip}>ZIP</span>}
+                  </div>
                 </td>
                 <td>₹{p.price}</td>
                 <td>
@@ -181,4 +200,23 @@ const styles = {
   bulkText: { color: "#D4AF37", fontWeight: "bold", fontSize: 14 },
   bulkBtn: { background: "#333", color: "#fff", padding: "6px 12px", borderRadius: "8px", border: "none", cursor: "pointer", fontSize: 12 },
   bulkDelete: { background: "#ff4444", padding: "6px 12px", borderRadius: "8px", border: "none", cursor: "pointer", color: "#fff", fontSize: 12, fontWeight: "bold", marginLeft: "auto" },
+  mobileSelectAll: {
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+    background: "#1a1a1a",
+    padding: "12px 15px",
+    borderRadius: "12px",
+    border: "1px solid #333",
+    marginBottom: "5px",
+  },
+  selectAllLabel: {
+    color: "#fff",
+    fontSize: "14px",
+    fontWeight: "600",
+    cursor: "pointer",
+  },
+  assetBadges: { display: "flex", gap: "6px", marginTop: "4px" },
+  assetBadgePdf: { background: "rgba(212, 175, 55, 0.1)", color: "#D4AF37", border: "1px solid #D4AF37", fontSize: "9px", padding: "1px 5px", borderRadius: "4px", fontWeight: "bold" },
+  assetBadgeZip: { background: "rgba(76, 175, 80, 0.1)", color: "#4CAF50", border: "1px solid #4CAF50", fontSize: "9px", padding: "1px 5px", borderRadius: "4px", fontWeight: "bold" },
 };

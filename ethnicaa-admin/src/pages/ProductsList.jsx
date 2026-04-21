@@ -1,4 +1,5 @@
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import AdminLayout from "../components/AdminLayout";
 import ProductTable from "../components/ProductTable";
 import useProducts from "../hooks/useProducts";
@@ -29,7 +30,19 @@ export default function ProductsList() {
     bulkOfferOn,
     bulkOfferOff,
     bulkDelete,
+    duplicateProduct,
   } = useProducts();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    const q = searchParams.get("q");
+    if (q) {
+      setSearch(q);
+      // Clean up the URL to avoid confusion after initial search
+      setSearchParams({}, { replace: true });
+    }
+  }, [searchParams, setSearch, setSearchParams]);
 
   // Build unique category & fabric lists from all products
   const categoriesList = useMemo(() => {
@@ -42,20 +55,14 @@ export default function ProductsList() {
     return [...new Set(all)].filter(Boolean).sort();
   }, [products]);
 
-  // Duplicate handler (deep copy + new slug)
+  // Duplicate handler
   const onDuplicate = async (p) => {
-    const copy = {
-      ...p,
-      name: `${p.name} (Copy)`,
-      slug: `${p.slug}-copy-${Date.now()}`,
-      status: "draft",
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-    // reuse bulkPublish style API via save by toggling draft first
-    // NOTE: actual save will be implemented in Add/Edit step; for now this is a placeholder
-    alert("Duplicate created as draft. (Save logic will be finalized in Add/Edit step)");
-    console.log("Duplicate payload:", copy);
+    try {
+      await duplicateProduct(p);
+      alert("Product duplicated successfully as draft!");
+    } catch (err) {
+      alert("Failed to duplicate: " + err.message);
+    }
   };
 
   return (
