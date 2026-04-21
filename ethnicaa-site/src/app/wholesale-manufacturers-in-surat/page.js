@@ -18,7 +18,7 @@ export default function SuratManufacturersPage() {
       <Breadcrumbs items={[{ name: "Surat Manufacturers", url: "" }]} />
 
       <section style={styles.hero}>
-        <h1 style={styles.heroTitle}>Direct From Surat’s Leading Manufacturers</h1>
+        <h1 style={styles.heroTitle}>Direct From Surat&apos;s Leading Manufacturers</h1>
         <p style={styles.heroSub}>
           Ethnicaa is your primary bridge to the world-renowned Surat Textile Market. Skip the middlemen and source ethnic wear at authentic factory prices.
         </p>
@@ -29,14 +29,14 @@ export default function SuratManufacturersPage() {
         <div style={styles.textBlock}>
           <h2 style={styles.sectionTitle}>Why Source From Surat with Ethnicaa?</h2>
           <p style={styles.text}>
-            Surat is the heart of India's textile industry. However, finding reliable manufacturers and managing quality can be challenging. 
+            Surat is the heart of India&apos;s textile industry. However, finding reliable manufacturers and managing quality can be challenging. 
             Ethnicaa acts as your **boots-on-the-ground partner**, aggregating products from over 100+ verified factories in Ring Road, Millennium Market, and Pashupati Market.
           </p>
           <ul style={styles.featList}>
             <li>✅ **Verified Manufacturers**: Every supplier is vetted for quality and reliability.</li>
             <li>✅ **Daily New Arrivals**: Get catalog updates as soon as they hit the factory floors.</li>
-            <li>✅ **Zero Middleman Markup**: We provide products at the manufacturer's listed price.</li>
-            <li>✅ **Global Shipping**: We ship Surat's best-selling designs to over 50+ countries.</li>
+            <li>✅ **Zero Middleman Markup**: We provide products at the manufacturer&apos;s listed price.</li>
+            <li>✅ **Global Shipping**: We ship Surat&apos;s best-selling designs to over 50+ countries.</li>
           </ul>
         </div>
       </section>

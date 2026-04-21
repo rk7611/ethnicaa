@@ -18,7 +18,7 @@ export default function SuratWholesaleGuide() {
       <section style={styles.hero}>
         <h1 style={styles.heroTitle}>The Ultimate Guide to sourcing from Surat Wholesale Market (2026)</h1>
         <p style={styles.heroSub}>
-          Everything you need to know about the top fabrics, biggest markets, and direct sourcing secrets from India’s textile capital.
+          Everything you need to know about the top fabrics, biggest markets, and direct sourcing secrets from India&apos;s textile capital.
         </p>
       </section>
 
@@ -54,15 +54,15 @@ export default function SuratWholesaleGuide() {
             <Link href="/collections/organza-sarees" style={styles.inlineLink}>View Wholesale Organza Collection</Link>
           </li>
           <li>
-            <strong>Pure Georgette:</strong> Known for its "fall" and durability. Ideal for heavy embroidery and Swarovski work.
+            <strong>Pure Georgette:</strong> Known for its &quot;fall&quot; and durability. Ideal for heavy embroidery and Swarovski work.
             <Link href="/collections/georgette-suits" style={styles.inlineLink}>Explore Georgette Suits</Link>
           </li>
           <li>
-            <strong>Tusser Silk & Banarasi:</strong> Timeless classics that always have a high demand in the South Indian and NRI markets.
+            <strong>Tusser Silk &amp; Banarasi:</strong> Timeless classics that always have a high demand in the South Indian and NRI markets.
             <Link href="/collections/silk-sarees" style={styles.inlineLink}>Browse Silk Catalog</Link>
           </li>
           <li>
-            <strong>Cotton & Rayon:</strong> The go-to fabrics for daily wear Kurtis. High breathability and perfect for the Indian climate.
+            <strong>Cotton &amp; Rayon:</strong> The go-to fabrics for daily wear Kurtis. High breathability and perfect for the Indian climate.
             <Link href="/collections/cotton-kurtis" style={styles.inlineLink}>Shop Cotton Kurtis</Link>
           </li>
         </ul>
@@ -70,7 +70,7 @@ export default function SuratWholesaleGuide() {
         <div style={styles.infoBox}>
           <h3>Pro Tip for Resellers</h3>
           <p>
-            When sourcing from Surat, pay attention to the "Cut" size and "Fabric GSM." Many local wholesalers may provide shorter cuts to lower the price. At Ethnicaa, we guarantee standard factory cuts and verified fabric quality.
+            When sourcing from Surat, pay attention to the &quot;Cut&quot; size and &quot;Fabric GSM.&quot; Many local wholesalers may provide shorter cuts to lower the price. At Ethnicaa, we guarantee standard factory cuts and verified fabric quality.
           </p>
         </div>
       </section>

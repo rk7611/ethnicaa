@@ -44,7 +44,7 @@ export default function FAQPage() {
       <h1 style={styles.title}>Frequently Asked Questions</h1>
       
       <div style={styles.content}>
-        <p>If you have a question that isn't answered here, please don't hesitate to reach out to our WhatsApp support.</p>
+        <p>If you have a question that isn&apos;t answered here, please don&apos;t hesitate to reach out to our WhatsApp support.</p>
         
         <div style={styles.faqList}>
           {faqs.map((faq, index) => (

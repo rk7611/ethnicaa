@@ -10,7 +10,7 @@ export default function ShippingPolicyPage() {
       
       <div style={styles.content}>
         <p>
-          At Ethnicaa Wholesale, we ensure that your bulk orders are packaged securely and dispatched through India's most reliable logistics partners. 
+          At Ethnicaa Wholesale, we ensure that your bulk orders are packaged securely and dispatched through India&apos;s most reliable logistics partners. 
         </p>
         
         <h2>1. Dispatch Time</h2>

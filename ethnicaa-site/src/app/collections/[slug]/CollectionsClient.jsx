@@ -129,7 +129,7 @@ export default function CollectionsClient({ slug }) {
         <h2>Wholesale {category || "Ethnic Wear"} Sourcing for {city || "Retailers"}</h2>
         <p>
           At Ethnicaa, we specialize in providing {fabric || "premium fabric"} {category || "garments"} directly from 
-          Surat's manufacturers. Our collection in {city || "the region"} is specially curated to meet the demands 
+          Surat&apos;s manufacturers. Our collection in {city || "the region"} is specially curated to meet the demands 
           of local boutiques and online resellers.
         </p>
         <p>
