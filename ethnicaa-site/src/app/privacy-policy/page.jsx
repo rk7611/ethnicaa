@@ -11,7 +11,7 @@ export default function PrivacyPolicyPage() {
       <div style={styles.content}>
         <p><em>Last Updated: April 13, 2026</em></p>
         <p>
-          Ethnicaa Wholesale ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how your personal and business information is collected, used, and disclosed when you visit our website (ethnicaa.com).
+          Ethnicaa Wholesale (&quot;we&quot;, &quot;our&quot;, or &quot;us&quot;) is committed to protecting your privacy. This Privacy Policy explains how your personal and business information is collected, used, and disclosed when you visit our website (ethnicaa.com).
         </p>
         
         <h2>1. Information We Collect</h2>

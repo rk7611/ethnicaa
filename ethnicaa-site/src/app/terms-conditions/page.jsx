@@ -28,7 +28,7 @@ export default function TermsConditionsPage() {
 
         <h2>3. Taxes and GST</h2>
         <p>
-          For buyers within India, a standard GST (typically 5% for textiles and 12% for readymade garments) will be added to the final invoice value. International buyers are exempt from Indian GST but are responsible for their own country's import duties.
+          For buyers within India, a standard GST (typically 5% for textiles and 12% for readymade garments) will be added to the final invoice value. International buyers are exempt from Indian GST but are responsible for their own country&apos;s import duties.
         </p>
 
         <h2>4. Intellectual Property</h2>

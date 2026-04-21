@@ -18,7 +18,7 @@ export default function RefundPolicyPage() {
           We accept returns or offer replacements <strong>ONLY</strong> in the case of major manufacturing defects or if the wrong catalog/product was shipped to you. 
         </p>
         <ul>
-          <li>We do <strong>not</strong> accept returns for reasons such as "did not like the color", "cloth quality not as expected", or "reselling issues".</li>
+          <li>We do <strong>not</strong> accept returns for reasons such as &quot;did not like the color&quot;, &quot;cloth quality not as expected&quot;, or &quot;reselling issues&quot;.</li>
           <li>Slight color variations are possible due to professional photography lighting and device screen settings, and do not qualify as defects.</li>
         </ul>
 

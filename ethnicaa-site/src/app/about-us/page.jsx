@@ -10,7 +10,7 @@ export default function AboutUsPage() {
       
       <div style={styles.content}>
         <p>
-          Welcome to <strong>Ethnicaa Wholesale</strong>, India’s fastest-growing B2B marketplace for premium ethnic wear. We bridge the gap between Surat's leading manufacturers and retail businesses across the globe.
+          Welcome to <strong>Ethnicaa Wholesale</strong>, India&apos;s fastest-growing B2B marketplace for premium ethnic wear. We bridge the gap between Surat&apos;s leading manufacturers and retail businesses across the globe.
         </p>
         
         <h2>Our Mission</h2>

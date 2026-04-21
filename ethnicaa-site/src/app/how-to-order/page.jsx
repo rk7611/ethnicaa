@@ -24,7 +24,7 @@ export default function HowToOrderPage() {
         <div style={styles.stepBox}>
           <div style={styles.stepNum}>2</div>
           <div>
-            <h3>Click "Enquire"</h3>
+            <h3>Click &quot;Enquire&quot;</h3>
             <p>Once you find a catalog you want to purchase, click the <strong>Enquire on WhatsApp</strong> button located on the product page. This will automatically open a chat with our wholesale team with the specific product details pre-filled.</p>
           </div>
         </div>

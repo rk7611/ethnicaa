@@ -258,15 +258,15 @@ export default function HomePage() {
         <h2 style={styles.testimonialHeading}>What Our Resellers Say</h2>
         <div style={styles.testimonialGrid}>
           <div className="premium-card" style={styles.testimonialCard}>
-            <p style={styles.testimonialText}>"Always brings the latest wholesale catalogs! My customers love the quality."</p>
+            <p style={styles.testimonialText}>&quot;Always brings the latest wholesale catalogs! My customers love the quality.&quot;</p>
             <strong style={styles.testimonialAuthor}>- Riya, Mumbai</strong>
           </div>
           <div className="premium-card" style={styles.testimonialCard}>
-            <p style={styles.testimonialText}>"Best reseller margin and very fast dispatch perfectly packed."</p>
+            <p style={styles.testimonialText}>&quot;Best reseller margin and very fast dispatch perfectly packed.&quot;</p>
             <strong style={styles.testimonialAuthor}>- Ayesha, Delhi</strong>
           </div>
           <div className="premium-card" style={styles.testimonialCard}>
-            <p style={styles.testimonialText}>"I only order my Kurtis and Lehenga from Ethnicaa. Top notch fabric!"</p>
+            <p style={styles.testimonialText}>&quot;I only order my Kurtis and Lehenga from Ethnicaa. Top notch fabric!&quot;</p>
             <strong style={styles.testimonialAuthor}>- Pooja, Surat</strong>
           </div>
         </div>
