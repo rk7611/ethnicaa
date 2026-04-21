@@ -9,7 +9,7 @@ export default function Footer() {
           <div>
             <h3 style={styles.title}>Ethnicaa Wholesale</h3>
             <p style={styles.text}>
-              India's fastest growing B2B ethnic wear marketplace. Direct from Surat manufacturers giving you the best margins for your resale business.
+              India&apos;s fastest growing B2B ethnic wear marketplace. Direct from Surat manufacturers giving you the best margins for your resale business.
             </p>
           </div>
 

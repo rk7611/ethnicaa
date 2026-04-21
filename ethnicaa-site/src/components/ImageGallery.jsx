@@ -131,9 +131,12 @@ export default function ImageGallery({ images = [], zoom = true, altText = "prod
             resetZoom();
           }}
         >
-          <img
+          <Image
             src={safe[active]}
             alt={`${altText} zoomed`}
+            width={1200}
+            height={1600}
+            unoptimized
             onClick={(e) => e.stopPropagation()}
             onDoubleClick={handleDoubleTap}
             style={{

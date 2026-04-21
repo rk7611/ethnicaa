@@ -8,30 +8,25 @@ export default function BannerSlider({ banners = [] }) {
   const timeoutRef = useRef(null);
 
   /* -------------------------
-     Safety: No banners
-  ------------------------- */
-  if (!banners || banners.length === 0) {
-    return (
-      <div style={{ width: "100%", height: 200, background: "#f2f2f2", borderRadius: 10 }} />
-    );
-  }
-
-  /* -------------------------
      Auto Slide
   ------------------------- */
   useEffect(() => {
+    if (!banners || banners.length === 0) return;
     clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
       setIndex((prev) => (prev + 1) % banners.length);
     }, 4000);
 
     return () => clearTimeout(timeoutRef.current);
-  }, [index]);
+  }, [index, banners.length]);
 
-  /* -------------------------
-     Swipe
-  ------------------------- */
   const touchStart = useRef(0);
+
+  if (!banners || banners.length === 0) {
+    return (
+      <div style={{ width: "100%", height: 200, background: "#f2f2f2", borderRadius: 10 }} />
+    );
+  }
   const handleTouchStart = (e) => (touchStart.current = e.touches[0].clientX);
   const handleTouchEnd = (e) => {
     const diff = e.changedTouches[0].clientX - touchStart.current;
