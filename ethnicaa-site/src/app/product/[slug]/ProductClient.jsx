@@ -168,69 +168,8 @@ useEffect(() => {
     },
   ];
 
-  /* SCHEMA */
-  const schemaList = [
-    {
-      "@context": "https://schema.org",
-      "@type": "Product",
-      name: product.catalog || product.name,
-      image: product.images || [],
-      description: product.seo_description || product.description || "",
-      sku: product.sku || product.slug,
-      mpn: product.slug,
-      brand: { 
-        "@type": "Brand", 
-        name: product.brand || "Ethnicaa" 
-      },
-      manufacturer: {
-        "@type": "Organization",
-        name: "Ethnicaa Surat"
-      },
-      material: product.fabricNames?.join(", ") || "",
-      color: product.color || "",
-      aggregateRating: {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "128"
-      },
-      offers: {
-        "@type": "Offer",
-        priceCurrency: "INR",
-        price: product.price || product.avgPrice || "0",
-        itemCondition: "https://schema.org/NewCondition",
-        availability: "https://schema.org/InStock",
-        url: `https://ethnicaa.com/product/${product.slug}`,
-        priceValidUntil: "2026-12-31",
-        seller: {
-          "@type": "Organization",
-          "name": "Ethnicaa Wholesale Surat"
-        }
-      },
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: faqs.map((f) => ({
-        "@type": "Question",
-        name: f.q,
-        acceptedAnswer: { "@type": "Answer", text: f.a },
-      })),
-    },
-  ];
-  
- 
-
-  /* ============================================================
-      UI
-============================================================ */
   return (
     <div style={styles.container}>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(schemaList),
-        }}
-      />
 
       {/* BREADCRUMB */}
       <Breadcrumbs

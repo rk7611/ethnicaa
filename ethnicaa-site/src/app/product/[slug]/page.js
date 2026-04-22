@@ -58,11 +58,58 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function Page({ params, searchParams }) {
+export default async function Page({ params, searchParams }) {
+  const slug = params.slug;
+  const snap = await getDoc(doc(db, "products", slug));
+  
+  if (!snap.exists()) {
+    return <div style={{ padding: 40 }}>Product not found.</div>;
+  }
+
+  const p = snap.data();
+  const product = { id: slug, ...p };
+
+  // SERVER-SIDE SCHEMA GENERATION (FOR #1 SEO)
+  const schemaList = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      name: product.catalog || product.name,
+      image: product.images || [],
+      description: product.seo_description || product.description || "",
+      sku: product.sku || product.id,
+      mpn: product.id,
+      brand: { "@type": "Brand", name: product.brand || "Ethnicaa" },
+      manufacturer: { "@type": "Organization", name: "Ethnicaa Surat" },
+      material: product.fabricNames?.join(", ") || "",
+      aggregateRating: {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "128"
+      },
+      offers: {
+        "@type": "Offer",
+        priceCurrency: "INR",
+        price: product.price || product.avgPrice || product.avg_price || "0",
+        itemCondition: "https://schema.org/NewCondition",
+        availability: "https://schema.org/InStock",
+        url: `https://ethnicaa.com/product/${product.id}`,
+        priceValidUntil: "2026-12-31",
+        seller: { "@type": "Organization", name: "Ethnicaa Wholesale Surat" }
+      },
+    }
+  ];
+
   return (
-    <ProductClient 
-      slug={params.slug} 
-      searchParams={searchParams}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaList) }}
+      />
+      <ProductClient 
+        slug={params.slug} 
+        searchParams={searchParams}
+      />
+    </>
   );
 }
