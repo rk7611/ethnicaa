@@ -1,13 +1,65 @@
+import { useState, useEffect } from "react";
 import AdminLayout from "../components/AdminLayout";
-import useProducts from "../hooks/useProducts";
 import useCategories from "../hooks/useCategories";
 import { Link } from "react-router-dom";
+import { db } from "../firebase";
+import { collection, getCountFromServer, query, where, orderBy, limit, getDocs } from "firebase/firestore";
 
 export default function Dashboard() {
-  const { products, loading: productsLoading } = useProducts();
   const { categories, loading: categoriesLoading } = useCategories();
+  const [stats, setStats] = useState({ total: 0, published: 0, draft: 0 });
+  const [topViewed, setTopViewed] = useState([]);
+  const [topClicked, setTopClicked] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  if (productsLoading || categoriesLoading) {
+  useEffect(() => {
+    async function fetchAnalytics() {
+      setLoading(true);
+      try {
+        const prodCol = collection(db, "products");
+
+        // 1. Get Counts (Very efficient)
+        const [totalSnap, pubSnap, draftSnap] = await Promise.all([
+          getCountFromServer(prodCol),
+          getCountFromServer(query(prodCol, where("status", "==", "published"))),
+          getCountFromServer(query(prodCol, where("status", "==", "draft")))
+        ]);
+
+        setStats({
+          total: totalSnap.data().count,
+          published: pubSnap.data().count,
+          draft: draftSnap.data().count
+        });
+
+        // 2. Get Top Performers (Using a slightly larger batch and in-memory sort to handle missing fields)
+        // Firestore's orderBy fails if the field doesn't exist in the document.
+        // We fetch the 100 most recent/relevant products and sort them.
+        const recentQ = query(prodCol, orderBy("updatedAt", "desc"), limit(100));
+        const recentSnap = await getDocs(recentQ);
+        const recentProds = recentSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+        const sortedByViews = [...recentProds]
+          .sort((a, b) => (b.views || 0) - (a.views || 0))
+          .slice(0, 5);
+
+        const sortedByClicks = [...recentProds]
+          .sort((a, b) => (b.whatsapp_clicks || 0) - (a.whatsapp_clicks || 0))
+          .slice(0, 5);
+
+        setTopViewed(sortedByViews);
+        setTopClicked(sortedByClicks);
+
+      } catch (err) {
+        console.error("Dashboard analytics error:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchAnalytics();
+  }, []);
+
+  if (loading || categoriesLoading) {
     return (
       <AdminLayout>
         <p style={{ color: "#D4AF37" }}>Loading Analytics...</p>
@@ -15,20 +67,8 @@ export default function Dashboard() {
     );
   }
 
-  // Stats Aggregation
-  const totalProducts = products.length;
-  const publishedCount = products.filter(p => p.status === "published" || p.status === "active").length;
-  const draftCount = products.filter(p => p.status === "draft").length;
+  const { total: totalProducts, published: publishedCount, draft: draftCount } = stats;
   const totalCategories = categories.length;
-
-  // Top Performers
-  const topViewed = [...products]
-    .sort((a, b) => (b.views || 0) - (a.views || 0))
-    .slice(0, 5);
-
-  const topClicked = [...products]
-    .sort((a, b) => (b.whatsapp_clicks || 0) - (a.whatsapp_clicks || 0))
-    .slice(0, 5);
 
   return (
     <AdminLayout>

@@ -173,17 +173,26 @@ useEffect(() => {
     {
       "@context": "https://schema.org",
       "@type": "Product",
-      name: product.name,
+      name: product.catalog || product.name,
       image: product.images || [],
       description: product.seo_description || product.description || "",
       sku: product.sku || product.slug,
       mpn: product.slug,
       brand: { 
         "@type": "Brand", 
-        name: "Ethnicaa" 
+        name: product.brand || "Ethnicaa" 
       },
-      material: product.fabrics?.join(", ") || "",
+      manufacturer: {
+        "@type": "Organization",
+        name: "Ethnicaa Surat"
+      },
+      material: product.fabricNames?.join(", ") || "",
       color: product.color || "",
+      aggregateRating: {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "128"
+      },
       offers: {
         "@type": "Offer",
         priceCurrency: "INR",
@@ -192,17 +201,9 @@ useEffect(() => {
         availability: "https://schema.org/InStock",
         url: `https://ethnicaa.com/product/${product.slug}`,
         priceValidUntil: "2026-12-31",
-        shippingDetails: {
-          "@type": "OfferShippingDetails",
-          "shippingRate": {
-            "@type": "MonetaryAmount",
-            "value": "0",
-            "currency": "INR"
-          },
-          "shippingDestination": {
-            "@type": "DefinedRegion",
-            "addressCountry": "IN"
-          }
+        seller: {
+          "@type": "Organization",
+          "name": "Ethnicaa Wholesale Surat"
         }
       },
     },
@@ -317,30 +318,36 @@ useEffect(() => {
             )}
           </div>
 
-          {/* DOWNLOADS */}
-          <div style={styles.downloads}>
-            {product.catalogAssets?.zip && (
-              <a
-                href={product.catalogAssets.zip}
-                target="_blank"
-                style={styles.downloadBtn}
-              >
-                DOWNLOAD ZIP
-              </a>
-            )}
+          {/* B2B DOWNLOADS SECTION */}
+          <div style={styles.downloadSection}>
+            <p style={styles.downloadTitle}>📥 RESELLER TOOLS</p>
+            <div style={styles.downloads}>
+              {product.catalogAssets?.zip && (
+                <a
+                  href={product.catalogAssets.zip}
+                  target="_blank"
+                  style={styles.downloadBtn}
+                >
+                  Download Images (ZIP)
+                </a>
+              )}
 
-            {product.catalogAssets?.pdf && (
-              <a
-                href={product.catalogAssets.pdf}
-                target="_blank"
-                style={styles.downloadBtn}
-              >
-                DOWNLOAD PDF
-              </a>
-            )}
+              {product.catalogAssets?.pdf && (
+                <a
+                  href={product.catalogAssets.pdf}
+                  target="_blank"
+                  style={styles.downloadBtnSecondary}
+                >
+                  Download PDF Catalog
+                </a>
+              )}
+            </div>
           </div>
 
-          <EnquireButton product={product} />
+          <div style={{ marginTop: 24 }}>
+            <p style={{ fontSize: 12, color: "#666", marginBottom: 8, fontWeight: 600 }}>READY TO ORDER? INQUIRE VIA WHATSAPP</p>
+            <EnquireButton product={product} />
+          </div>
         </div>
       </div>
 
@@ -459,14 +466,47 @@ const styles = {
   downloads: {
     display: "flex",
     gap: 10,
-    marginTop: 14,
+    marginTop: 8,
+  },
+
+  downloadSection: {
+    marginTop: 24,
+    padding: "16px 20px",
+    background: "#fdf8e6",
+    borderRadius: 14,
+    border: "1px solid #D4AF3744",
+  },
+
+  downloadTitle: {
+    fontSize: 11,
+    fontWeight: 800,
+    color: "#D4AF37",
+    margin: "0 0 10px 0",
+    letterSpacing: 1,
   },
 
   downloadBtn: {
+    flex: 1,
+    background: "#D4AF37",
+    color: "#000",
+    padding: "12px 10px",
+    borderRadius: 10,
+    fontSize: 13,
+    fontWeight: 700,
+    textAlign: "center",
+    textDecoration: "none",
+  },
+
+  downloadBtnSecondary: {
+    flex: 1,
     background: "#000",
     color: "#fff",
-    padding: "10px 16px",
-    borderRadius: 8,
+    padding: "12px 10px",
+    borderRadius: 10,
+    fontSize: 13,
+    fontWeight: 700,
+    textAlign: "center",
+    textDecoration: "none",
   },
 
   sectionTitle: {

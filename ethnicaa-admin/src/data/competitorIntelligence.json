@@ -1,0 +1,28 @@
+{
+  "namingPatterns": {
+    "saree": "{brand} {catalog} {fabric} Fabric With {work} Saree Wholesaler {catalog}",
+    "suit": "{brand} {catalog} {fabric} {style} Suit {status} Catalog Wholesale",
+    "kurti": "{brand} {catalog} {fabric} Readymade Kurti With {work} Surat",
+    "indo-western": "{brand} {catalog} {fabric} Designer {style} Collection {status}"
+  },
+  "descriptionStructure": {
+    "specs": ["Catalog Name", "Brand", "Fabric", "Work", "Stitch Type", "Pcs per set", "Sizes Available"],
+    "components": {
+      "saree": ["Saree", "Blouse"],
+      "suit": ["Top", "Bottom", "Dupatta"],
+      "kurti": ["Kurti", "Pant", "Dupatta"],
+      "indo-western": ["Gown", "Jacket", "Shrug", "Belt"]
+    }
+  },
+  "seoPatterns": {
+    "metaTitle": "{brand} {catalog} {category} | Wholesale Surat Textile Market",
+    "metaDescription": "Shop the latest {brand} {catalog} {category} at wholesale price. We are top dealers of {category} in Surat. Best rates for Resellers. Worldwide shipping to USA, UK, Canada."
+  },
+  "classificationKeywords": {
+    "saree": ["saree", "blouse", "pallu", "border", "draping"],
+    "suit": ["suit", "unstitched", "top", "bottom", "dupatta", "salwar", "kameez", "dress material"],
+    "kurti": ["kurti", "readymade", "stitched", "size m", "size l", "size xl", "tunic"],
+    "indo-western": ["indo western", "gown", "shrug", "jacket", "belt", "western style", "indo-western"]
+  },
+  "marketKeywords": ["Wholesale", "Surat", "Reseller", "Best Price", "Bulk Buy", "Manufacturer"]
+}

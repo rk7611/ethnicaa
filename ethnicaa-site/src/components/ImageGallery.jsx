@@ -91,7 +91,8 @@ export default function ImageGallery({ images = [], zoom = true, altText = "prod
           src={safe[active]}
           alt={altText}
           fill
-          sizes="600px"
+          sizes="(max-width: 768px) 100vw, 600px"
+          quality={75}
           style={styles.mainImage}
         />
       </div>
@@ -115,6 +116,7 @@ export default function ImageGallery({ images = [], zoom = true, altText = "prod
               src={img}
               width={70}
               height={70}
+              quality={60}
               alt={`${altText} thumbnail ${i + 1}`}
               style={{ objectFit: "cover" }}
             />
@@ -134,9 +136,9 @@ export default function ImageGallery({ images = [], zoom = true, altText = "prod
           <Image
             src={safe[active]}
             alt={`${altText} zoomed`}
-            width={1200}
-            height={1600}
-            unoptimized
+            width={1000}
+            height={1400}
+            quality={80}
             onClick={(e) => e.stopPropagation()}
             onDoubleClick={handleDoubleTap}
             style={{

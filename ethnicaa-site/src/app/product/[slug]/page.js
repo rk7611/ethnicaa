@@ -15,15 +15,23 @@ export async function generateMetadata({ params }) {
   }
 
   const p = snap.data();
-  const title = p.seo_title || `${p.catalog || p.name} — Surat Wholesale at Factory Price`;
-  const description = p.seo_description || `Buy ${p.catalog || p.name} catalog at wholesale direct from Surat. ${p.pcs ? p.pcs + " pieces. " : ""}Latest collection for resellers with global shipping.`;
+  const brand = p.brand || "Ethnicaa";
+  const catalog = p.catalog || p.name;
+  const category = p.categoryNames?.[0] || "Ethnic Wear";
+  
+  // High-Conversion B2B Title Pattern
+  const title = p.seo_title || `${brand} ${catalog} | Wholesale Surat Textile Market | Best Price`;
+  
+  // High-Conversion B2B Description Pattern
+  const description = p.seo_description || `Buy ${brand} ${catalog} ${category} at wholesale price direct from Surat. Best collection for resellers and retailers with global shipping to USA, UK, Canada. Contact for bulk export.`;
+  
   const image = p.coverImage || p.images?.[0] || "https://ethnicaa.com/logo.png";
   const url = `https://ethnicaa.com/product/${slug}`;
 
   return {
     title,
     description,
-    keywords: p.seo_keywords || `${p.name} wholesale, ${p.catalog} Surat wholesale, ethnic wear manufacturers Surat, ${p.name} price per piece`,
+    keywords: p.seo_keywords || `${p.name} wholesale, ${catalog} Surat wholesale, ethnic wear manufacturers Surat, ${brand} catalog wholesale, textile export surat, best price sarees surat`,
     alternates: {
       canonical: url,
     },

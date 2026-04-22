@@ -26,6 +26,12 @@ export default function Sidebar({ onClose }) {
         <Link to="/add-product" style={isActive("/add-product") ? styles.activeLink : styles.link} onClick={onClose}>
           Add New Product
         </Link>
+        <Link to="/review-agent" style={isActive("/review-agent") ? styles.activeLink : styles.link} onClick={onClose}>
+          Review Agent
+        </Link>
+        <Link to="/bulk-edit" style={isActive("/bulk-edit") ? styles.activeLink : styles.link} onClick={onClose}>
+          Bulk Edit
+        </Link>
         <Link to="/Banners" style={isActive("/Banners") ? styles.activeLink : styles.link} onClick={onClose}>
           Banners & Promotions
         </Link>

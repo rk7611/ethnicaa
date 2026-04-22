@@ -2,6 +2,8 @@ import { db } from "@/lib/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { blogs } from "@/lib/blog-data";
 
+export const revalidate = 3600; // Update sitemap every hour
+
 export default async function sitemap() {
   const BASE_URL = "https://ethnicaa.com";
 

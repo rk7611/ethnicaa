@@ -5,6 +5,8 @@ import Login from "./auth/Login";
 import Dashboard from "./pages/Dashboard";
 import ProductsList from "./pages/ProductsList";
 import AddEditProduct from "./pages/AddEditProduct";
+import ReviewAgent from "./pages/ReviewAgent";
+import BulkEdit from "./pages/BulkEdit";
 import ProfileManager from "./pages/ProfileManager";
 
 import Banners from "./pages/Banners";
@@ -54,6 +56,24 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <AddEditProduct mode="edit" />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/review-agent"
+            element={
+              <ProtectedRoute>
+                <ReviewAgent />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/bulk-edit"
+            element={
+              <ProtectedRoute>
+                <BulkEdit />
               </ProtectedRoute>
             }
           />

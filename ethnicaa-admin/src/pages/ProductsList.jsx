@@ -8,6 +8,9 @@ export default function ProductsList() {
   const {
     products,
     loading,
+    loadingMore,
+    hasMore,
+    loadMore,
 
     // filters
     search, setSearch,
@@ -139,6 +142,19 @@ export default function ProductsList() {
         onBulkOfferOff={bulkOfferOff}
         onBulkDelete={bulkDelete}
       />
+
+      {/* PAGINATION */}
+      {hasMore && (
+        <div style={styles.loadMoreContainer}>
+          <button 
+            style={styles.loadMoreBtn} 
+            onClick={loadMore} 
+            disabled={loadingMore}
+          >
+            {loadingMore ? "Loading..." : "Load More Products"}
+          </button>
+        </div>
+      )}
     </AdminLayout>
   );
 }
@@ -175,5 +191,22 @@ const styles = {
     border: "1px solid #333",
     borderRadius: "6px",
     padding: "8px",
+  },
+  loadMoreContainer: {
+    display: "flex",
+    justifyContent: "center",
+    marginTop: "30px",
+    marginBottom: "50px",
+  },
+  loadMoreBtn: {
+    background: "#1a1a1a",
+    color: "#D4AF37",
+    border: "1px solid #D4AF37",
+    padding: "12px 30px",
+    borderRadius: "10px",
+    cursor: "pointer",
+    fontWeight: "bold",
+    fontSize: "15px",
+    transition: "all 0.2s",
   },
 };
