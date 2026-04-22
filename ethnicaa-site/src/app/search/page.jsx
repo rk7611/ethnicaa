@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import {
   collection,
   query,
@@ -57,8 +58,9 @@ function fuzzyMatch(a, b) {
 /* ===================================================================
     MAIN SEARCH PAGE
 =================================================================== */
-export default function SearchPage({ searchParams }) {
-  const keywordRaw = searchParams?.keyword || "";
+function SearchContent() {
+  const searchParams = useSearchParams();
+  const keywordRaw = searchParams.get("keyword") || "";
   const keyword = normalizeKeyword(keywordRaw);
 
   const [products, setProducts] = useState([]);
@@ -224,6 +226,14 @@ export default function SearchPage({ searchParams }) {
         💬
       </a>
     </div>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={<div style={{ textAlign: "center", padding: "50px" }}>Loading Search...</div>}>
+      <SearchContent />
+    </Suspense>
   );
 }
 

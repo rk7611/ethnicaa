@@ -13,7 +13,9 @@ export default function EnquireButton({ product }) {
       ? product.categories[0]
       : "Catalog";
 
-  const perPiece = product.price || product.avg_price || "";
+  const isOffer = product.offer && product.offer_price;
+  const originalPrice = product.price || "";
+  const perPiece = isOffer ? product.offer_price : (product.price || product.avg_price || "");
   const pcs = product.pcs || "";
   const fullPrice = product.full_price || "";
   const gstPrice = product.full_price_with_gst || "";
@@ -28,8 +30,7 @@ I am interested in the following product:
 • Product: ${name}
 • Category: ${category}
 • Product ID: ${slug}
-
-• Price per piece: ₹${perPiece}
+${isOffer ? `\n• Original Price: ~₹${originalPrice}~\n• OFFER PRICE: ₹${perPiece}` : `\n• Price per piece: ₹${perPiece}`}
 • PCS: ${pcs}
 • Full Price: ₹${fullPrice}
 • With GST (5%): ₹${gstPrice}

@@ -109,6 +109,8 @@ export default function AddEditProduct({ mode }) {
     availability: "",
     dispatchTime: "",
     offer: false,
+    offer_price: "",
+    discount_percent: 0,
     price: "",
     pcs: "",
     gst: 5,
@@ -195,13 +197,26 @@ export default function AddEditProduct({ mode }) {
       alert("Enter Price and PCS first");
       return;
     }
-    const full = price * pcs;
+
+    let activePrice = price;
+    let discountPercent = 0;
+
+    if (data.offer && data.offer_price) {
+      activePrice = Number(data.offer_price || 0);
+      if (activePrice > 0 && price > 0) {
+         discountPercent = Math.round(((price - activePrice) / price) * 100);
+      }
+    }
+
+    const full = activePrice * pcs;
     const fullWithGst = +(full * (1 + gst / 100)).toFixed(2);
+
     setData((prev) => ({
       ...prev,
-      avg_price: `INR ${price}`,
+      avg_price: `INR ${activePrice}`,
       full_price: `INR ${full}`,
       full_price_with_gst: `INR ${fullWithGst}`,
+      discount_percent: discountPercent,
     }));
   };
 
@@ -286,6 +301,8 @@ export default function AddEditProduct({ mode }) {
         ...data,
         slug: finalSlug,
         price: Number(data.price),
+        offer_price: Number(data.offer_price || 0),
+        discount_percent: Number(data.discount_percent || 0),
         pcs: Number(data.pcs),
         gst: Number(data.gst),
         categoryNames: cleanedPretty,
@@ -387,7 +404,7 @@ export default function AddEditProduct({ mode }) {
           </div>
 
           <div style={styles.sectionCard} className="premium-card">
-            <h3 style={styles.sectionHeading}>Wholesale Pricing</h3>
+            <h3 style={styles.sectionHeading}>Wholesale Pricing & Offers</h3>
             <div style={styles.row}>
               <div style={{ flex: 1 }}>
                 <label style={styles.label}>Price per PC *</label>
@@ -398,11 +415,51 @@ export default function AddEditProduct({ mode }) {
                 <input style={styles.input} type="number" value={data.pcs} onChange={(e) => setData({ ...data, pcs: e.target.value })} />
               </div>
             </div>
+            
+            <div style={{ display: "flex", gap: 15, marginBottom: 15, alignItems: "center", background: "#1a1a1a", padding: 15, borderRadius: 10, border: "1px solid #333" }}>
+              <div>
+                <label style={{ ...styles.label, marginBottom: 5 }}>Enable Offer?</label>
+                <button
+                  type="button"
+                  style={{
+                    background: data.offer ? "#D4AF37" : "#333",
+                    color: data.offer ? "#000" : "#fff",
+                    border: "none",
+                    padding: "8px 16px",
+                    borderRadius: 8,
+                    fontWeight: "bold",
+                    cursor: "pointer"
+                  }}
+                  onClick={() => setData({ ...data, offer: !data.offer })}
+                >
+                  {data.offer ? "ON" : "OFF"}
+                </button>
+              </div>
+              
+              {data.offer && (
+                <div style={{ flex: 1 }}>
+                  <label style={{ ...styles.label, color: "#D4AF37" }}>Offer Price per PC</label>
+                  <input
+                    style={{ ...styles.input, borderColor: "#D4AF37" }}
+                    type="number"
+                    value={data.offer_price || ""}
+                    onChange={(e) => setData({ ...data, offer_price: e.target.value })}
+                    placeholder="Enter discounted rate"
+                  />
+                </div>
+              )}
+            </div>
+
             <button style={styles.btnCalc} onClick={calculatePricing}>Auto Calculate</button>
             <div style={{ marginTop: 10 }}>
               <label style={styles.label}>Full Set Price</label>
               <input disabled style={styles.inputDisabled} value={data.full_price_with_gst} />
             </div>
+            {data.discount_percent > 0 && (
+              <p style={{ color: "#4CAF50", fontSize: 13, fontWeight: "bold", marginTop: 8 }}>
+                Calculated Discount: {data.discount_percent}% OFF
+              </p>
+            )}
           </div>
 
           <div style={styles.sectionCard} className="premium-card">

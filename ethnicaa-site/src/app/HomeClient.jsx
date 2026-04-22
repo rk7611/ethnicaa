@@ -210,9 +210,21 @@ export default function HomePage() {
             : products.map((p) => (
                 <div key={p.id} className="premium-card" style={styles.card}>
                     <Link href={`/product/${p.slug}`} style={{ textDecoration: "none", color: "inherit" }}>
-                    {isValidImageUrl(p.images?.[0]) && <Image src={p.images[0]} alt={p.catalog || p.name} width={300} height={380} style={styles.cardImg} />}
+                    <div style={styles.imgContainer}>
+                      {isValidImageUrl(p.images?.[0]) && <Image src={p.images[0]} alt={p.catalog || p.name} width={300} height={380} style={styles.cardImg} />}
+                      {p.offer && p.discount_percent > 0 && (
+                        <div style={styles.badge}>Save {p.discount_percent}%</div>
+                      )}
+                    </div>
                     <div style={styles.cardText}>{p.catalog || p.name}</div>
-                    <div style={styles.price}>₹ {p.price || 0} / pc</div>
+                    {p.offer && p.offer_price ? (
+                      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 8, marginTop: 6, flexWrap: "wrap" }}>
+                        <div style={styles.originalPrice}>₹ {p.price}</div>
+                        <div style={styles.priceOffer}>₹ {p.offer_price}</div>
+                      </div>
+                    ) : (
+                      <div style={styles.price}>₹ {p.price || 0} / pc</div>
+                    )}
                     </Link>
                     <EnquireButton product={p} />
                 </div>
@@ -290,8 +302,12 @@ const styles = {
   grid: { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: 16 },
   card: { background: "#fff", borderRadius: 16, padding: 12, boxShadow: "0 4px 12px rgba(0,0,0,0.05)" },
   cardImg: { width: "100%", height: "auto", borderRadius: 12, aspectRatio: "4/5", objectFit: "cover" },
+  imgContainer: { position: "relative" },
   cardText: { marginTop: 10, textAlign: "center", fontWeight: 700, fontSize: 14 },
   price: { marginTop: 6, fontSize: 15, fontWeight: 800, textAlign: "center", color: "#D4AF37" },
+  priceOffer: { fontSize: 15, fontWeight: 800, textAlign: "center", color: "#d32f2f" },
+  originalPrice: { fontSize: 13, color: "#888", textDecoration: "line-through", fontWeight: 500 },
+  badge: { position: "absolute", top: 8, left: 8, background: "#d32f2f", color: "#fff", padding: "2px 6px", borderRadius: 4, fontSize: 11, fontWeight: "bold", zIndex: 2 },
   loadMoreBtn: { margin: "30px auto", display: "block", padding: "12px 30px", borderRadius: 12, background: "#000", color: "#fff", fontWeight: 700, border: "none", cursor: "pointer" },
   seoBox: { marginTop: 40, padding: 25, background: "#f9f9f9", borderRadius: 16, lineHeight: 1.8 },
   skeletonCard: { background: "#eee", borderRadius: 16, padding: 12 },

@@ -17,9 +17,14 @@ export default function Header() {
   return (
     <>
       <header style={styles.header}>
-        <Link href="/" style={{ textDecoration: "none", color: "inherit" }}>
-          <div style={styles.logo}>Ethnicaa Wholesale</div>
-        </Link>
+        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
+          <Link href="/" style={{ textDecoration: "none", color: "inherit" }}>
+            <div style={styles.logo}>Ethnicaa Wholesale</div>
+          </Link>
+          <Link href="/offers" style={styles.offerLink}>
+            🔥 Offers
+          </Link>
+        </div>
 
         <form onSubmit={handleSubmit} style={styles.searchForm}>
           <input
@@ -58,6 +63,17 @@ const styles = {
   logo: {
     fontWeight: 700,
     fontSize: 20,
+    whiteSpace: "nowrap",
+  },
+
+  offerLink: {
+    fontWeight: 800,
+    fontSize: 15,
+    color: "#d32f2f",
+    textDecoration: "none",
+    background: "rgba(211, 47, 47, 0.1)",
+    padding: "6px 12px",
+    borderRadius: 20,
     whiteSpace: "nowrap",
   },
 

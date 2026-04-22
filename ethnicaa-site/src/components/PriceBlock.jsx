@@ -10,6 +10,9 @@ export default function PriceBlock({ product }) {
     fullPriceWithGST = "",
     pcs = 0,
     priceText = "",
+    offer = false,
+    offer_price = "",
+    discount_percent = 0,
   } = product;
 
   /* Pick final per-piece price */
@@ -26,7 +29,19 @@ export default function PriceBlock({ product }) {
       <div>
         {/* MAIN PRICE */}
         {perPiece ? (
-          <div style={styles.mainPrice}>₹ {perPiece} / pc</div>
+          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8, flexWrap: "wrap" }}>
+            {offer && offer_price ? (
+              <>
+                <div style={styles.originalPrice}>₹ {price}</div>
+                <div style={styles.offerPrice}>₹ {offer_price} / pc</div>
+                {discount_percent > 0 && (
+                  <div style={styles.discountBadge}>Save {discount_percent}%</div>
+                )}
+              </>
+            ) : (
+              <div style={styles.mainPrice}>₹ {perPiece} / pc</div>
+            )}
+          </div>
         ) : (
           <div style={styles.mainPrice}>Price on Request</div>
         )}
@@ -88,8 +103,26 @@ const styles = {
   mainPrice: {
     fontSize: 28,
     fontWeight: 800,
-    marginBottom: 8,
     color: "#d32f2f",
+  },
+  originalPrice: {
+    fontSize: 20,
+    fontWeight: 600,
+    color: "#888",
+    textDecoration: "line-through",
+  },
+  offerPrice: {
+    fontSize: 28,
+    fontWeight: 800,
+    color: "#d32f2f",
+  },
+  discountBadge: {
+    background: "#d32f2f", // Red badge like Meena Bazaar
+    color: "#fff",
+    padding: "4px 8px",
+    borderRadius: 6,
+    fontSize: 14,
+    fontWeight: "bold",
   },
 
   line: {
