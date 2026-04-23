@@ -149,6 +149,7 @@ export default function CollectionsClient({ slug, initialProducts }) {
           </p>
         </div>
       )}
+    </div>
   );
 }
 
