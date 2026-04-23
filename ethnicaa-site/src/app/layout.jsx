@@ -119,7 +119,6 @@ const globalSchema = {
   ],
 };
 
-import { GoogleAnalytics } from "@next/third-parties/google";
 import { Inter } from "next/font/google";
 import Footer from "@/components/Footer";
 import WhatsAppPopup from "@/components/WhatsAppPopup";
@@ -134,11 +133,27 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://firebasestorage.googleapis.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
 
         {/* Global Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(globalSchema) }}
+        />
+
+        {/* Google Analytics (gtag.js) - Stable Fallback */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XF0XGW58DX"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-XF0XGW58DX', {
+                page_path: window.location.pathname,
+              });
+            `,
+          }}
         />
       </head>
 
@@ -147,7 +162,6 @@ export default function RootLayout({ children }) {
         <main>{children}</main>
         <Footer />
         <WhatsAppPopup />
-        <GoogleAnalytics gaId="G-XF0XGW58DX" />
       </body>
     </html>
   );
