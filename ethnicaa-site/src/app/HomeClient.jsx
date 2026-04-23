@@ -53,7 +53,7 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
     if (initialCategories) return;
     async function loadCategories() {
       const catsSnap = await getDocs(collection(db, "categories"));
-      const categoriesList = catsSnap.docs.map((d) => {
+      const rawCategories = catsSnap.docs.map((d) => {
         const cat = d.data();
         return {
           slug: d.id,
@@ -62,7 +62,8 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
           count: cat.count || 0,
         };
       });
-      setCategories(categoriesList);
+      const { consolidateCategories } = await import("@/lib/category-utils");
+      setCategories(consolidateCategories(rawCategories));
     }
     loadCategories();
   }, [initialCategories]);

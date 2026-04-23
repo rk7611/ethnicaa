@@ -35,6 +35,8 @@ export const metadata = {
 
 export const dynamic = "force-dynamic";
 
+import { consolidateCategories } from "@/lib/category-utils";
+
 async function getHomeData() {
   const bannersQuery = query(collection(db, "banners"), orderBy("order", "asc"));
   const categoriesQuery = query(collection(db, "categories"));
@@ -55,7 +57,7 @@ async function getHomeData() {
     .map(d => ({ id: d.id, ...d.data() }))
     .filter(b => isValidImageUrl(b.imageURL));
 
-  const categories = catsSnap.docs.map(d => {
+  const rawCategories = catsSnap.docs.map(d => {
     const cat = d.data();
     return {
       slug: d.id,
@@ -64,6 +66,8 @@ async function getHomeData() {
       count: cat.count || 0,
     };
   });
+
+  const categories = consolidateCategories(rawCategories);
 
   const products = prodsSnap.docs.map(d => {
     const data = d.data();

@@ -50,35 +50,26 @@ export default function BannerSlider({ banners = [] }) {
   return (
     <div className="slider-wrapper">
       {banners.map((b, i) => (
-        <Link key={i} href={b.link || "#"} prefetch={false}>
-          <picture>
-
-            {/* Mobile Tall (phones <480px) */}
-            <source media="(max-width: 480px)"
-              srcSet={getMobileTall(b)}
-            />
-
-            {/* Mobile Square (phones <768px) */}
-            <source media="(max-width: 768px)"
-              srcSet={getMobileSquare(b)}
-            />
-
-            {/* Desktop */}
-            <source media="(min-width: 769px)"
-              srcSet={getDesktop(b)}
-            />
-
-            {/* fallback */}
-            <img
-              src={getDesktop(b)}
-              className={`slide ${index === i ? "active" : ""}`}
-              onTouchStart={handleTouchStart}
-              onTouchEnd={handleTouchEnd}
-              alt={b.title ? `${b.title} - Ethnicaa` : `Wholesale Ethnic Wear Collection from Surat - Ethnicaa`}
-              loading="lazy"
-            />
-          </picture>
-        </Link>
+        <div 
+          key={i} 
+          className={`slide-container ${index === i ? "active" : ""}`}
+        >
+          <Link href={b.link || "#"} prefetch={false}>
+            <picture>
+              <source media="(max-width: 480px)" srcSet={getMobileTall(b)} />
+              <source media="(max-width: 768px)" srcSet={getMobileSquare(b)} />
+              <source media="(min-width: 769px)" srcSet={getDesktop(b)} />
+              <img
+                src={getDesktop(b)}
+                className="slide-img"
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
+                alt={b.title ? `${b.title} Wholesale - Ethnicaa` : "Wholesale Ethnic Wear Surat Manufacturer - Ethnicaa"}
+                loading="lazy"
+              />
+            </picture>
+          </Link>
+        </div>
       ))}
 
       {/* Dots */}
@@ -98,31 +89,47 @@ export default function BannerSlider({ banners = [] }) {
           width: 100%;
           overflow: hidden;
           border-radius: 12px;
+          min-height: 200px;
+          background: #f0f0f0;
         }
 
-        .slide {
+        .slide-container {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+          transition: opacity 0.8s ease-in-out;
+          pointer-events: none;
+          z-index: 1;
+        }
+
+        .slide-container.active {
+          opacity: 1;
+          pointer-events: auto;
+          z-index: 2;
+        }
+
+        .slide-img {
           width: 100%;
           height: 100%;
           object-fit: cover;
           object-position: center;
-          opacity: 0;
-          transition: opacity 0.6s ease-in-out;
-        }
-
-        .slide.active {
-          opacity: 1;
         }
 
         /* Aspect ratios */
         @media (min-width: 769px) {
           .slider-wrapper {
             aspect-ratio: 16 / 6;
+            min-height: 350px;
           }
         }
 
         @media (max-width: 768px) {
           .slider-wrapper {
             aspect-ratio: 16 / 9;
+            min-height: 200px;
           }
         }
 
