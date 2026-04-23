@@ -101,7 +101,7 @@ export default async function Page({ params, searchParams }) {
       mpn: product.id,
       brand: { "@type": "Brand", name: product.brand || "Ethnicaa" },
       manufacturer: { "@type": "Organization", name: "Ethnicaa Surat" },
-      material: product.fabricNames?.join(", ") || "",
+      material: Array.isArray(product.fabricNames) ? product.fabricNames.join(", ") : product.fabricNames || "",
       aggregateRating: {
         "@type": "AggregateRating",
         "ratingValue": "4.9",

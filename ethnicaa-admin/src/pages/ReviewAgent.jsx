@@ -109,15 +109,21 @@ export default function ReviewAgent() {
   const smartExtract = (p) => {
     const text = `${p.name} ${p.description} ${p.rawSpecs}`.toLowerCase();
     let foundBrand = p.brand;
-    let foundCategory = (p.categoryNames && p.categoryNames.length > 0) ? p.categoryNames[0] : null;
+    let foundCategories = (p.categoryNames && p.categoryNames.length > 0) ? [...p.categoryNames] : [];
 
     // 1. Check Competitor Keywords (Industry Standard)
-    if (!foundCategory) {
-      for (const [cat, kws] of Object.entries(competitorIntelligence.classificationKeywords)) {
-        if (kws.some(kw => text.includes(kw))) {
-          foundCategory = cat.charAt(0).toUpperCase() + cat.slice(1);
-          if (foundCategory === "Suit") foundCategory = "Salwar Suit"; // mapping
-          break;
+    for (const [cat, kws] of Object.entries(competitorIntelligence.classificationKeywords)) {
+      if (kws.some(kw => text.includes(kw))) {
+        let catName = cat.charAt(0).toUpperCase() + cat.slice(1);
+        if (catName === "Suit") catName = "Salwar Suit"; // mapping
+        
+        // Normalization (Internal logic or mapping)
+        if (catName === "Saree") catName = "Sarees";
+        if (catName === "Kurti") catName = "Kurtis";
+        if (catName === "Gown") catName = "Gowns";
+
+        if (!foundCategories.includes(catName)) {
+          foundCategories.push(catName);
         }
       }
     }
@@ -128,24 +134,21 @@ export default function ReviewAgent() {
         foundBrand = knowledge.brands.find(b => text.includes(b));
       }
 
-      if (!foundCategory) {
-        let bestMatch = null;
-        let maxScore = 0;
-        knowledge.categories.forEach(cat => {
-          let score = 0;
-          cat.keywords.forEach(kw => {
-            if (text.includes(kw)) score++;
-          });
-          if (score > maxScore) {
-            maxScore = score;
-            bestMatch = cat.name;
-          }
+      knowledge.categories.forEach(cat => {
+        let score = 0;
+        cat.keywords.forEach(kw => {
+          if (text.includes(kw)) score++;
         });
-        foundCategory = bestMatch;
-      }
+        if (score >= 3 && !foundCategories.includes(cat.name)) { // Confidence threshold
+          foundCategories.push(cat.name);
+        }
+      });
     }
 
-    return { brand: foundBrand, category: foundCategory };
+    // Cleanup: Ensure unique and capped
+    const finalCategories = [...new Set(foundCategories)].slice(0, 3);
+
+    return { brand: foundBrand, categories: finalCategories };
   };
 
   const fetchDrafts = async () => {
@@ -171,7 +174,7 @@ export default function ReviewAgent() {
     if (!p.name || p.name.length < 3) issues.push("Name too short or missing");
     if (!p.price || Number(p.price) <= 0) issues.push("Invalid price");
     
-    const hasCategory = (p.categoryNames && p.categoryNames.length > 0) || smart.category;
+    const hasCategory = (p.categoryNames && p.categoryNames.length > 0) || (smart.categories && smart.categories.length > 0);
     if (!hasCategory) issues.push("No category (and agent couldn't guess)");
     
     if (!p.images || p.images.length === 0) issues.push("No images uploaded");
@@ -180,7 +183,7 @@ export default function ReviewAgent() {
     const fixable = [];
     if (!p.brand && smart.brand) fixable.push(`Brand missing (Agent can set to "${smart.brand}")`);
     if (!p.categoryNames || p.categoryNames.length === 0) {
-      if (smart.category) fixable.push(`Category missing (Agent can set to "${smart.category}")`);
+      if (smart.categories && smart.categories.length > 0) fixable.push(`Category missing (Agent can set to "${smart.categories.join(", ")}")`);
     }
     if (!p.seo_title || !p.seo_description || !p.search_keywords || p.search_keywords.length === 0) {
       fixable.push("SEO/Search Metadata missing (Auto-fixable)");
@@ -211,24 +214,26 @@ export default function ReviewAgent() {
 
       if (!p.brand && smartData.brand) updates.brand = smartData.brand;
       if (!p.categoryNames || p.categoryNames.length === 0) {
-        if (smartData.category) {
-          updates.categoryNames = [smartData.category];
-          updates.categories = [slugify(smartData.category)];
+        if (smartData.categories && smartData.categories.length > 0) {
+          updates.categoryNames = smartData.categories;
+          updates.categories = smartData.categories.map(c => slugify(c));
         }
       }
 
       // Auto-generate missing SEO/Keywords using Competitor Patterns
       const fabric = p.fabricNames?.[0] || "";
-      const catName = smartData.category || "Ethnic Wear";
+      const catName = (updates.categoryNames && updates.categoryNames[0]) || (p.categoryNames && p.categoryNames[0]) || "Ethnic Wear";
       
       // Competitor-style SEO Title
       updates.seo_title = p.seo_title || competitorIntelligence.seoPatterns.metaTitle
-        .replace("{name}", p.name)
+        .replace("{brand}", updates.brand || p.brand || "Ethnicaa")
+        .replace("{catalog}", p.catalog || "Exclusive")
         .replace("{category}", catName);
 
       // Competitor-style SEO Description
       updates.seo_description = p.seo_description || competitorIntelligence.seoPatterns.metaDescription
-        .replace("{name}", p.name)
+        .replace("{brand}", updates.brand || p.brand || "Ethnicaa")
+        .replace("{catalog}", p.catalog || "Exclusive")
         .replace("{category}", catName);
 
       updates.search_keywords = (p.search_keywords && p.search_keywords.length > 0) 

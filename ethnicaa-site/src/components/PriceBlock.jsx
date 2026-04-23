@@ -50,16 +50,16 @@ export default function PriceBlock({ product }) {
         {priceText && <div style={styles.subNote}>{priceText}</div>}
 
         {/* FULL SET PRICE */}
-        {fullPrice && (
+        {(fullPrice || (Number(perPiece) > 0 && pcs > 1)) && (
           <p style={styles.line}>
-            <b>Total:</b> ₹ {fullPrice}
+            <b>Full Set Price:</b> ₹ {fullPrice || (Number(perPiece) * pcs)}
           </p>
         )}
 
         {/* GST PRICE */}
-        {fullPriceWithGST && (
+        {(fullPriceWithGST || (Number(perPiece) > 0 && pcs > 1)) && (
           <p style={styles.line}>
-            <b>With GST (5%):</b> ₹ {fullPriceWithGST}
+            <b>Total with GST (5%):</b> ₹ {fullPriceWithGST || Math.round(Number(fullPrice || (Number(perPiece) * pcs)) * 1.05)}
           </p>
         )}
 

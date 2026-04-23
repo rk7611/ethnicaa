@@ -169,7 +169,7 @@ useEffect(() => {
   const faqs = [
     {
       q: `What is the fabric of ${product.name}?`,
-      a: product.fabrics.join(", ") || "Fabric details provided above.",
+      a: Array.isArray(product.fabrics) ? product.fabrics.join(", ") : product.fabrics || "Fabric details provided above.",
     },
     {
       q: `What is the dispatch time for ${product.name}?`,
@@ -241,21 +241,21 @@ useEffect(() => {
 
           {/* META */}
           <div style={styles.meta}>
-            <p><b>Category:</b> {product.categoryNames?.join(", ") || product.category}</p>
+            <p><b>Category:</b> {Array.isArray(product.categoryNames) ? product.categoryNames.join(", ") : product.category}</p>
 
-            {product.fabricNames?.length > 0 && (
+            {Array.isArray(product.fabricNames) && product.fabricNames.length > 0 && (
               <p>
                 <b>Fabric:</b> {product.fabricNames.join(", ")}
               </p>
             )}
 
-            {product.fabricNames?.length === 0 && product.fabrics?.length > 0 && (
+            {(!Array.isArray(product.fabricNames) || product.fabricNames.length === 0) && Array.isArray(product.fabrics) && product.fabrics.length > 0 && (
                <p>
                 <b>Fabric:</b> {product.fabrics.join(", ")}
               </p>
             )}
 
-            {product.sizes.length > 0 && (
+            {Array.isArray(product.sizes) && product.sizes.length > 0 && (
               <p>
                 <b>Sizes:</b> {product.sizes.join(", ")}
               </p>
