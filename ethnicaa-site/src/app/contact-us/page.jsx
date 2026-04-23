@@ -1,11 +1,36 @@
 export const metadata = {
-  title: "Contact Us | Ethnicaa Wholesale",
-  description: "Get in touch with the Ethnicaa Wholesale support team for bulk inquiries, order tracking, and business partnerships.",
+  title: "Contact Us | Ethnicaa Wholesale Surat",
+  description: "Contact Ethnicaa Wholesale for bulk orders, factory inquiries, and reseller support. WhatsApp us at +91 9586346332 for direct manufacturer access.",
 };
 
 export default function ContactUsPage() {
+  const contactSchema = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact Ethnicaa Wholesale",
+    "description": "Contact our Surat-based wholesale support team for bulk inquiries and reseller support.",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "Ethnicaa Wholesale",
+      "telephone": "+91-9586346332",
+      "email": "support@ethnicaa.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Ring Road",
+        "addressLocality": "Surat",
+        "addressRegion": "Gujarat",
+        "postalCode": "395002",
+        "addressCountry": "IN"
+      }
+    }
+  };
+
   return (
     <div style={styles.container}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }}
+      />
       <h1 style={styles.title}>Contact Us</h1>
       
       <div style={styles.content}>

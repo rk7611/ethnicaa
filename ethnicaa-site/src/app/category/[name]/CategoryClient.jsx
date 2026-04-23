@@ -44,37 +44,30 @@ function getNumericPrice(p) {
 function generateAltText(p) {
   if (!p) return "Ethnicaa product image";
 
-  const title = p.catalog || p.name || "Ethnic wear";
-  const fabric =
-    Array.isArray(p.fabricNames) && p.fabricNames.length > 0
-      ? p.fabricNames.join(", ")
-      : "";
-  
-  // FIXED: Use categoryNames array instead of legacy category string
-  const cats = Array.isArray(p.categoryNames) && p.categoryNames.length > 0
-    ? p.categoryNames.join(", ")
-    : "";
+  const catalog = p.catalog || p.name || "Ethnic wear";
+  const type = p.categoryNames?.[0] || "";
+  const fabric = p.fabricNames?.[0] || "";
 
-  return `${title}${
-    fabric ? " in " + fabric : ""
-  }${cats ? " | " + cats : ""} | Ethnicaa Wholesale`.trim();
+  return `${catalog} ${type} wholesale ${fabric} - Ethnicaa`.trim().replace(/\s+/g, ' ');
 }
 
 /* ============================================================
    CATEGORY PAGE
 ============================================================ */
-export default function CategoryClient({ name, searchParams }){
+export default function CategoryClient({ name, searchParams, initialCategory, initialProducts }){
   const categorySlug = decodeURIComponent(name);
   const sort = searchParams?.sort || "latest";
 
-  const [category, setCategory] = useState(null);
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [category, setCategory] = useState(initialCategory || null);
+  const [products, setProducts] = useState(initialProducts || []);
+  const [loading, setLoading] = useState(!initialProducts);
 
   const [allCategories, setAllCategories] = useState([]);
 
-  /* LOAD CATEGORY DETAILS */
+  /* LOAD CATEGORY DETAILS (only if not provided) */
   useEffect(() => {
+    if (initialCategory && initialCategory.slug === categorySlug) return;
+
     async function loadCategory() {
       const ref = doc(db, "categories", categorySlug);
       const snap = await getDoc(ref);
@@ -90,7 +83,7 @@ export default function CategoryClient({ name, searchParams }){
     }
 
     loadCategory();
-  }, [categorySlug]);
+  }, [categorySlug, initialCategory]);
 
   /* LOAD ALL CATEGORIES (for internal linking) */
   useEffect(() => {
@@ -107,18 +100,26 @@ export default function CategoryClient({ name, searchParams }){
   }, []);
 
   
-  /* LOAD PRODUCTS - CASE INSENSITIVE VERSION */
+  /* LOAD PRODUCTS - Handles sort changes and navigation */
 useEffect(() => {
+  // If we have initial products for this category and sort is default, skip initial fetch
+  if (initialProducts && initialProducts.length > 0 && sort === "latest" && products.length > 0) {
+     // Check if products belong to this category (simple check)
+     const firstProd = products[0];
+     if (firstProd.categories?.includes(categorySlug)) {
+        return;
+     }
+  }
+
   async function loadProducts() {
     setLoading(true);
 
     try {
-      // Get products with matching category using array-contains for performance
       const q = query(
         collection(db, "products"),
         where("status", "==", "published"),
         where("categories", "array-contains", categorySlug),
-        limit(PAGE_SIZE * 2) // Fetch a bit more for client-side sorting if needed
+        limit(PAGE_SIZE * 2)
       );
 
       const snap = await getDocs(q);
@@ -140,7 +141,6 @@ useEffect(() => {
           return dateA - dateB;
         });
       } else {
-        // Latest first
         list.sort((a, b) => {
           const dateA = a.createdAt?.seconds || a.createdAt?._seconds || 0;
           const dateB = b.createdAt?.seconds || b.createdAt?._seconds || 0;
@@ -158,77 +158,7 @@ useEffect(() => {
   }
 
   loadProducts();
-}, [sort, categorySlug]);
-
-  /* ============================================================
-      SCHEMAS
-  ============================================================= */
-  const schemaList = [];
-
-  if (category) {
-    schemaList.push({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: "https://ethnicaa.com",
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: category.name,
-          item: typeof window !== "undefined" ? window.location.href : "",
-        },
-      ],
-    });
-  }
-
-  if (Array.isArray(category?.category_faqs)) {
-    schemaList.push({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: category.category_faqs.map((f) => ({
-        "@type": "Question",
-        name: f.q,
-        acceptedAnswer: { "@type": "Answer", text: f.a },
-      })),
-    });
-  }
-
-  if (products.length > 0) {
-    schemaList.push({
-      "@context": "https://schema.org",
-      "@type": "CollectionPage",
-      name: category?.name || categorySlug,
-      url: `https://ethnicaa.com/category/${categorySlug}`,
-      description: category?.category_seo_description || `Wholesale collection of ${category?.name || categorySlug}.`,
-      mainEntity: {
-        "@type": "ItemList",
-        itemListElement: products.map((p, i) => ({
-          "@type": "ListItem",
-          position: i + 1,
-          url: `https://ethnicaa.com/product/${p.slug}`,
-          name: p.catalog || p.name,
-          image: p.images?.[0] || "",
-        })),
-      },
-    });
-  }
-
-  schemaList.push({
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "Ethnicaa Wholesale",
-    url: "https://ethnicaa.com",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: "https://ethnicaa.com/search?keyword={search}",
-      "query-input": "required name=search",
-    },
-  });
+}, [sort, categorySlug, initialProducts]);
 
   /* ============================================================
       UI
@@ -245,7 +175,7 @@ useEffect(() => {
       />
 
       <h1 style={styles.pageTitle}>
-        {category?.name || categorySlug.replace(/-/g, " ")}
+        {category?.name || categorySlug.replace(/-/g, " ")} Wholesale Catalog 2026 — Factory Price Surat
       </h1>
 
       {/* SORT */}
@@ -276,6 +206,7 @@ useEffect(() => {
                     height={380}
                     quality={100}
                     style={styles.cardImg}
+                    loading="lazy"
                   />
                 )}
               </Link>

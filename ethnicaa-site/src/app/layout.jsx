@@ -47,28 +47,35 @@ export const metadata = {
     follow: true,
   },
 
+  verification: {
+    google: "GSC_VERIFICATION_CODE_HERE", // User to replace with actual code
+  },
+
   alternates: {
     canonical: "https://ethnicaa.com",
   },
 };
 
-// JSON-LD Global Schema (Organization + Website)
+// JSON-LD Global Schema (Organization + Website + LocalBusiness)
 const globalSchema = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "Organization",
-      name: "Ethnicaa Wholesale",
-      url: "https://ethnicaa.com",
-      logo: "https://ethnicaa.com/logo.png",
-      sameAs: [
-        "https://www.instagram.com/rk7611",
-      ],
-      contactPoint: {
+      "@id": "https://ethnicaa.com/#organization",
+      "name": "Ethnicaa Wholesale",
+      "url": "https://ethnicaa.com",
+      "logo": "https://ethnicaa.com/logo.png",
+      "contactPoint": {
         "@type": "ContactPoint",
-        telephone: "+91-9586346332",
-        contactType: "sales",
+        "telephone": "+91-9586346332",
+        "contactType": "customer service",
+        "availableLanguage": ["Hindi", "English"]
       },
+      "sameAs": [
+        "https://wa.me/9586346332",
+        "https://www.instagram.com/rk7611"
+      ]
     },
     {
       "@type": "LocalBusiness",
@@ -100,6 +107,7 @@ const globalSchema = {
     },
     {
       "@type": "WebSite",
+      "@id": "https://ethnicaa.com/#website",
       "name": "Ethnicaa Wholesale",
       "url": "https://ethnicaa.com",
       "potentialAction": {

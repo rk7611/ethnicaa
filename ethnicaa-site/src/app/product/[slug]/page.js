@@ -1,5 +1,5 @@
 import ProductClient from "./ProductClient";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, collection, query, where, getDocs, limit } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
 export const dynamic = "force-dynamic";
@@ -39,6 +39,7 @@ export async function generateMetadata({ params }) {
       title,
       description,
       url,
+      siteName: "Ethnicaa Wholesale",
       images: [
         {
           url: image,
@@ -58,6 +59,24 @@ export async function generateMetadata({ params }) {
   };
 }
 
+async function getSimilarProducts(product, slug) {
+  const mainCat = Array.isArray(product.categories) ? product.categories[0] : "";
+  if (!mainCat) return [];
+
+  const q = query(
+    collection(db, "products"),
+    where("status", "==", "published"),
+    where("categories", "array-contains", mainCat),
+    limit(7)
+  );
+
+  const snap = await getDocs(q);
+  return snap.docs
+    .map((d) => ({ id: d.id, ...d.data() }))
+    .filter((p) => p.slug !== slug)
+    .slice(0, 6);
+}
+
 export default async function Page({ params, searchParams }) {
   const slug = params.slug;
   const snap = await getDoc(doc(db, "products", slug));
@@ -68,6 +87,7 @@ export default async function Page({ params, searchParams }) {
 
   const p = snap.data();
   const product = { id: slug, ...p };
+  const similar = await getSimilarProducts(product, slug);
 
   // SERVER-SIDE SCHEMA GENERATION (FOR #1 SEO)
   const schemaList = [
@@ -89,14 +109,38 @@ export default async function Page({ params, searchParams }) {
       },
       offers: {
         "@type": "Offer",
-        priceCurrency: "INR",
-        price: product.price || product.avgPrice || product.avg_price || "0",
-        itemCondition: "https://schema.org/NewCondition",
-        availability: "https://schema.org/InStock",
-        url: `https://ethnicaa.com/product/${product.id}`,
-        priceValidUntil: "2026-12-31",
-        seller: { "@type": "Organization", name: "Ethnicaa Wholesale Surat" }
+        "priceCurrency": "INR",
+        "price": product.price || product.avgPrice || product.avg_price || "0",
+        "itemCondition": "https://schema.org/NewCondition",
+        "availability": "https://schema.org/InStock",
+        "url": `https://ethnicaa.com/product/${product.id}`,
+        "priceValidUntil": "2026-12-31",
+        "seller": { "@type": "Organization", "name": "Ethnicaa Wholesale" }
       },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://ethnicaa.com",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: product.categoryNames?.[0] || "Catalog",
+          item: `https://ethnicaa.com/category/${product.categories?.[0] || ""}`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: product.catalog || product.name,
+          item: `https://ethnicaa.com/product/${slug}`,
+        },
+      ],
     }
   ];
 
@@ -109,6 +153,8 @@ export default async function Page({ params, searchParams }) {
       <ProductClient 
         slug={params.slug} 
         searchParams={searchParams}
+        initialProduct={product}
+        initialSimilar={similar}
       />
     </>
   );

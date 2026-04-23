@@ -74,7 +74,8 @@ export default function BannerSlider({ banners = [] }) {
               className={`slide ${index === i ? "active" : ""}`}
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
-              alt={b.title || `Wholesale Ethnic Wear Banner ${i + 1}`}
+              alt={b.title ? `${b.title} - Ethnicaa` : `Wholesale Ethnic Wear Collection from Surat - Ethnicaa`}
+              loading="lazy"
             />
           </picture>
         </Link>

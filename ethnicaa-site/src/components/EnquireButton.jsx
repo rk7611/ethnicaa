@@ -2,6 +2,7 @@
 
 import { doc, updateDoc, increment } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import { trackEnquiry, trackWhatsAppClick } from "@/lib/analytics";
 
 export default function EnquireButton({ product }) {
   if (!product) return null;
@@ -51,6 +52,10 @@ Please share more details.
     } catch (err) {
       console.error("Failed to increment clicks:", err);
     }
+
+    // Analytics (NEW)
+    trackEnquiry(name);
+    trackWhatsAppClick("Product Enquiry");
 
     const url = `https://wa.me/9586346332?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");

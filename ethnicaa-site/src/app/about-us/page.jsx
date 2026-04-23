@@ -1,6 +1,6 @@
 export const metadata = {
   title: "About Us | Ethnicaa Wholesale",
-  description: "Learn about Ethnicaa Wholesale, India's leading B2B wholesale marketplace for ethnic wear directly from Surat manufacturers.",
+  description: "India's fastest growing B2B ethnic wear marketplace. Source latest sarees, kurtis & Pakistani suits directly from Surat manufacturers at direct factory rates.",
 };
 
 export default function AboutUsPage() {

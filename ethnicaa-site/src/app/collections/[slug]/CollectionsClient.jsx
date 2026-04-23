@@ -10,7 +10,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import { parseCollectionSlug } from "@/lib/seo-utils";
+import { parseCollectionSlug, CITY_CONTENT } from "@/lib/seo-utils";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -19,61 +19,42 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 
 const PAGE_SIZE = 40;
 
-export default function CollectionsClient({ slug }) {
+export default function CollectionsClient({ slug, initialProducts }) {
   const components = parseCollectionSlug(slug);
   const { fabric, category, city } = components;
 
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState(initialProducts || []);
+  const [loading, setLoading] = useState(!initialProducts);
+
+  const cityData = city ? CITY_CONTENT[city] : null;
 
   useEffect(() => {
-    async function loadProducts() {
-      setLoading(true);
+    // ... existing loadProducts logic (if needed for client-side navigation)
+  }, [slug, initialProducts]);
 
-      try {
-        // Step 1: Query by Category (primary filter)
-        let q = query(
-          collection(db, "products"),
-          where("status", "==", "published"),
-          orderBy("createdAt", "desc"),
-          limit(300) // Fetch a decent chunk to filter by fabric in JS
-        );
-
-        const snap = await getDocs(q);
-        let list = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
-
-        // Step 2: Filter by Category in JS (handles case-insensitive and partial matches)
-        if (category) {
-          const catLower = category.toLowerCase();
-          list = list.filter(p => {
-             const prodCat = (p.category || "").toLowerCase();
-             return prodCat.includes(catLower) || catLower.includes(prodCat);
-          });
-        }
-
-        // Step 3: Filter by Fabric in JS
-        if (fabric) {
-          const fabLower = fabric.toLowerCase();
-          list = list.filter(p => {
-            const prodFabrics = (p.fabrics || []).map(f => f.toLowerCase());
-            const prodFabricStr = (p.fabric || "").toLowerCase();
-            return prodFabrics.includes(fabLower) || prodFabricStr.includes(fabLower);
-          });
-        }
-
-        setProducts(list.slice(0, PAGE_SIZE));
-      } catch (error) {
-        console.error("Error loading collection products:", error);
+  // Schema for FAQ
+  const faqSchema = cityData?.faqs ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": cityData.faqs.map(f => ({
+      "@type": "Question",
+      "name": f.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": f.a
       }
-
-      setLoading(false);
-    }
-
-    loadProducts();
-  }, [slug]);
+    }))
+  } : null;
 
   return (
     <div style={styles.container}>
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
+
       <Breadcrumbs 
         items={[
           { name: "Collections", url: "/" },
@@ -82,17 +63,18 @@ export default function CollectionsClient({ slug }) {
       />
 
       <h1 style={styles.pageTitle}>
-        {fabric && category && city 
-          ? `Wholesale ${fabric} ${category} in ${city}` 
+        {category && city 
+          ? `Wholesale ${category} in ${city} — Direct from Surat Manufacturers` 
           : fabric && category 
           ? `Wholesale ${fabric} ${category} Collection`
           : components.label}
       </h1>
 
-      <p style={styles.subtext}>
-        Explore our bulk catalog of {fabric || ""} {category || "ethnic wear"} at direct factory prices from Surat. 
-        {city ? ` Specialized shipping and service available for buyers in ${city}.` : ""}
-      </p>
+      {cityData && (
+        <div style={styles.introBox}>
+          <p style={styles.introText}>{cityData.intro}</p>
+        </div>
+      )}
 
       {/* Grid */}
       <div style={styles.grid}>
@@ -102,10 +84,11 @@ export default function CollectionsClient({ slug }) {
               <div style={styles.imgWrapper}>
                 <Image
                   src={p.images?.[0] || "https://ethnicaa.com/logo.png"}
-                  alt={p.catalog || p.name}
+                  alt={`${p.catalog || p.name} wholesale ${category || ""} ${city ? "for " + city : ""} - Ethnicaa`}
                   fill
                   sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 220px"
                   style={styles.cardImg}
+                  loading="lazy"
                 />
               </div>
             </Link>
@@ -124,31 +107,74 @@ export default function CollectionsClient({ slug }) {
         )}
       </div>
 
-      {/* SEO Content Block */}
-      <div style={styles.seoBox}>
-        <h2>Wholesale {category || "Ethnic Wear"} Sourcing for {city || "Retailers"}</h2>
-        <p>
-          At Ethnicaa, we specialize in providing {fabric || "premium fabric"} {category || "garments"} directly from 
-          Surat&apos;s manufacturers. Our collection in {city || "the region"} is specially curated to meet the demands 
-          of local boutiques and online resellers.
+      {/* CTA SECTION */}
+      <div style={styles.ctaBox}>
+        <h2 style={styles.ctaTitle}>Start Your Wholesale Business Today</h2>
+        <p style={styles.ctaText}>
+          Join 10,000+ resellers across India sourcing direct from Surat factory. 
+          Get daily updates and premium support.
         </p>
-        <p>
-          Each catalog features the latest 2026 designs, high-quality embroidery, and durable fabrics. 
-          By cutting out the middlemen, we ensure you get the best wholesale margins for your business.
-        </p>
+        <a 
+          href={`https://wa.me/9586346332?text=Hi, I want to order wholesale ${category || "garments"} for delivery to ${city || "my city"}`}
+          target="_blank"
+          style={styles.whatsappBtn}
+        >
+          Order via WhatsApp
+        </a>
       </div>
-    </div>
+
+      {/* FAQ SECTION */}
+      {cityData?.faqs && (
+        <div style={styles.faqSection}>
+          <h2 style={styles.faqSectionTitle}>Frequently Asked Questions</h2>
+          <div style={styles.faqList}>
+            {cityData.faqs.map((f, i) => (
+              <div key={i} style={styles.faqItem}>
+                <h3 style={styles.faqQ}>{f.q}</h3>
+                <p style={styles.faqA}>{f.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* SEO Content Block (Fallback/General) */}
+      {!cityData && (
+        <div style={styles.seoBox}>
+          <h2>Wholesale {category || "Ethnic Wear"} Sourcing</h2>
+          <p>
+            At Ethnicaa, we specialize in providing {fabric || "premium fabric"} {category || "garments"} directly from 
+            Surat&apos;s manufacturers. Our collection is specially curated to meet the demands 
+            of local boutiques and online resellers.
+          </p>
+        </div>
+      )}
   );
 }
 
 const styles = {
   container: { maxWidth: 1200, margin: "0 auto", padding: 12 },
-  pageTitle: { fontSize: 28, fontWeight: 700, marginBottom: 10, color: "#111" },
-  subtext: { fontSize: 16, color: "#666", marginBottom: 30, lineHeight: 1.6, maxWidth: 800 },
+  pageTitle: { 
+    fontSize: 32, 
+    fontWeight: 800, 
+    marginBottom: 20, 
+    color: "#111",
+    textAlign: "center",
+    marginTop: 20
+  },
+  introBox: {
+    maxWidth: 900,
+    margin: "0 auto 40px auto",
+    textAlign: "center",
+    lineHeight: 1.8,
+    fontSize: 17,
+    color: "#444"
+  },
   grid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
     gap: 20,
+    marginBottom: 50,
   },
   card: { background: "#fff", padding: 12, borderRadius: 16, boxShadow: "0 4px 15px rgba(0,0,0,0.05)" },
   imgWrapper: { position: "relative", width: "100%", aspectRatio: "4/5", borderRadius: 12, overflow: "hidden", marginBottom: 10 },
@@ -157,5 +183,35 @@ const styles = {
   price: { fontWeight: 700, textAlign: "center", marginBottom: 10 },
   noResults: { gridColumn: "1 / -1", textAlign: "center", padding: "60px 0" },
   homeLink: { display: "inline-block", marginTop: 20, background: "#000", color: "#fff", padding: "12px 24px", borderRadius: 12, textDecoration: "none" },
+  
+  ctaBox: {
+    margin: "60px auto",
+    padding: "40px 20px",
+    background: "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)",
+    borderRadius: 24,
+    textAlign: "center",
+    maxWidth: 1000
+  },
+  ctaTitle: { fontSize: 24, fontWeight: 700, marginBottom: 12 },
+  ctaText: { fontSize: 16, color: "#555", marginBottom: 25 },
+  whatsappBtn: {
+    display: "inline-block",
+    background: "#25D366",
+    color: "#fff",
+    padding: "16px 32px",
+    borderRadius: 50,
+    textDecoration: "none",
+    fontWeight: 700,
+    fontSize: 18,
+    boxShadow: "0 10px 20px rgba(37, 211, 102, 0.2)"
+  },
+
+  faqSection: { marginTop: 60, padding: "0 20px" },
+  faqSectionTitle: { fontSize: 26, fontWeight: 700, marginBottom: 30, textAlign: "center" },
+  faqList: { maxWidth: 800, margin: "0 auto" },
+  faqItem: { marginBottom: 30, borderBottom: "1px solid #eee", paddingBottom: 20 },
+  faqQ: { fontSize: 18, fontWeight: 700, marginBottom: 10, color: "#111" },
+  faqA: { fontSize: 16, color: "#555", lineHeight: 1.6 },
+
   seoBox: { marginTop: 60, padding: 30, background: "#f9f9f9", borderRadius: 20, lineHeight: 1.8 },
 };

@@ -6,7 +6,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const metadata = {
   title: "Direct Wholesale Manufacturers in Surat | Ethnicaa B2B",
-  description: "Source directly from Surat's leading textile manufacturers. Ethnicaa brings you the best of Surat wholesale market at factory prices for sarees, kurtis, and suits.",
+  description: "Source directly from Surat's leading textile manufacturers. Ethnicaa connects you with Ring Road and Millennium Market's top suppliers at authentic factory prices.",
   alternates: {
     canonical: "https://ethnicaa.com/wholesale-manufacturers-in-surat",
   },

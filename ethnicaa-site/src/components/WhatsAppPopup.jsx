@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 export default function WhatsAppPopup() {
   const [show, setShow] = useState(false);
@@ -24,6 +25,7 @@ export default function WhatsAppPopup() {
   };
 
   const subscribe = () => {
+    trackWhatsAppClick("Popup Subscription");
     const message = encodeURIComponent("Hi Ethnicaa, I want to subscribe to daily wholesale catalogues and new arrival updates. Please add me.");
     window.open(`https://wa.me/9586346332?text=${message}`, "_blank");
     dismiss();

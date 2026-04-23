@@ -7,10 +7,11 @@ export default function ProductCard({ product }) {
       <div style={styles.imageWrapper}>
         <Image
           src={product.cover || product.images?.[0]}
-          alt={product.name}
+          alt={`${product.catalog || product.name} ${product.categoryNames?.[0] || ""} wholesale ${product.fabricNames?.[0] || ""} - Ethnicaa`.trim()}
           fill
           sizes="(max-width: 600px) 48vw, 220px"
           style={styles.image}
+          loading="lazy"
         />
         {product.offer && product.discount_percent > 0 && (
           <div style={styles.badge}>Save {product.discount_percent}%</div>

@@ -74,10 +74,10 @@ async function fetchSimilarProducts(product, slug) {
 /* ============================================================
    PRODUCT PAGE
 ============================================================ */
-export default function ProductClient({ slug }) {
-  const [product, setProduct] = useState(null);
-  const [similar, setSimilar] = useState([]);
-  const [loading, setLoading] = useState(true);
+export default function ProductClient({ slug, initialProduct, initialSimilar }) {
+  const [product, setProduct] = useState(initialProduct || null);
+  const [similar, setSimilar] = useState(initialSimilar || []);
+  const [loading, setLoading] = useState(!initialProduct);
   const [isMobile, setIsMobile] = useState(false);
 
 useEffect(() => {
@@ -87,8 +87,10 @@ useEffect(() => {
   return () => window.removeEventListener("resize", check);
 }, []);
 
-  /* LOAD PRODUCT */
+  /* LOAD PRODUCT (only if not provided) */
   useEffect(() => {
+    if (initialProduct && product && product.id === slug) return;
+
     async function load() {
       setLoading(true);
 
@@ -103,6 +105,7 @@ useEffect(() => {
 
       const normalized = {
         ...data,
+        id: slug,
 
         price: data.price ?? "",
         avgPrice: data.avg_price ?? "",
@@ -132,7 +135,7 @@ useEffect(() => {
 
       setLoading(false);
 
-      // INCREMENT VIEWS (NEW)
+      // INCREMENT VIEWS
       try {
         await updateDoc(doc(db, "products", slug), {
           views: increment(1)
@@ -143,7 +146,21 @@ useEffect(() => {
     }
 
     load();
-  }, [slug]);
+  }, [slug, initialProduct]);
+
+  useEffect(() => {
+    if (product && product !== "not-found") {
+       import("@/lib/analytics").then((m) => m.trackProductView(product));
+    }
+  }, [product]);
+
+  function generateAltText(p) {
+    if (!p) return "Ethnicaa product image";
+    const catalog = p.catalog || p.name || "Ethnic wear";
+    const type = p.categoryNames?.[0] || "";
+    const fabric = p.fabricNames?.[0] || "";
+    return `${catalog} ${type} wholesale ${fabric} - Ethnicaa`.trim().replace(/\s+/g, ' ');
+  }
 
   if (loading) return <p style={{ padding: 40 }}>Loading...</p>;
   if (product === "not-found") return <p style={{ padding: 40 }}>Not found.</p>;

@@ -37,24 +37,20 @@ async function getBanners() {
   }));
 }
 
-export default function HomePage() {
-  const [loading, setLoading] = useState(true);
+export default function HomePage({ initialBanners, initialCategories, initialProducts }) {
+  const [loading, setLoading] = useState(!initialProducts);
   const [loadMoreLoading, setLoadMoreLoading] = useState(false);
 
-  const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [banners, setBanners] = useState([]);
+  const [products, setProducts] = useState(initialProducts || []);
+  const [categories, setCategories] = useState(initialCategories || []);
+  const [banners, setBanners] = useState(initialBanners || []);
 
   const [lastDoc, setLastDoc] = useState(null);
   const [hasMore, setHasMore] = useState(true);
 
+  // Initial load categories if not provided (fallback)
   useEffect(() => {
-    getBanners().then(list => {
-      setBanners(list.filter(b => isValidImageUrl(b.imageURL)));
-    });
-  }, []);
-
-  useEffect(() => {
+    if (initialCategories) return;
     async function loadCategories() {
       const catsSnap = await getDocs(collection(db, "categories"));
       const categoriesList = catsSnap.docs.map((d) => {
@@ -69,11 +65,23 @@ export default function HomePage() {
       setCategories(categoriesList);
     }
     loadCategories();
-  }, []);
+  }, [initialCategories]);
 
+  // Initial load banners if not provided (fallback)
   useEffect(() => {
+    if (initialBanners) return;
+    getBanners().then(list => {
+      setBanners(list.filter(b => isValidImageUrl(b.imageURL)));
+    });
+  }, [initialBanners]);
+
+  // Initial load products or pagination
+  useEffect(() => {
+    if (initialProducts && products.length > 0) {
+      return;
+    }
     loadProducts(false);
-  }, []);
+  }, [initialProducts]);
 
   async function loadProducts(loadMore) {
     loadMore ? setLoadMoreLoading(true) : setLoading(true);
@@ -112,59 +120,15 @@ export default function HomePage() {
     setLoadMoreLoading(false);
   }
 
-  const websiteSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "Ethnicaa Wholesale",
-    url: "https://ethnicaa.com",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: "https://ethnicaa.com/search?keyword={search_term_string}",
-      "query-input": "required name=search_term_string",
-    },
-  };
-
-  const orgSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "Ethnicaa Wholesale",
-    url: "https://ethnicaa.com",
-    logo: "https://ethnicaa.com/logo.png",
-    contactPoint: { "@type": "ContactPoint", telephone: "+91-9586346332", contactType: "sales" },
-    sameAs: ["https://www.facebook.com", "https://www.instagram.com"],
-  };
-
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      { "@type": "Question", name: "Do you offer wholesale prices?", acceptedAnswer: { "@type": "Answer", text: "Yes, all products on Ethnicaa are available at wholesale prices." } },
-      { "@type": "Question", name: "How often do you add new catalogs?", acceptedAnswer: { "@type": "Answer", text: "We add new catalogs daily." } },
-    ],
-  };
-
-  const itemListSchema = products.length > 0 ? {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    itemListElement: products.slice(0, 12).map((p, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      name: p.name || p.catalog,
-      url: `https://ethnicaa.com/product/${p.slug}`,
-    })),
-  } : null;
-
   const homepageSEOContent = `
     <h2>Wholesale Ethnic Wear at Best Prices — Ethnicaa</h2>
     <p>Ethnicaa Wholesale is India’s fastest-growing wholesale marketplace for Sarees, Kurtis, Pakistani Suits, Lehenga Choli, Gowns, and Salwar Suits.</p>
+    <p>We provide direct factory access to the latest 2026 designs from Surat's top manufacturers, ensuring the best profit margins for your retail or resale business.</p>
   `;
 
   return (
     <div style={styles.container}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      {itemListSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }} />}
+      {/* Schemas handled in layout or page.jsx for SSR efficiency */}
 
       {banners.length > 0 && (
         <div style={{ marginBottom: 20, marginTop: 10 }}>
@@ -185,7 +149,7 @@ export default function HomePage() {
                 {isValidImageUrl(c.cover) && (
                   <Image
                     src={c.cover}
-                    alt={c.name}
+                    alt={c.name + " Wholesale"}
                     width={300}
                     height={380}
                     quality={100}
@@ -203,7 +167,7 @@ export default function HomePage() {
       <div style={styles.section}>
         <h2 style={styles.heading}>Latest Arrivals</h2>
         <div style={styles.grid}>
-            {loading
+            {loading && products.length === 0
             ? Array(12).fill(0).map((_, i) => (
                 <div key={i} style={styles.skeletonCard}><div style={styles.skeletonImg}></div><div style={styles.skeletonText}></div></div>
                 ))
@@ -211,7 +175,15 @@ export default function HomePage() {
                 <div key={p.id} className="premium-card" style={styles.card}>
                     <Link href={`/product/${p.slug}`} style={{ textDecoration: "none", color: "inherit" }}>
                     <div style={styles.imgContainer}>
-                      {isValidImageUrl(p.images?.[0]) && <Image src={p.images[0]} alt={p.catalog || p.name} width={300} height={380} style={styles.cardImg} />}
+                      {isValidImageUrl(p.images?.[0]) && (
+                        <Image 
+                          src={p.images[0]} 
+                          alt={`${p.catalog || p.name} wholesale Surat manufacturer`} 
+                          width={300} 
+                          height={380} 
+                          style={styles.cardImg} 
+                        />
+                      )}
                       {p.offer && p.discount_percent > 0 && (
                         <div style={styles.badge}>Save {p.discount_percent}%</div>
                       )}
@@ -270,21 +242,42 @@ export default function HomePage() {
         <h2 style={styles.testimonialHeading}>What Our Resellers Say</h2>
         <div style={styles.testimonialGrid}>
           <div className="premium-card" style={styles.testimonialCard}>
-            <p style={styles.testimonialText}>&quot;Always brings the latest wholesale catalogs! My customers love the quality.&quot;</p>
-            <strong style={styles.testimonialAuthor}>- Riya, Mumbai</strong>
+            <div style={styles.stars}>★★★★★</div>
+            <p style={styles.testimonialText}>&quot;Always brings the latest wholesale catalogs! My customers love the quality and fast shipping.&quot;</p>
+            <div style={styles.authorBox}>
+              <div style={styles.avatar}>R</div>
+              <div>
+                <strong style={styles.testimonialAuthor}>Riya Sharma</strong>
+                <div style={styles.authorLoc}>Mumbai, Reseller</div>
+              </div>
+            </div>
           </div>
           <div className="premium-card" style={styles.testimonialCard}>
-            <p style={styles.testimonialText}>&quot;Best reseller margin and very fast dispatch perfectly packed.&quot;</p>
-            <strong style={styles.testimonialAuthor}>- Ayesha, Delhi</strong>
+            <div style={styles.stars}>★★★★★</div>
+            <p style={styles.testimonialText}>&quot;Best reseller margin and very fast dispatch perfectly packed. Ethnicaa is my primary source.&quot;</p>
+            <div style={styles.authorBox}>
+              <div style={styles.avatar}>A</div>
+              <div>
+                <strong style={styles.testimonialAuthor}>Ayesha Khan</strong>
+                <div style={styles.authorLoc}>Delhi, Boutique Owner</div>
+              </div>
+            </div>
           </div>
           <div className="premium-card" style={styles.testimonialCard}>
-            <p style={styles.testimonialText}>&quot;I only order my Kurtis and Lehenga from Ethnicaa. Top notch fabric!&quot;</p>
-            <strong style={styles.testimonialAuthor}>- Pooja, Surat</strong>
+            <div style={styles.stars}>★★★★★</div>
+            <p style={styles.testimonialText}>&quot;I only order my Kurtis and Lehenga from Ethnicaa. Top notch fabric and genuine rates.&quot;</p>
+            <div style={styles.authorBox}>
+              <div style={styles.avatar}>P</div>
+              <div>
+                <strong style={styles.testimonialAuthor}>Pooja Patel</strong>
+                <div style={styles.authorLoc}>Surat, Online Seller</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <a href="https://wa.me/9586346332" target="_blank" rel="noopener noreferrer" className="pulsing-whatsapp" aria-label="Chat on WhatsApp">💬</a>
+      <a href="https://wa.me/9586346332?text=Hi, I want to enquire about wholesale sarees" target="_blank" rel="noopener noreferrer" className="pulsing-whatsapp" aria-label="Chat on WhatsApp">💬</a>
     </div>
   );
 }
@@ -317,8 +310,12 @@ const styles = {
   testimonialHeading: { fontSize: 24, fontWeight: 800, textAlign: "center", marginBottom: 30 },
   testimonialGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 },
   testimonialCard: { background: "#fff", padding: 25, borderRadius: 20, boxShadow: "0 8px 24px rgba(0,0,0,0.04)" },
-  testimonialText: { fontStyle: "italic", color: "#444", marginBottom: 15 },
-  testimonialAuthor: { color: "#000" },
+  testimonialText: { fontStyle: "italic", color: "#444", marginBottom: 15, fontSize: 15, lineHeight: 1.6 },
+  testimonialAuthor: { color: "#000", fontSize: 15, fontWeight: 700 },
+  stars: { color: "#FFD700", marginBottom: 10, fontSize: 14 },
+  authorBox: { display: "flex", alignItems: "center", gap: 12, marginTop: 15 },
+  avatar: { width: 40, height: 40, borderRadius: "50%", background: "#f0f0f0", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, color: "#555" },
+  authorLoc: { fontSize: 12, color: "#888", marginTop: 2 },
   blogGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 },
   blogCard: { padding: 16, background: "#fff", borderRadius: 16, boxShadow: "0 4px 12px rgba(0,0,0,0.03)" },
   blogImageWrapper: { position: "relative", width: "100%", height: 180, marginBottom: 12 },

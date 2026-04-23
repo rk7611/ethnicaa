@@ -5,26 +5,22 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import ProductCard from "@/components/ProductCard";
 
-export default function OffersClient() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+export default function OffersClient({ initialProducts }) {
+  const [products, setProducts] = useState(initialProducts || []);
+  const [loading, setLoading] = useState(!initialProducts);
 
   useEffect(() => {
+    if (initialProducts) return;
     async function fetchOffers() {
       try {
         const q = query(
           collection(db, "products"),
           where("status", "in", ["published", "active"]),
-          where("offer", "==", true)
+          where("offer", "==", true),
+          orderBy("createdAt", "desc")
         );
         const snap = await getDocs(q);
         const list = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-        // Sort in memory by createdAt descending
-        list.sort((a, b) => {
-          const t1 = a.createdAt?.seconds || a.timestamp || 0;
-          const t2 = b.createdAt?.seconds || b.timestamp || 0;
-          return t2 - t1;
-        });
         setProducts(list);
       } catch (err) {
         console.error("Failed to fetch offers:", err);
@@ -33,7 +29,7 @@ export default function OffersClient() {
       }
     }
     fetchOffers();
-  }, []);
+  }, [initialProducts]);
 
   return (
     <div style={styles.container}>
