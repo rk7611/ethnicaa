@@ -282,8 +282,8 @@ export default function AddEditProduct({ mode }) {
       ["Pakistani Suits", ["pakistani"]],
       ["Lahanga", ["lehenga", "lahanga"]],
       ["Gown", ["gown"]],
-      ["Sarees", ["saree"]],
       ["Kurti", ["kurti"]],
+      ["Sarees", ["saree"]],
     ];
 
     let derivedCat = "Ethnic Wear";
@@ -413,8 +413,8 @@ export default function AddEditProduct({ mode }) {
                       ["Pakistani Suits", ["pakistani"]],
                       ["Lahanga", ["lehenga", "lahanga"]],
                       ["Gown", ["gown"]],
-                      ["Sarees", ["saree"]],
                       ["Kurti", ["kurti"]],
+                      ["Sarees", ["saree"]],
                     ];
                     let cat = "Ethnic Wear";
                     for (const [name, r] of rules) {

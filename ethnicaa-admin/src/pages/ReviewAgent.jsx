@@ -116,7 +116,14 @@ export default function ReviewAgent() {
       "wedding", "casual", "bridal", "heavy"
     ];
     
-    const extractedTags = KEYWORDS.filter(kw => text.includes(kw));
+    // Boilerplate removal
+    let cleanText = text.replace(/requirment for.*/gi, "")
+                        .replace(/requirement for.*/gi, "")
+                        .replace(/available for.*/gi, "")
+                        .replace(/search keywords.*/gi, "")
+                        .replace(/dispatched only after.*/gi, "");
+
+    const extractedTags = KEYWORDS.filter(kw => cleanText.includes(kw));
     
     // Derive category from tags
     const CATEGORY_RULES = [
@@ -125,8 +132,8 @@ export default function ReviewAgent() {
       ["Pakistani Suits", ["pakistani"]],
       ["Lahanga", ["lehenga", "lahanga"]],
       ["Gown", ["gown"]],
-      ["Sarees", ["saree"]],
       ["Kurti", ["kurti"]],
+      ["Sarees", ["saree"]],
     ];
 
     let derivedCat = "Ethnic Wear";
