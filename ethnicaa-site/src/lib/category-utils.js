@@ -31,6 +31,7 @@ export function normalizeCategoryName(name) {
 }
 
 export function consolidateCategories(categories) {
+  if (!categories || !Array.isArray(categories)) return [];
   const consolidated = {};
 
   // 1. Add "All Products" as the first virtual category

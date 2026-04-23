@@ -48,11 +48,16 @@ export default function BannerSlider({ banners = [] }) {
     b.image_mobileTall || b.image_mobileSquare || b.image_desktop || b.imageURL || b.image || "";
 
   return (
-    <div className="slider-wrapper">
+    <div style={localStyles.sliderWrapper}>
       {banners.map((b, i) => (
         <div 
           key={i} 
-          className={`slide-container ${index === i ? "active" : ""}`}
+          style={{
+            ...localStyles.slideContainer,
+            opacity: index === i ? 1 : 0,
+            pointerEvents: index === i ? "auto" : "none",
+            zIndex: index === i ? 2 : 1,
+          }}
         >
           <Link href={b.link || "#"} prefetch={false}>
             <picture>
@@ -61,7 +66,7 @@ export default function BannerSlider({ banners = [] }) {
               <source media="(min-width: 769px)" srcSet={getDesktop(b)} />
               <img
                 src={getDesktop(b)}
-                className="slide-img"
+                style={localStyles.slideImg}
                 onTouchStart={handleTouchStart}
                 onTouchEnd={handleTouchEnd}
                 alt={b.title ? `${b.title} Wholesale - Ethnicaa` : "Wholesale Ethnic Wear Surat Manufacturer - Ethnicaa"}
@@ -73,90 +78,59 @@ export default function BannerSlider({ banners = [] }) {
       ))}
 
       {/* Dots */}
-      <div className="dots">
+      <div style={localStyles.dots}>
         {banners.map((_, i) => (
           <div
             key={i}
-            className={`dot ${i === index ? "active" : ""}`}
+            style={{
+              ...localStyles.dot,
+              background: i === index ? "#fff" : "#ffffff80",
+              width: i === index ? 12 : 10,
+              height: i === index ? 12 : 10,
+            }}
             onClick={() => setIndex(i)}
           />
         ))}
       </div>
-
-      <style jsx>{`
-        .slider-wrapper {
-          position: relative;
-          width: 100%;
-          overflow: hidden;
-          border-radius: 12px;
-          min-height: 200px;
-          background: #f0f0f0;
-        }
-
-        .slide-container {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          opacity: 0;
-          transition: opacity 0.8s ease-in-out;
-          pointer-events: none;
-          z-index: 1;
-        }
-
-        .slide-container.active {
-          opacity: 1;
-          pointer-events: auto;
-          z-index: 2;
-        }
-
-        .slide-img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          object-position: center;
-        }
-
-        /* Aspect ratios */
-        @media (min-width: 769px) {
-          .slider-wrapper {
-            aspect-ratio: 16 / 6;
-            min-height: 350px;
-          }
-        }
-
-        @media (max-width: 768px) {
-          .slider-wrapper {
-            aspect-ratio: 16 / 9;
-            min-height: 200px;
-          }
-        }
-
-        .dots {
-          position: absolute;
-          bottom: 12px;
-          width: 100%;
-          display: flex;
-          justify-content: center;
-          gap: 6px;
-        }
-
-        .dot {
-          width: 10px;
-          height: 10px;
-          background: #ffffff80;
-          border-radius: 50%;
-          cursor: pointer;
-          transition: 0.3s;
-        }
-
-        .dot.active {
-          background: #fff;
-          width: 12px;
-          height: 12px;
-        }
-      `}</style>
     </div>
   );
 }
+
+const localStyles = {
+  sliderWrapper: {
+    position: "relative",
+    width: "100%",
+    overflow: "hidden",
+    borderRadius: "12px",
+    aspectRatio: "16 / 9",
+    background: "#f0f0f0",
+  },
+  slideContainer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    transition: "opacity 0.8s ease-in-out",
+  },
+  slideImg: {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    objectPosition: "center",
+  },
+  dots: {
+    position: "absolute",
+    bottom: "12px",
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    gap: "6px",
+    zIndex: 10,
+  },
+  dot: {
+    borderRadius: "50%",
+    cursor: "pointer",
+    transition: "0.3s",
+  },
+};

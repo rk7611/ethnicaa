@@ -37,6 +37,8 @@ async function getBanners() {
   }));
 }
 
+import { consolidateCategories } from "@/lib/category-utils";
+
 export default function HomePage({ initialBanners, initialCategories, initialProducts }) {
   const [loading, setLoading] = useState(!initialProducts);
   const [loadMoreLoading, setLoadMoreLoading] = useState(false);
@@ -62,7 +64,6 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
           count: cat.count || 0,
         };
       });
-      const { consolidateCategories } = await import("@/lib/category-utils");
       setCategories(consolidateCategories(rawCategories));
     }
     loadCategories();
