@@ -79,11 +79,37 @@ export default async function sitemap() {
     });
   });
 
+  // 6. VERNACULAR PAGES
+  const vernacularLangs = ["hi", "te", "ta"];
+  const vernacularPages = [];
+  
+  vernacularLangs.forEach(lang => {
+    // Basic categories in vernacular
+    categories.forEach(cat => {
+      vernacularPages.push({
+        url: cat.url.replace(`${baseUrl}/`, `${baseUrl}/${lang}/`),
+        lastModified: new Date(),
+        changeFrequency: "weekly",
+        priority: 0.8,
+      });
+    });
+    // Blog posts in vernacular
+    blogs.filter(b => b.lang === lang).forEach(post => {
+      vernacularPages.push({
+        url: `${baseUrl}/${lang}/blog/${post.slug}`,
+        lastModified: new Date(),
+        changeFrequency: "monthly",
+        priority: 0.6,
+      });
+    });
+  });
+
   return [
     ...staticPages,
     ...categories,
     ...productPages,
     ...blogPages,
     ...collectionPages,
+    ...vernacularPages,
   ];
 }

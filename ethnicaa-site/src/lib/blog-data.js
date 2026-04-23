@@ -1,6 +1,34 @@
 export const blogs = [
   {
+    slug: "wholesale-saree-surat-thok-bazaar-guide",
+    lang: "hi",
+    title: "सूरत थोक साड़ी बाजार 2026: कम कीमत में सीधा निर्माता से खरीदें",
+    date: "April 23, 2026",
+    excerpt: "सूरत से थोक साड़ी (wholesale saree Surat) खरीदने का पूरा गाइड। जानें कि सीधे फैक्ट्री से कैसे मंगवाएं और अपना रीसेलिंग बिजनेस शुरू करें।",
+    image: "https://storage.googleapis.com/ethnicaa-8402c.firebasestorage.app/products/1064-jute-crape-shop-trendy-kalamkali-saree-exports/e1105953-5ee9-4e26-a631-7118b0901bf1.jpeg",
+    keywords: "थोक साड़ी सूरत, wholesale saree Surat Hindi, सूरत साड़ी फैक्ट्री, साड़ी रीसेलिंग बिजनेस",
+    content: `
+      <h2>सूरत: भारत का सबसे बड़ा कपड़ा बाजार</h2>
+      <p>अगर आप अपना कपड़ों का बिजनेस शुरू करना चाहते हैं, तो <strong>सूरत थोक साड़ी बाजार</strong> से बेहतर कोई जगह नहीं है। 2026 में, तकनीक की मदद से अब आप घर बैठे सीधे सूरत की फैक्ट्रियों से जुड़ सकते हैं।</p>
+
+      <h2>सीधे निर्माता से खरीदने के फायदे</h2>
+      <p>जब आप किसी बिचौलिये के बजाय सीधे निर्माता (Ethnicaa) से जुड़ते हैं, तो आपको मिलता है:</p>
+      <ul>
+        <li><strong>सबसे कम दाम:</strong> कोई कमीशन नहीं।</li>
+        <li><strong>लेटेस्ट डिज़ाइन:</strong> सूरत में बनने वाले नए डिज़ाइन सबसे पहले आपके पास।</li>
+        <li><strong>क्वालिटी की गारंटी:</strong> सीधे फैक्ट्री चेक के बाद डिस्पैच।</li>
+      </ul>
+
+      <h2>साड़ी रीसेलिंग बिजनेस कैसे शुरू करें?</h2>
+      <p>आजकल व्हाट्सएप (WhatsApp) के जरिए रीसेलिंग करना बहुत आसान है। आपको बस Ethnicaa के कैटलॉग अपने ग्रुप में शेयर करने हैं और अपना मार्जिन जोड़कर ऑर्डर लेना है।</p>
+
+      <p><strong>आज ही थोक दाम पर साड़ियाँ देखें:</strong><br/>
+      👉 <a href="/hi/collections/thok-saree-surat">सूरत थोक साड़ी कलेक्शन यहाँ देखें →</a></p>
+    `
+  },
+  {
     slug: "how-to-start-saree-reselling-business-india-2026",
+    lang: "en",
     title: "How to Start a Saree Reselling Business from Home in 2026",
     date: "April 23, 2026",
     excerpt: "Learn how to start a saree reselling business in India with zero investment. Step-by-step 2026 guide to sourcing wholesale and selling on WhatsApp.",
@@ -34,6 +62,7 @@ export const blogs = [
   },
   {
     slug: "top-10-wholesale-saree-suppliers-surat-reseller",
+    lang: "en",
     title: "Top 10 Wholesale Saree Suppliers in Surat for Resellers",
     date: "April 23, 2026",
     excerpt: "Find the best wholesale sarees Surat reseller hubs. Top 10 list of manufacturers and B2B platforms for the best margins in 2026.",
@@ -58,6 +87,7 @@ export const blogs = [
   },
   {
     slug: "wholesale-kurtis-price-list-surat-2026",
+    lang: "en",
     title: "Wholesale Kurtis Price List 2026 — Factory Rates from Surat",
     date: "April 23, 2026",
     excerpt: "Get the latest wholesale kurtis price list Surat for 2026. Compare cotton, rayon, and designer kurti rates direct from factory.",
@@ -84,6 +114,7 @@ export const blogs = [
   },
   {
     slug: "pakistani-suits-wholesale-india-guide",
+    lang: "en",
     title: "Pakistani Suits Wholesale Guide — Everything Resellers Need to Know",
     date: "April 23, 2026",
     excerpt: "Everything you need to know about Pakistani suits wholesale India. Learn about lawn fabric, embroidery patches, and sourcing the best replicas in 2026.",

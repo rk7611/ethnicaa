@@ -19,8 +19,8 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 
 const PAGE_SIZE = 40;
 
-export default function CollectionsClient({ slug, initialProducts }) {
-  const components = parseCollectionSlug(slug);
+export default function CollectionsClient({ slug, initialProducts, lang = "en" }) {
+  const components = parseCollectionSlug(slug, lang);
   const { fabric, category, city } = components;
 
   const [products, setProducts] = useState(initialProducts || []);
@@ -63,7 +63,9 @@ export default function CollectionsClient({ slug, initialProducts }) {
       />
 
       <h1 style={styles.pageTitle}>
-        {category && city 
+        {lang !== "en" && VERNACULAR_MAP[lang]
+          ? VERNACULAR_MAP[lang].title.replace("{category}", VERNACULAR_MAP[lang][category?.toLowerCase()] || category)
+          : category && city 
           ? `Wholesale ${category} in ${city} — Direct from Surat Manufacturers` 
           : fabric && category 
           ? `Wholesale ${fabric} ${category} Collection`

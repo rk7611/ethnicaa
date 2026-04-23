@@ -16,30 +16,78 @@ const CATEGORIES = [
   "Sarees", "Kurtis", "Salwar Suits", "Pakistani Suits", "Lehenga", "Gowns"
 ];
 
+export const LANGUAGES = {
+  en: { name: "English", native: "English" },
+  hi: { name: "Hindi", native: "हिन्दी" },
+  te: { name: "Telugu", native: "తెలుగు" },
+  ta: { name: "Tamil", native: "தமிழ்" },
+  kn: { name: "Kannada", native: "ಕನ್ನಡ" },
+  ml: { name: "Malayalam", native: "മലയാളம்" },
+  pa: { name: "Punjabi", native: "ਪੰਜਾਬੀ" },
+  gu: { name: "Gujarati", native: "ગુજરાતી" }
+};
+
+export const VERNACULAR_MAP = {
+  hi: {
+    wholesale: "थोक",
+    sarees: "साड़ियाँ",
+    kurtis: "कुर्तियाँ",
+    surat: "सूरत",
+    manufacturer: "निर्माता",
+    factory: "फैक्ट्री",
+    reseller: "पुनर्विक्रेता",
+    title: "सूरत से सीधे थोक {category} — फैक्टरी रेट",
+    desc: "सूरत से सीधे थोक दरों पर {category} खरीदें। रीसेलर्स और बुटीक मालिकों के लिए बेहतरीन संग्रह। पूरे भारत में डिलीवरी।"
+  },
+  te: {
+    wholesale: "హోల్‌సేల్",
+    sarees: "చీరలు",
+    kurtis: "కుర్తీలు",
+    surat: "సూరత్",
+    title: "సూరత్ ఫ్యాక్టరీ నుండి నేరుగా హోల్‌సేల్ {category}",
+    desc: "సూరత్ తయారీదారుల నుండి నేరుగా హోల్‌సేల్ ధరలకు {category} కొనండి. రీసెల్లర్లకు ఉత్తమ మార్జిన్."
+  },
+  ta: {
+    wholesale: "மொத்த விற்பனை",
+    sarees: "சேலைகள்",
+    kurtis: "குர்த்திகள்",
+    surat: "சூரத்",
+    title: "சூரத் தொழிற்சாலையிலிருந்து நேரடியாக மொத்த விற்பனை {category}",
+    desc: "சூரத் உற்பத்தியாளர்களிடமிருந்து நேரடியாக மொத்த விலையில் {category} வாங்கவும்."
+  },
+  kn: {
+    wholesale: "ಸಗಟು",
+    sarees: "ಸೀರೆಗಳು",
+    kurtis: "ಕುರ್ತಿಗಳು",
+    surat: "ಸೂರತ್",
+    title: "ಸೂರತ್ ಫ್ಯಾಕ್ಟರಿಯಿಂದ ನೇರವಾಗಿ ಸಗಟು {category}",
+    desc: "ಸೂರತ್ ತಯಾರಕರಿಂದ ನೇರವಾಗಿ ಸಗಟು ದರದಲ್ಲಿ {category} ಖರೀದಿಸಿ."
+  }
+};
+
 /**
  * Parses a slug like 'silk-sarees-in-mumbai' into its components.
  */
-export function parseCollectionSlug(slug) {
+export function parseCollectionSlug(slug, lang = "en") {
   const s = slug.toLowerCase();
   
+  // Vernacular Keyword Mapping (thok = wholesale, etc)
+  const isVernacular = s.includes("thok") || s.includes("thok-") || s.includes("wholesale-");
+
   let fabric = PRIORITY_FABRICS.find(f => s.includes(f.toLowerCase())) || "";
   let city = PRIORITY_CITIES.find(c => s.includes(c.toLowerCase())) || "";
   let category = CATEGORIES.find(cat => s.includes(cat.toLowerCase())) || "";
 
-  // Fallback for category if slug is just 'silk-sarees'
-  if (!category) {
-    if (s.includes("saree")) category = "Sarees";
-    else if (s.includes("kurti")) category = "Kurtis";
-    else if (s.includes("suit")) category = "Salwar Suits";
-    else if (s.includes("lehenga")) category = "Lehenga";
-    else if (s.includes("gown")) category = "Gowns";
-  }
+  // Handle common vernacular terms
+  if (!category && s.includes("saree")) category = "Sarees";
+  if (!category && s.includes("kurti")) category = "Kurtis";
 
   return {
     fabric,
     city,
     category,
-    label: slug.replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase())
+    label: slug.replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase()),
+    isVernacular
   };
 }
 
@@ -97,9 +145,15 @@ export const CITY_CONTENT = {
 /**
  * Generates SEO Optimized Title
  */
-export function generateCollectionTitle(components) {
+export function generateCollectionTitle(components, lang = "en") {
   const { fabric, category, city } = components;
   
+  if (lang !== "en" && VERNACULAR_MAP[lang]) {
+    const map = VERNACULAR_MAP[lang];
+    const catTrans = map[category.toLowerCase()] || category;
+    return map.title.replace("{category}", catTrans) + " | Ethnicaa";
+  }
+
   if (category && city) {
     return `Wholesale ${category} in ${city} | Direct from Surat Factory | Ethnicaa`;
   }
@@ -116,9 +170,15 @@ export function generateCollectionTitle(components) {
 /**
  * Generates SEO Optimized Description
  */
-export function generateCollectionDescription(components) {
+export function generateCollectionDescription(components, lang = "en") {
   const { fabric, category, city } = components;
   
+  if (lang !== "en" && VERNACULAR_MAP[lang]) {
+    const map = VERNACULAR_MAP[lang];
+    const catTrans = map[category.toLowerCase()] || category;
+    return map.desc.replace("{category}", catTrans);
+  }
+
   if (category && city) {
     return `Buy wholesale ${category} in ${city} at direct factory prices from Surat. Best collection for resellers and boutique owners. Fast delivery to ${city}, COD available. Join Ethnicaa today.`;
   }
