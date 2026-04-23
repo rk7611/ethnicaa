@@ -20,12 +20,22 @@ async function getCategoryData(categorySlug) {
 
 async function getProductsData(categorySlug) {
   try {
-    const q = query(
-      collection(db, "products"),
-      where("status", "==", "published"),
-      where("categories", "array-contains", categorySlug),
-      limit(PAGE_SIZE * 2)
-    );
+    let q;
+    if (categorySlug === "all-products") {
+      q = query(
+        collection(db, "products"),
+        where("status", "==", "published"),
+        orderBy("createdAt", "desc"),
+        limit(PAGE_SIZE * 2)
+      );
+    } else {
+      q = query(
+        collection(db, "products"),
+        where("status", "==", "published"),
+        where("categories", "array-contains", categorySlug),
+        limit(PAGE_SIZE * 2)
+      );
+    }
     const snap = await getDocs(q);
     return snap.docs.map((d) => ({
       id: d.id,

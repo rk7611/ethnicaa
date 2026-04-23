@@ -148,16 +148,6 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
           <div style={styles.categories}>
             {categories.map((c) => (
               <Link key={c.slug} href={`/category/${c.slug}`} className="premium-card" style={styles.categoryCard}>
-                {isValidImageUrl(c.cover) && (
-                  <Image
-                    src={c.cover}
-                    alt={c.name + " Wholesale"}
-                    width={300}
-                    height={380}
-                    quality={100}
-                    style={styles.categoryImg}
-                  />
-                )}
                 <div style={styles.categoryTitle}>{c.name}</div>
                 <div style={styles.categoryCount}>{c.count} items</div>
               </Link>
@@ -289,11 +279,22 @@ const styles = {
   section: { marginBottom: 40 },
   heading: { fontSize: 22, fontWeight: 700, marginBottom: 20, color: "#111" },
   pageH1: { fontSize: 26, fontWeight: 800, textAlign: "center", marginBottom: 30, marginTop: 10, color: "#000" },
-  categories: { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: 16 },
-  categoryCard: { background: "#fff", padding: 12, borderRadius: 16, textAlign: "center", textDecoration: "none", color: "#000", boxShadow: "0 4px 12px rgba(0,0,0,0.05)" },
-  categoryImg: { width: "100%", height: "auto", borderRadius: 12, marginBottom: 8, aspectRatio: "4/5", objectFit: "cover" },
-  categoryTitle: { fontWeight: 700, fontSize: 15 },
-  categoryCount: { fontSize: 12, opacity: 0.6, marginTop: 2 },
+  categories: { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))", gap: 12 },
+  categoryCard: { 
+    background: "#fff", 
+    padding: "20px 10px", 
+    borderRadius: 12, 
+    textAlign: "center", 
+    textDecoration: "none", 
+    color: "#000", 
+    boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    minHeight: 80
+  },
+  categoryTitle: { fontWeight: 700, fontSize: 16, color: "#333" },
+  categoryCount: { fontSize: 13, opacity: 0.5, marginTop: 4 },
   grid: { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: 16 },
   card: { background: "#fff", borderRadius: 16, padding: 12, boxShadow: "0 4px 12px rgba(0,0,0,0.05)" },
   cardImg: { width: "100%", height: "auto", borderRadius: 12, aspectRatio: "4/5", objectFit: "cover" },

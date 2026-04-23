@@ -1,5 +1,5 @@
 import HomeClient from "./HomeClient";
-import { collection, query, where, orderBy, limit, getDocs } from "firebase/firestore";
+import { collection, query, where, orderBy, limit, getDocs, getCountFromServer } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { isValidImageUrl } from "@/utils/imageUtils";
 
@@ -47,11 +47,27 @@ async function getHomeData() {
     limit(12)
   );
 
-  const [bannersSnap, catsSnap, prodsSnap] = await Promise.all([
+  const totalCountQuery = query(
+    collection(db, "products"),
+    where("status", "in", ["published", "active"])
+  );
+
+  const offersCountQuery = query(
+    collection(db, "products"),
+    where("status", "in", ["published", "active"]),
+    where("offer", "==", true)
+  );
+
+  const [bannersSnap, catsSnap, prodsSnap, countSnap, offersSnap] = await Promise.all([
     getDocs(bannersQuery),
     getDocs(categoriesQuery),
-    getDocs(productsQuery)
+    getDocs(productsQuery),
+    getCountFromServer(totalCountQuery),
+    getCountFromServer(offersCountQuery)
   ]);
+
+  const totalProductsCount = countSnap.data().count;
+  const totalOffersCount = offersSnap.data().count;
 
   const banners = bannersSnap.docs
     .map(d => ({ id: d.id, ...d.data() }))
@@ -67,7 +83,7 @@ async function getHomeData() {
     };
   });
 
-  const categories = consolidateCategories(rawCategories);
+  const categories = consolidateCategories(rawCategories, totalProductsCount, totalOffersCount);
 
   const products = prodsSnap.docs.map(d => {
     const data = d.data();

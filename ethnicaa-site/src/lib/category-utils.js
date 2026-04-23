@@ -30,16 +30,21 @@ export function normalizeCategoryName(name) {
   return CATEGORY_MAP[clean] || name;
 }
 
-export function consolidateCategories(categories) {
+export function consolidateCategories(categories, totalProductCount = 0, totalOffersCount = 0) {
   if (!categories || !Array.isArray(categories)) return [];
   const consolidated = {};
 
-  // 1. Add "All Products" as the first virtual category
+  // 1. Add virtual categories
   consolidated["All Products"] = {
     slug: "all-products",
     name: "All Products",
-    cover: "https://ethnicaa.com/logo.png", // Or a generic store image
-    count: categories.reduce((a, b) => a + (b.count || 0), 0)
+    count: totalProductCount > 0 ? totalProductCount : 0
+  };
+
+  consolidated["Offers"] = {
+    slug: "offers",
+    name: "Offers",
+    count: totalOffersCount > 0 ? totalOffersCount : 0
   };
 
   categories.forEach(cat => {
