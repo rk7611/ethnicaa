@@ -275,27 +275,35 @@ export default function AddEditProduct({ mode }) {
 
     const finalSlug = seoSlug || slugify(data.name);
 
-    // Dynamic Category Derivation Logic
-    const CATEGORY_RULES = [
-      ["Readymade Salwar Suits", ["readymade", "salwar suit"]],
-      ["Semi Stitched Salwar Suit", ["semi stitched"]],
-      ["Pakistani Suits", ["pakistani"]],
-      ["Lahanga", ["lehenga", "lahanga"]],
-      ["Gown", ["gown"]],
-      ["Kurti", ["kurti"]],
-      ["Sarees", ["saree"]],
-    ];
+    // --- READYMADE VS REGULAR SUIT RULES ---
+    const hasSuitParts = ["top", "bottom", "dupatta"].every(t => tags.includes(t.toLowerCase()));
+    const hasSize = ["size", "m", "l", "xl", "xxl", "3xl", "4xl", "5xl"].some(t => tags.includes(t.toLowerCase()));
 
     let derivedCat = "Ethnic Wear";
-    for (const [cat, rules] of CATEGORY_RULES) {
-      if (rules.every(r => tags.includes(r.toLowerCase()))) {
-        derivedCat = cat;
-        break;
+    
+    if (hasSuitParts) {
+      derivedCat = (hasSize || tags.includes("readymade")) ? "Readymade Salwar Suits" : "Salwar Suits";
+    } else {
+      const CATEGORY_RULES = [
+        ["Readymade Salwar Suits", ["readymade", "salwar suit"]],
+        ["Semi Stitched Salwar Suit", ["semi stitched"]],
+        ["Pakistani Suits", ["pakistani"]],
+        ["Lahanga", ["lehenga", "lahanga"]],
+        ["Gown", ["gown"]],
+        ["Kurti", ["kurti"]],
+        ["Sarees", ["saree"]],
+      ];
+
+      for (const [cat, rules] of CATEGORY_RULES) {
+        if (rules.every(r => tags.includes(r.toLowerCase()))) {
+          derivedCat = cat;
+          break;
+        }
       }
-    }
-    if (derivedCat === "Ethnic Wear") {
-      if (tags.includes("kurti")) derivedCat = "Kurti";
-      else if (tags.includes("saree")) derivedCat = "Sarees";
+      if (derivedCat === "Ethnic Wear") {
+        if (tags.includes("kurti")) derivedCat = "Kurti";
+        else if (tags.includes("saree")) derivedCat = "Sarees";
+      }
     }
 
     const cleanedPretty = [derivedCat];
@@ -333,6 +341,7 @@ export default function AddEditProduct({ mode }) {
         gst: Number(data.gst),
         categoryNames: cleanedPretty,
         categories: cleanedSlugs,
+        category: derivedCat,
         tags: tags,
         fabricNames: fabPretty,
         fabrics: fabSlugs,
@@ -407,24 +416,31 @@ export default function AddEditProduct({ mode }) {
               <p style={{ fontSize: 12, color: "#888", margin: 0 }}>
                 Inferred Category: <span style={{ color: "#D4AF37", fontWeight: "bold" }}>
                   {(() => {
-                    const rules = [
-                      ["Readymade Salwar Suits", ["readymade", "salwar suit"]],
-                      ["Semi Stitched Salwar Suit", ["semi stitched"]],
-                      ["Pakistani Suits", ["pakistani"]],
-                      ["Lahanga", ["lehenga", "lahanga"]],
-                      ["Gown", ["gown"]],
-                      ["Kurti", ["kurti"]],
-                      ["Sarees", ["saree"]],
-                    ];
+                    const hasSuitParts = ["top", "bottom", "dupatta"].every(t => tags.includes(t.toLowerCase()));
+                    const hasSize = ["size", "m", "l", "xl", "xxl", "3xl", "4xl", "5xl"].some(t => tags.includes(t.toLowerCase()));
+                    
                     let cat = "Ethnic Wear";
-                    for (const [name, r] of rules) {
-                      if (r.every(kw => tags.includes(kw.toLowerCase()))) {
-                        cat = name; break;
+                    if (hasSuitParts) {
+                      cat = (hasSize || tags.includes("readymade")) ? "Readymade Salwar Suits" : "Salwar Suits";
+                    } else {
+                      const rules = [
+                        ["Readymade Salwar Suits", ["readymade", "salwar suit"]],
+                        ["Semi Stitched Salwar Suit", ["semi stitched"]],
+                        ["Pakistani Suits", ["pakistani"]],
+                        ["Lahanga", ["lehenga", "lahanga"]],
+                        ["Gown", ["gown"]],
+                        ["Kurti", ["kurti"]],
+                        ["Sarees", ["saree"]],
+                      ];
+                      for (const [name, r] of rules) {
+                        if (r.every(kw => tags.includes(kw.toLowerCase()))) {
+                          cat = name; break;
+                        }
                       }
-                    }
-                    if (cat === "Ethnic Wear") {
-                      if (tags.includes("kurti")) cat = "Kurti";
-                      else if (tags.includes("saree")) cat = "Sarees";
+                      if (cat === "Ethnic Wear") {
+                        if (tags.includes("kurti")) cat = "Kurti";
+                        else if (tags.includes("saree")) cat = "Sarees";
+                      }
                     }
                     return cat;
                   })()}

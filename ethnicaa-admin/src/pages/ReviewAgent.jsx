@@ -113,7 +113,8 @@ export default function ReviewAgent() {
       "lehenga", "lahanga", "gown", "designer",
       "cotton", "printed", "embroidered", "dupatta",
       "silk", "georgette", "chiffon", "net", "party wear",
-      "wedding", "casual", "bridal", "heavy"
+      "wedding", "casual", "bridal", "heavy",
+      "top", "bottom", "size", "m", "l", "xl", "xxl", "3xl", "4xl", "5xl"
     ];
     
     // Boilerplate removal
@@ -125,27 +126,36 @@ export default function ReviewAgent() {
 
     const extractedTags = KEYWORDS.filter(kw => cleanText.includes(kw));
     
-    // Derive category from tags
-    const CATEGORY_RULES = [
-      ["Readymade Salwar Suits", ["readymade", "salwar suit"]],
-      ["Semi Stitched Salwar Suit", ["semi stitched"]],
-      ["Pakistani Suits", ["pakistani"]],
-      ["Lahanga", ["lehenga", "lahanga"]],
-      ["Gown", ["gown"]],
-      ["Kurti", ["kurti"]],
-      ["Sarees", ["saree"]],
-    ];
+    // --- READYMADE VS REGULAR SUIT RULES ---
+    const hasSuitParts = ["top", "bottom", "dupatta"].every(t => extractedTags.includes(t));
+    const hasSize = ["size", "m", "l", "xl", "xxl", "3xl", "4xl", "5xl"].some(t => extractedTags.includes(t));
 
     let derivedCat = "Ethnic Wear";
-    for (const [cat, rules] of CATEGORY_RULES) {
-      if (rules.every(r => extractedTags.includes(r))) {
-        derivedCat = cat;
-        break;
+    
+    if (hasSuitParts) {
+      derivedCat = (hasSize || extractedTags.includes("readymade")) ? "Readymade Salwar Suits" : "Salwar Suits";
+    } else {
+      // Derive from other rules
+      const CATEGORY_RULES = [
+        ["Readymade Salwar Suits", ["readymade", "salwar suit"]],
+        ["Semi Stitched Salwar Suit", ["semi stitched"]],
+        ["Pakistani Suits", ["pakistani"]],
+        ["Lahanga", ["lehenga", "lahanga"]],
+        ["Gown", ["gown"]],
+        ["Kurti", ["kurti"]],
+        ["Sarees", ["saree"]],
+      ];
+
+      for (const [cat, rules] of CATEGORY_RULES) {
+        if (rules.every(r => extractedTags.includes(r))) {
+          derivedCat = cat;
+          break;
+        }
       }
-    }
-    if (derivedCat === "Ethnic Wear") {
-       if (extractedTags.includes("kurti")) derivedCat = "Kurti";
-       else if (extractedTags.includes("saree")) derivedCat = "Sarees";
+      if (derivedCat === "Ethnic Wear") {
+         if (extractedTags.includes("kurti")) derivedCat = "Kurti";
+         else if (extractedTags.includes("saree")) derivedCat = "Sarees";
+      }
     }
 
     return { brand: foundBrand, categories: [derivedCat], tags: extractedTags };
@@ -225,6 +235,7 @@ export default function ReviewAgent() {
       updates.tags = smartData.tags || [];
       updates.categoryNames = smartData.categories;
       updates.categories = smartData.categories.map(c => slugify(c));
+      updates.category = smartData.categories[0] || "Ethnic Wear";
 
       // Auto-generate missing SEO/Keywords using Competitor Patterns
       const fabric = p.fabricNames?.[0] || "";
