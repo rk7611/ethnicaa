@@ -19,7 +19,7 @@ import EnquireButton from "@/components/EnquireButton";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { isValidImageUrl } from "@/utils/imageUtils";
 
-const PAGE_SIZE = 40;
+const PAGE_SIZE = 80;
 
 /* ============================================================
    PRICE HELPER

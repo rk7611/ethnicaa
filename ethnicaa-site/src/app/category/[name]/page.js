@@ -1,10 +1,10 @@
 import CategoryClient from "./CategoryClient";
-import { doc, getDoc, collection, query, where, getDocs, limit } from "firebase/firestore";
+import { doc, getDoc, collection, query, where, getDocs, limit, orderBy } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
 export const dynamic = "force-dynamic";
 
-const PAGE_SIZE = 50;
+const PAGE_SIZE = 80;
 
 async function getCategoryData(categorySlug) {
   const ref = doc(db, "categories", categorySlug);
