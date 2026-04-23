@@ -209,6 +209,13 @@ export default function ReviewAgent() {
     try {
       const updates = {
         updatedAt: serverTimestamp(),
+        description: (p.description || "").replace(/Stitching available on customer/gi, "")
+          .replace(/Requirment For Sarees\s*,\s*Salwar Kameez\s*,?/gi, "")
+          .replace(/Lehengha\s*\.\s*\(i\.e\s*M\s*,\s*L\s*,\s*XL\s*,\s*XXL\s*\)\s*.*Goods Will be dispatched only/gi, "")
+          .replace(/after.*Payment is recived in our bank account\./gi, "")
+          .replace(/Goods Will be dispatched only after.*Payment is recived in our bank account\./gi, "")
+          .replace(/Lehengha\.\(i\.e M,L,XL,XXL\)/gi, "")
+          .trim(),
         status: "published"
       };
 
