@@ -138,6 +138,14 @@ export default function ProductTable({
                 <td>
                   <div style={styles.productName}>{p.name}</div>
                   <div style={styles.slug}>{p.slug}</div>
+                  {p.tags && p.tags.length > 0 && (
+                    <div style={styles.tagList}>
+                      {p.tags.slice(0, 4).map(t => (
+                        <span key={t} style={styles.tagBadge}>{t}</span>
+                      ))}
+                      {p.tags.length > 4 && <span style={styles.tagBadge}>+{p.tags.length - 4}</span>}
+                    </div>
+                  )}
                   <div style={styles.assetBadges}>
                     {(p.catalogAssets?.pdf || p.catalog_assets?.pdf || p.pdf) && <span style={styles.assetBadgePdf}>PDF</span>}
                     {(p.catalogAssets?.zip || p.catalog_assets?.zip || p.zip) && <span style={styles.assetBadgeZip}>ZIP</span>}
@@ -219,4 +227,6 @@ const styles = {
   assetBadges: { display: "flex", gap: "6px", marginTop: "4px" },
   assetBadgePdf: { background: "rgba(212, 175, 55, 0.1)", color: "#D4AF37", border: "1px solid #D4AF37", fontSize: "9px", padding: "1px 5px", borderRadius: "4px", fontWeight: "bold" },
   assetBadgeZip: { background: "rgba(76, 175, 80, 0.1)", color: "#4CAF50", border: "1px solid #4CAF50", fontSize: "9px", padding: "1px 5px", borderRadius: "4px", fontWeight: "bold" },
+  tagList: { display: "flex", gap: "4px", flexWrap: "wrap", marginTop: "4px" },
+  tagBadge: { background: "#222", color: "#888", fontSize: "9px", padding: "1px 6px", borderRadius: "4px", border: "1px solid #333" },
 };

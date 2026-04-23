@@ -106,49 +106,42 @@ export default function ReviewAgent() {
     }
   };
 
-  const smartExtract = (p) => {
-    const text = `${p.name} ${p.description} ${p.rawSpecs}`.toLowerCase();
-    let foundBrand = p.brand;
-    let foundCategories = (p.categoryNames && p.categoryNames.length > 0) ? [...p.categoryNames] : [];
+    // --- NEW TAG SYSTEM ---
+    const KEYWORDS = [
+      "kurti", "long kurti", "saree", "salwar suit",
+      "readymade", "semi stitched", "pakistani",
+      "lehenga", "lahanga", "gown", "designer",
+      "cotton", "printed", "embroidered", "dupatta",
+      "silk", "georgette", "chiffon", "net", "party wear",
+      "wedding", "casual", "bridal", "heavy"
+    ];
+    
+    const extractedTags = KEYWORDS.filter(kw => text.includes(kw));
+    
+    // Derive category from tags
+    const CATEGORY_RULES = [
+      ["Readymade Salwar Suits", ["readymade", "salwar suit"]],
+      ["Semi Stitched Salwar Suit", ["semi stitched"]],
+      ["Pakistani Suits", ["pakistani"]],
+      ["Lahanga", ["lehenga", "lahanga"]],
+      ["Gown", ["gown"]],
+      ["Sarees", ["saree"]],
+      ["Kurti", ["kurti"]],
+    ];
 
-    // 1. Check Competitor Keywords (Industry Standard)
-    for (const [cat, kws] of Object.entries(competitorIntelligence.classificationKeywords)) {
-      if (kws.some(kw => text.includes(kw))) {
-        let catName = cat.charAt(0).toUpperCase() + cat.slice(1);
-        if (catName === "Suit") catName = "Salwar Suit"; // mapping
-        
-        // Normalization (Internal logic or mapping)
-        if (catName === "Saree") catName = "Sarees";
-        if (catName === "Kurti") catName = "Kurtis";
-        if (catName === "Gown") catName = "Gowns";
-
-        if (!foundCategories.includes(catName)) {
-          foundCategories.push(catName);
-        }
+    let derivedCat = "Ethnic Wear";
+    for (const [cat, rules] of CATEGORY_RULES) {
+      if (rules.every(r => extractedTags.includes(r))) {
+        derivedCat = cat;
+        break;
       }
     }
-
-    // 2. Check Learned Knowledge (Historical Local Data)
-    if (knowledge) {
-      if (!foundBrand) {
-        foundBrand = knowledge.brands.find(b => text.includes(b));
-      }
-
-      knowledge.categories.forEach(cat => {
-        let score = 0;
-        cat.keywords.forEach(kw => {
-          if (text.includes(kw)) score++;
-        });
-        if (score >= 3 && !foundCategories.includes(cat.name)) { // Confidence threshold
-          foundCategories.push(cat.name);
-        }
-      });
+    if (derivedCat === "Ethnic Wear") {
+       if (extractedTags.includes("kurti")) derivedCat = "Kurti";
+       else if (extractedTags.includes("saree")) derivedCat = "Sarees";
     }
 
-    // Cleanup: Ensure unique and capped
-    const finalCategories = [...new Set(foundCategories)].slice(0, 3);
-
-    return { brand: foundBrand, categories: finalCategories };
+    return { brand: foundBrand, categories: [derivedCat], tags: extractedTags };
   };
 
   const fetchDrafts = async () => {
@@ -213,12 +206,11 @@ export default function ReviewAgent() {
       };
 
       if (!p.brand && smartData.brand) updates.brand = smartData.brand;
-      if (!p.categoryNames || p.categoryNames.length === 0) {
-        if (smartData.categories && smartData.categories.length > 0) {
-          updates.categoryNames = smartData.categories;
-          updates.categories = smartData.categories.map(c => slugify(c));
-        }
-      }
+      
+      // Always sync tags and derived categories
+      updates.tags = smartData.tags || [];
+      updates.categoryNames = smartData.categories;
+      updates.categories = smartData.categories.map(c => slugify(c));
 
       // Auto-generate missing SEO/Keywords using Competitor Patterns
       const fabric = p.fabricNames?.[0] || "";

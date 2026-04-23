@@ -123,6 +123,7 @@ export default function AddEditProduct({ mode }) {
   const [slug, setSlug] = useState("");
   const [categoryNames, setCategoryNames] = useState([]);
   const [fabricNames, setFabricNames] = useState([]);
+  const [tags, setTags] = useState([]);
   const [color, setColor] = useState("");
 
   const [seoTitle, setSeoTitle] = useState("");
@@ -152,6 +153,7 @@ export default function AddEditProduct({ mode }) {
         setSlug(d.slug);
         setCategoryNames(d.categoryNames || []);
         setFabricNames(d.fabricNames || []);
+        setTags(d.tags || []);
         setColor(d.color || "");
         setSeoTitle(d.seo_title || "");
         setSeoDescription(d.seo_description || "");
@@ -272,8 +274,32 @@ export default function AddEditProduct({ mode }) {
     }
 
     const finalSlug = seoSlug || slugify(data.name);
-    const cleanedPretty = [...new Set(categoryNames.map((c) => toPretty(c)).filter(Boolean))];
-    const cleanedSlugs = [...new Set(cleanedPretty.map((c) => toSlug(c)).filter(Boolean))];
+
+    // Dynamic Category Derivation Logic
+    const CATEGORY_RULES = [
+      ["Readymade Salwar Suits", ["readymade", "salwar suit"]],
+      ["Semi Stitched Salwar Suit", ["semi stitched"]],
+      ["Pakistani Suits", ["pakistani"]],
+      ["Lahanga", ["lehenga", "lahanga"]],
+      ["Gown", ["gown"]],
+      ["Sarees", ["saree"]],
+      ["Kurti", ["kurti"]],
+    ];
+
+    let derivedCat = "Ethnic Wear";
+    for (const [cat, rules] of CATEGORY_RULES) {
+      if (rules.every(r => tags.includes(r.toLowerCase()))) {
+        derivedCat = cat;
+        break;
+      }
+    }
+    if (derivedCat === "Ethnic Wear") {
+      if (tags.includes("kurti")) derivedCat = "Kurti";
+      else if (tags.includes("saree")) derivedCat = "Sarees";
+    }
+
+    const cleanedPretty = [derivedCat];
+    const cleanedSlugs = [toSlug(derivedCat)];
     const fabPretty = [...new Set(fabricNames.map((c) => toPretty(c)).filter(Boolean))];
     const fabSlugs = [...new Set(fabPretty.map((c) => toSlug(c)).filter(Boolean))];
 
@@ -307,6 +333,7 @@ export default function AddEditProduct({ mode }) {
         gst: Number(data.gst),
         categoryNames: cleanedPretty,
         categories: cleanedSlugs,
+        tags: tags,
         fabricNames: fabPretty,
         fabrics: fabSlugs,
         color: color || "",
@@ -369,9 +396,44 @@ export default function AddEditProduct({ mode }) {
           </div>
 
           <div style={styles.sectionCard} className="premium-card">
-            <h3 style={styles.sectionHeading}>Categorization & Specs</h3>
-            <TagInput label="Categories *" suggestions={catList} values={categoryNames} setValues={setCategoryNames} onCreate={ensureCategory} />
-            <TagInput label="Fabrics" suggestions={fabList} values={fabricNames} setValues={setFabricNames} onCreate={ensureFabric} />
+            <h3 style={styles.sectionHeading}>Categorization & Tags</h3>
+            <TagInput 
+              label="Product Tags (Powering classification)" 
+              suggestions={["kurti", "saree", "salwar suit", "readymade", "semi stitched", "pakistani", "lehenga", "gown", "cotton", "designer"]} 
+              values={tags} 
+              setValues={setTags} 
+            />
+            <div style={{ marginTop: 10, padding: 10, background: "#1a1a1a", borderRadius: 8, border: "1px dashed #333" }}>
+              <p style={{ fontSize: 12, color: "#888", margin: 0 }}>
+                Inferred Category: <span style={{ color: "#D4AF37", fontWeight: "bold" }}>
+                  {(() => {
+                    const rules = [
+                      ["Readymade Salwar Suits", ["readymade", "salwar suit"]],
+                      ["Semi Stitched Salwar Suit", ["semi stitched"]],
+                      ["Pakistani Suits", ["pakistani"]],
+                      ["Lahanga", ["lehenga", "lahanga"]],
+                      ["Gown", ["gown"]],
+                      ["Sarees", ["saree"]],
+                      ["Kurti", ["kurti"]],
+                    ];
+                    let cat = "Ethnic Wear";
+                    for (const [name, r] of rules) {
+                      if (r.every(kw => tags.includes(kw.toLowerCase()))) {
+                        cat = name; break;
+                      }
+                    }
+                    if (cat === "Ethnic Wear") {
+                      if (tags.includes("kurti")) cat = "Kurti";
+                      else if (tags.includes("saree")) cat = "Sarees";
+                    }
+                    return cat;
+                  })()}
+                </span>
+              </p>
+            </div>
+            <div style={{ marginTop: 20 }}>
+               <TagInput label="Fabrics" suggestions={fabList} values={fabricNames} setValues={setFabricNames} onCreate={ensureFabric} />
+            </div>
             <label style={styles.label}>Dominant Color</label>
             <input style={styles.input} value={color} onChange={(e) => setColor(e.target.value)} />
             <label style={styles.label}>Raw Specs</label>

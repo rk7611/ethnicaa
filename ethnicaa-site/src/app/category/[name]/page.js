@@ -29,10 +29,21 @@ async function getProductsData(categorySlug) {
         limit(PAGE_SIZE * 2)
       );
     } else {
+      const tagMap = {
+        "sarees": "saree",
+        "kurtis": "kurti",
+        "gowns": "gown",
+        "lehenga": "lehenga",
+        "pakistani-suits": "pakistani",
+        "salwar-suits": "salwar suit",
+        "readymade-suits": "readymade",
+        "semi-stitched": "semi stitched"
+      };
+      const tagQuery = tagMap[categorySlug] || categorySlug;
       q = query(
         collection(db, "products"),
         where("status", "==", "published"),
-        where("categories", "array-contains", categorySlug),
+        where("tags", "array-contains", tagQuery),
         limit(PAGE_SIZE * 2)
       );
     }

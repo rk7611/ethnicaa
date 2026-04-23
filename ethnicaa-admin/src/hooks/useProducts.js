@@ -76,7 +76,23 @@ export default function useProducts() {
       // Equality Filters (Server-side)
       if (status) q = query(q, where("status", "==", status));
       if (offer) q = query(q, where("offer", "==", offer === "true"));
-      if (category) q = query(q, where("categories", "array-contains", category.toLowerCase().replace(/\s+/g, "-")));
+      
+      if (category) {
+        // Map common category display names to their singular tag counterparts
+        const tagMap = {
+          "Sarees": "saree",
+          "Kurtis": "kurti",
+          "Gowns": "gown",
+          "Lahanga": "lehenga",
+          "Pakistani Suits": "pakistani",
+          "Salwar Suits": "salwar suit",
+          "Readymade Salwar Suits": "readymade",
+          "Semi Stitched Salwar Suit": "semi stitched"
+        };
+        const tagQuery = tagMap[category] || category.toLowerCase();
+        q = query(q, where("tags", "array-contains", tagQuery));
+      }
+
       if (fabric) q = query(q, where("fabrics", "array-contains", fabric.toLowerCase().replace(/\s+/g, "-")));
 
       // Search (Server-side via search_keywords if it's a single word)

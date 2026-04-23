@@ -103,7 +103,19 @@ export default function CategoryClient({ name, searchParams, initialCategory, in
       const constraints = [where("status", "in", ["published", "active"])];
       
       if (categorySlug !== "all-products") {
-        constraints.push(where("categories", "array-contains", categorySlug));
+        // Map common category slugs to their singular tag counterparts
+        const tagMap = {
+          "sarees": "saree",
+          "kurtis": "kurti",
+          "gowns": "gown",
+          "lehenga": "lehenga",
+          "pakistani-suits": "pakistani",
+          "salwar-suits": "salwar suit",
+          "readymade-suits": "readymade",
+          "semi-stitched": "semi stitched"
+        };
+        const tagQuery = tagMap[categorySlug] || categorySlug;
+        constraints.push(where("tags", "array-contains", tagQuery));
       }
 
       let q = query(
