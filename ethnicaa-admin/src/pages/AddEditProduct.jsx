@@ -277,15 +277,22 @@ export default function AddEditProduct({ mode }) {
 
     // --- CATEGORY RULES ---
     const hasTop = tags.includes("top") || tags.includes("kurti");
-    const hasBottom = tags.includes("bottom") || tags.includes("bottam") || tags.includes("pant");
-    const hasDupatta = tags.includes("dupatta");
-    const hasCoordKeywords = tags.includes("co-ord") || tags.includes("cord set");
+    const hasBottom = tags.includes("bottom") || tags.includes("bottam") || tags.includes("botam") || tags.includes("botom") || tags.includes("pant") || tags.includes("pent");
+    const hasDupatta = tags.includes("dupatta") || tags.includes("dupptta") || tags.includes("duppata") || tags.includes("duppta") || tags.includes("duptta") || tags.includes("dupatt") || tags.includes("dupptta");
+    const hasCoordKeywords = tags.includes("co-ord") || tags.includes("cord set") || tags.includes("cord");
+    const hasThreePieceConcept = tags.includes("3 pcs concept") || 
+      ["3 pcs concept", "3 pcs catlog", "3 pieces concept", "3 pieces catalog", "3 pcs catalogue", "3 pieces catalogue"]
+      .some(p => data.description?.toLowerCase().includes(p));
     const hasSize = ["size", "m", "l", "xl", "xxl", "3xl", "4xl", "5xl"].some(t => tags.includes(t.toLowerCase()));
 
     let derivedCat = "Ethnic Wear";
     
+    // 0. Special Concepts
+    if (hasThreePieceConcept) {
+      derivedCat = "Readymade Salwar Suits";
+    }
     // 1. Cord Set
-    if (hasCoordKeywords || (hasTop && hasBottom && hasSize && !hasDupatta)) {
+    else if (hasCoordKeywords || (hasTop && hasBottom && hasSize && !hasDupatta)) {
       derivedCat = "CO ORD SET";
     } 
     // 2. Salwar Suits
@@ -426,13 +433,18 @@ export default function AddEditProduct({ mode }) {
                 Inferred Category: <span style={{ color: "#D4AF37", fontWeight: "bold" }}>
                   {(() => {
                     const hasTop = tags.includes("top") || tags.includes("kurti");
-                    const hasBottom = tags.includes("bottom") || tags.includes("bottam") || tags.includes("pant");
-                    const hasDupatta = tags.includes("dupatta");
-                    const hasCoordKeywords = tags.includes("co-ord") || tags.includes("cord set");
+                    const hasBottom = tags.includes("bottom") || tags.includes("bottam") || tags.includes("botam") || tags.includes("botom") || tags.includes("pant") || tags.includes("pent");
+                    const hasDupatta = tags.includes("dupatta") || tags.includes("dupptta") || tags.includes("duppata") || tags.includes("duppta") || tags.includes("duptta") || tags.includes("dupatt") || tags.includes("dupptta");
+                    const hasCoordKeywords = tags.includes("co-ord") || tags.includes("cord set") || tags.includes("cord");
+                    const hasThreePieceConcept = tags.includes("3 pcs concept") || 
+                      ["3 pcs concept", "3 pcs catlog", "3 pieces concept", "3 pieces catalog", "3 pcs catalogue", "3 pieces catalogue"]
+                      .some(p => data.description?.toLowerCase().includes(p));
                     const hasSize = ["size", "m", "l", "xl", "xxl", "3xl", "4xl", "5xl"].some(t => tags.includes(t.toLowerCase()));
                     
                     let cat = "Ethnic Wear";
-                    if (hasCoordKeywords || (hasTop && hasBottom && hasSize && !hasDupatta)) {
+                    if (hasThreePieceConcept) {
+                      cat = "Readymade Salwar Suits";
+                    } else if (hasCoordKeywords || (hasTop && hasBottom && hasSize && !hasDupatta)) {
                       cat = "CO ORD SET";
                     } else if (hasTop && hasBottom && hasDupatta) {
                       cat = hasSize ? "Readymade Salwar Suits" : "Salwar Suits";

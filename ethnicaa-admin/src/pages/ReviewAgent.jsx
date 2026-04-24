@@ -111,10 +111,10 @@ export default function ReviewAgent() {
       "kurti", "long kurti", "saree", "salwar suit",
       "readymade", "semi stitched", "pakistani",
       "lehenga", "lahanga", "gown", "designer",
-      "cotton", "printed", "embroidered", "dupatta",
+      "cotton", "printed", "embroidered", "dupatta", "duppatta", "duppata", "duppta", "duptta", "dupatt", "dupptta",
       "silk", "georgette", "chiffon", "net", "party wear",
       "wedding", "casual", "bridal", "heavy",
-      "top", "bottom", "bottam", "pant", "co-ord", "cord set", "size", "m", "l", "xl", "xxl", "3xl", "4xl", "5xl"
+      "top", "bottom", "bottam", "botam", "botom", "pant", "pents", "pent", "co-ord", "cord set", "cord", "3 pcs concept", "3 pcs catlog", "3 pieces concept", "3 pieces catalog", "3 pcs catalogue", "3 pieces catalogue", "size", "m", "l", "xl", "xxl", "3xl", "4xl", "5xl"
     ];
     
     // Boilerplate removal
@@ -128,15 +128,20 @@ export default function ReviewAgent() {
     
     // --- CATEGORY RULES ---
     const hasTop = extractedTags.includes("top") || extractedTags.includes("kurti");
-    const hasBottom = extractedTags.includes("bottom") || extractedTags.includes("bottam") || extractedTags.includes("pant");
-    const hasDupatta = extractedTags.includes("dupatta");
-    const hasCoordKeywords = extractedTags.includes("co-ord") || extractedTags.includes("cord set");
+    const hasBottom = extractedTags.includes("bottom") || extractedTags.includes("bottam") || extractedTags.includes("botam") || extractedTags.includes("botom") || extractedTags.includes("pant") || extractedTags.includes("pent");
+    const hasDupatta = extractedTags.includes("dupatta") || extractedTags.includes("dupptta") || extractedTags.includes("duppata") || extractedTags.includes("duppta") || extractedTags.includes("duptta") || extractedTags.includes("dupatt") || extractedTags.includes("dupptta");
+    const hasCoordKeywords = extractedTags.includes("co-ord") || extractedTags.includes("cord set") || extractedTags.includes("cord");
+    const hasThreePieceConcept = ["3 pcs concept", "3 pcs catlog", "3 pieces concept", "3 pieces catalog", "3 pcs catalogue", "3 pieces catalogue"].some(t => extractedTags.includes(t));
     const hasSize = ["size", "m", "l", "xl", "xxl", "3xl", "4xl", "5xl"].some(t => extractedTags.includes(t));
 
     let derivedCat = "Ethnic Wear";
     
+    // 0. Special Concepts
+    if (hasThreePieceConcept) {
+      derivedCat = "Readymade Salwar Suits";
+    } 
     // 1. Cord Set
-    if (hasCoordKeywords || (hasTop && hasBottom && hasSize && !hasDupatta)) {
+    else if (hasCoordKeywords || (hasTop && hasBottom && hasSize && !hasDupatta)) {
       derivedCat = "CO ORD SET";
     } 
     // 2. Salwar Suits

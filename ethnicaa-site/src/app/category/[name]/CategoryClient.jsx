@@ -76,6 +76,22 @@ export default function CategoryClient({ name, searchParams, initialCategory, in
     loadCategory();
   }, [categorySlug, initialCategory]);
 
+  /* INITIALIZE lastDoc from initialProducts */
+  useEffect(() => {
+    if (initialProducts && initialProducts.length > 0 && !lastDoc) {
+      const lastId = initialProducts[initialProducts.length - 1].id;
+      async function syncLastDoc() {
+        try {
+          const snap = await getDoc(doc(db, "products", lastId));
+          if (snap.exists()) setLastDoc(snap);
+        } catch (err) {
+          console.error("Error syncing lastDoc:", err);
+        }
+      }
+      syncLastDoc();
+    }
+  }, [initialProducts]);
+
   /* LOAD ALL CATEGORIES */
   useEffect(() => {
     async function loadAllCategories() {
