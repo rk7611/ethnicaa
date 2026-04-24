@@ -114,7 +114,7 @@ export default function ReviewAgent() {
       "cotton", "printed", "embroidered", "dupatta",
       "silk", "georgette", "chiffon", "net", "party wear",
       "wedding", "casual", "bridal", "heavy",
-      "top", "bottom", "bottam", "size", "m", "l", "xl", "xxl", "3xl", "4xl", "5xl"
+      "top", "bottom", "bottam", "pant", "size", "m", "l", "xl", "xxl", "3xl", "4xl", "5xl"
     ];
     
     // Boilerplate removal
@@ -127,7 +127,11 @@ export default function ReviewAgent() {
     const extractedTags = KEYWORDS.filter(kw => cleanText.includes(kw));
     
     // --- READYMADE VS REGULAR SUIT RULES ---
-    const hasSuitParts = ["top", "dupatta"].every(t => extractedTags.includes(t)) && (extractedTags.includes("bottom") || extractedTags.includes("bottam"));
+    const hasTop = extractedTags.includes("top") || extractedTags.includes("kurti");
+    const hasBottom = extractedTags.includes("bottom") || extractedTags.includes("bottam") || extractedTags.includes("pant");
+    const hasDupatta = extractedTags.includes("dupatta");
+    
+    const hasSuitParts = hasTop && hasBottom && hasDupatta;
     const hasSize = ["size", "m", "l", "xl", "xxl", "3xl", "4xl", "5xl"].some(t => extractedTags.includes(t));
 
     let derivedCat = "Ethnic Wear";

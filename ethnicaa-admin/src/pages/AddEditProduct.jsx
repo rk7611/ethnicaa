@@ -276,7 +276,10 @@ export default function AddEditProduct({ mode }) {
     const finalSlug = seoSlug || slugify(data.name);
 
     // --- READYMADE VS REGULAR SUIT RULES ---
-    const hasSuitParts = ["top", "dupatta"].every(t => tags.includes(t.toLowerCase())) && (tags.includes("bottom") || tags.includes("bottam"));
+    const hasTop = tags.includes("top") || tags.includes("kurti");
+    const hasBottom = tags.includes("bottom") || tags.includes("bottam") || tags.includes("pant");
+    const hasDupatta = tags.includes("dupatta");
+    const hasSuitParts = hasTop && hasBottom && hasDupatta;
     const hasSize = ["size", "m", "l", "xl", "xxl", "3xl", "4xl", "5xl"].some(t => tags.includes(t.toLowerCase()));
 
     let derivedCat = "Ethnic Wear";
@@ -416,7 +419,10 @@ export default function AddEditProduct({ mode }) {
               <p style={{ fontSize: 12, color: "#888", margin: 0 }}>
                 Inferred Category: <span style={{ color: "#D4AF37", fontWeight: "bold" }}>
                   {(() => {
-                    const hasSuitParts = ["top", "dupatta"].every(t => tags.includes(t.toLowerCase())) && (tags.includes("bottom") || tags.includes("bottam"));
+                    const hasTop = tags.includes("top") || tags.includes("kurti");
+                    const hasBottom = tags.includes("bottom") || tags.includes("bottam") || tags.includes("pant");
+                    const hasDupatta = tags.includes("dupatta");
+                    const hasSuitParts = hasTop && hasBottom && hasDupatta;
                     const hasSize = ["size", "m", "l", "xl", "xxl", "3xl", "4xl", "5xl"].some(t => tags.includes(t.toLowerCase()));
                     
                     let cat = "Ethnic Wear";
