@@ -286,7 +286,7 @@ export default function AddEditProduct({ mode }) {
     
     // 1. Cord Set
     if (hasCoordKeywords || (hasTop && hasBottom && hasSize && !hasDupatta)) {
-      derivedCat = "Cord Set";
+      derivedCat = "CO ORD SET";
     } 
     // 2. Salwar Suits
     else if (hasTop && hasBottom && hasDupatta) {
@@ -433,7 +433,7 @@ export default function AddEditProduct({ mode }) {
                     
                     let cat = "Ethnic Wear";
                     if (hasCoordKeywords || (hasTop && hasBottom && hasSize && !hasDupatta)) {
-                      cat = "Cord Set";
+                      cat = "CO ORD SET";
                     } else if (hasTop && hasBottom && hasDupatta) {
                       cat = hasSize ? "Readymade Salwar Suits" : "Salwar Suits";
                     }

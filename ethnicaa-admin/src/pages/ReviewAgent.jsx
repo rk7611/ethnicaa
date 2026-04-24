@@ -137,7 +137,7 @@ export default function ReviewAgent() {
     
     // 1. Cord Set
     if (hasCoordKeywords || (hasTop && hasBottom && hasSize && !hasDupatta)) {
-      derivedCat = "Cord Set";
+      derivedCat = "CO ORD SET";
     } 
     // 2. Salwar Suits
     else if (hasTop && hasBottom && hasDupatta) {
