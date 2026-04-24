@@ -114,7 +114,7 @@ export default function ReviewAgent() {
       "cotton", "printed", "embroidered", "dupatta",
       "silk", "georgette", "chiffon", "net", "party wear",
       "wedding", "casual", "bridal", "heavy",
-      "top", "bottom", "bottam", "pant", "size", "m", "l", "xl", "xxl", "3xl", "4xl", "5xl"
+      "top", "bottom", "bottam", "pant", "co-ord", "cord set", "size", "m", "l", "xl", "xxl", "3xl", "4xl", "5xl"
     ];
     
     // Boilerplate removal
@@ -126,19 +126,24 @@ export default function ReviewAgent() {
 
     const extractedTags = KEYWORDS.filter(kw => cleanText.includes(kw));
     
-    // --- READYMADE VS REGULAR SUIT RULES ---
+    // --- CATEGORY RULES ---
     const hasTop = extractedTags.includes("top") || extractedTags.includes("kurti");
     const hasBottom = extractedTags.includes("bottom") || extractedTags.includes("bottam") || extractedTags.includes("pant");
     const hasDupatta = extractedTags.includes("dupatta");
-    
-    const hasSuitParts = hasTop && hasBottom && hasDupatta;
+    const hasCoordKeywords = extractedTags.includes("co-ord") || extractedTags.includes("cord set");
     const hasSize = ["size", "m", "l", "xl", "xxl", "3xl", "4xl", "5xl"].some(t => extractedTags.includes(t));
 
     let derivedCat = "Ethnic Wear";
     
-    if (hasSuitParts) {
-      derivedCat = (hasSize || extractedTags.includes("readymade")) ? "Readymade Salwar Suits" : "Salwar Suits";
-    } else {
+    // 1. Cord Set
+    if (hasCoordKeywords || (hasTop && hasBottom && hasSize && !hasDupatta)) {
+      derivedCat = "Cord Set";
+    } 
+    // 2. Salwar Suits
+    else if (hasTop && hasBottom && hasDupatta) {
+      derivedCat = hasSize ? "Readymade Salwar Suits" : "Salwar Suits";
+    }
+ else {
       // Derive from other rules
       const CATEGORY_RULES = [
         ["Readymade Salwar Suits", ["readymade", "salwar suit"]],

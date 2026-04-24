@@ -275,18 +275,24 @@ export default function AddEditProduct({ mode }) {
 
     const finalSlug = seoSlug || slugify(data.name);
 
-    // --- READYMADE VS REGULAR SUIT RULES ---
+    // --- CATEGORY RULES ---
     const hasTop = tags.includes("top") || tags.includes("kurti");
     const hasBottom = tags.includes("bottom") || tags.includes("bottam") || tags.includes("pant");
     const hasDupatta = tags.includes("dupatta");
-    const hasSuitParts = hasTop && hasBottom && hasDupatta;
+    const hasCoordKeywords = tags.includes("co-ord") || tags.includes("cord set");
     const hasSize = ["size", "m", "l", "xl", "xxl", "3xl", "4xl", "5xl"].some(t => tags.includes(t.toLowerCase()));
 
     let derivedCat = "Ethnic Wear";
     
-    if (hasSuitParts) {
-      derivedCat = (hasSize || tags.includes("readymade")) ? "Readymade Salwar Suits" : "Salwar Suits";
-    } else {
+    // 1. Cord Set
+    if (hasCoordKeywords || (hasTop && hasBottom && hasSize && !hasDupatta)) {
+      derivedCat = "Cord Set";
+    } 
+    // 2. Salwar Suits
+    else if (hasTop && hasBottom && hasDupatta) {
+      derivedCat = hasSize ? "Readymade Salwar Suits" : "Salwar Suits";
+    }
+    else {
       const CATEGORY_RULES = [
         ["Readymade Salwar Suits", ["readymade", "salwar suit"]],
         ["Semi Stitched Salwar Suit", ["semi stitched"]],
@@ -422,13 +428,16 @@ export default function AddEditProduct({ mode }) {
                     const hasTop = tags.includes("top") || tags.includes("kurti");
                     const hasBottom = tags.includes("bottom") || tags.includes("bottam") || tags.includes("pant");
                     const hasDupatta = tags.includes("dupatta");
-                    const hasSuitParts = hasTop && hasBottom && hasDupatta;
+                    const hasCoordKeywords = tags.includes("co-ord") || tags.includes("cord set");
                     const hasSize = ["size", "m", "l", "xl", "xxl", "3xl", "4xl", "5xl"].some(t => tags.includes(t.toLowerCase()));
                     
                     let cat = "Ethnic Wear";
-                    if (hasSuitParts) {
-                      cat = (hasSize || tags.includes("readymade")) ? "Readymade Salwar Suits" : "Salwar Suits";
-                    } else {
+                    if (hasCoordKeywords || (hasTop && hasBottom && hasSize && !hasDupatta)) {
+                      cat = "Cord Set";
+                    } else if (hasTop && hasBottom && hasDupatta) {
+                      cat = hasSize ? "Readymade Salwar Suits" : "Salwar Suits";
+                    }
+                    else {
                       const rules = [
                         ["Readymade Salwar Suits", ["readymade", "salwar suit"]],
                         ["Semi Stitched Salwar Suit", ["semi stitched"]],
