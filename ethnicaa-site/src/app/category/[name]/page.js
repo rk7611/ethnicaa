@@ -18,17 +18,11 @@ async function getCategoryData(categorySlug) {
   };
 }
 
-async function getProductsData(categorySlug) {
+async function getProductsData(categorySlug, sort = "latest") {
   try {
-    let q;
-    if (categorySlug === "all-products") {
-      q = query(
-        collection(db, "products"),
-        where("status", "==", "published"),
-        orderBy("createdAt", "desc"),
-        limit(PAGE_SIZE * 2)
-      );
-    } else {
+    const constraints = [where("status", "==", "published")];
+    
+    if (categorySlug !== "all-products") {
       const tagMap = {
         "sarees": "saree",
         "kurtis": "kurti",
@@ -40,13 +34,28 @@ async function getProductsData(categorySlug) {
         "semi-stitched": "semi stitched"
       };
       const tagQuery = tagMap[categorySlug] || categorySlug;
-      q = query(
-        collection(db, "products"),
-        where("status", "==", "published"),
-        where("tags", "array-contains", tagQuery),
-        limit(PAGE_SIZE * 2)
-      );
+      constraints.push(where("tags", "array-contains", tagQuery));
     }
+
+    let sortField = "createdAt";
+    let sortDir = "desc";
+
+    if (sort === "oldest") sortDir = "asc";
+    else if (sort === "low-high") {
+      sortField = "price";
+      sortDir = "asc";
+    } else if (sort === "high-low") {
+      sortField = "price";
+      sortDir = "desc";
+    }
+
+    const q = query(
+      collection(db, "products"),
+      ...constraints,
+      orderBy(sortField, sortDir),
+      limit(PAGE_SIZE)
+    );
+
     const snap = await getDocs(q);
     return snap.docs.map((d) => ({
       id: d.id,
@@ -119,9 +128,11 @@ export async function generateMetadata({ params }) {
 
 export default async function Page({ params, searchParams }) {
   const categorySlug = decodeURIComponent(params.name);
+  const sort = searchParams?.sort || "latest";
+  
   const [category, products] = await Promise.all([
     getCategoryData(categorySlug),
-    getProductsData(categorySlug)
+    getProductsData(categorySlug, sort)
   ]);
 
   // SERVER-SIDE SCHEMAS

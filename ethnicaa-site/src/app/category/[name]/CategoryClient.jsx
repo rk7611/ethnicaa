@@ -58,7 +58,7 @@ export default function CategoryClient({ name, searchParams, initialCategory, in
   const [allCategories, setAllCategories] = useState([]);
 
   const [lastDoc, setLastDoc] = useState(null);
-  const [hasMore, setHasMore] = useState(true);
+  const [hasMore, setHasMore] = useState(initialProducts?.length === PAGE_SIZE);
   const [loadMoreLoading, setLoadMoreLoading] = useState(false);
 
   /* LOAD CATEGORY DETAILS (if not provided) */
@@ -91,6 +91,10 @@ export default function CategoryClient({ name, searchParams, initialCategory, in
 
   /* LOAD PRODUCTS */
   useEffect(() => {
+    if (initialProducts && products.length > 0 && sort === "latest") {
+      // If we have server-side products and it's default sort, skip first load
+      return;
+    }
     loadProducts(false);
   }, [sort, categorySlug]);
 
@@ -118,10 +122,22 @@ export default function CategoryClient({ name, searchParams, initialCategory, in
         constraints.push(where("tags", "array-contains", tagQuery));
       }
 
+      let sortField = "createdAt";
+      let sortDir = "desc";
+
+      if (sort === "oldest") sortDir = "asc";
+      else if (sort === "low-high") {
+        sortField = "price";
+        sortDir = "asc";
+      } else if (sort === "high-low") {
+        sortField = "price";
+        sortDir = "desc";
+      }
+
       let q = query(
         collection(db, "products"),
         ...constraints,
-        orderBy("createdAt", sort === "oldest" ? "asc" : "desc"),
+        orderBy(sortField, sortDir),
         limit(PAGE_SIZE)
       );
 
@@ -129,7 +145,7 @@ export default function CategoryClient({ name, searchParams, initialCategory, in
         q = query(
           collection(db, "products"),
           ...constraints,
-          orderBy("createdAt", sort === "oldest" ? "asc" : "desc"),
+          orderBy(sortField, sortDir),
           startAfter(lastDoc),
           limit(PAGE_SIZE)
         );
