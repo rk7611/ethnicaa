@@ -449,51 +449,74 @@ export default function AddEditProduct({ mode }) {
               values={tags} 
               setValues={setTags} 
             />
-            <div style={{ marginTop: 10, padding: 10, background: "#1a1a1a", borderRadius: 8, border: "1px dashed #333" }}>
-              <p style={{ fontSize: 12, color: "#888", margin: 0 }}>
-                Inferred Category: <span style={{ color: "#D4AF37", fontWeight: "bold" }}>
-                  {(() => {
-                    const hasTop = tags.includes("top") || tags.includes("kurti");
-                    const hasBottom = tags.includes("bottom") || tags.includes("bottam") || tags.includes("botam") || tags.includes("botom") || tags.includes("pant") || tags.includes("pent");
-                    const hasDupatta = tags.includes("dupatta") || tags.includes("dupptta") || tags.includes("duppata") || tags.includes("duppta") || tags.includes("duptta") || tags.includes("dupatt") || tags.includes("dupptta");
-                    const hasCoordKeywords = tags.includes("co-ord") || tags.includes("cord set") || tags.includes("cord");
-                    const hasThreePieceConcept = tags.includes("3 pcs concept") || 
-                      ["3 pcs concept", "3 pcs catlog", "3 pieces concept", "3 pieces catalog", "3 pcs catalogue", "3 pieces catalogue"]
-                      .some(p => data.description?.toLowerCase().includes(p));
-                    const hasSize = ["size", "m", "l", "xl", "xxl", "3xl", "4xl", "5xl"].some(t => tags.includes(t.toLowerCase()));
-                    
-                    let cat = "Ethnic Wear";
-                    if (hasThreePieceConcept) {
-                      cat = "Readymade Salwar Suits";
-                    } else if (hasCoordKeywords || (hasTop && hasBottom && hasSize && !hasDupatta)) {
-                      cat = "CO ORD SET";
-                    } else if (hasTop && hasBottom && hasDupatta) {
-                      cat = hasSize ? "Readymade Salwar Suits" : "Salwar Suits";
-                    }
-                    else {
-                      const rules = [
-                        ["Readymade Salwar Suits", ["readymade", "salwar suit"]],
-                        ["Semi Stitched Salwar Suit", ["semi stitched"]],
-                        ["Pakistani Suits", ["pakistani"]],
-                        ["Lahanga", ["lehenga", "lahanga"]],
-                        ["Gown", ["gown"]],
-                        ["Kurti", ["kurti"]],
-                        ["Sarees", ["saree"]],
-                      ];
-                      for (const [name, r] of rules) {
-                        if (r.every(kw => tags.includes(kw.toLowerCase()))) {
-                          cat = name; break;
-                        }
+            <div style={{ marginTop: 20 }}>
+               <TagInput 
+                 label="Category Names (Stored as Array)" 
+                 suggestions={catList} 
+                 values={categoryNames} 
+                 setValues={setCategoryNames} 
+                 onCreate={ensureCategory} 
+               />
+               <p style={{ fontSize: 11, color: "#888", marginTop: 5, fontStyle: "italic" }}>
+                 AI Recommendation: <span style={{ color: "#D4AF37", fontWeight: "bold", cursor: "pointer" }} onClick={() => {
+                   const hasTop = tags.includes("top") || tags.includes("kurti");
+                   const hasBottom = tags.includes("bottom") || tags.includes("bottam") || tags.includes("botam") || tags.includes("botom") || tags.includes("pant") || tags.includes("pent");
+                   const hasDupatta = tags.includes("dupatta") || tags.includes("dupptta") || tags.includes("duppata") || tags.includes("duppta") || tags.includes("duptta") || tags.includes("dupatt") || tags.includes("dupptta");
+                   const hasCoordKeywords = tags.includes("co-ord") || tags.includes("cord set") || tags.includes("cord");
+                   const hasThreePieceConcept = tags.includes("3 pcs concept") || 
+                     ["3 pcs concept", "3 pcs catlog", "3 pieces concept", "3 pieces catalog", "3 pcs catalogue", "3 pieces catalogue"]
+                     .some(p => data.description?.toLowerCase().includes(p));
+                   const hasSize = ["size", "m", "l", "xl", "xxl", "3xl", "4xl", "5xl"].some(t => tags.includes(t.toLowerCase()));
+                   
+                   let rec = "Ethnic Wear";
+                   if (hasThreePieceConcept) rec = "Readymade Salwar Suits";
+                   else if (hasCoordKeywords || (hasTop && hasBottom && hasSize && !hasDupatta)) rec = "CO ORD SET";
+                   else if (hasTop && hasBottom && hasDupatta) rec = (hasSize ? "Readymade Salwar Suits" : "Salwar Suits");
+                   else {
+                     const rules = [
+                       ["Readymade Salwar Suits", ["readymade", "salwar suit"]],
+                       ["Semi Stitched Salwar Suit", ["semi stitched"]],
+                       ["Pakistani Suits", ["pakistani"]],
+                       ["Lahanga", ["lehenga", "lahanga"]],
+                       ["Gown", ["gown"]],
+                       ["Kurti", ["kurti"]],
+                       ["Sarees", ["saree"]],
+                     ];
+                     for (const [name, r] of rules) {
+                       if (r.every(kw => tags.includes(kw.toLowerCase()))) {
+                         rec = name; break;
+                       }
+                     }
+                     if (rec === "Ethnic Wear") {
+                       if (tags.includes("kurti")) rec = "Kurti";
+                       else if (tags.includes("saree")) rec = "Sarees";
+                     }
+                   }
+                   if (!categoryNames.includes(rec)) setCategoryNames([...categoryNames, rec]);
+                 }}>
+                   {(() => {
+                      // Logic to display current recommendation text
+                      const hasTop = tags.includes("top") || tags.includes("kurti");
+                      const hasBottom = tags.includes("bottom") || tags.includes("bottam") || tags.includes("botam") || tags.includes("botom") || tags.includes("pant") || tags.includes("pent");
+                      const hasDupatta = tags.includes("dupatta") || tags.includes("dupptta") || tags.includes("duppata") || tags.includes("duppta") || tags.includes("duptta") || tags.includes("dupatt") || tags.includes("dupptta");
+                      const hasCoordKeywords = tags.includes("co-ord") || tags.includes("cord set") || tags.includes("cord");
+                      const hasThreePieceConcept = tags.includes("3 pcs concept") || 
+                        ["3 pcs concept", "3 pcs catlog", "3 pieces concept", "3 pieces catalog", "3 pcs catalogue", "3 pieces catalogue"]
+                        .some(p => data.description?.toLowerCase().includes(p));
+                      const hasSize = ["size", "m", "l", "xl", "xxl", "3xl", "4xl", "5xl"].some(t => tags.includes(t.toLowerCase()));
+                      let cat = "Ethnic Wear";
+                      if (hasThreePieceConcept) cat = "Readymade Salwar Suits";
+                      else if (hasCoordKeywords || (hasTop && hasBottom && hasSize && !hasDupatta)) cat = "CO ORD SET";
+                      else if (hasTop && hasBottom && hasDupatta) cat = hasSize ? "Readymade Salwar Suits" : "Salwar Suits";
+                      else {
+                        const rules = [["Readymade Salwar Suits", ["readymade", "salwar suit"]], ["Semi Stitched Salwar Suit", ["semi stitched"]], ["Pakistani Suits", ["pakistani"]], ["Lahanga", ["lehenga", "lahanga"]], ["Gown", ["gown"]], ["Kurti", ["kurti"]], ["Sarees", ["saree"]]];
+                        for (const [name, r] of rules) { if (r.every(kw => tags.includes(kw.toLowerCase()))) { cat = name; break; } }
+                        if (cat === "Ethnic Wear") { if (tags.includes("kurti")) cat = "Kurti"; else if (tags.includes("saree")) cat = "Sarees"; }
                       }
-                      if (cat === "Ethnic Wear") {
-                        if (tags.includes("kurti")) cat = "Kurti";
-                        else if (tags.includes("saree")) cat = "Sarees";
-                      }
-                    }
-                    return cat;
-                  })()}
-                </span>
-              </p>
+                      return cat;
+                   })()} (Click to Add)
+                 </span>
+               </p>
             </div>
             <div style={{ marginTop: 20 }}>
                <TagInput label="Fabrics" suggestions={fabList} values={fabricNames} setValues={setFabricNames} onCreate={ensureFabric} />
