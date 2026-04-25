@@ -42,8 +42,13 @@ export default function CategoryClient({ name, searchParams, initialCategory, in
 
   const [category, setCategory] = useState(initialCategory || null);
   const [products, setProducts] = useState(initialProducts || []);
-  const [loading, setLoading] = useState(!initialProducts);
+  const [loading, setLoading] = useState(false);
   const [allCategories, setAllCategories] = useState([]);
+
+  // Sync products state when server sends new data (pagination fix)
+  useEffect(() => {
+    setProducts(initialProducts);
+  }, [initialProducts]);
 
   // Scroll to top on page change
   useEffect(() => {

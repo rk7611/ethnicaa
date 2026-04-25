@@ -45,6 +45,14 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
   const [categories, setCategories] = useState(initialCategories || []);
   const [banners, setBanners] = useState(initialBanners || []);
 
+  // Sync state when server sends new data (pagination fix)
+  useEffect(() => {
+    if (initialProducts) setProducts(initialProducts);
+    if (initialCategories) setCategories(initialCategories);
+    if (initialBanners) setBanners(initialBanners);
+    setLoading(false);
+  }, [initialProducts, initialCategories, initialBanners]);
+
   // Scroll to top on page change
   useEffect(() => {
     // Only scroll if we are deep into the page (above the products)
