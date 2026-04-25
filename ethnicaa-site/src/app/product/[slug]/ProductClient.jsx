@@ -234,7 +234,46 @@ useEffect(() => {
 
           {/* META */}
           <div style={styles.meta}>
-            <p><b>Category:</b> {Array.isArray(product.categoryNames) ? product.categoryNames.join(", ") : product.category}</p>
+            <div style={{ marginBottom: 15 }}>
+              <b style={{ color: "#888", display: "block", marginBottom: 8, fontSize: 13, textTransform: "uppercase" }}>Categories:</b>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                {Array.isArray(product.categoryNames) ? product.categoryNames.map((cat, i) => (
+                  <Link 
+                    key={i} 
+                    href={`/category/${product.categories?.[i] || encodeURIComponent(cat)}`}
+                    style={{
+                      background: "rgba(212, 175, 55, 0.1)",
+                      color: "#D4AF37",
+                      padding: "4px 12px",
+                      borderRadius: 20,
+                      fontSize: 13,
+                      fontWeight: 600,
+                      textDecoration: "none",
+                      border: "1px solid rgba(212, 175, 55, 0.3)",
+                      transition: "all 0.2s ease"
+                    }}
+                  >
+                    {cat}
+                  </Link>
+                )) : (
+                  <Link 
+                    href={`/category/${product.categories?.[0] || encodeURIComponent(product.category || "")}`}
+                    style={{
+                      background: "rgba(212, 175, 55, 0.1)",
+                      color: "#D4AF37",
+                      padding: "4px 12px",
+                      borderRadius: 20,
+                      fontSize: 13,
+                      fontWeight: 600,
+                      textDecoration: "none",
+                      border: "1px solid rgba(212, 175, 55, 0.3)"
+                    }}
+                  >
+                    {product.category}
+                  </Link>
+                )}
+              </div>
+            </div>
 
             {Array.isArray(product.fabricNames) && product.fabricNames.length > 0 && (
               <p>
