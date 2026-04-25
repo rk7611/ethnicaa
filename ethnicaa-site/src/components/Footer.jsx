@@ -11,6 +11,17 @@ export default function Footer() {
             <p style={styles.text}>
               India&apos;s fastest growing B2B ethnic wear marketplace. Direct from Surat manufacturers giving you the best margins for your resale business.
             </p>
+            <div style={{ marginTop: 20 }}>
+              <h4 style={styles.subTitle}>Warehouse Address:</h4>
+              <p style={styles.addressText}>
+                1028-29, Shree Om Market,<br />
+                Near RKTM, Ring Road,<br />
+                Surat-395002, Gujarat, India
+              </p>
+              <p style={styles.appointmentNote}>
+                ⚠️ <i>Book appointment before visit</i>
+              </p>
+            </div>
           </div>
 
           {/* Column 2 */}
@@ -138,6 +149,23 @@ const styles = {
     textDecoration: "none",
     fontSize: 14,
     transition: "color 0.2s",
+  },
+  subTitle: {
+    fontSize: 14,
+    fontWeight: "700",
+    color: "#fff",
+    marginBottom: 8,
+  },
+  addressText: {
+    fontSize: 13,
+    color: "#999",
+    lineHeight: 1.5,
+    marginBottom: 8,
+  },
+  appointmentNote: {
+    fontSize: 12,
+    color: "#D4AF37", // Gold color for importance
+    fontWeight: "600",
   },
   bottomBar: {
     borderTop: "1px solid #333",

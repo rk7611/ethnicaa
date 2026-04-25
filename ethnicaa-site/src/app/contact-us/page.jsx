@@ -16,7 +16,7 @@ export default function ContactUsPage() {
       "email": "support@ethnicaa.com",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Ring Road",
+        "streetAddress": "1028-29, Shree Om Market, Near RKTM, Ring Road",
         "addressLocality": "Surat",
         "addressRegion": "Gujarat",
         "postalCode": "395002",
@@ -58,8 +58,10 @@ export default function ContactUsPage() {
           <h3>🏢 Office & Dispatch Hub</h3>
           <p>
             <strong>Ethnicaa Wholesale</strong><br/>
-            Surat, Gujarat, India<br/>
-            <em>(Note: We are a strict B2B operating hub. Physical visits are by appointment only.)</em>
+            1028-29, Shree Om Market,<br />
+            Near RKTM, Ring Road,<br />
+            Surat-395002, Gujarat, India<br/>
+            <strong style={{ color: "#d32f2f" }}>⚠️ PLEASE BOOK APPOINTMENT BEFORE VISIT</strong>
           </p>
         </div>
 

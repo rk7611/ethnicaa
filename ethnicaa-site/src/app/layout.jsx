@@ -87,7 +87,7 @@ const globalSchema = {
       "priceRange": "$$",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Ring Road",
+        "streetAddress": "1028-29, Shree Om Market, Near RKTM, Ring Road",
         "addressLocality": "Surat",
         "addressRegion": "Gujarat",
         "postalCode": "395002",
