@@ -105,6 +105,17 @@ export default function ReviewAgent() {
       setTraining(false);
     }
   };
+  const smartExtract = (p) => {
+    const text = `${p.name} ${p.description} ${p.rawSpecs}`.toLowerCase();
+    let foundBrand = "";
+    if (knowledge && knowledge.brands) {
+        for (const b of knowledge.brands) {
+            if (text.includes(b.toLowerCase())) {
+                foundBrand = b;
+                break;
+            }
+        }
+    }
 
     // --- NEW TAG SYSTEM ---
     const KEYWORDS = [
