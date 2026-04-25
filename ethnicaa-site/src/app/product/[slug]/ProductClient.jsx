@@ -195,20 +195,6 @@ useEffect(() => {
       {/* MAIN GRID */}
       <div style={{ ...styles.main, gridTemplateColumns: isMobile ? "1fr" : "1.2fr 1fr" }}>
         <div style={styles.left}>
-          {product.videoUrl && (
-            <div style={styles.videoSection}>
-              <video 
-                src={product.videoUrl} 
-                style={styles.productVideo} 
-                controls 
-                autoPlay 
-                muted 
-                loop 
-                playsInline
-              />
-              <p style={styles.videoBadge}>📺 Product Video Ready</p>
-            </div>
-          )}
           {/* Image Gallery with SEO ALT TEXT */}
           <ImageGallery
             images={product.images}
@@ -400,32 +386,6 @@ const styles = {
     borderRadius: 10,
   },
 
-  videoSection: {
-    marginBottom: 20,
-    borderRadius: 16,
-    overflow: "hidden",
-    background: "#000",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-    position: "relative"
-  },
-
-  productVideo: {
-    width: "100%",
-    maxHeight: 500,
-    objectFit: "contain"
-  },
-
-  videoBadge: {
-    position: "absolute",
-    top: 10,
-    right: 10,
-    background: "rgba(0,0,0,0.6)",
-    color: "#fff",
-    padding: "4px 10px",
-    borderRadius: 20,
-    fontSize: 11,
-    fontWeight: 700
-  },
 
   right: {
     background: "#fff",

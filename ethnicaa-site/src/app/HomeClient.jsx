@@ -15,7 +15,6 @@ import { db } from "@/lib/firebase";
 import Link from "next/link";
 import Image from "next/image";
 import BannerSlider from "@/components/BannerSlider";
-import VideoReels from "@/components/VideoReels";
 import EnquireButton from "@/components/EnquireButton";
 import Pagination from "@/components/Pagination";
 import { blogs } from "@/lib/blog-data";
@@ -104,8 +103,6 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
           <BannerSlider banners={banners} />
         </div>
       )}
-
-      <VideoReels />
 
       <TrustBadges />
 

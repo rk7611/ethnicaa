@@ -26,7 +26,7 @@ def run_social_cycle(limit=5, dry_run=True):
     print(f"--- [SYNC] Starting Social Cycle ({'DRY RUN' if dry_run else 'LIVE'}) ---")
     
     # 1. Fetch unposted products
-    docs = db.collection("products").where("status", "==", "published").limit(50).stream()
+    docs = db.collection("products").where("status", "==", "published").limit(50).get()
     
     sent_count = 0
     for doc in docs:
@@ -60,11 +60,13 @@ def run_social_cycle(limit=5, dry_run=True):
             # 4. Email Video to User
             if dry_run:
                 print(f"[DRY RUN] Would email video to rahulsharmasujan@gmail.com")
-                success = True
             else:
-                success = send_video_email(video_path, p['name'])
+                send_video_email(video_path, p['name'])
             
             sent_count += 1
+            # Small pause to be gentle on servers
+            import time
+            time.sleep(2)
         else:
             print(f"WARNING: Could not generate video for {p['id']}")
 
