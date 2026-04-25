@@ -105,7 +105,7 @@ export default function StructuredDescription({ product = {} }) {
       <div style={styles.seoBox}>
           <h3 style={styles.subTitle}>Wholesale & Bulk Ordering Info</h3>
           <p style={styles.descLine}>
-            Looking to buy <b>{product.name} wholesale</b>? Ethnicaa is Surat's leading <b>B2B textile supplier</b> providing direct factory access to the latest catalogs. 
+            Looking to buy <b>{product.name} wholesale</b>? Ethnicaa is Surat&apos;s leading <b>B2B textile supplier</b> providing direct factory access to the latest catalogs. 
             We specialize in bulk exports and supply to resellers, boutiques, and retailers globally including USA, UK, Canada, and UAE.
           </p>
           <ul style={styles.list}>

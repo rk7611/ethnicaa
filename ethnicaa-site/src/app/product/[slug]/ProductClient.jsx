@@ -152,7 +152,7 @@ useEffect(() => {
     if (product && product !== "not-found") {
        import("@/lib/analytics").then((m) => m.trackProductView(product));
     }
-  }, [product]);
+  }, [product, slug]);
 
   function generateAltText(p) {
     if (!p) return "Ethnicaa product image";

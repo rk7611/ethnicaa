@@ -133,7 +133,7 @@ function SearchContent() {
     }
 
     load();
-  }, [keywordRaw]);
+  }, [keywordRaw, keyword, page]);
 
   /* SLICE PRODUCTS FOR CURRENT PAGE */
   useEffect(() => {
