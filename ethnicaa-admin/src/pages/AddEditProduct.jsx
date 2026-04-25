@@ -118,6 +118,8 @@ export default function AddEditProduct({ mode }) {
     full_price: "",
     full_price_with_gst: "",
     status: "draft",
+    sizes: "",
+    sourceUrl: "",
   });
 
   const [slug, setSlug] = useState("");
@@ -164,6 +166,11 @@ export default function AddEditProduct({ mode }) {
         setCoverIdx(d.images?.indexOf(d.coverImage) || 0);
         setPdfUrl(d.catalogAssets?.pdf || d.catalog_assets?.pdf || d.catalog_assets?.pdfUrl || d.pdf || "");
         setZipUrl(d.catalogAssets?.zip || d.catalog_assets?.zip || d.catalog_assets?.zipUrl || d.zip || "");
+        
+        // SYNC CRAWLER FIELDS
+        if (!d.sizes && d.size) d.sizes = d.size;
+        if (!d.sourceUrl && d.sourceMeta?.original_url) d.sourceUrl = d.sourceMeta.original_url;
+        if (!d.dispatchTime && d.initial_delivery) d.dispatchTime = d.initial_delivery;
       });
     }
   }, [id, mode]);
@@ -375,6 +382,10 @@ export default function AddEditProduct({ mode }) {
         images,
         coverImage: images[coverIdx] || "",
         catalogAssets: { pdf: finalPdf, zip: finalZip },
+        sourceMeta: {
+          original_url: data.sourceUrl || "",
+          website: data.sourceUrl ? new URL(data.sourceUrl).hostname : "manual"
+        },
         status: publish ? "published" : "draft",
         updatedAt: serverTimestamp(),
         ...(mode === "add" && { createdAt: serverTimestamp() }),
@@ -414,6 +425,16 @@ export default function AddEditProduct({ mode }) {
               <div style={{ flex: 1 }}>
                 <label style={styles.label}>Catalog / Code</label>
                 <input style={styles.input} value={data.catalog} onChange={(e) => setData({ ...data, catalog: e.target.value })} />
+              </div>
+            </div>
+            <div style={styles.row}>
+              <div style={{ flex: 1 }}>
+                <label style={styles.label}>Sizes (e.g. XL, XXL or Semi-Stitched)</label>
+                <input style={styles.input} value={data.sizes} onChange={(e) => setData({ ...data, sizes: e.target.value })} />
+              </div>
+              <div style={{ flex: 1 }}>
+                <label style={styles.label}>Dispatch Time</label>
+                <input style={styles.input} value={data.dispatchTime} onChange={(e) => setData({ ...data, dispatchTime: e.target.value })} />
               </div>
             </div>
             <label style={styles.label}>Description</label>
@@ -481,6 +502,10 @@ export default function AddEditProduct({ mode }) {
             <input style={styles.input} value={color} onChange={(e) => setColor(e.target.value)} />
             <label style={styles.label}>Raw Specs</label>
             <textarea style={{ ...styles.input, height: 80 }} value={data.rawSpecs} onChange={(e) => setData({ ...data, rawSpecs: e.target.value })} />
+            <label style={styles.label}>Source URL (Crawler/Reference)</label>
+            <input style={styles.input} value={data.sourceUrl} onChange={(e) => setData({ ...data, sourceUrl: e.target.value })} />
+            <label style={styles.label}>Video URL (Optional)</label>
+            <input style={styles.input} value={data.videoUrl} onChange={(e) => setData({ ...data, videoUrl: e.target.value })} placeholder="e.g. YouTube or Firebase Video Link" />
           </div>
         </div>
 
