@@ -146,7 +146,7 @@ useEffect(() => {
     }
 
     load();
-  }, [slug, initialProduct]);
+  }, [slug, initialProduct, product]);
 
   useEffect(() => {
     if (product && product !== "not-found") {
@@ -154,13 +154,6 @@ useEffect(() => {
     }
   }, [product, slug]);
 
-  function generateAltText(p) {
-    if (!p) return "Ethnicaa product image";
-    const catalog = p.catalog || p.name || "Ethnic wear";
-    const type = p.categoryNames?.[0] || "";
-    const fabric = p.fabricNames?.[0] || "";
-    return `${catalog} ${type} wholesale ${fabric} - Ethnicaa`.trim().replace(/\s+/g, ' ');
-  }
 
   if (loading) return <p style={{ padding: 40 }}>Loading...</p>;
   if (product === "not-found") return <p style={{ padding: 40 }}>Not found.</p>;

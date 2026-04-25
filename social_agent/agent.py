@@ -22,7 +22,7 @@ def upload_video(file_path, product_id):
     blob.make_public()
     return blob.public_url
 
-def run_social_cycle(limit=1, dry_run=True):
+def run_social_cycle(limit=5, dry_run=True):
     print(f"--- [SYNC] Starting Social Cycle ({'DRY RUN' if dry_run else 'LIVE'}) ---")
     
     # 1. Fetch unposted products

@@ -44,3 +44,10 @@ next-env.d.ts
 
 # scratch
 scratch/
+
+# Social Agent
+social_agent/temp_assets/
+social_agent/output_videos/
+social_agent/*.exe
+social_agent/ig_session.json
+social_agent/.env
