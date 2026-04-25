@@ -4,40 +4,48 @@ import app from "../firebase";
 
 const AuthContext = createContext();
 
-const ADMIN_PASSWORD = "ethnicaa@2025";
-
 export const AuthProvider = ({ children }) => {
-  const [isAdmin, setIsAdmin] = useState(
-    localStorage.getItem("ethnicaa_admin") === "true"
-  );
-  const [loading, setLoading] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const auth = getAuth(app);
 
-  // Auto-re-authenticate with Firebase if admin flag is set
+  // Use Firebase Auth state as the source of truth
   useEffect(() => {
-    if (isAdmin && !auth.currentUser) {
-      signInAnonymously(auth).catch(err => {
-        console.error("Auto-auth failed:", err);
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user && localStorage.getItem("ethnicaa_admin_active") === "true") {
+        setIsAdmin(true);
+      } else {
         setIsAdmin(false);
-      });
-    }
-  }, [isAdmin, auth]);
+      }
+      setLoading(false);
+    });
+
+    return unsubscribe;
+  }, [auth]);
 
   const login = async (password) => {
-    if (password !== ADMIN_PASSWORD) {
+    const SECURE_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
+
+    if (!SECURE_PASSWORD) {
+      console.error("CRITICAL: VITE_ADMIN_PASSWORD is not set in environment.");
+      return { success: false, message: "Server configuration error" };
+    }
+
+    if (password !== SECURE_PASSWORD) {
       return { success: false, message: "Invalid password" };
     }
 
     try {
       setLoading(true);
+      // Log in anonymously to get a valid Firebase session for security rules
       await signInAnonymously(auth);
-      localStorage.setItem("ethnicaa_admin", "true");
+      localStorage.setItem("ethnicaa_admin_active", "true");
       setIsAdmin(true);
       return { success: true };
     } catch (err) {
-      console.error(err);
-      return { success: false, message: "Firebase auth failed" };
+      console.error("Auth Error:", err);
+      return { success: false, message: "Secure authentication failed" };
     } finally {
       setLoading(false);
     }
@@ -45,7 +53,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     await signOut(auth);
-    localStorage.removeItem("ethnicaa_admin");
+    localStorage.removeItem("ethnicaa_admin_active");
     setIsAdmin(false);
   };
 
@@ -53,7 +61,7 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{ isAdmin, login, logout, loading }}
     >
-      {children}
+      {!loading && children}
     </AuthContext.Provider>
   );
 };
