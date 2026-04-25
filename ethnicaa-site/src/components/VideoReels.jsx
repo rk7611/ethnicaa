@@ -12,18 +12,17 @@ export default function VideoReels() {
     useEffect(() => {
         async function fetchReels() {
             try {
-                // Fetch products that have a videoUrl, ordered by latest
+                // Fetch products that have a videoUrl using the 'posted_to_social' flag
                 const q = query(
                     collection(db, "products"),
-                    where("videoUrl", "!=", null),
-                    orderBy("videoUrl"), // Workaround for Firestore inequality ordering
+                    where("posted_to_social", "==", true),
                     limit(10)
                 );
                 
                 const snap = await getDocs(q);
                 const list = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 
-                // Sorting manually because Firestore compound queries are tricky with inequalities
+                // Sort in memory to avoid index requirements
                 list.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
                 
                 setReels(list);
