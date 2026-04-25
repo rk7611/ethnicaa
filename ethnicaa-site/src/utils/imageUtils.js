@@ -4,6 +4,19 @@
  * It explicitly rejects strings that don't match these patterns, like "image url" placeholders.
  * It also filters out hostnames that are not configured in next.config.js to prevent runtime crashes.
  */
+/**
+ * Generates SEO-optimized Alt Text for product images
+ */
+export function generateProductAlt(product) {
+  if (!product) return "Ethnicaa Wholesale Surat Manufacturer";
+  
+  const name = product.catalog || product.name || "Product";
+  const category = (product.categories && product.categories[0]) || (product.categoryNames && product.categoryNames[0]) || "";
+  const fabric = product.fabric || (product.fabricNames && product.fabricNames[0]) || "";
+  
+  return `Buy ${name} ${category} ${fabric} Wholesale Surat Manufacturer - Ethnicaa`.trim().replace(/\s+/g, ' ');
+}
+
 export function isValidImageUrl(url) {
   if (!url || typeof url !== "string") return false;
   

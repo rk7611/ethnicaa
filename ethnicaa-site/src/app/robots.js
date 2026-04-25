@@ -3,7 +3,7 @@ export default function robots() {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api/", "/admin/"],
+      disallow: ["/admin/", "/api/", "/login"],
     },
     sitemap: "https://ethnicaa.com/sitemap.xml",
   };

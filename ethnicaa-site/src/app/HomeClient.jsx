@@ -19,7 +19,7 @@ import EnquireButton from "@/components/EnquireButton";
 import Pagination from "@/components/Pagination";
 import { blogs } from "@/lib/blog-data";
 import TrustBadges from "@/components/TrustBadges";
-import { isValidImageUrl } from "@/utils/imageUtils";
+import { isValidImageUrl, generateProductAlt } from "@/utils/imageUtils";
 
 /* ============================================================
     FETCH BANNERS
@@ -128,7 +128,7 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
                       {isValidImageUrl(p.images?.[0]) && (
                         <Image 
                           src={p.images[0]} 
-                          alt={`${p.catalog || p.name} wholesale Surat manufacturer`} 
+                          alt={generateProductAlt(p)} 
                           width={300} 
                           height={380} 
                           style={styles.cardImg} 

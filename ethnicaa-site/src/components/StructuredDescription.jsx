@@ -100,6 +100,27 @@ export default function StructuredDescription({ product = {} }) {
           </div>
         </>
       )}
+
+      {/* WHOLESALE SEO CONTENT BLOCK */}
+      <div style={styles.seoBox}>
+          <h3 style={styles.subTitle}>Wholesale & Bulk Ordering Info</h3>
+          <p style={styles.descLine}>
+            Looking to buy <b>{product.name} wholesale</b>? Ethnicaa is Surat's leading <b>B2B textile supplier</b> providing direct factory access to the latest catalogs. 
+            We specialize in bulk exports and supply to resellers, boutiques, and retailers globally including USA, UK, Canada, and UAE.
+          </p>
+          <ul style={styles.list}>
+              <li><b>Best Factory Prices:</b> Buy direct from Surat manufacturers at unbeatable wholesale rates.</li>
+              <li><b>Reseller Friendly:</b> Low MOQ (Minimum Order Quantity) and high profit margins for online resellers.</li>
+              <li><b>Verified Quality:</b> Every catalog is checked for fabric quality and embroidery precision.</li>
+              <li><b>Fast Dispatch:</b> We ship bulk orders via trusted logistics partners like DHL, FedEx, and DTDC.</li>
+          </ul>
+          <p style={styles.descLine}>
+              Explore our other collections: 
+              <a href="/category/sarees" style={styles.seoLink}> Wholesale Sarees</a>, 
+              <a href="/category/kurtis" style={styles.seoLink}> Wholesale Kurtis</a>, and 
+              <a href="/category/pakistani-suits" style={styles.seoLink}> Pakistani Suits</a>.
+          </p>
+      </div>
     </div>
   );
 }
@@ -149,5 +170,16 @@ const styles = {
 
   descLine: {
     marginBottom: 8,
+  },
+  seoBox: {
+    marginTop: 30,
+    paddingTop: 20,
+    borderTop: "1px solid #eee",
+  },
+  seoLink: {
+    color: "#D4AF37",
+    fontWeight: "700",
+    textDecoration: "none",
+    margin: "0 5px",
   },
 };

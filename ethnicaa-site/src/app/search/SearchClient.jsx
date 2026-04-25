@@ -15,6 +15,7 @@ import Link from "next/link";
 import Image from "next/image";
 import EnquireButton from "@/components/EnquireButton";
 import Pagination from "@/components/Pagination";
+import { generateProductAlt } from "@/utils/imageUtils";
 
 const PAGE_SIZE = 20;
 
@@ -216,7 +217,7 @@ function SearchContent() {
               {p.images?.[0] && (
                 <Image
                   src={p.images[0]}
-                  alt={p.name}
+                  alt={generateProductAlt(p)}
                   width={300}
                   height={380}
                   quality={100}

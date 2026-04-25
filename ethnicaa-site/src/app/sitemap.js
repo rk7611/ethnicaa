@@ -1,4 +1,4 @@
-import { getDocs, collection, query, where } from "firebase/firestore";
+import { getDocs, collection, query, where, orderBy, limit } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { blogs } from "@/lib/blog-data";
 
@@ -18,7 +18,7 @@ export default async function sitemap() {
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
-    changeFrequency: "monthly",
+    changeFrequency: "daily",
     priority: route === "" ? 1 : 0.8,
   }));
 
@@ -30,23 +30,32 @@ export default async function sitemap() {
     "salwar-suits",
     "lehenga",
     "gowns",
+    "all-products",
+    "offers"
   ].map((cat) => ({
     url: `${baseUrl}/category/${cat}`,
     lastModified: new Date(),
-    changeFrequency: "weekly",
+    changeFrequency: "daily",
     priority: 0.9,
   }));
 
-  // 3. PRODUCT PAGES (Dynamic from Firestore)
+  // 3. PRODUCT PAGES (Optimized for 3000+ docs)
   let productPages = [];
   try {
-    const q = query(collection(db, "products"), where("status", "==", "published"));
+    // Fetching only necessary fields to prevent timeout
+    const q = query(
+        collection(db, "products"), 
+        where("status", "==", "published"),
+        orderBy("createdAt", "desc"),
+        limit(5000) // Next.js sitemap limit is high, but we limit to a safe batch
+    );
     const snap = await getDocs(q);
     productPages = snap.docs.map((doc) => {
       const data = doc.data();
+      const lastMod = data.updatedAt?.seconds ? new Date(data.updatedAt.seconds * 1000) : new Date();
       return {
         url: `${baseUrl}/product/${data.slug || doc.id}`,
-        lastModified: data.updatedAt?.toDate() || new Date(),
+        lastModified: lastMod,
         changeFrequency: "weekly",
         priority: 0.7,
       };
@@ -63,8 +72,8 @@ export default async function sitemap() {
     priority: 0.6,
   }));
 
-  // 5. COLLECTIONS (Priority Cities)
-  const cities = ["mumbai", "delhi", "jaipur", "kolkata", "bangalore", "hyderabad"];
+  // 5. COLLECTIONS (SEO Landing Pages)
+  const cities = ["mumbai", "delhi", "jaipur", "kolkata", "hyderabad"];
   const cats = ["sarees", "kurtis", "suits"];
   const collectionPages = [];
   
@@ -79,37 +88,11 @@ export default async function sitemap() {
     });
   });
 
-  // 6. VERNACULAR PAGES
-  const vernacularLangs = ["hi", "te", "ta"];
-  const vernacularPages = [];
-  
-  vernacularLangs.forEach(lang => {
-    // Basic categories in vernacular
-    categories.forEach(cat => {
-      vernacularPages.push({
-        url: cat.url.replace(`${baseUrl}/`, `${baseUrl}/${lang}/`),
-        lastModified: new Date(),
-        changeFrequency: "weekly",
-        priority: 0.8,
-      });
-    });
-    // Blog posts in vernacular
-    blogs.filter(b => b.lang === lang).forEach(post => {
-      vernacularPages.push({
-        url: `${baseUrl}/${lang}/blog/${post.slug}`,
-        lastModified: new Date(),
-        changeFrequency: "monthly",
-        priority: 0.6,
-      });
-    });
-  });
-
   return [
     ...staticPages,
     ...categories,
     ...productPages,
     ...blogPages,
     ...collectionPages,
-    ...vernacularPages,
   ];
 }

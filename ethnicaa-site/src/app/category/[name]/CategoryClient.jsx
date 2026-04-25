@@ -18,7 +18,7 @@ import Image from "next/image";
 import EnquireButton from "@/components/EnquireButton";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Pagination from "@/components/Pagination";
-import { isValidImageUrl } from "@/utils/imageUtils";
+import { isValidImageUrl, generateProductAlt } from "@/utils/imageUtils";
 
 /* ============================================================
    PRICE HELPER
@@ -34,17 +34,6 @@ function getNumericPrice(p) {
   if (typeof p.avg_price === "number") return p.avg_price;
 
   return 0;
-}
-
-/* ============================================================
-   ALT TEXT GENERATOR
-============================================================ */
-function generateAltText(p) {
-  if (!p) return "Ethnicaa product image";
-  const catalog = p.catalog || p.name || "Ethnic wear";
-  const type = p.categoryNames?.[0] || "";
-  const fabric = p.fabricNames?.[0] || "";
-  return `${catalog} ${type} wholesale ${fabric} - Ethnicaa`.trim().replace(/\s+/g, ' ');
 }
 
 export default function CategoryClient({ name, searchParams, initialCategory, initialProducts, currentPage, totalPages }){
@@ -117,7 +106,7 @@ export default function CategoryClient({ name, searchParams, initialCategory, in
               {isValidImageUrl(p.images?.[0]) && (
                 <Image
                   src={p.images[0]}
-                  alt={generateAltText(p)}
+                  alt={generateProductAlt(p)}
                   width={300}
                   height={380}
                   quality={100}
