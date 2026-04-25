@@ -48,7 +48,7 @@ export const metadata = {
   },
 
   verification: {
-    google: "GSC_VERIFICATION_CODE_HERE", // User to replace with actual code
+    google: "reX122ZQK9Yf0MgcGGYpvUIphSfjw-mkcS5p6BvVcSU",
   },
 
   alternates: {
