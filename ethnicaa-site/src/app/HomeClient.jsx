@@ -16,11 +16,10 @@ import Link from "next/link";
 import Image from "next/image";
 import BannerSlider from "@/components/BannerSlider";
 import EnquireButton from "@/components/EnquireButton";
+import Pagination from "@/components/Pagination";
 import { blogs } from "@/lib/blog-data";
 import TrustBadges from "@/components/TrustBadges";
 import { isValidImageUrl } from "@/utils/imageUtils";
-
-const PAGE_SIZE = 12;
 
 /* ============================================================
     FETCH BANNERS
@@ -39,16 +38,20 @@ async function getBanners() {
 
 import { consolidateCategories } from "@/lib/category-utils";
 
-export default function HomePage({ initialBanners, initialCategories, initialProducts }) {
+export default function HomePage({ initialBanners, initialCategories, initialProducts, currentPage, totalPages }) {
   const [loading, setLoading] = useState(!initialProducts);
-  const [loadMoreLoading, setLoadMoreLoading] = useState(false);
 
   const [products, setProducts] = useState(initialProducts || []);
   const [categories, setCategories] = useState(initialCategories || []);
   const [banners, setBanners] = useState(initialBanners || []);
 
-  const [lastDoc, setLastDoc] = useState(null);
-  const [hasMore, setHasMore] = useState(true);
+  // Scroll to top on page change
+  useEffect(() => {
+    // Only scroll if we are deep into the page (above the products)
+    if (window.scrollY > 500) {
+        window.scrollTo({ top: 400, behavior: "smooth" });
+    }
+  }, [currentPage]);
 
   // Initial load categories if not provided (fallback)
   useEffect(() => {
@@ -76,51 +79,6 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
       setBanners(list.filter(b => isValidImageUrl(b.imageURL)));
     });
   }, [initialBanners]);
-
-  // Initial load products or pagination
-  useEffect(() => {
-    if (initialProducts && products.length > 0) {
-      return;
-    }
-    loadProducts(false);
-  }, [initialProducts]);
-
-  async function loadProducts(loadMore) {
-    loadMore ? setLoadMoreLoading(true) : setLoading(true);
-    let q = query(
-      collection(db, "products"),
-      where("status", "in", ["published", "active"]),
-      orderBy("createdAt", "desc"),
-      limit(PAGE_SIZE)
-    );
-    if (loadMore && lastDoc) {
-      q = query(
-        collection(db, "products"),
-        where("status", "in", ["published", "active"]),
-        orderBy("createdAt", "desc"),
-        startAfter(lastDoc),
-        limit(PAGE_SIZE)
-      );
-    }
-    const snap = await getDocs(q);
-    if (snap.empty) {
-      setHasMore(false);
-      setLoading(false);
-      setLoadMoreLoading(false);
-      return;
-    }
-    const list = snap.docs.map((d) => {
-      const data = d.data();
-      const createdAt = data.createdAt?.seconds || data.updatedAt?.seconds || data.timestamp || 0;
-      return { id: d.id, ...data, _order: createdAt };
-    });
-    list.sort((a, b) => b._order - a._order);
-    setProducts((prev) => (loadMore ? [...prev, ...list] : list));
-    setLastDoc(snap.docs[snap.docs.length - 1]);
-    if (snap.docs.length < PAGE_SIZE) setHasMore(false);
-    setLoading(false);
-    setLoadMoreLoading(false);
-  }
 
   const homepageSEOContent = `
     <h2>Wholesale Ethnic Wear at Best Prices — Ethnicaa</h2>
@@ -196,11 +154,12 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
         </div>
       </div>
 
-      {hasMore && !loading && (
-        <button onClick={() => loadProducts(true)} style={styles.loadMoreBtn} disabled={loadMoreLoading}>
-          {loadMoreLoading ? "Loading..." : "Load More Products"}
-        </button>
-      )}
+      <Pagination 
+        totalPages={totalPages} 
+        currentPage={currentPage} 
+        basePath="/"
+        searchParams={{}}
+      />
 
       <div style={styles.section}>
         <h2 style={styles.heading}>From Our Blog</h2>

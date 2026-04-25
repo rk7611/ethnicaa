@@ -14,6 +14,9 @@ import { db } from "@/lib/firebase";
 import Link from "next/link";
 import Image from "next/image";
 import EnquireButton from "@/components/EnquireButton";
+import Pagination from "@/components/Pagination";
+
+const PAGE_SIZE = 20;
 
 /* ===================================================================
     NORMALIZATION HELPERS
@@ -61,10 +64,18 @@ function fuzzyMatch(a, b) {
 function SearchContent() {
   const searchParams = useSearchParams();
   const keywordRaw = searchParams.get("keyword") || "";
+  const page = parseInt(searchParams.get("page")) || 1;
   const keyword = normalizeKeyword(keywordRaw);
 
+  const [allProducts, setAllProducts] = useState([]);
   const [products, setProducts] = useState([]);
+  const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
+
+  // Scroll to top on page change
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [page, keywordRaw]);
 
   /* ===================================================================
       LOAD PRODUCTS
@@ -115,12 +126,19 @@ function SearchContent() {
 
       results.sort((a, b) => b._score - a._score);
 
-      setProducts(results);
+      setAllProducts(results);
+      setTotalPages(Math.ceil(results.length / PAGE_SIZE));
       setLoading(false);
     }
 
     load();
   }, [keywordRaw]);
+
+  /* SLICE PRODUCTS FOR CURRENT PAGE */
+  useEffect(() => {
+    const start = (page - 1) * PAGE_SIZE;
+    setProducts(allProducts.slice(start, start + PAGE_SIZE));
+  }, [allProducts, page]);
 
   /* ===================================================================
       SEARCH PAGE SCHEMAS
@@ -214,6 +232,13 @@ function SearchContent() {
           </div>
         ))}
       </div>
+
+      <Pagination 
+        totalPages={totalPages} 
+        currentPage={page} 
+        basePath="/search"
+        searchParams={{ keyword: keywordRaw }}
+      />
 
       {/* FLOAT WHATSAPP */}
       <a

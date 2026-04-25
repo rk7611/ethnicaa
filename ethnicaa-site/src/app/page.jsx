@@ -37,16 +37,11 @@ export const dynamic = "force-dynamic";
 
 import { consolidateCategories } from "@/lib/category-utils";
 
-async function getHomeData() {
+async function getHomeData(page = 1) {
+  const PAGE_SIZE = 12;
   const bannersQuery = query(collection(db, "banners"), orderBy("order", "asc"));
   const categoriesQuery = query(collection(db, "categories"));
-  const productsQuery = query(
-    collection(db, "products"),
-    where("status", "in", ["published", "active"]),
-    orderBy("createdAt", "desc"),
-    limit(12)
-  );
-
+  
   const totalCountQuery = query(
     collection(db, "products"),
     where("status", "in", ["published", "active"])
@@ -58,17 +53,25 @@ async function getHomeData() {
     where("offer", "==", true)
   );
 
-  const [bannersSnap, catsSnap, prodsSnap, countSnap, offersSnap] = await Promise.all([
+  const [bannersSnap, catsSnap, countSnap, offersSnap] = await Promise.all([
     getDocs(bannersQuery),
     getDocs(categoriesQuery),
-    getDocs(productsQuery),
     getCountFromServer(totalCountQuery),
     getCountFromServer(offersCountQuery)
   ]);
 
   const totalProductsCount = countSnap.data().count;
   const totalOffersCount = offersSnap.data().count;
+  const totalPages = Math.ceil(totalProductsCount / PAGE_SIZE);
 
+  const productsQuery = query(
+    collection(db, "products"),
+    where("status", "in", ["published", "active"]),
+    orderBy("createdAt", "desc"),
+    limit(page * PAGE_SIZE)
+  );
+
+  const prodsSnap = await getDocs(productsQuery);
   const banners = bannersSnap.docs
     .map(d => ({ id: d.id, ...d.data() }))
     .filter(b => isValidImageUrl(b.imageURL));
@@ -85,24 +88,30 @@ async function getHomeData() {
 
   const categories = consolidateCategories(rawCategories, totalProductsCount, totalOffersCount);
 
-  const products = prodsSnap.docs.map(d => {
+  const allProducts = prodsSnap.docs.map(d => {
     const data = d.data();
     const createdAt = data.createdAt?.seconds || data.updatedAt?.seconds || data.timestamp || 0;
     return { id: d.id, ...data, _order: createdAt };
   });
-  products.sort((a, b) => b._order - a._order);
+  
+  // Slice for current page
+  const start = (page - 1) * PAGE_SIZE;
+  const products = allProducts.slice(start, start + PAGE_SIZE);
 
-  return { banners, categories, products };
+  return { banners, categories, products, totalPages, totalProductsCount };
 }
 
-export default async function Home() {
-  const { banners, categories, products } = await getHomeData();
+export default async function Home({ searchParams }) {
+  const page = parseInt(searchParams?.page) || 1;
+  const { banners, categories, products, totalPages } = await getHomeData(page);
 
   return (
     <HomeClient 
       initialBanners={banners} 
       initialCategories={categories} 
       initialProducts={products} 
+      currentPage={page}
+      totalPages={totalPages}
     />
   );
 }

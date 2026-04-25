@@ -17,9 +17,8 @@ import Link from "next/link";
 import Image from "next/image";
 import EnquireButton from "@/components/EnquireButton";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import Pagination from "@/components/Pagination";
 import { isValidImageUrl } from "@/utils/imageUtils";
-
-const PAGE_SIZE = 80;
 
 /* ============================================================
    PRICE HELPER
@@ -48,7 +47,7 @@ function generateAltText(p) {
   return `${catalog} ${type} wholesale ${fabric} - Ethnicaa`.trim().replace(/\s+/g, ' ');
 }
 
-export default function CategoryClient({ name, searchParams, initialCategory, initialProducts }){
+export default function CategoryClient({ name, searchParams, initialCategory, initialProducts, currentPage, totalPages }){
   const categorySlug = decodeURIComponent(name);
   const sort = searchParams?.sort || "latest";
 
@@ -57,9 +56,10 @@ export default function CategoryClient({ name, searchParams, initialCategory, in
   const [loading, setLoading] = useState(!initialProducts);
   const [allCategories, setAllCategories] = useState([]);
 
-  const [lastDoc, setLastDoc] = useState(null);
-  const [hasMore, setHasMore] = useState(initialProducts?.length === PAGE_SIZE);
-  const [loadMoreLoading, setLoadMoreLoading] = useState(false);
+  // Scroll to top on page change
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage, categorySlug]);
 
   /* LOAD CATEGORY DETAILS (if not provided) */
   useEffect(() => {
@@ -76,22 +76,6 @@ export default function CategoryClient({ name, searchParams, initialCategory, in
     loadCategory();
   }, [categorySlug, initialCategory]);
 
-  /* INITIALIZE lastDoc from initialProducts */
-  useEffect(() => {
-    if (initialProducts && initialProducts.length > 0 && !lastDoc) {
-      const lastId = initialProducts[initialProducts.length - 1].id;
-      async function syncLastDoc() {
-        try {
-          const snap = await getDoc(doc(db, "products", lastId));
-          if (snap.exists()) setLastDoc(snap);
-        } catch (err) {
-          console.error("Error syncing lastDoc:", err);
-        }
-      }
-      syncLastDoc();
-    }
-  }, [initialProducts]);
-
   /* LOAD ALL CATEGORIES */
   useEffect(() => {
     async function loadAllCategories() {
@@ -104,86 +88,6 @@ export default function CategoryClient({ name, searchParams, initialCategory, in
     }
     loadAllCategories();
   }, []);
-
-  /* LOAD PRODUCTS */
-  useEffect(() => {
-    if (initialProducts && products.length > 0 && sort === "latest") {
-      // If we have server-side products and it's default sort, skip first load
-      return;
-    }
-    loadProducts(false);
-  }, [sort, categorySlug]);
-
-  async function loadProducts(isLoadMore) {
-    if (isLoadMore) setLoadMoreLoading(true);
-    else setLoading(true);
-
-    try {
-      const { startAfter } = await import("firebase/firestore");
-      const constraints = [where("status", "in", ["published", "active"])];
-      
-      if (categorySlug !== "all-products") {
-        // Map common category slugs to their singular tag counterparts
-        const tagMap = {
-          "sarees": "saree",
-          "kurtis": "kurti",
-          "gowns": "gown",
-          "lehenga": "lehenga",
-          "pakistani-suits": "pakistani",
-          "salwar-suits": "salwar suit",
-          "readymade-suits": "readymade",
-          "semi-stitched": "semi stitched"
-        };
-        const tagQuery = tagMap[categorySlug] || categorySlug;
-        constraints.push(where("tags", "array-contains", tagQuery));
-      }
-
-      let sortField = "createdAt";
-      let sortDir = "desc";
-
-      if (sort === "oldest") sortDir = "asc";
-      else if (sort === "low-high") {
-        sortField = "price";
-        sortDir = "asc";
-      } else if (sort === "high-low") {
-        sortField = "price";
-        sortDir = "desc";
-      }
-
-      let q = query(
-        collection(db, "products"),
-        ...constraints,
-        orderBy(sortField, sortDir),
-        limit(PAGE_SIZE)
-      );
-
-      if (isLoadMore && lastDoc) {
-        q = query(
-          collection(db, "products"),
-          ...constraints,
-          orderBy(sortField, sortDir),
-          startAfter(lastDoc),
-          limit(PAGE_SIZE)
-        );
-      }
-
-      const snap = await getDocs(q);
-      
-      if (snap.empty) {
-        setHasMore(false);
-      } else {
-        const list = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-        setProducts(prev => isLoadMore ? [...prev, ...list] : list);
-        setLastDoc(snap.docs[snap.docs.length - 1]);
-        setHasMore(snap.docs.length === PAGE_SIZE);
-      }
-    } catch (error) {
-      console.error("Error loading products:", error);
-    } finally {
-      setLoading(false);
-      setLoadMoreLoading(false);
-    }
-  }
 
   return (
     <div style={styles.container}>
@@ -229,19 +133,12 @@ export default function CategoryClient({ name, searchParams, initialCategory, in
         ))}
       </div>
 
-      {loading && products.length === 0 && <p style={{ textAlign: "center", padding: 20 }}>Loading products...</p>}
-
-      {hasMore && !loading && (
-        <div style={{ textAlign: "center", marginTop: 40 }}>
-          <button 
-            onClick={() => loadProducts(true)} 
-            disabled={loadMoreLoading}
-            style={styles.loadMoreBtn}
-          >
-            {loadMoreLoading ? "Loading more..." : "Load More Products"}
-          </button>
-        </div>
-      )}
+      <Pagination 
+        totalPages={totalPages} 
+        currentPage={currentPage} 
+        basePath={`/category/${categorySlug}`}
+        searchParams={searchParams}
+      />
 
       {category?.category_seo_content && (
         <div style={styles.seoBox}>

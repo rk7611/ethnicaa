@@ -18,7 +18,7 @@ async function getCategoryData(categorySlug) {
   };
 }
 
-async function getProductsData(categorySlug, sort = "latest") {
+async function getProductsData(categorySlug, sort = "latest", page = 1) {
   try {
     const constraints = [where("status", "==", "published")];
     
@@ -49,18 +49,23 @@ async function getProductsData(categorySlug, sort = "latest") {
       sortDir = "desc";
     }
 
-    const q = query(
+    // --- PAGINATION LOGIC ---
+    let q = query(
       collection(db, "products"),
       ...constraints,
       orderBy(sortField, sortDir),
-      limit(PAGE_SIZE)
+      limit(page * PAGE_SIZE)
     );
 
     const snap = await getDocs(q);
-    return snap.docs.map((d) => ({
+    const allDocs = snap.docs.map((d) => ({
       id: d.id,
       ...d.data(),
     }));
+
+    // Slice for the specific page
+    const start = (page - 1) * PAGE_SIZE;
+    return allDocs.slice(start, start + PAGE_SIZE);
   } catch (error) {
     console.error("Error fetching products:", error);
     return [];
@@ -129,11 +134,15 @@ export async function generateMetadata({ params }) {
 export default async function Page({ params, searchParams }) {
   const categorySlug = decodeURIComponent(params.name);
   const sort = searchParams?.sort || "latest";
+  const page = parseInt(searchParams?.page) || 1;
   
   const [category, products] = await Promise.all([
     getCategoryData(categorySlug),
-    getProductsData(categorySlug, sort)
+    getProductsData(categorySlug, sort, page)
   ]);
+
+  const totalCount = category.count || 0;
+  const totalPages = Math.ceil(totalCount / PAGE_SIZE);
 
   // SERVER-SIDE SCHEMAS
   const schemaList = [
@@ -188,6 +197,8 @@ export default async function Page({ params, searchParams }) {
         searchParams={searchParams}
         initialCategory={category}
         initialProducts={products}
+        currentPage={page}
+        totalPages={totalPages}
       />
     </>
   );
