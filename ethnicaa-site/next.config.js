@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    unoptimized: true,
+    // Enabled optimization for better performance (WebP conversion, resizing)
+    unoptimized: false,
 
     remotePatterns: [
       {
@@ -42,6 +43,10 @@ const nextConfig = {
         source: "/(.*)",
         headers: [
           {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+          {
             key: "X-Content-Type-Options",
             value: "nosniff",
           },
@@ -60,6 +65,25 @@ const nextConfig = {
           {
             key: "Permissions-Policy",
             value: "camera=(), microphone=(), geolocation=()",
+          },
+        ],
+      },
+      // Special caching for images
+      {
+        source: "/_next/image(.*)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/(favicon.ico|logo.png|apple-touch-icon.png)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },

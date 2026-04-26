@@ -127,7 +127,11 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
         <div style={styles.grid}>
             {loading && products.length === 0
             ? Array(12).fill(0).map((_, i) => (
-                <div key={i} style={styles.skeletonCard}><div style={styles.skeletonImg}></div><div style={styles.skeletonText}></div></div>
+                <div key={i} style={styles.skeletonCard}>
+                  <div style={styles.skeletonImg}></div>
+                  <div style={styles.skeletonText}></div>
+                  <div style={{...styles.skeletonText, width: '60%', marginTop: 8}}></div>
+                </div>
                 ))
             : products.map((p) => (
                 <div key={p.id} className="premium-card" style={styles.card}>
@@ -139,7 +143,9 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
                           alt={generateProductAlt(p)} 
                           width={300} 
                           height={380} 
+                          sizes="(max-width: 480px) 45vw, (max-width: 768px) 30vw, 250px"
                           style={styles.cardImg} 
+                          loading="lazy"
                         />
                       )}
                       {p.offer && p.discount_percent > 0 && (

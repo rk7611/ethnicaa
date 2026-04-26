@@ -33,11 +33,15 @@ export function isValidImageUrl(url) {
       const allowedHosts = [
         "storage.googleapis.com",
         "firebasestorage.googleapis.com",
+        "ethnicaa-8402c.firebasestorage.app",
         "images.unsplash.com",
         "ethnicaa.com",
         "picsum.photos",
         "fastly.picsum.photos",
-        "lh3.googleusercontent.com"
+        "lh3.googleusercontent.com",
+        "kapdavilla.com",
+        "www.kapdavilla.com",
+        "cdn.kapdavilla.com"
       ];
       return allowedHosts.some(host => parsed.hostname === host || parsed.hostname.endsWith("." + host));
     } catch (e) {
