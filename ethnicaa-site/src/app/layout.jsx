@@ -141,6 +141,24 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(globalSchema) }}
         />
 
+        {/* Apollo Tracking Script */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              function initApollo(){
+                var n=Math.random().toString(36).substring(7),
+                o=document.createElement("script");
+                o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,
+                o.async=!0,
+                o.defer=!0,
+                o.onload=function(){window.trackingFunctions.onLoad({appId:"69edb47dfe097c000d29d3cd"})},
+                document.head.appendChild(o)
+              }
+              initApollo();
+            `,
+          }}
+        />
+
         {/* Google Analytics (gtag.js) - Stable Fallback */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-XF0XGW58DX"></script>
         <script
