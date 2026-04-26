@@ -129,11 +129,19 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* Preconnect for Speed */}
+        {/* Preconnect & DNS Prefetch for Speed */}
         <link rel="preconnect" href="https://firebasestorage.googleapis.com" />
+        <link rel="dns-prefetch" href="https://firebasestorage.googleapis.com" />
+        
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+
         <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
+        <link rel="preconnect" href="https://assets.apollo.io" />
+        <link rel="dns-prefetch" href="https://assets.apollo.io" />
 
         {/* Global Schema */}
         <script

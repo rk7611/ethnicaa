@@ -70,7 +70,9 @@ export default function BannerSlider({ banners = [] }) {
                 onTouchStart={handleTouchStart}
                 onTouchEnd={handleTouchEnd}
                 alt={b.title ? `${b.title} Wholesale - Ethnicaa` : "Wholesale Ethnic Wear Surat Manufacturer - Ethnicaa"}
-                loading="lazy"
+                loading={i === 0 ? "eager" : "lazy"}
+                fetchPriority={i === 0 ? "high" : "auto"}
+                onLoad={() => i === 0 && console.log("LCP Image Loaded")}
               />
             </picture>
           </Link>
