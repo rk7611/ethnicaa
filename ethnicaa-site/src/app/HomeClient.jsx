@@ -14,11 +14,14 @@ import {
 import { db } from "@/lib/firebase";
 import Link from "next/link";
 import Image from "next/image";
-import BannerSlider from "@/components/BannerSlider";
-import EnquireButton from "@/components/EnquireButton";
-import Pagination from "@/components/Pagination";
+import dynamic from "next/dynamic";
+const BannerSlider = dynamic(() => import("@/components/BannerSlider"), { ssr: true });
+const EnquireButton = dynamic(() => import("@/components/EnquireButton"), { ssr: false });
+const Pagination = dynamic(() => import("@/components/Pagination"), { ssr: false });
+const TrustBadges = dynamic(() => import("@/components/TrustBadges"), { ssr: false });
+
 import { blogs } from "@/lib/blog-data";
-import TrustBadges from "@/components/TrustBadges";
+import { consolidateCategories } from "@/lib/category-utils";
 import { isValidImageUrl, generateProductAlt } from "@/utils/imageUtils";
 
 /* ============================================================

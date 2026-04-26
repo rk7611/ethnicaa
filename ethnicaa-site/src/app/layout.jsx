@@ -125,6 +125,8 @@ import WhatsAppPopup from "@/components/WhatsAppPopup";
 
 const inter = Inter({ subsets: ["latin"] });
 
+import { GoogleAnalytics } from "@next/third-parties/google";
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -149,11 +151,11 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(globalSchema) }}
         />
 
-        {/* Apollo Tracking Script */}
+        {/* Apollo Tracking Script - Delayed for Performance */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              function initApollo(){
+              setTimeout(function(){
                 var n=Math.random().toString(36).substring(7),
                 o=document.createElement("script");
                 o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,
@@ -161,29 +163,14 @@ export default function RootLayout({ children }) {
                 o.defer=!0,
                 o.onload=function(){window.trackingFunctions.onLoad({appId:"69edb47dfe097c000d29d3cd"})},
                 document.head.appendChild(o)
-              }
-              initApollo();
-            `,
-          }}
-        />
-
-        {/* Google Analytics (gtag.js) - Stable Fallback */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XF0XGW58DX"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-XF0XGW58DX', {
-                page_path: window.location.pathname,
-              });
+              }, 3000);
             `,
           }}
         />
       </head>
 
       <body className={inter.className}>
+        <GoogleAnalytics gaId="G-XF0XGW58DX" />
         <Header />
         <main>{children}</main>
         <Footer />
