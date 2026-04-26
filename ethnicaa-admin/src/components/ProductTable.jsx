@@ -92,9 +92,10 @@ export default function ProductTable({
           <span style={styles.bulkText}>{selected.length} selected</span>
           <button style={styles.bulkBtn} onClick={() => onBulkPublish(selected)}>Publish</button>
           <button style={styles.bulkBtn} onClick={() => onBulkDraft(selected)}>Draft</button>
-          <button style={styles.bulkDelete} onClick={() => {
+          <button style={styles.bulkDelete} onClick={async () => {
             if (window.confirm("Delete selected products permanently?")) {
-              onBulkDelete(products.filter(p => selected.includes(p.id)));
+              await onBulkDelete(products.filter(p => selected.includes(p.id)));
+              setSelected([]); // CLEAR SELECTION AFTER DELETE
             }
           }}>Delete</button>
         </div>

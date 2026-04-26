@@ -43,9 +43,9 @@ async function deleteProductFolder(slug) {
 export default function useProducts() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [loadingMore, setLoadingMore] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
-  const lastDoc = useRef(null);
+  const [totalCount, setTotalCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [cursors, setCursors] = useState({}); // { page: lastDoc }
 
   // Filters
   const [search, setSearch] = useState("");
@@ -62,13 +62,9 @@ export default function useProducts() {
   // =========================
   // LOAD PRODUCTS (PAGINATED)
   // =========================
-  const loadProducts = useCallback(async (isMore = false) => {
-    if (isMore) setLoadingMore(true);
-    else {
-      setLoading(true);
-      setProducts([]);
-      lastDoc.current = null;
-    }
+  const loadProducts = useCallback(async (page = 1) => {
+    setLoading(true);
+    setCurrentPage(page);
 
     try {
       let q = collection(db, "products");
@@ -78,7 +74,6 @@ export default function useProducts() {
       if (offer) q = query(q, where("offer", "==", offer === "true"));
       
       if (category) {
-        // Map common category display names to their singular tag counterparts
         const tagMap = {
           "Sarees": "saree",
           "Kurtis": "kurti",
@@ -95,33 +90,28 @@ export default function useProducts() {
 
       if (fabric) q = query(q, where("fabrics", "array-contains", fabric.toLowerCase().replace(/\s+/g, "-")));
 
-      // Search (Server-side via search_keywords if it's a single word)
-      // Note: Full-text search in Firestore is limited. 
-      // If search is complex, we might still need some client-side filtering or a better index.
-      // For now, let's keep it simple.
+      // Get Total Count (Only on first page or filter change)
+      if (page === 1) {
+        const countSnap = await getCountFromServer(q);
+        setTotalCount(countSnap.data().count);
+        setCursors({}); // Reset cursors on new search
+      }
 
-      // Sorting & Pagination
+      // Sorting
       switch (sortBy) {
-        case "price_low":
-          q = query(q, orderBy("price", "asc"));
-          break;
-        case "price_high":
-          q = query(q, orderBy("price", "desc"));
-          break;
-        case "name_az":
-          q = query(q, orderBy("name", "asc"));
-          break;
-        case "name_za":
-          q = query(q, orderBy("name", "desc"));
-          break;
+        case "price_low": q = query(q, orderBy("price", "asc")); break;
+        case "price_high": q = query(q, orderBy("price", "desc")); break;
+        case "name_az": q = query(q, orderBy("name", "asc")); break;
+        case "name_za": q = query(q, orderBy("name", "desc")); break;
         case "newest":
         default:
           q = query(q, orderBy("createdAt", "desc"));
           break;
       }
 
-      if (isMore && lastDoc.current) {
-        q = query(q, startAfter(lastDoc.current));
+      // Pagination logic
+      if (page > 1 && cursors[page - 1]) {
+        q = query(q, startAfter(cursors[page - 1]));
       }
 
       q = query(q, limit(PAGE_SIZE));
@@ -129,7 +119,7 @@ export default function useProducts() {
       const snapshot = await getDocs(q);
       const list = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
 
-      // Client-side Filters (for Search and Price Range since Firestore has limits)
+      // Client-side Filters
       const filteredList = list.filter(p => {
         const matchesSearch = !search || 
           p.name?.toLowerCase().includes(search.toLowerCase()) ||
@@ -143,27 +133,27 @@ export default function useProducts() {
         return matchesSearch && matchesPrice;
       });
 
-      if (isMore) {
-        setProducts(prev => [...prev, ...filteredList]);
-      } else {
-        setProducts(filteredList);
-      }
+      setProducts(filteredList);
 
-      lastDoc.current = snapshot.docs[snapshot.docs.length - 1];
-      setHasMore(snapshot.docs.length === PAGE_SIZE);
+      // Save cursor for NEXT page
+      if (snapshot.docs.length > 0) {
+        setCursors(prev => ({
+          ...prev,
+          [page]: snapshot.docs[snapshot.docs.length - 1]
+        }));
+      }
 
     } catch (err) {
       console.error("Load products error:", err);
     } finally {
       setLoading(false);
-      setLoadingMore(false);
     }
-  }, [search, sortBy, category, fabric, status, offer, minPrice, maxPrice]);
+  }, [search, sortBy, category, fabric, status, offer, minPrice, maxPrice, cursors]);
 
   // Initial load and filter change
   useEffect(() => {
-    loadProducts();
-  }, [loadProducts]);
+    loadProducts(1);
+  }, [search, sortBy, category, fabric, status, offer, minPrice, maxPrice]);
 
   // =========================
   // PRODUCT ACTIONS
@@ -184,6 +174,7 @@ export default function useProducts() {
       await deleteProductFolder(slug);
       await deleteDoc(doc(db, "products", id));
       setProducts(prev => prev.filter(p => p.id !== id));
+      setTotalCount(prev => prev - 1);
       return true;
     } catch (err) {
       console.error("Delete error:", err);
@@ -237,17 +228,17 @@ export default function useProducts() {
     };
     delete copy.id;
     await setDoc(doc(db, "products", newSlug), copy);
-    // Refresh to show the new product
-    loadProducts();
+    loadProducts(1);
     return true;
   };
 
   return {
     products,
     loading,
-    loadingMore,
-    hasMore,
-    loadMore: () => loadProducts(true),
+    totalCount,
+    currentPage,
+    totalPages: Math.ceil(totalCount / PAGE_SIZE),
+    goToPage: loadProducts,
 
     // Filters
     search,

@@ -2,15 +2,17 @@ import { useMemo, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import AdminLayout from "../components/AdminLayout";
 import ProductTable from "../components/ProductTable";
+import Pagination from "../components/Pagination";
 import useProducts from "../hooks/useProducts";
 
 export default function ProductsList() {
   const {
     products,
     loading,
-    loadingMore,
-    hasMore,
-    loadMore,
+    totalCount,
+    currentPage,
+    totalPages,
+    goToPage,
 
     // filters
     search, setSearch,
@@ -144,17 +146,11 @@ export default function ProductsList() {
       />
 
       {/* PAGINATION */}
-      {hasMore && (
-        <div style={styles.loadMoreContainer}>
-          <button 
-            style={styles.loadMoreBtn} 
-            onClick={loadMore} 
-            disabled={loadingMore}
-          >
-            {loadingMore ? "Loading..." : "Load More Products"}
-          </button>
-        </div>
-      )}
+      <Pagination 
+        totalPages={totalPages}
+        currentPage={currentPage}
+        onPageChange={goToPage}
+      />
     </AdminLayout>
   );
 }

@@ -1,5 +1,11 @@
 *.zip
 node_modules/
+.env
+*.json
+!package.json
+!composer.json
+!tsconfig.json
+!jsconfig.json
 
 # Social Agent
 social_agent/temp_assets/
@@ -7,3 +13,8 @@ social_agent/output_videos/
 social_agent/*.exe
 social_agent/ig_session.json
 social_agent/.env
+
+# Crawler & Data
+KAPAD_CRAWLER/category_discovered_products.json
+KAPAD_CRAWLER/firebase_key.json
+KAPAD_CRAWLER/temp_images/
