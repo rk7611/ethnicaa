@@ -28,12 +28,22 @@ async function getBanners() {
   const snap = await getDocs(
     query(collection(db, "banners"), orderBy("order", "asc"))
   );
-  return snap.docs.map((d) => ({
-    id: d.id,
-    imageURL: d.data().imageURL || "",
-    link: d.data().link || "#",
-    order: d.data().order || 0,
-  }));
+  return snap.docs.map((d) => {
+    const data = d.data();
+    let link = data.link || "#";
+    
+    // Normalize localhost links to relative paths
+    if (link.includes("localhost:3000")) {
+      link = link.split("localhost:3000")[1] || "#";
+    }
+
+    return {
+      id: d.id,
+      imageURL: data.imageURL || "",
+      link: link,
+      order: data.order || 0,
+    };
+  });
 }
 
 import { consolidateCategories } from "@/lib/category-utils";

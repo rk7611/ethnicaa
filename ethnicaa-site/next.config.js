@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    // Enabled optimization for better performance (WebP conversion, resizing)
-    unoptimized: false,
+    // TEMPORARILY DISABLED: Vercel quota exceeded (Error 402)
+    unoptimized: true,
 
     remotePatterns: [
       {
