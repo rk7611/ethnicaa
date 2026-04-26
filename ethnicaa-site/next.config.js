@@ -1,9 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    // TEMPORARILY DISABLED: Vercel quota exceeded (Error 402)
-    unoptimized: true,
-
+    loader: 'custom',
+    loaderFile: './src/utils/imageLoader.js',
     remotePatterns: [
       {
         protocol: "https",

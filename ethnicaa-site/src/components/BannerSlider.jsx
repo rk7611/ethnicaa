@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function BannerSlider({ banners = [] }) {
   const [index, setIndex] = useState(0);
@@ -59,22 +60,18 @@ export default function BannerSlider({ banners = [] }) {
             zIndex: index === i ? 2 : 1,
           }}
         >
-          <Link href={b.link || "#"} prefetch={false}>
-            <picture>
-              <source media="(max-width: 480px)" srcSet={getMobileTall(b)} />
-              <source media="(max-width: 768px)" srcSet={getMobileSquare(b)} />
-              <source media="(min-width: 769px)" srcSet={getDesktop(b)} />
-              <img
-                src={getDesktop(b)}
-                style={localStyles.slideImg}
-                onTouchStart={handleTouchStart}
-                onTouchEnd={handleTouchEnd}
-                alt={b.title ? `${b.title} Wholesale - Ethnicaa` : "Wholesale Ethnic Wear Surat Manufacturer - Ethnicaa"}
-                loading={i === 0 ? "eager" : "lazy"}
-                fetchPriority={i === 0 ? "high" : "auto"}
-                onLoad={() => i === 0 && console.log("LCP Image Loaded")}
-              />
-            </picture>
+          <Link href={b.link || "#"} prefetch={false} style={{ width: "100%", height: "100%", display: "block" }}>
+            <Image
+              src={getDesktop(b)}
+              alt={b.title ? `${b.title} Wholesale - Ethnicaa` : "Wholesale Ethnic Wear Surat Manufacturer - Ethnicaa"}
+              fill
+              priority={i === 0}
+              sizes="100vw"
+              style={{ objectFit: "cover" }}
+              fetchPriority={i === 0 ? "high" : "auto"}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+            />
           </Link>
         </div>
       ))}
