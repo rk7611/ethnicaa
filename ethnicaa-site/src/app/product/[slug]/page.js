@@ -120,7 +120,7 @@ export default async function Page({ params, searchParams }) {
           "@type": "MerchantReturnPolicy",
           "applicableCountry": "IN",
           "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-          "merchantReturnDays": "7",
+          "merchantReturnDays": 7,
           "returnMethod": "https://schema.org/ReturnByMail",
           "returnFees": "https://schema.org/FreeReturn"
         },
@@ -128,7 +128,7 @@ export default async function Page({ params, searchParams }) {
           "@type": "OfferShippingDetails",
           "shippingRate": {
             "@type": "MonetaryAmount",
-            "value": "0",
+            "value": 0,
             "currency": "INR"
           },
           "shippingDestination": {
@@ -139,14 +139,14 @@ export default async function Page({ params, searchParams }) {
             "@type": "ShippingDeliveryTime",
             "handlingTime": {
               "@type": "QuantitativeValue",
-              "minValue": "1",
-              "maxValue": "2",
+              "minValue": 1,
+              "maxValue": 2,
               "unitCode": "d"
             },
             "transitTime": {
               "@type": "QuantitativeValue",
-              "minValue": "2",
-              "maxValue": "5",
+              "minValue": 2,
+              "maxValue": 5,
               "unitCode": "d"
             }
           }
