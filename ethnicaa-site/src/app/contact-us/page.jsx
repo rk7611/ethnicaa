@@ -1,111 +1,53 @@
 export const metadata = {
-  title: "Contact Us | Ethnicaa Wholesale Surat",
-  description: "Contact Ethnicaa Wholesale for bulk orders, factory inquiries, and reseller support. WhatsApp us at +91 9586346332 for direct manufacturer access.",
+  title: "Contact Ethnicaa | Wholesale Enquiries & Support",
+  description: "Get in touch with Ethnicaa for wholesale textile enquiries, manufacturing partnerships, and bulk shipping support. Located in the heart of Surat.",
+  alternates: {
+    canonical: "https://ethnicaa.com/contact-us",
+  },
 };
 
-export default function ContactUsPage() {
-  const contactSchema = {
-    "@context": "https://schema.org",
-    "@type": "ContactPage",
-    "name": "Contact Ethnicaa Wholesale",
-    "description": "Contact our Surat-based wholesale support team for bulk inquiries and reseller support.",
-    "mainEntity": {
-      "@type": "Organization",
-      "name": "Ethnicaa Wholesale",
-      "telephone": "+91-9586346332",
-      "email": "support@ethnicaa.com",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "1028-29, Shree Om Market, Near RKTM, Ring Road",
-        "addressLocality": "Surat",
-        "addressRegion": "Gujarat",
-        "postalCode": "395002",
-        "addressCountry": "IN"
-      }
-    }
-  };
-
+export default function ContactUs() {
   return (
     <div style={styles.container}>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }}
-      />
-      <h1 style={styles.title}>Contact Us</h1>
+      <h1 style={styles.h1}>Contact Ethnicaa Wholesale</h1>
       
-      <div style={styles.content}>
-        <p>
-          Our dedicated wholesale support team is ready to assist you with order inquiries, shipping details, or customized bulk requirements.
-        </p>
-        
-        <div style={styles.card}>
-          <h3>💬 WhatsApp Support (Fastest Response)</h3>
-          <p>
-            For instant ordering and support, message us on WhatsApp:<br/>
-            <strong><a href="https://wa.me/9586346332" style={styles.link} target="_blank">+91 9586346332</a></strong>
-          </p>
+      <div style={styles.grid}>
+        <div style={styles.info}>
+          <h2>Wholesale & Bulk Enquiries</h2>
+          <p>For catalog enquiries and bulk ordering, please contact our sales team via WhatsApp for the fastest response.</p>
+          <a href="https://wa.me/9586346332" style={styles.whatsappBtn}>Chat on WhatsApp: +91 9586346332</a>
+          
+          <div style={styles.detailBox}>
+            <h3>Office & Warehouse Address:</h3>
+            <p>1028-29, Shree Om Market,<br />
+               Near RKTM, Ring Road,<br />
+               Surat-395002, Gujarat, India</p>
+          </div>
+
+          <div style={styles.detailBox}>
+            <h3>Email Support:</h3>
+            <p>Sales: sales@ethnicaa.com<br />
+               Support: support@ethnicaa.com</p>
+          </div>
         </div>
 
-        <div style={styles.card}>
-          <h3>✉️ Email Support</h3>
-          <p>
-            For official inquiries, export documentation, or general support:<br/>
-            <strong><a href="mailto:support@ethnicaa.com" style={styles.link}>support@ethnicaa.com</a></strong>
-          </p>
+        <div style={styles.map}>
+          {/* Static representation of a map or contact form can go here */}
+          <div style={styles.placeholderMap}>
+            <p>📍 Located in the Heart of Surat Textile Market</p>
+          </div>
         </div>
-
-        <div style={styles.card}>
-          <h3>🏢 Office & Dispatch Hub</h3>
-          <p>
-            <strong>Ethnicaa Wholesale</strong><br/>
-            1028-29, Shree Om Market,<br />
-            Near RKTM, Ring Road,<br />
-            Surat-395002, Gujarat, India<br/>
-            <strong style={{ color: "#d32f2f" }}>⚠️ PLEASE BOOK APPOINTMENT BEFORE VISIT</strong>
-          </p>
-        </div>
-
-        <h2>Business Hours</h2>
-        <p>
-          Monday - Saturday: <strong>10:00 AM - 7:00 PM (IST)</strong><br/>
-          Sunday: Closed
-        </p>
       </div>
     </div>
   );
 }
 
 const styles = {
-  container: {
-    maxWidth: 900,
-    margin: "0 auto",
-    padding: "40px 20px",
-    background: "#fff",
-    borderRadius: 12,
-    marginTop: 40,
-    boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: "bold",
-    marginBottom: 20,
-    borderBottom: "2px solid #eee",
-    paddingBottom: 15,
-  },
-  content: {
-    fontSize: 16,
-    lineHeight: 1.8,
-    color: "#333",
-  },
-  card: {
-    background: "#F9FAFC",
-    padding: 20,
-    borderRadius: 10,
-    marginBottom: 20,
-    border: "1px solid #eee",
-  },
-  link: {
-    color: "#0066cc",
-    textDecoration: "none",
-  }
+  container: { maxWidth: 1000, margin: "0 auto", padding: "60px 20px" },
+  h1: { fontSize: 36, fontWeight: 800, marginBottom: 40, textAlign: "center" },
+  grid: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60 },
+  info: { display: "flex", flexDirection: "column", gap: 30 },
+  whatsappBtn: { background: "#25D366", color: "#fff", padding: "15px 30px", borderRadius: 12, textDecoration: "none", fontWeight: 700, textAlign: "center" },
+  detailBox: { borderLeft: "4px solid #eee", paddingLeft: 20 },
+  placeholderMap: { width: "100%", height: 400, background: "#f0f0f0", borderRadius: 24, display: "flex", alignItems: "center", justifyContent: "center", color: "#666", fontWeight: 700 },
 };

@@ -380,7 +380,7 @@ useEffect(() => {
                       {p.fabric} {p.category}
                     </div>
                     <div style={styles.similarName}>{p.catalog || p.name}</div>
-                    <div style={styles.similarPrice}>Wholesale Price</div>
+                    <div style={styles.similarPrice}>Bulk Wholesale Price</div>
                   </div>
                 </Link>
               </div>

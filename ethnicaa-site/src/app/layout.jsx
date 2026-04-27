@@ -5,12 +5,16 @@ export const metadata = {
   metadataBase: new URL("https://ethnicaa.com"),
 
   title: {
-    default: "Ethnicaa Wholesale",
+    default: "Ethnicaa Wholesale | Surat Wholesale Market - Kurtis, Sarees & Suits",
     template: "%s | Ethnicaa Wholesale",
   },
 
   description:
-    "Ethnicaa Wholesale offers latest wholesale Sarees, Kurtis, Pakistani Suits, Salwar Suits, Gowns, Lehengas and more. Daily new arrivals with best wholesale pricing.",
+    "Ethnicaa Wholesale is India's leading B2B marketplace for wholesale Kurtis, Sarees, and Salwar Suits direct from Surat manufacturers. Best pricing for resellers.",
+
+  alternates: {
+    canonical: "/",
+  },
 
   icons: {
     icon: "/favicon.ico",
@@ -64,17 +68,21 @@ const globalSchema = {
       "@type": "Organization",
       "@id": "https://ethnicaa.com/#organization",
       "name": "Ethnicaa Wholesale",
+      "legalName": "Ethnicaa Textiles",
       "url": "https://ethnicaa.com",
       "logo": "https://ethnicaa.com/logo.png",
+      "description": "India's premier B2B marketplace for wholesale ethnic wear, connecting global retailers directly with Surat's top manufacturers.",
       "contactPoint": {
         "@type": "ContactPoint",
         "telephone": "+91-9586346332",
         "contactType": "customer service",
-        "availableLanguage": ["Hindi", "English"]
+        "areaServed": "Global",
+        "availableLanguage": ["Hindi", "English", "Gujarati"]
       },
       "sameAs": [
         "https://wa.me/9586346332",
-        "https://www.instagram.com/rk7611"
+        "https://www.instagram.com/rk7611",
+        "https://www.facebook.com/ethnicaa"
       ]
     },
     {

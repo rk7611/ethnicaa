@@ -33,13 +33,13 @@ export default function PriceBlock({ product }) {
             {offer && offer_price ? (
               <>
                 <div style={styles.originalPrice}>₹ {price}</div>
-                <div style={styles.offerPrice}>₹ {offer_price} / pc</div>
+                <div style={styles.offerPrice}>₹ {offer_price} / pc <span style={{fontSize: "14px", fontWeight: "600", color: "#666", marginLeft: "8px"}}>(Bulk Wholesale)</span></div>
                 {discount_percent > 0 && (
                   <div style={styles.discountBadge}>Save {discount_percent}%</div>
                 )}
               </>
             ) : (
-              <div style={styles.mainPrice}>₹ {perPiece} / pc</div>
+              <div style={styles.mainPrice}>₹ {perPiece} / pc <span style={{fontSize: "14px", fontWeight: "600", color: "#666", marginLeft: "8px"}}>(Bulk Wholesale)</span></div>
             )}
           </div>
         ) : (

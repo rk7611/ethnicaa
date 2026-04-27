@@ -23,6 +23,7 @@ const TrustBadges = dynamic(() => import("@/components/TrustBadges"), { ssr: fal
 import { blogs } from "@/lib/blog-data";
 import { consolidateCategories } from "@/lib/category-utils";
 import { isValidImageUrl, generateProductAlt } from "@/utils/imageUtils";
+import InternalLinking from "@/components/InternalLinking";
 
 /* ============================================================
     FETCH BANNERS
@@ -49,7 +50,7 @@ async function getBanners() {
   });
 }
 
-import { consolidateCategories } from "@/lib/category-utils";
+
 
 export default function HomePage({ initialBanners, initialCategories, initialProducts, currentPage, totalPages }) {
   const [loading, setLoading] = useState(!initialProducts);
@@ -211,6 +212,19 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
             ))}
         </div>
       </div>
+
+      <InternalLinking 
+        links={[
+          { href: "/collections/kurti-wholesale-surat", label: "Kurti Wholesale Surat" },
+          { href: "/collections/saree-manufacturer-surat", label: "Saree Manufacturer Surat" },
+          { href: "/collections/kurti-wholesaler-mumbai", label: "Mumbai Wholesale Market" },
+          { href: "/collections/kurti-market-delhi", label: "Delhi Kurti Market" },
+          { href: "/collections/jaipuri-kurtis-wholesale", label: "Jaipuri Kurtis" },
+          { href: "/collections/wholesale-pakistani-suits", label: "Pakistani Suits" },
+          { href: "/collections/best-kurti-wholesaler-surat", label: "Best Wholesalers" },
+          { href: "/collections/wholesale-sarees-usa", label: "Export Sarees USA" },
+        ]} 
+      />
 
       <div style={styles.seoBox}>
         <div dangerouslySetInnerHTML={{ __html: homepageSEOContent }} />

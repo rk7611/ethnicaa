@@ -1,60 +1,53 @@
+import Image from "next/image";
+
 export const metadata = {
-  title: "About Us | Ethnicaa Wholesale",
-  description: "India's fastest growing B2B ethnic wear marketplace. Source latest sarees, kurtis & Pakistani suits directly from Surat manufacturers at direct factory rates.",
+  title: "About Ethnicaa | India's Leading B2B Textile Marketplace",
+  description: "Ethnicaa is a premier B2B textile marketplace based in Surat, Gujarat. We connect global retailers directly with verified Surat manufacturers.",
+  alternates: {
+    canonical: "https://ethnicaa.com/about-us",
+  },
 };
 
-export default function AboutUsPage() {
+export default function AboutUs() {
   return (
     <div style={styles.container}>
-      <h1 style={styles.title}>About Ethnicaa Wholesale</h1>
+      <h1 style={styles.h1}>About Ethnicaa: The Heart of Surat Textiles</h1>
       
       <div style={styles.content}>
-        <p>
-          Welcome to <strong>Ethnicaa Wholesale</strong>, India&apos;s fastest-growing B2B marketplace for premium ethnic wear. We bridge the gap between Surat&apos;s leading manufacturers and retail businesses across the globe.
-        </p>
+        <p>Ethnicaa is born from the looms of Surat, the textile capital of the world. Our mission is to bridge the gap between Surat&apos;s high-quality manufacturers and the global community of retailers, boutique owners, and online resellers.</p>
         
-        <h2>Our Mission</h2>
-        <p>
-          Our mission is to empower boutique owners, resellers, and online sellers by providing direct access to 100% original designer catalogs at absolute rock-bottom manufacturer prices. We believe that when our resellers grow, we grow.
-        </p>
+        <h2>Our Manufacturing Heritage</h2>
+        <p>With roots deep in the Surat Ring Road textile market, Ethnicaa understands the intricate details of fabric, craftsmanship, and design. We partner with over 500+ verified manufacturers in Surat to bring you the latest collections in Kurtis, Sarees, and Salwar Suits.</p>
 
-        <h2>Why Choose Ethnicaa?</h2>
-        <ul>
-          <li><strong>Direct Manufacturer Pricing:</strong> Avoid middleman margins. We source and supply directly from the factory.</li>
-          <li><strong>Daily New Arrivals:</strong> Stay ahead of the fashion curve with fresh catalogs uploaded every single day.</li>
-          <li><strong>Quality Guarantee:</strong> Every shipment undergoes strict quality control before dispatch.</li>
-          <li><strong>Global Logistics:</strong> We partner with trusted courier services to deliver worldwide efficiently.</li>
-        </ul>
+        <h2>Direct Factory Access</h2>
+        <p>By eliminating multiple layers of middlemen and commission agents, we ensure that you get the <strong>lowest possible wholesale prices</strong>. This direct-from-factory model allows our resellers to maintain healthy margins while offering competitive prices to their customers.</p>
 
-        <h2>Our Categories</h2>
-        <p>
-          We specialize in complete wholesale catalogs across a vast range of categories including Sarees, Kurtis, Salwar Suits, Pakistani Suits, Gowns, Lehengas, and Cord Sets.
-        </p>
+        <h2>Quality & Trust</h2>
+        <p>Every product ordered through Ethnicaa undergoes a 3-layer quality check at our Surat warehouse. From fabric strength to embroidery precision, we ensure that what you see is exactly what you get.</p>
+      </div>
+
+      <div style={styles.stats}>
+        <div style={styles.statItem}>
+          <h3>500+</h3>
+          <p>Verified Manufacturers</p>
+        </div>
+        <div style={styles.statItem}>
+          <h3>10k+</h3>
+          <p>Resellers Globally</p>
+        </div>
+        <div style={styles.statItem}>
+          <h3>50+</h3>
+          <p>Countries Served</p>
+        </div>
       </div>
     </div>
   );
 }
 
 const styles = {
-  container: {
-    maxWidth: 900,
-    margin: "0 auto",
-    padding: "40px 20px",
-    background: "#fff",
-    borderRadius: 12,
-    marginTop: 40,
-    boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: "bold",
-    marginBottom: 20,
-    borderBottom: "2px solid #eee",
-    paddingBottom: 15,
-  },
-  content: {
-    fontSize: 16,
-    lineHeight: 1.8,
-    color: "#333",
-  },
+  container: { maxWidth: 900, margin: "0 auto", padding: "60px 20px" },
+  h1: { fontSize: 36, fontWeight: 800, marginBottom: 30, textAlign: "center" },
+  content: { lineHeight: 1.8, fontSize: 17, color: "#333" },
+  stats: { display: "flex", justifyContent: "space-around", marginTop: 60, padding: 40, background: "#f9f9f9", borderRadius: 24 },
+  statItem: { textAlign: "center" },
 };

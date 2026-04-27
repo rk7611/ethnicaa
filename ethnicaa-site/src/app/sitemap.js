@@ -1,6 +1,7 @@
 import { getDocs, collection, query, where, orderBy, limit } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { blogs } from "@/lib/blog-data";
+import { keywordPages } from "@/lib/keyword-content";
 
 export default async function sitemap() {
   const baseUrl = "https://ethnicaa.com";
@@ -73,20 +74,12 @@ export default async function sitemap() {
   }));
 
   // 5. COLLECTIONS (SEO Landing Pages)
-  const cities = ["mumbai", "delhi", "jaipur", "kolkata", "hyderabad"];
-  const cats = ["sarees", "kurtis", "suits"];
-  const collectionPages = [];
-  
-  cities.forEach(city => {
-    cats.forEach(cat => {
-      collectionPages.push({
-        url: `${baseUrl}/collections/${cat}-in-${city}`,
-        lastModified: new Date(),
-        changeFrequency: "weekly",
-        priority: 0.8,
-      });
-    });
-  });
+  const collectionPages = Object.keys(keywordPages).map((slug) => ({
+    url: `${baseUrl}/collections/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly",
+    priority: 0.8,
+  }));
 
   return [
     ...staticPages,

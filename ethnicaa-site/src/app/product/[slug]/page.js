@@ -97,8 +97,8 @@ export default async function Page({ params, searchParams }) {
       name: product.catalog || product.name,
       image: product.images || [],
       description: product.seo_description || product.description || "",
-      sku: product.sku || product.id,
-      mpn: product.id,
+      sku: (product.sku || product.id).toString().substring(0, 70),
+      mpn: product.id.toString().substring(0, 70),
       brand: { "@type": "Brand", name: product.brand || "Ethnicaa" },
       manufacturer: { "@type": "Organization", name: "Ethnicaa Surat" },
       material: Array.isArray(product.fabricNames) ? product.fabricNames.join(", ") : product.fabricNames || "",
@@ -115,7 +115,42 @@ export default async function Page({ params, searchParams }) {
         "availability": "https://schema.org/InStock",
         "url": `https://ethnicaa.com/product/${product.id}`,
         "priceValidUntil": "2026-12-31",
-        "seller": { "@type": "Organization", "name": "Ethnicaa Wholesale" }
+        "seller": { "@type": "Organization", "name": "Ethnicaa Wholesale" },
+        "hasMerchantReturnPolicy": {
+          "@type": "MerchantReturnPolicy",
+          "applicableCountry": "IN",
+          "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+          "merchantReturnDays": "7",
+          "returnMethod": "https://schema.org/ReturnByMail",
+          "returnFees": "https://schema.org/FreeReturn"
+        },
+        "shippingDetails": {
+          "@type": "OfferShippingDetails",
+          "shippingRate": {
+            "@type": "MonetaryAmount",
+            "value": "0",
+            "currency": "INR"
+          },
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": "IN"
+          },
+          "deliveryTime": {
+            "@type": "ShippingDeliveryTime",
+            "handlingTime": {
+              "@type": "QuantitativeValue",
+              "minValue": "1",
+              "maxValue": "2",
+              "unitCode": "d"
+            },
+            "transitTime": {
+              "@type": "QuantitativeValue",
+              "minValue": "2",
+              "maxValue": "5",
+              "unitCode": "d"
+            }
+          }
+        }
       },
     },
     {

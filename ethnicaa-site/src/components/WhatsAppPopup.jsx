@@ -40,13 +40,13 @@ export default function WhatsAppPopup() {
         
         <div style={styles.icon}>🔔</div>
         
-        <h2 style={styles.title}>Never Miss a New Catalog!</h2>
+        <h2 style={styles.title}>Get Direct Factory Bulk Pricing!</h2>
         <p style={styles.text}>
-          Get the latest **Surat Wholesale** arrivals, daily price lists, and exclusive offers directly on your WhatsApp.
+          Receive the latest **Surat Wholesale** arrivals, daily bulk price lists, and exclusive offers directly on your WhatsApp.
         </p>
         
         <button onClick={subscribe} style={styles.btn}>
-          Subscribe on WhatsApp
+          Get Bulk Prices on WhatsApp
         </button>
         
         <p style={styles.footer}>Join 5,000+ resellers already receiving updates.</p>
