@@ -19,6 +19,7 @@ const BannerSlider = dynamic(() => import("@/components/BannerSlider"), { ssr: t
 const EnquireButton = dynamic(() => import("@/components/EnquireButton"), { ssr: false });
 const Pagination = dynamic(() => import("@/components/Pagination"), { ssr: false });
 const TrustBadges = dynamic(() => import("@/components/TrustBadges"), { ssr: false });
+const FAQSchema = dynamic(() => import("@/components/FAQSchema"), { ssr: false });
 
 import { blogs } from "@/lib/blog-data";
 import { consolidateCategories } from "@/lib/category-utils";
@@ -107,18 +108,43 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
   const homepageSEOContent = `
     <h2>Wholesale Ethnic Wear at Best Prices — Ethnicaa</h2>
     <p>Ethnicaa Wholesale is India’s fastest-growing wholesale marketplace for Sarees, Kurtis, Pakistani Suits, Lehenga Choli, Gowns, and Salwar Suits.</p>
-    <p>We provide direct factory access to the latest 2026 designs from Surat's top manufacturers, ensuring the best profit margins for your retail or resale business.</p>
+    <p>We provide direct factory access to the latest 2026 designs from Surat&apos;s top manufacturers, ensuring the best profit margins for your retail or resale business.</p>
   `;
+
+  const homeFaqs = [
+    {
+      question: "How do I buy wholesale from Ethnicaa?",
+      answer: "Buying wholesale is easy! Browse our catalogs for Kurtis, Sarees, and Suits. Once you find a product you like, click the 'Enquire on WhatsApp' button to get live stock availability and the best bulk pricing direct from our Surat warehouse."
+    },
+    {
+      question: "Do you ship internationally?",
+      answer: "Yes, Ethnicaa ships to over 50+ countries including USA, UK, Canada, Australia, and UAE. We use express shipping partners to ensure your wholesale orders reach you safely and quickly."
+    },
+    {
+      question: "What is the minimum order quantity (MOQ)?",
+      answer: "Most of our catalogs are available as full sets (one of each size/color in a design). For many items, we also support custom bulk orders. Contact our wholesale managers on WhatsApp for specific product MOQs."
+    },
+    {
+      question: "Are these direct factory prices from Surat?",
+      answer: "Absolutely. Ethnicaa is based in the heart of the Surat textile market. We work directly with manufacturers to bring you factory-direct rates, eliminating middlemen and helping you maximize your margins."
+    }
+  ];
 
   return (
     <div style={styles.container}>
       {/* Schemas handled in layout or page.jsx for SSR efficiency */}
 
+      {/* 
+        ============================================================
+        BANNER SLIDER (Temporarily Disabled)
+        To restore, simply uncomment the BannerSlider component below.
+        ============================================================
       {banners.length > 0 && (
         <div style={{ marginBottom: 20, marginTop: 10 }}>
           <BannerSlider banners={banners} />
         </div>
       )}
+      */}
 
       <TrustBadges />
 
@@ -244,6 +270,19 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
         ]} 
       />
 
+      <div style={styles.section}>
+        <h2 style={styles.heading}>Frequently Asked Questions</h2>
+        <div style={styles.faqGrid}>
+          {homeFaqs.map((faq, i) => (
+            <div key={i} style={styles.faqItem}>
+              <h3 style={styles.faqQuestion}>{faq.question}</h3>
+              <p style={styles.faqAnswer}>{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+        <FAQSchema faqs={homeFaqs} />
+      </div>
+
       <div style={styles.seoBox}>
         <div dangerouslySetInnerHTML={{ __html: homepageSEOContent }} />
       </div>
@@ -302,6 +341,11 @@ const styles = {
   brandCard: { background: "#fff", padding: 12, borderRadius: 12, textAlign: "center", textDecoration: "none" },
   brandImgWrapper: { position: "relative", width: "100%", aspectRatio: "1/1", marginBottom: 8 },
   brandName: { fontSize: 13, fontWeight: 700, color: "#333" },
+  brandName: { fontSize: 13, fontWeight: 700, color: "#333" },
+  faqGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 20 },
+  faqItem: { background: "#fff", padding: 20, borderRadius: 16, border: "1px solid #eee" },
+  faqQuestion: { fontSize: 16, fontWeight: 700, marginBottom: 10, color: "#000" },
+  faqAnswer: { fontSize: 14, color: "#555", lineHeight: 1.6 },
   categoryCard: { 
     background: "#fff", 
     padding: "20px 10px", 

@@ -15,6 +15,4 @@ social_agent/ig_session.json
 social_agent/.env
 
 # Crawler & Data
-KAPAD_CRAWLER/category_discovered_products.json
-KAPAD_CRAWLER/firebase_key.json
-KAPAD_CRAWLER/temp_images/
+KAPAD_CRAWLER/

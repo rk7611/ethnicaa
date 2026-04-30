@@ -4,6 +4,9 @@ import Link from "next/link";
 export const metadata = {
   title: "Shop by Brand | Wholesale Ethnic Wear Brands | Ethnicaa",
   description: "Browse all major wholesale ethnic wear brands including Bela, Bansi, Laxmipati, and more. Direct factory prices for retailers and boutiques.",
+  alternates: {
+    canonical: "https://ethnicaa.com/brands",
+  },
 };
 
 export default function BrandsDirectoryPage() {
