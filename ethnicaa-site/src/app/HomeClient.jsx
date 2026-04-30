@@ -67,7 +67,7 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
     if (initialBanners) setBanners(initialBanners);
     if (initialBrands) setBrands(initialBrands);
     setLoading(false);
-  }, [initialProducts, initialCategories, initialBanners]);
+  }, [initialProducts, initialCategories, initialBanners, initialBrands]);
 
   // Scroll to top on page change
   useEffect(() => {

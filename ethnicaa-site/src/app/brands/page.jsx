@@ -12,7 +12,7 @@ export default function BrandsDirectoryPage() {
   return (
     <div style={styles.container}>
       <h1 style={styles.h1}>Our Wholesale Brands</h1>
-      <p style={styles.subtitle}>Direct Factory Supply from India's Top Ethnic Wear Manufacturers</p>
+      <p style={styles.subtitle}>Direct Factory Supply from India&apos;s Top Ethnic Wear Manufacturers</p>
       
       <div style={styles.grid}>
         {brands.map((brand) => (
@@ -24,7 +24,7 @@ export default function BrandsDirectoryPage() {
       </div>
 
       <div style={styles.infoSection}>
-        <h2>Don't see your favorite brand?</h2>
+        <h2>Don&apos;t see your favorite brand?</h2>
         <p>We work with over 500+ manufacturers in Surat and Jaipur. If you are looking for a specific brand that is not listed here, contact us on WhatsApp.</p>
         <a href="https://wa.me/9586346332" style={styles.waBtn}>Inquire on WhatsApp</a>
       </div>

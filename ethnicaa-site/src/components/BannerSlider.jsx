@@ -19,7 +19,7 @@ export default function BannerSlider({ banners = [] }) {
     }, 4000);
 
     return () => clearTimeout(timeoutRef.current);
-  }, [index, banners.length]);
+  }, [index, banners]);
 
   const touchStart = useRef(0);
 
