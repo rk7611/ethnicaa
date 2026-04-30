@@ -133,7 +133,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en-IN">
       <head>
         {/* Preconnect & DNS Prefetch for Speed */}
         <link rel="preconnect" href="https://firebasestorage.googleapis.com" />
@@ -144,6 +144,10 @@ export default function RootLayout({ children }) {
 
         <link rel="preconnect" href="https://assets.apollo.io" />
         <link rel="dns-prefetch" href="https://assets.apollo.io" />
+        
+        {/* Hreflang for Regional SEO */}
+        <link rel="alternate" href="https://ethnicaa.com" hreflang="en-in" />
+        <link rel="alternate" href="https://ethnicaa.com" hreflang="x-default" />
 
         {/* Global Schema */}
         <script

@@ -109,7 +109,7 @@ export default async function Page({ params, searchParams }) {
       offers: {
         "@type": "Offer",
         "priceCurrency": "INR",
-        "price": product.price || product.avgPrice || product.avg_price || "0",
+        "price": (product.price || product.avgPrice || product.avg_price || "0").toString().replace(/[^0-9.]/g, ""),
         "itemCondition": "https://schema.org/NewCondition",
         "availability": "https://schema.org/InStock",
         "url": `https://ethnicaa.com/product/${product.id}`,
@@ -130,10 +130,16 @@ export default async function Page({ params, searchParams }) {
             "value": 0,
             "currency": "INR"
           },
-          "shippingDestination": {
-            "@type": "DefinedRegion",
-            "addressCountry": "IN"
-          },
+          "shippingDestination": [
+            {
+              "@type": "DefinedRegion",
+              "addressCountry": "IN"
+            },
+            {
+              "@type": "DefinedRegion",
+              "addressCountry": "US"
+            }
+          ],
           "deliveryTime": {
             "@type": "ShippingDeliveryTime",
             "handlingTime": {

@@ -55,6 +55,13 @@ export default function Footer() {
               <li><Link href="/blog" style={styles.link}>Wholesale Blog</Link></li>
               <li><a href="https://wa.me/9586346332" target="_blank" rel="noopener noreferrer" style={styles.link}>WhatsApp: +91 9586346332</a></li>
               <li><a href="mailto:support@ethnicaa.com" style={styles.link}>support@ethnicaa.com</a></li>
+              <li style={{ marginTop: 15 }}>
+                <div style={{ display: "flex", gap: 15 }}>
+                  <a href="https://instagram.com/rk7611" target="_blank" rel="noopener noreferrer" style={styles.link} aria-label="Instagram">Instagram</a>
+                  <a href="https://facebook.com/ethnicaa" target="_blank" rel="noopener noreferrer" style={styles.link} aria-label="Facebook">Facebook</a>
+                  <a href="https://linkedin.com/company/ethnicaa" target="_blank" rel="noopener noreferrer" style={styles.link} aria-label="LinkedIn">LinkedIn</a>
+                </div>
+              </li>
             </ul>
           </div>
         </div>
