@@ -2,6 +2,7 @@ import { getDocs, collection, query, where, orderBy, limit } from "firebase/fire
 import { db } from "@/lib/firebase";
 import { blogs } from "@/lib/blog-data";
 import { keywordPages } from "@/lib/keyword-content";
+import { brandsData } from "@/lib/brands-data";
 
 export default async function sitemap() {
   const baseUrl = "https://ethnicaa.com";
@@ -13,6 +14,7 @@ export default async function sitemap() {
     "/contact-us",
     "/offers",
     "/blog",
+    "/brands",
     "/privacy-policy",
     "/shipping-policy",
     "/refund-cancellation",
@@ -23,6 +25,7 @@ export default async function sitemap() {
     priority: route === "" ? 1 : 0.8,
   }));
 
+  // ... (categories and products sections remain the same)
   // 2. CATEGORY PAGES
   const categories = [
     "sarees",
@@ -43,12 +46,11 @@ export default async function sitemap() {
   // 3. PRODUCT PAGES (Optimized for 3000+ docs)
   let productPages = [];
   try {
-    // Fetching only necessary fields to prevent timeout
     const q = query(
         collection(db, "products"), 
         where("status", "==", "published"),
         orderBy("createdAt", "desc"),
-        limit(5000) // Next.js sitemap limit is high, but we limit to a safe batch
+        limit(5000)
     );
     const snap = await getDocs(q);
     productPages = snap.docs.map((doc) => {
@@ -81,11 +83,20 @@ export default async function sitemap() {
     priority: 0.8,
   }));
 
+  // 6. BRAND PAGES
+  const brandPages = Object.keys(brandsData).map((slug) => ({
+    url: `${baseUrl}/brands/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly",
+    priority: 0.8,
+  }));
+
   return [
     ...staticPages,
     ...categories,
     ...productPages,
     ...blogPages,
     ...collectionPages,
+    ...brandPages,
   ];
 }
