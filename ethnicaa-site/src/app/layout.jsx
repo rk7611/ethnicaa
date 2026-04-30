@@ -12,10 +12,6 @@ export const metadata = {
   description:
     "Ethnicaa Wholesale is India's leading B2B marketplace for wholesale Kurtis, Sarees, and Salwar Suits direct from Surat manufacturers. Best pricing for resellers.",
 
-  alternates: {
-    canonical: "/",
-  },
-
   icons: {
     icon: "/favicon.ico",
     apple: "/apple-touch-icon.png",

@@ -4,7 +4,20 @@ import { db } from "@/lib/firebase";
 
 export const dynamic = "force-dynamic";
 
+import { notFound } from "next/navigation";
+
 const PAGE_SIZE = 80;
+
+const VALID_STATIC_CATEGORIES = [
+  "sarees",
+  "kurtis",
+  "pakistani-suits",
+  "salwar-suits",
+  "lehenga",
+  "gowns",
+  "all-products",
+  "offers"
+];
 
 async function getCategoryData(categorySlug) {
   const ref = doc(db, "categories", categorySlug);
@@ -12,10 +25,15 @@ async function getCategoryData(categorySlug) {
   if (snap.exists()) {
     return { slug: categorySlug, ...snap.data() };
   }
-  return {
-    slug: categorySlug,
-    name: categorySlug.replace(/-/g, " "),
-  };
+  
+  if (VALID_STATIC_CATEGORIES.includes(categorySlug)) {
+    return {
+      slug: categorySlug,
+      name: categorySlug.replace(/-/g, " "),
+    };
+  }
+  
+  return null;
 }
 
 async function getProductsData(categorySlug, sort = "latest", page = 1) {
@@ -95,6 +113,7 @@ export async function generateMetadata({ params }) {
   const slug = params.name;
   const name = decodeURIComponent(slug).toLowerCase();
   const category = await getCategoryData(slug);
+  if (!category) return notFound();
   
   const custom = CATEGORY_META[name];
   const title = category.category_seo_title || custom?.title || `${category.name} Wholesale Catalog 2026 — Factory Price Surat`;
@@ -140,6 +159,8 @@ export default async function Page({ params, searchParams }) {
     getCategoryData(categorySlug),
     getProductsData(categorySlug, sort, page)
   ]);
+  
+  if (!category) return notFound();
 
   const totalCount = category.count || 0;
   const totalPages = Math.ceil(totalCount / PAGE_SIZE);

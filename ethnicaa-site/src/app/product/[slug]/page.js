@@ -1,6 +1,7 @@
 import ProductClient from "./ProductClient";
 import { doc, getDoc, collection, query, where, getDocs, limit } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import { notFound } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
@@ -9,9 +10,7 @@ export async function generateMetadata({ params }) {
   const snap = await getDoc(doc(db, "products", slug));
 
   if (!snap.exists()) {
-    return {
-      title: "Product Not Found | Ethnicaa Wholesale",
-    };
+    return notFound();
   }
 
   const p = snap.data();
@@ -82,7 +81,7 @@ export default async function Page({ params, searchParams }) {
   const snap = await getDoc(doc(db, "products", slug));
   
   if (!snap.exists()) {
-    return <div style={{ padding: 40 }}>Product not found.</div>;
+    return notFound();
   }
 
   const p = snap.data();

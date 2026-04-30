@@ -52,18 +52,20 @@ async function getBanners() {
 
 
 
-export default function HomePage({ initialBanners, initialCategories, initialProducts, currentPage, totalPages }) {
+export default function HomePage({ initialBanners, initialCategories, initialProducts, initialBrands, currentPage, totalPages }) {
   const [loading, setLoading] = useState(!initialProducts);
 
   const [products, setProducts] = useState(initialProducts || []);
   const [categories, setCategories] = useState(initialCategories || []);
   const [banners, setBanners] = useState(initialBanners || []);
+  const [brands, setBrands] = useState(initialBrands || []);
 
   // Sync state when server sends new data (pagination fix)
   useEffect(() => {
     if (initialProducts) setProducts(initialProducts);
     if (initialCategories) setCategories(initialCategories);
     if (initialBanners) setBanners(initialBanners);
+    if (initialBrands) setBrands(initialBrands);
     setLoading(false);
   }, [initialProducts, initialCategories, initialBanners]);
 
@@ -130,6 +132,22 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
               <Link key={c.slug} href={`/category/${c.slug}`} className="premium-card" style={styles.categoryCard}>
                 <div style={styles.categoryTitle}>{c.name}</div>
                 <div style={styles.categoryCount}>{c.count} items</div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+ 
+      {brands.length > 0 && (
+        <div style={styles.section}>
+          <h2 style={styles.heading}>Shop by Brand</h2>
+          <div style={styles.brandsGrid}>
+            {brands.map((b) => (
+              <Link key={b.slug} href={`/brands/${b.slug}`} className="premium-card" style={styles.brandCard}>
+                <div style={styles.brandImgWrapper}>
+                  <Image src={b.image} alt={b.name} fill sizes="100px" style={{ objectFit: "contain" }} />
+                </div>
+                <div style={styles.brandName}>{b.name}</div>
               </Link>
             ))}
           </div>
@@ -280,6 +298,10 @@ const styles = {
   heading: { fontSize: 22, fontWeight: 700, marginBottom: 20, color: "#111" },
   pageH1: { fontSize: 26, fontWeight: 800, textAlign: "center", marginBottom: 30, marginTop: 10, color: "#000" },
   categories: { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))", gap: 12 },
+  brandsGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))", gap: 12 },
+  brandCard: { background: "#fff", padding: 12, borderRadius: 12, textAlign: "center", textDecoration: "none" },
+  brandImgWrapper: { position: "relative", width: "100%", aspectRatio: "1/1", marginBottom: 8 },
+  brandName: { fontSize: 13, fontWeight: 700, color: "#333" },
   categoryCard: { 
     background: "#fff", 
     padding: "20px 10px", 

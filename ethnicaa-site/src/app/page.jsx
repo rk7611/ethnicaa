@@ -2,6 +2,7 @@ import HomeClient from "./HomeClient";
 import { collection, query, where, orderBy, limit, getDocs, getCountFromServer } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { isValidImageUrl } from "@/utils/imageUtils";
+import { brandsData } from "@/lib/brands-data";
 
 export const metadata = {
   title: "Ethnicaa: Surat Wholesale Sarees, Kurtis & Pakistani Suits",
@@ -98,18 +99,25 @@ async function getHomeData(page = 1) {
   const start = (page - 1) * PAGE_SIZE;
   const products = allProducts.slice(start, start + PAGE_SIZE);
 
-  return { banners, categories, products, totalPages, totalProductsCount };
+  const brands = Object.entries(brandsData).map(([slug, data]) => ({
+    slug,
+    name: data.name,
+    image: data.image || "/logo.png"
+  })).slice(0, 10); // Show top 10 brands
+
+  return { banners, categories, products, totalPages, totalProductsCount, brands };
 }
 
 export default async function Home({ searchParams }) {
   const page = parseInt(searchParams?.page) || 1;
-  const { banners, categories, products, totalPages } = await getHomeData(page);
+  const { banners, categories, products, totalPages, brands } = await getHomeData(page);
 
   return (
     <HomeClient 
       initialBanners={banners} 
       initialCategories={categories} 
       initialProducts={products} 
+      initialBrands={brands}
       currentPage={page}
       totalPages={totalPages}
     />
