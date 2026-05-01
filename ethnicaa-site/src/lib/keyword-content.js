@@ -1,36 +1,52 @@
-export const keywordPages = {
-  "kurti-wholesale-surat": {
-    title: "Kurti Wholesale Surat | Direct Manufacturer Prices 2026",
-    h1: "Kurti Wholesale Surat: Direct from Manufacturer",
-    meta: "Shop Kurti Wholesale Surat at direct factory prices. Ethnicaa offers latest 2026 designer collections, cotton kurtis, and heavy work sets for resellers.",
-    intro: "Welcome to the heart of India's textile industry. If you are looking for Kurti Wholesale Surat, you have arrived at the premier destination. Ethnicaa connects you directly with the looms and factories of Surat, bypassing middlemen to give you the highest possible margins.",
+  "kurti-wholesalers-surat": {
+    title: "Kurti Wholesalers Surat | Direct Manufacturer Factory Prices 2026",
+    h1: "Top Kurti Wholesalers in Surat: Shop at Direct Factory Price",
+    meta: "Ethnicaa is a leading Kurti Wholesaler in Surat offering bulk collections directly from manufacturers. Get the best wholesale price list on WhatsApp today.",
+    intro: "Ethnicaa is a premier Kurti Wholesaler in Surat, providing high-quality ethnic wear directly from the looms and factories of Ring Road. As a verified Surat manufacturer, we help retailers bypass middleman commissions and secure the lowest possible factory prices for their boutiques.",
     content: `
-      <h2>Why Source Kurtis from Surat?</h2>
-      <p>Surat is globally recognized as the textile hub of India. Sourcing <strong>Kurti wholesale in Surat</strong> means you get access to thousands of new designs every week. At Ethnicaa, we curate the best of these designs, ensuring that every piece meets our strict quality standards.</p>
+      <h2>Why We are the Preferred Kurti Wholesalers in Surat</h2>
+      <p>Buying from <strong>Kurti wholesalers in Surat</strong> shouldn't be a gamble. At Ethnicaa, we offer a 100% Quality Check guarantee on all bulk orders. Our infrastructure allows us to supply over 10,000 units weekly to retailers across India and globally.</p>
       
-      <h2>Our Collection Range</h2>
-      <p>Our catalog includes a vast variety of styles to suit every market:</p>
+      <h3>Exclusive Reseller Benefits:</h3>
       <ul>
-        <li><strong>Daily Wear Kurtis:</strong> Comfortable cotton and rayon fabrics perfect for office and home.</li>
-        <li><strong>Designer Party Wear:</strong> Heavy embroidery, sequence work, and premium silk fabrics.</li>
-        <li><strong>Anarkali & Nyra Cut:</strong> The latest trending silhouettes in the wholesale market.</li>
-        <li><strong>Kurti Sets:</strong> Complete 2-piece and 3-piece sets with dupatta and pants.</li>
+        <li><strong>💰 Direct Factory Pricing:</strong> No agent commissions, maximum profit for you.</li>
+        <li><strong>🚀 Express Dispatch:</strong> Secure same-day dispatch from our Surat warehouse.</li>
+        <li><strong>✅ Low MOQ:</strong> Start your reselling business with small, flexible sets.</li>
       </ul>
 
-      <h2>Benefits of Buying from Ethnicaa</h2>
-      <p>When you choose Ethnicaa as your wholesale partner, you benefit from:</p>
-      <ol>
-        <li><strong>Direct Manufacturer Pricing:</strong> No commission agents involved.</li>
-        <li><strong>Quality Assurance:</strong> Every set is checked before dispatch.</li>
-        <li><strong>Global Shipping:</strong> We ship to over 50 countries including USA, UK, and UAE.</li>
-        <li><strong>Low MOQ:</strong> Start your business with small investment.</li>
-      </ol>
+      <h2>Get the Latest 2026 Kurti Catalog</h2>
+      <p>Click the button below to get our full wholesale price list and catalog on WhatsApp. We provide professional images for your social media marketing.</p>
     `,
     faqs: [
-      { question: "Who is the best kurti wholesaler in Surat?", answer: "Ethnicaa Wholesale is considered one of the best kurti wholesalers in Surat due to its direct manufacturer tie-ups and strict quality control." },
-      { question: "What is the minimum order for wholesale kurtis in Surat?", answer: "Most Surat wholesalers require set-to-set buying. At Ethnicaa, we offer flexible MOQ to help small resellers start their business." }
+      { question: "Who is the best kurti wholesaler in Surat?", answer: "Ethnicaa is ranked as a top kurti wholesaler in Surat due to its direct manufacturer tie-ups and strict quality control for B2B exports." },
+      { question: "How can I get the wholesale price list for Surat kurtis?", answer: "You can click our WhatsApp button to receive the latest 2026 kurti catalog and wholesale price list instantly." }
     ],
-    targetKeyword: "kurti wholesale surat"
+    targetKeyword: "kurti wholesalers surat"
+  },
+  "kurti-manufacturers-india": {
+    title: "Kurti Manufacturers India | Direct Factory Wholesale Prices",
+    h1: "Top Kurti Manufacturers in India: Shop Direct & Save",
+    meta: "Searching for Kurti Manufacturers in India? Ethnicaa offers direct factory supply of designer, cotton, and party wear kurtis at unbeatable rates.",
+    intro: "Ethnicaa ranks among the most reliable Kurti Manufacturers in India, with our primary production units based in the textile hub of Surat. We specialize in mass-manufacturing high-quality ethnic wear that combines traditional craftsmanship with modern efficiency, ensuring you get the best price-to-quality ratio in the market.",
+    content: `
+      <h2>Manufacturing Excellence: Kurti Manufacturers India</h2>
+      <p>Being prominent <strong>Kurti manufacturers in India</strong>, we control the entire supply chain—from fabric selection and dyeing to stitching and final finishing. This allows us to offer prices that traders and wholesalers simply cannot match. Our collections feature Liva Rayon, Pure Cotton, and Premium Silk fabrics.</p>
+      
+      <h3>Why Buy Direct from Manufacturers?</h3>
+      <ul>
+        <li><strong>💰 Zero Middleman:</strong> Save 20-30% on procurement costs.</li>
+        <li><strong>⚙️ Customization:</strong> Option for custom brand labels and specific size charts.</li>
+        <li><strong>🔄 Fresh Stock:</strong> Get access to the latest designs before they hit the market.</li>
+      </ul>
+
+      <h2>Scale Your Business with Factory Direct Supply</h2>
+      <p>We serve both large retail chains and small boutique owners with equal dedication. Contact us to visit our Surat manufacturing unit or request a virtual tour on WhatsApp.</p>
+    `,
+    faqs: [
+      { question: "How to contact kurti manufacturers in India directly?", answer: "Ethnicaa provides a direct B2B platform to connect you with our Surat-based kurti manufacturing units." },
+      { question: "Can I get my own brand label on the kurtis?", answer: "Yes, for bulk orders, we provide custom white-labeling and branding services." }
+    ],
+    targetKeyword: "kurti manufacturers india"
   },
   "kurti-manufacturer-surat": {
     title: "Kurti Manufacturer in Surat | Premium Bulk Suppliers",
@@ -90,22 +106,30 @@ export const keywordPages = {
     ],
     targetKeyword: "saree manufacturer surat"
   },
-  "salwar-suit-wholesale": {
-    title: "Salwar Suit Wholesale | Pakistani Suits & Dress Materials",
-    h1: "Salwar Suit Wholesale: Bulk Dress Materials",
-    meta: "Premium Salwar Suit Wholesale collection from Surat. Shop Pakistani suits, cotton dress materials, and ready-made suits at factory prices.",
-    intro: "Ethnicaa is your one-stop shop for Salwar Suit Wholesale. We specialize in both unstitched dress materials and ready-to-wear salwar kameez sets, sourced directly from the top factories of Surat.",
+  "pakistani-suits-wholesale-india": {
+    title: "Pakistani Suits Wholesale India | Surat Factory Manufacturer",
+    h1: "Leading Pakistani Suits Wholesale Supplier in India",
+    meta: "Ethnicaa is a top Pakistani suits wholesale supplier in India. Get bulk luxury lawn, organza, and velvet Pakistani suits at direct Surat factory prices.",
+    intro: "Ethnicaa is a leading Pakistani suits wholesale supplier in India, offering premium bulk collections directly from our Surat manufacturing units. We specialize in luxury lawn sets, organza party wear, and authentic-style Pakistani replicas that guarantee high retail margins for your boutique.",
     content: `
-      <h2>Trending Pakistani Suits in Wholesale</h2>
-      <p>The craze for Pakistani style suits is booming. We provide high-quality replicas and original Pakistani brand materials at <strong>salwar suit wholesale</strong> prices that you won't find elsewhere.</p>
+      <h2>The Best Pakistani Suits Wholesale in India</h2>
+      <p>Our <strong>Pakistani suits wholesale in India</strong> program focuses on high-ticket luxury sets. We use premium fabrics like Liva Certified Rayon and Pure Organza adorned with heavy sequence and zari work, making them the top choice for retailers in Mumbai, Delhi, and Bangalore.</p>
       
-      <h2>Quality Fabric Choices</h2>
-      <p>Our suits are made from premium lawn cotton, velvet, organza, and net, ensuring that your customers get the luxury feel they desire.</p>
+      <h3>Why Source Pakistani Suits from Ethnicaa?</h3>
+      <ul>
+        <li><strong>👗 Exclusive Designs:</strong> Non-catalog designs that your competitors won't have.</li>
+        <li><strong>📦 Worldwide Shipping:</strong> Doorstep delivery to USA, UK, Canada, and UAE.</li>
+        <li><strong>💰 Bulk Discounts:</strong> Tiered pricing based on your order volume.</li>
+      </ul>
+
+      <h2>Start Your Pakistani Suit Business Today</h2>
+      <p>We provide full white-labeling and rebranding services for large bulk buyers. Contact us to get the latest luxury Pakistani suit price list.</p>
     `,
     faqs: [
-      { question: "Where to buy Pakistani suits in wholesale in Surat?", answer: "Ethnicaa offers the widest range of Pakistani style suits and salwar kameez in Surat's wholesale market." }
+      { question: "Where to buy Pakistani suits wholesale in India?", answer: "Ethnicaa is the most trusted source for Pakistani suits in wholesale in India, providing direct Surat factory rates and export quality." },
+      { question: "Do you provide original Pakistani brands in wholesale?", answer: "We provide high-quality Surat-made luxury replicas that offer better margins for Indian resellers, as well as curated semi-original sets." }
     ],
-    targetKeyword: "salwar suit wholesale"
+    targetKeyword: "pakistani suits wholesale india"
   },
   "best-kurti-wholesaler-surat": {
     title: "Best Kurti Wholesaler in Surat | 2026 Rankings & Reviews",
@@ -124,38 +148,55 @@ export const keywordPages = {
     ],
     targetKeyword: "best kurti wholesaler surat"
   },
-  "top-saree-supplier-india": {
-    title: "Top Saree Supplier in India | Wholesale Bulk Saree Exports",
-    h1: "Ethnicaa: A Top Saree Supplier in India",
-    meta: "Ethnicaa is a top saree supplier in India, exporting premium Surat sarees to USA, UK, and UAE. Direct manufacturer rates for bulk saree buyers.",
-    intro: "As a top saree supplier in India, Ethnicaa understands the diverse needs of the global Indian diaspora. We provide high-quality sarees that blend traditional craftsmanship with modern trends.",
+  "wholesale-sarees-india": {
+    title: "Wholesale Sarees India | Top Surat Manufacturer Supplier",
+    h1: "Wholesale Sarees India: Shop Latest 2026 Catalogs",
+    meta: "Buy Wholesale Sarees India at factory prices. Ethnicaa is a leading manufacturer of Silk, Georgette, and Cotton sarees for bulk buyers globally.",
+    intro: "Ethnicaa is a top-tier source for Wholesale Sarees India, providing direct access to the massive production units of Surat. We specialize in export-quality silk sarees, designer georgette drapes, and daily wear printed sarees at unbeatable manufacturer rates.",
     content: `
-      <h2>Sourcing from the Best Saree Suppliers</h2>
-      <p>India's saree market is vast, but as a <strong>top saree supplier in India</strong>, we focus on the export-quality segment. Our sarees undergo a 3-layer quality check before they are shipped internationally.</p>
+      <h2>The Largest Hub for Wholesale Sarees India</h2>
+      <p>When searching for <strong>Wholesale sarees India</strong>, Surat is the ultimate destination. Ethnicaa brings the entire Surat saree market to your screen, offering a curated collection of thousands of designs that are updated daily.</p>
       
-      <h2>Export Specialist for USA & UK</h2>
-      <p>We are the preferred supplier for boutique owners in the USA and UK who need reliable, high-fashion sarees delivered on time.</p>
+      <h3>Our Specialized Saree Range:</h3>
+      <ul>
+        <li><strong>🎨 Digital Prints:</strong> Lightweight crepe and georgette for daily wear.</li>
+        <li><strong>🌟 Silk Heritage:</strong> Banarasi, Kanjivaram, and Soft Silk replicas.</li>
+        <li><strong>👗 Party Wear:</strong> Ruffle sarees, sequence work, and Bollywood styles.</li>
+      </ul>
+
+      <h2>Exporting Surat Sarees Globally</h2>
+      <p>We are a leading exporter of Indian sarees to the USA, UK, and UAE. Contact us for bulk export pricing and shipping details.</p>
     `,
     faqs: [
-      { question: "Where to buy sarees in bulk India?", answer: "Ethnicaa is the leading destination for bulk saree buying in India, providing direct manufacturer access and international shipping." }
+      { question: "Where to buy sarees in wholesale in India?", answer: "Ethnicaa.com is the leading online B2B platform for buying wholesale sarees directly from Surat manufacturers." },
+      { question: "Which city is best for wholesale sarees in India?", answer: "Surat is the undisputed leader for saree manufacturing and wholesale pricing in India." }
     ],
-    targetKeyword: "top saree supplier india"
+    targetKeyword: "wholesale sarees india"
   },
-  "kurti-wholesaler-mumbai": {
-    title: "Kurti Wholesaler in Mumbai | Direct Surat Factory Prices",
-    h1: "Leading Kurti Wholesaler in Mumbai Alternative",
-    meta: "Looking for a Kurti Wholesaler in Mumbai? Ethnicaa offers direct Surat manufacturer prices with faster delivery to Mumbai than local Crawford Market traders.",
-    intro: "While Mumbai's Crawford Market and Dadar are famous for wholesale, many retailers are now switching to Ethnicaa. As a premier Kurti wholesaler in Mumbai alternative, we provide direct Surat factory rates that local Mumbai traders cannot match.",
+  "bulk-ethnic-wear-supplier": {
+    title: "Bulk Ethnic Wear Supplier | Export Quality Surat Factory",
+    h1: "Global Bulk Ethnic Wear Supplier: Kurtis, Sarees, Suits",
+    meta: "Ethnicaa is a leading bulk ethnic wear supplier in India. Source high-quality Kurtis, Sarees, and Lehengas directly from our Surat factory for export.",
+    intro: "Ethnicaa is a globally recognized Bulk Ethnic Wear Supplier, providing a one-stop sourcing solution for retailers and boutique owners worldwide. From our state-of-the-art manufacturing units in Surat, we supply export-quality Kurtis, Sarees, and Suits that meet international stitching and finishing standards.",
     content: `
-      <h2>Better Than Crawford Market Prices</h2>
-      <p>Most <strong>kurti wholesalers in Mumbai</strong> actually source their stock from Surat. By buying from Ethnicaa, you are cutting out the Mumbai middleman commission, saving you 15-20% on every single set.</p>
-      <h2>Express Delivery to Mumbai & Thane</h2>
-      <p>Our logistics network ensures that your wholesale kurti orders reach Mumbai within 24-48 hours, making us more reliable than many local suppliers.</p>
+      <h2>The Most Reliable Bulk Ethnic Wear Supplier in India</h2>
+      <p>As your dedicated <strong>bulk ethnic wear supplier</strong>, we focus on scalability and consistency. Whether you need 50 units or 5,000, our production lines are equipped to deliver high-quality fashion on time. We serve large-scale distributors in the USA, UK, UAE, and Australia.</p>
+      
+      <h3>Our Bulk Sourcing Advantages:</h3>
+      <ul>
+        <li><strong>📦 Consolidated Shipping:</strong> Save on logistics by sourcing all categories from one supplier.</li>
+        <li><strong>🧵 Custom Manufacturing:</strong> White-labeling and custom design services for large orders.</li>
+        <li><strong>⭐ Verified Quality:</strong> Every shipment undergoes a 3-layer inspection process.</li>
+      </ul>
+
+      <h2>Partner with Ethnicaa for Global Growth</h2>
+      <p>Join our network of international distributors and boutique owners. Contact our export department on WhatsApp for bulk pricing and logistics support.</p>
     `,
     faqs: [
-      { question: "Who is the best kurti wholesaler in Mumbai?", answer: "While Dadar and Crawford Market are popular, Ethnicaa offers better rates by providing direct Surat manufacturer supply to Mumbai retailers." }
+      { question: "How to find a reliable bulk ethnic wear supplier in India?", answer: "Ethnicaa is a verified bulk supplier with direct manufacturing and a proven track record of international exports." },
+      { question: "Do you provide worldwide shipping for bulk orders?", answer: "Yes, we ship to over 50 countries via express carriers like DHL, FedEx, and UPS." }
     ],
-    targetKeyword: "kurti wholesaler mumbai"
+    targetKeyword: "bulk ethnic wear supplier"
   },
   "kurti-market-delhi": {
     title: "Kurti Market Delhi | Wholesale Prices from Surat Factory",
@@ -285,21 +326,30 @@ export const keywordPages = {
     ],
     targetKeyword: "jaipuri kurtis wholesale"
   },
-  "designer-kurti-bulk-supplier": {
-    title: "Designer Kurti Bulk Supplier | Exclusive High-Fashion Supply",
-    h1: "Leading Designer Kurti Bulk Supplier in India",
-    meta: "Ethnicaa is your trusted Designer Kurti Bulk Supplier. We provide exclusive, high-fashion kurtis with heavy embroidery and premium fabrics to boutiques worldwide.",
-    intro: "Standalone boutiques need something different to compete with big brands. As a specialized Designer Kurti Bulk Supplier, we focus on unique silhouettes, intricate handwork, and premium fabric choices that help you stand out.",
+  "designer-suits-wholesale": {
+    title: "Designer Suits Wholesale | Exclusive Heavy Work Sets Surat",
+    h1: "Designer Suits Wholesale: Premium Boutique Collection",
+    meta: "Shop Designer Suits Wholesale at direct manufacturer rates. Ethnicaa offers exclusive heavy embroidery, sequence work, and luxury silk suits in bulk.",
+    intro: "Ethnicaa is a premier Designer Suits Wholesale supplier, offering exclusive high-fashion ethnic wear directly from our Surat production house. We focus on unique silhouettes and intricate handwork that help standalone boutiques compete with major luxury brands.",
     content: `
-      <h2>Exclusive Designs for Premium Boutiques</h2>
-      <p>Our <strong>designer kurti wholesale</strong> program is limited to boutique owners who value exclusivity. We use high-end fabrics like Organza, Chinon, and Silk with hand-touch sequence and zari work.</p>
-      <h2>Limited Edition Collections</h2>
-      <p>We launch new designer catalogs every month, ensuring that your collection stays fresh and updated with the latest runway trends.</p>
+      <h2>Luxury Designer Suits Wholesale for Boutiques</h2>
+      <p>Our <strong>Designer suits wholesale</strong> program is curated for premium retailers. We use high-end fabrics like Organza, Chinon, and Modal Silk adorned with heavy zari, mirror, and sequence work. Every piece is a masterpiece designed to offer you 50-80% retail margins.</p>
+      
+      <h3>What Makes Our Designer Suits Unique?</h3>
+      <ul>
+        <li><strong>💎 Premium Finish:</strong> Export-quality stitching and finishing.</li>
+        <li><strong>👗 Boutique Exclusive:</strong> Designs that are NOT found in local mass markets.</li>
+        <li><strong>🌏 Global Export:</strong> Direct shipping to USA, Canada, and UK boutiques.</li>
+      </ul>
+
+      <h2>Request Our Exclusive 2026 Catalog</h2>
+      <p>Due to the exclusivity of our designer range, we share catalogs only with verified boutique owners. Contact us on WhatsApp to see our latest arrivals.</p>
     `,
     faqs: [
-      { question: "How to find a designer kurti supplier for a boutique?", answer: "Ethnicaa is a specialized supplier for boutiques, offering exclusive high-fashion designs that are not found in the mass wholesale markets." }
+      { question: "How to find a designer suit supplier for a boutique?", answer: "Ethnicaa is a specialized designer suit wholesaler focusing on premium, high-margin boutique stock." },
+      { question: "What is the price range for wholesale designer suits?", answer: "Our designer range starts from premium affordable luxury to heavy bridal sets. Contact us for the full price list." }
     ],
-    targetKeyword: "designer kurti bulk supplier"
+    targetKeyword: "designer suits wholesale"
   },
   "viscose-kurti-manufacturer": {
     title: "Viscose Kurti Manufacturer | Premium Silk-Feel Collections",
@@ -317,21 +367,30 @@ export const keywordPages = {
     ],
     targetKeyword: "viscose kurti manufacturer"
   },
-  "cotton-kurti-wholesale": {
-    title: "Cotton Kurti Wholesale | 100% Pure Jaipuri Cotton Sets",
-    h1: "Cotton Kurti Wholesale: Daily Wear & Office Wear",
-    meta: "Buy Cotton Kurti Wholesale at direct manufacturer rates. Ethnicaa offers 100% pure cotton sets, printed kurtis, and palazzo sets for resellers.",
-    intro: "Cotton is the evergreen favorite. Our Cotton Kurti Wholesale collection is the bread and butter for many of our resellers, offering high turnover and high customer satisfaction due to the comfort of our 60/60 cotton fabric.",
+  "cotton-kurtis-wholesale": {
+    title: "Cotton Kurtis Wholesale | Pure Jaipuri & Surat Factory Price",
+    h1: "Cotton Kurtis Wholesale: Shop Direct from Manufacturer",
+    meta: "Buy Cotton Kurtis Wholesale at direct factory prices. Ethnicaa offers 100% pure cotton, Sanganeri prints, and daily wear sets for resellers.",
+    intro: "Ethnicaa is a leading source for Cotton Kurtis Wholesale, providing 100% pure 60/60 cotton sets directly from our manufacturing units in Surat and Jaipur. We specialize in breathable daily wear and office wear kurtis that offer high turnover and maximum profit margins for retail shop owners.",
     content: `
-      <h2>Daily Wear Cotton Essentials</h2>
-      <p>We are a top source for <strong>wholesale cotton kurtis</strong>. Our range includes simple prints for daily wear and sophisticated embroidered sets for office wear, all at direct factory prices.</p>
-      <h2>Breathable and Skin-Friendly Fabrics</h2>
-      <p>We ensure that our cotton fabrics are pre-shrunk and use fast colors, giving your customers the quality they expect from a premium brand.</p>
+      <h2>The Largest Cotton Kurtis Wholesale Catalog</h2>
+      <p>Our <strong>Cotton kurtis wholesale</strong> range is designed for the Indian climate. We use eco-friendly dyes and pre-shrunk fabrics to ensure zero complaints from your customers. From simple ethnic prints to heavy embroidered cotton sets, our variety is unmatched.</p>
+      
+      <h3>Why Boutique Owners Choose Our Cotton Kurtis:</h3>
+      <ul>
+        <li><strong>🌿 Pure Fabric:</strong> 100% authentic cotton (No mixing).</li>
+        <li><strong>🎨 Vibrant Prints:</strong> Sanganeri, Bagru, and Digital prints that don't fade.</li>
+        <li><strong>📈 High Retail Margin:</strong> Source at factory rates and sell at premium boutique prices.</li>
+      </ul>
+
+      <h2>Direct Factory Supply to Your Doorstep</h2>
+      <p>We supply bulk cotton kurtis to Mumbai, Hyderabad, and Bangalore with 3-5 day express delivery. Get our latest 2026 cotton catalog on WhatsApp now.</p>
     `,
     faqs: [
-      { question: "Which fabric is best for wholesale kurtis in summer?", answer: "Pure cotton (60/60) is the best fabric for summer kurtis due to its breathability and sweat-absorbing properties." }
+      { question: "Where to buy cotton kurtis in wholesale in India?", answer: "Ethnicaa offers the best range of cotton kurtis in wholesale, with direct manufacturing in Surat and Jaipur." },
+      { question: "What is the quality of fabric in wholesale cotton kurtis?", answer: "We use premium 60/60 and Camric cotton, which are highly breathable and skin-friendly." }
     ],
-    targetKeyword: "cotton kurti wholesale"
+    targetKeyword: "cotton kurtis wholesale"
   },
   "wholesale-pakistani-suits": {
     title: "Wholesale Pakistani Suits | Original & Replica Luxury Sets",
@@ -445,21 +504,30 @@ export const keywordPages = {
     ],
     targetKeyword: "wholesale kurtis online cash on delivery"
   },
-  "boutique-wholesale-clothing-suppliers-in-india": {
-    title: "Boutique Wholesale Clothing Suppliers in India | Premium Range",
-    h1: "Top Boutique Wholesale Clothing Suppliers in India",
-    meta: "Ethnicaa is ranked among the best boutique wholesale clothing suppliers in India. Source exclusive, high-margin ethnic wear directly from Surat.",
-    intro: "Boutiques require unique designs that cannot be found in local markets. As one of the leading Boutique Wholesale Clothing Suppliers in India, Ethnicaa provides exclusive, premium quality ethnic wear that guarantees high retail margins.",
+  "reseller-clothing-supplier": {
+    title: "Reseller Clothing Supplier | Start Your Business from Home",
+    h1: "Trusted Reseller Clothing Supplier: Surat Factory Direct",
+    meta: "Looking for a reliable Reseller Clothing Supplier? Ethnicaa offers partial COD, HD images, and direct factory shipping for home-based resellers.",
+    intro: "Ethnicaa is a top-rated Reseller Clothing Supplier, helping thousands of entrepreneurs start their fashion business from home with zero risk. We provide direct Surat factory access, high-resolution product images, and a flexible reseller-friendly shipping policy.",
     content: `
-      <h2>Exclusive Collections for Boutiques</h2>
-      <p>Our focus as <strong>boutique wholesale clothing suppliers in India</strong> is to provide non-catalog, unique pieces that give your store a competitive edge. We specialize in heavy handwork and premium fabrics.</p>
-      <h2>High Margins for Retailers</h2>
-      <p>By skipping the middleman and buying directly from our Surat factory, boutique owners can easily maintain a 50-80% retail markup.</p>
+      <h2>The Best Reseller Clothing Supplier for WhatsApp & Instagram</h2>
+      <p>As your dedicated <strong>reseller clothing supplier</strong>, we understand that trust is everything. We provide a 100% quality guarantee and a verified replacement policy for any manufacturing defects, ensuring your customers are always happy.</p>
+      
+      <h3>How to Start Reselling with Ethnicaa:</h3>
+      <ul>
+        <li><strong>📲 WhatsApp Catalog:</strong> Get daily updates of new arrivals on your phone.</li>
+        <li><strong>📸 Professional Photos:</strong> Use our HD images to post on social media.</li>
+        <li><strong>🚚 Direct Shipping:</strong> We can ship directly to your customers (Drop-shipping).</li>
+      </ul>
+
+      <h2>Join Our Growing Reseller Network</h2>
+      <p>Start your business today with a small investment. Contact our reseller support team on WhatsApp to get started.</p>
     `,
     faqs: [
-      { question: "How to find wholesale clothing suppliers for a boutique in India?", answer: "Ethnicaa is a dedicated B2B supplier for boutiques, offering premium, un-common designs at direct factory rates." }
+      { question: "How can I find a clothing supplier for my reselling business?", answer: "Ethnicaa is a verified reseller-friendly supplier providing factory rates and marketing support." },
+      { question: "Is cash on delivery available for resellers?", answer: "We offer secure payment terms and partial COD options for our verified reseller network." }
     ],
-    targetKeyword: "boutique wholesale clothing suppliers in india"
+    targetKeyword: "reseller clothing supplier"
   },
   "readymade-garments-wholesale-market-in-surat": {
     title: "Readymade Garments Wholesale Market in Surat | Buy Direct",
@@ -509,21 +577,30 @@ export const keywordPages = {
     ],
     targetKeyword: "heavy work kurtis for wedding wholesale"
   },
-  "designer-sarees-wholesale-market-in-surat": {
-    title: "Designer Sarees Wholesale Market in Surat | Premium Supply",
-    h1: "Designer Sarees Wholesale Market in Surat",
-    meta: "Explore the Designer Sarees Wholesale Market in Surat with Ethnicaa. Direct supply of party wear, Bollywood replica, and heavy work sarees.",
-    intro: "Surat dictates saree fashion. Gain direct access to the Designer Sarees Wholesale Market in Surat through Ethnicaa, your trusted partner for premium, high-fashion drape collections.",
+  "lehenga-suppliers-surat": {
+    title: "Lehenga Suppliers Surat | Premium Bridal & Party Wear Bulk",
+    h1: "Leading Lehenga Suppliers in Surat: Direct Factory Rates",
+    meta: "Source from the best Lehenga Suppliers in Surat. Ethnicaa offers bridal, designer, and bridesmaid lehengas with heavy handwork at factory prices.",
+    intro: "Ethnicaa is one of the premier Lehenga Suppliers in Surat, providing an unmatched range of bridal and festive wear directly from our local manufacturing units. We cater to boutique owners who need high-quality, heavy-work lehengas that stand out in a competitive retail market.",
     content: `
-      <h2>Bollywood and Party Wear Sarees</h2>
-      <p>The <strong>designer sarees wholesale market in Surat</strong> is known for innovation. We supply the latest Bollywood replicas, ruffle sarees, and ready-to-wear pre-draped sarees at factory prices.</p>
-      <h2>Direct Factory Access</h2>
-      <p>Skip the agents and brokers. We provide direct access to the most exclusive designer saree catalogs before they even reach the local markets.</p>
+      <h2>Sourcing from the Best Lehenga Suppliers in Surat</h2>
+      <p>Surat is the bridal capital of India. As leading <strong>Lehenga suppliers in Surat</strong>, we specialize in heavy hand-touch embroidery, zari work, and sequence designs on premium velvet and silk fabrics. Our collection is curated to ensure high turnover and zero returns for your retail boutique.</p>
+      
+      <h3>What Sets Our Surat Lehengas Apart?</h3>
+      <ul>
+        <li><strong>🧵 Master Craftsmanship:</strong> Intricate hand-work by Surat's finest artisans.</li>
+        <li><strong>👗 Trending Silhouettes:</strong> Contemporary cuts mixed with traditional motifs.</li>
+        <li><strong>💰 Direct Pricing:</strong> Buy at the source and maximize your profit margins.</li>
+      </ul>
+
+      <h2>Visit Our Surat Warehouse</h2>
+      <p>We welcome boutique owners to visit our Surat warehouse to see the quality and scale of our lehenga collection. Contact us for our location and wholesale catalogs.</p>
     `,
     faqs: [
-      { question: "Which market in Surat is best for designer sarees?", answer: "Surat's Ring Road is the hub, and Ethnicaa provides the premium segment of this market online with secure shipping." }
+      { question: "Which is the best market for lehengas in Surat?", answer: "Ring Road is the hub, but for curated premium bridal lehengas, Ethnicaa is the most trusted direct supplier." },
+      { question: "Do lehenga suppliers in Surat ship internationally?", answer: "Yes, Ethnicaa provides secure international shipping for heavy bridal lehengas to USA, UK, and Australia." }
     ],
-    targetKeyword: "designer sarees wholesale market in surat"
+    targetKeyword: "lehenga suppliers surat"
   },
   "wholesale-ladies-suits-unstitched": {
     title: "Wholesale Ladies Suits Unstitched | Premium Dress Materials",
@@ -557,21 +634,30 @@ export const keywordPages = {
     ],
     targetKeyword: "pure cotton suits wholesale in surat"
   },
-  "wholesale-gowns-manufacturer-in-surat": {
-    title: "Wholesale Gowns Manufacturer in Surat | Evening & Bridal",
-    h1: "Top Wholesale Gowns Manufacturer in Surat",
-    meta: "Ethnicaa is a leading Wholesale Gowns Manufacturer in Surat. Get premium evening gowns, bridal wear, and Indo-western outfits at factory rates.",
-    intro: "Gowns are the new staple of Indian festive wear. As a premier Wholesale Gowns Manufacturer in Surat, Ethnicaa blends Western silhouettes with traditional Indian embroidery to create stunning masterpieces.",
+  "lehenga-wholesalers-india": {
+    title: "Lehenga Wholesalers India | Bridal & Designer Bulk Supply",
+    h1: "Top Lehenga Wholesalers in India: Direct Surat Factory",
+    meta: "Search for reliable Lehenga Wholesalers in India? Ethnicaa provides bridal, designer, and Bollywood lehengas at direct Surat manufacturer prices.",
+    intro: "As one of the prominent Lehenga Wholesalers in India, Ethnicaa offers a massive range of bridal trousseaus, bridesmaid lehengas, and Bollywood-inspired designs. We supply directly from our Surat factory to showrooms across Delhi, Mumbai, and Hyderabad.",
     content: `
-      <h2>Premium Indo-Western Gowns</h2>
-      <p>Our position as a <strong>wholesale gowns manufacturer in Surat</strong> allows us to innovate. We create heavy flare gowns using net, silk, and georgette, perfect for receptions and cocktail parties.</p>
-      <h2>High Profit Margins</h2>
-      <p>Designer gowns are highly profitable. By sourcing directly from our manufacturing unit, you secure the lowest possible price for premium party wear.</p>
+      <h2>Direct Source for Lehenga Wholesalers in India</h2>
+      <p>Sourcing from <strong>Lehenga wholesalers in India</strong> can be difficult if you don't have a direct manufacturer link. Ethnicaa simplifies this by providing factory-direct access to heavy work velvet, silk, and net lehengas with authentic zari and hand-work sequence.</p>
+      
+      <h3>Our Bestselling Lehenga Categories:</h3>
+      <ul>
+        <li><strong>👰 Bridal Lehengas:</strong> Heavy velvet and silk with double dupatta concepts.</li>
+        <li><strong>✨ Designer Party Wear:</strong> Lightweight organza and net lehengas for bridesmaids.</li>
+        <li><strong>📽️ Bollywood Replicas:</strong> Trending celebrity looks at wholesale prices.</li>
+      </ul>
+
+      <h2>Secure Global Shipping for Bridal Boutiques</h2>
+      <p>We specialize in exporting heavy lehengas to the USA, UK, and Canada, ensuring secure packaging and insured express delivery.</p>
     `,
     faqs: [
-      { question: "Where to find gown manufacturers in Surat?", answer: "Ethnicaa is a trusted manufacturer of heavy party wear and bridal gowns in Surat, supplying globally." }
+      { question: "Which is the best lehenga wholesale market in India?", answer: "Surat is the manufacturing hub. Ethnicaa provides the best of Surat's lehenga market online with direct manufacturer rates." },
+      { question: "Can I buy single pieces from a lehenga wholesaler?", answer: "We primarily deal in bulk/wholesale (sets), but we offer sample sets for bridal boutiques looking to establish long-term partnerships." }
     ],
-    targetKeyword: "wholesale gowns manufacturer in surat"
+    targetKeyword: "lehenga wholesalers india"
   },
   "wholesale-kurtis-bangalore": {
     title: "Wholesale Kurtis in Bangalore | Direct Surat Factory Rates",
