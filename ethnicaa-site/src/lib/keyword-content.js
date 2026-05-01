@@ -572,5 +572,247 @@ export const keywordPages = {
       { question: "Where to find gown manufacturers in Surat?", answer: "Ethnicaa is a trusted manufacturer of heavy party wear and bridal gowns in Surat, supplying globally." }
     ],
     targetKeyword: "wholesale gowns manufacturer in surat"
+  },
+  "wholesale-kurtis-bangalore": {
+    title: "Wholesale Kurtis in Bangalore | Direct Surat Factory Rates",
+    h1: "Best Wholesale Kurtis for Bangalore Boutiques",
+    meta: "Looking for wholesale kurtis in Bangalore? Ethnicaa offers direct Surat manufacturing prices with express shipping to Chickpet and Commercial Street retailers.",
+    intro: "Bangalore's fashion boutique market is one of the most vibrant in India. Ethnicaa provides premium, designer-quality kurtis to Bangalore retailers directly from our Surat units, bypassing the high margins of local distributors.",
+    content: `
+      <h2>Direct Sourcing for Bangalore Boutiques</h2>
+      <p>Boutique owners in areas like Indiranagar, Jayanagar, and Koramangala demand high-quality fabrics and unique designs. Our <strong>wholesale kurtis for Bangalore</strong> are curated to meet this premium demand, featuring pure cotton, muslin, and silk fabrics.</p>
+      <h2>Express Shipping to Bangalore</h2>
+      <p>We provide 72-hour doorstep delivery to all parts of Bangalore, ensuring your boutique is always updated with the latest Surat trends before your competitors.</p>
+    `,
+    faqs: [
+      { question: "Where is the best place for wholesale kurtis in Bangalore?", answer: "While Chickpet is the local hub, Ethnicaa offers better profit margins by providing direct manufacturer rates from Surat." }
+    ],
+    targetKeyword: "wholesale kurtis bangalore"
+  },
+  "saree-wholesale-market-chennai": {
+    title: "Saree Wholesale Market Chennai | Surat Silk & Organza Suppliers",
+    h1: "Surat Saree Wholesale for Chennai Retailers",
+    meta: "Access the best of Saree Wholesale Market Chennai alternative. Ethnicaa provides Surat's finest silk, georgette, and printed sarees to Sowcarpet traders.",
+    intro: "Chennai's love for sarees is unmatched. While Kanchipuram is for silk, the demand for fancy Surat sarees in Chennai is massive. Ethnicaa bridges this gap by supplying the latest North Indian trends to the heart of Tamil Nadu.",
+    content: `
+      <h2>Supplying to Sowcarpet and T.Nagar</h2>
+      <p>We are a major supplier to the <strong>Chennai saree wholesale market</strong>. Our organza, georgette, and crepe sarees are highly popular in retail showrooms across T.Nagar and Velachery.</p>
+      <h2>Bypass the Local Middlemen</h2>
+      <p>By ordering directly from Ethnicaa's Surat factory, Chennai shop owners can save up to 20% on procurement costs compared to local Sowcarpet wholesalers.</p>
+    `,
+    faqs: [
+      { question: "Is there a wholesale saree market in Chennai?", answer: "Sowcarpet is the primary wholesale market in Chennai, but Ethnicaa offers a wider range of Surat fancy sarees at better rates." }
+    ],
+    targetKeyword: "saree wholesale market chennai"
+  },
+  "wholesale-dress-materials-hyderabad": {
+    title: "Wholesale Dress Materials in Hyderabad | Madina Market Prices",
+    h1: "Hyderabad's Top Wholesale Dress Material Supplier",
+    meta: "Shop wholesale dress materials in Hyderabad at direct factory prices. Ethnicaa provides premium cotton, lawn, and silk materials to Madina Market retailers.",
+    intro: "Hyderabad's Madina Market and Begum Bazar are hubs for dress materials. Ethnicaa supports these retailers by providing high-quality, factory-direct unstitched suits that cater to the city's unique style preferences.",
+    content: `
+      <h2>The Best Fabrics for Hyderabad's Climate</h2>
+      <p>Our <strong>wholesale dress materials for Hyderabad</strong> focus on breathable lawn cotton and premium viscose, ensuring comfort during the city's hot summers.</p>
+      <h2>Bulk Sourcing for Telangana Retailers</h2>
+      <p>Whether you are a small boutique in Banjara Hills or a large wholesaler in Secunderabad, we provide scalable solutions for all your ethnic wear needs.</p>
+    `,
+    faqs: [
+      { question: "Where to buy dress materials in wholesale in Hyderabad?", answer: "Madina Market is the main hub, but Ethnicaa offers direct manufacturer access with a much wider range of designs." }
+    ],
+    targetKeyword: "wholesale dress materials hyderabad"
+  },
+  "kurti-wholesale-market-jaipur": {
+    title: "Kurti Wholesale Market Jaipur | Authentic Cotton Prints",
+    h1: "Jaipur Kurti Wholesale: Sanganeri & Bagru Specialists",
+    meta: "Discover the best of Kurti Wholesale Market Jaipur. Ethnicaa offers authentic Jaipuri cotton prints, block prints, and handcrafted kurtis at factory rates.",
+    intro: "Jaipur is the home of cotton craft. Ethnicaa brings the authentic soul of Jaipur's textile heritage to the global market, combining traditional block prints with modern B2B efficiency.",
+    content: `
+      <h2>Original Sanganeri Block Prints</h2>
+      <p>Our <strong>Jaipur wholesale kurtis</strong> are made using traditional Sanganeri and Bagru block printing techniques, which are highly valued by customers across the globe.</p>
+      <h2>Pure 60/60 Cotton Guarantee</h2>
+      <p>We use only the finest 60/60 premium cotton for our Jaipuri range, ensuring that your customers experience true luxury and comfort.</p>
+    `,
+    faqs: [
+      { question: "Which is the best market for kurtis in Jaipur?", answer: "While Sanganer and Purohit Ji Ka Katla are famous, Ethnicaa offers a verified and curated collection online with worldwide shipping." }
+    ],
+    targetKeyword: "kurti wholesale market jaipur"
+  },
+  "pakistani-suits-wholesale-delhi": {
+    title: "Pakistani Suits Wholesale Delhi | Chandni Chowk Replica Rates",
+    h1: "Wholesale Pakistani Suits for Delhi Boutiques",
+    meta: "Looking for Pakistani suits wholesale in Delhi? Ethnicaa offers premium lawn and organza Pakistani collections to Chandni Chowk and Karol Bagh retailers.",
+    intro: "Delhi's fashion sense is bold and trendy. The demand for Pakistani style suits in Delhi is at an all-time high, and Ethnicaa is the primary source for the latest Surat-made luxury replicas.",
+    content: `
+      <h2>Supplying to the Heart of Delhi</h2>
+      <p>We provide <strong>Pakistani suits wholesale to Delhi</strong> retailers in Chandni Chowk, Gandhi Nagar, and Lajpat Nagar. Our designs are often featured in the city's top retail outlets.</p>
+      <h2>Fast Logistics to NCR</h2>
+      <p>Orders to Delhi and NCR are prioritized, ensuring that your boutique stays ahead of the trend curve with our weekly new arrivals.</p>
+    `,
+    faqs: [
+      { question: "Where can I find Pakistani suits in wholesale in Delhi?", answer: "Chandni Chowk is a good place, but Ethnicaa offers direct manufacturer rates from Surat with higher quality control." }
+    ],
+    targetKeyword: "pakistani suits wholesale delhi"
   }
-};
+  },
+  "muslin-kurtis-wholesale": {
+    title: "Muslin Kurtis Wholesale | Premium Soft Fabric Collections",
+    h1: "Wholesale Muslin Kurtis: Pure Comfort & Style",
+    meta: "Shop premium Muslin Kurtis wholesale at direct factory prices. Ethnicaa offers high-quality digital prints and handwork on pure muslin fabrics.",
+    intro: "Muslin is the fabric of choice for high-end boutiques. Our Muslin Kurtis Wholesale collection features the softest textures and most vibrant digital prints, providing a luxury feel that your premium customers will adore.",
+    content: `
+      <h2>The Luxury of Pure Muslin</h2>
+      <p>Our <strong>wholesale muslin kurtis</strong> are known for their lightweight breathability and sophisticated luster. We use high-grade muslin that drapes beautifully, making it perfect for both casual and formal ethnic wear.</p>
+      <h2>Digital Prints and Hand Embroidery</h2>
+      <p>We combine modern digital printing technology with traditional hand-embroidery to create muslin sets that are truly one-of-a-kind. These are high-margin items for any retail store.</p>
+    `,
+    faqs: [
+      { question: "Is muslin good for kurtis?", answer: "Yes, muslin is extremely soft, breathable, and has a premium silk-like finish, making it a top choice for designer kurtis." }
+    ],
+    targetKeyword: "muslin kurtis wholesale"
+  },
+  "organza-pakistani-suits-wholesale": {
+    title: "Organza Pakistani Suits Wholesale | Heavy Party Wear Sets",
+    h1: "Luxury Organza Pakistani Suits in Wholesale",
+    meta: "Buy heavy Organza Pakistani suits wholesale at factory rates. Ethnicaa provides the latest party wear Pakistani concepts with intricate embroidery.",
+    intro: "Organza is the trending fabric for Pakistani suits in 2026. Our Organza Pakistani Suits Wholesale collection features heavy sequence work, zari embroidery, and luxury dupattas that are perfect for the wedding season.",
+    content: `
+      <h2>Sophisticated Organza Craftsmanship</h2>
+      <p>We specialize in <strong>wholesale organza Pakistani suits</strong>. Our designs focus on transparency, shine, and structural elegance, ensuring your boutique offers the most trending looks of the season.</p>
+      <h2>Direct Surat Factory Prices</h2>
+      <p>By sourcing your organza collections from Ethnicaa, you get direct access to Surat's manufacturing power, ensuring you stay ahead of the competition in both price and style.</p>
+    `,
+    faqs: [
+      { question: "Where to buy organza Pakistani suits in bulk?", answer: "Ethnicaa offers the widest range of luxury organza Pakistani suits at direct manufacturer prices in Surat." }
+    ],
+    targetKeyword: "organza pakistani suits wholesale"
+  },
+  "liva-rayon-kurtis-manufacturer": {
+    title: "Liva Rayon Kurtis Manufacturer | Certified Quality Bulk Supply",
+    h1: "Authorized Liva Rayon Kurtis Manufacturer in Surat",
+    meta: "Searching for a Liva Rayon Kurtis Manufacturer? Ethnicaa provides certified Liva fabric kurtis with superior drape and softness at factory rates.",
+    intro: "Liva Rayon is synonymous with quality and comfort. As a specialized Liva Rayon Kurtis Manufacturer, we ensure that every garment carries the promise of fluidity and eco-friendly manufacturing that today's conscious customers demand.",
+    content: `
+      <h2>The Fluidity of Liva Fabric</h2>
+      <p>Our <strong>Liva rayon kurti manufacturing</strong> process uses only 100% certified yarns. This results in kurtis that are exceptionally soft on the skin and maintain their shape and color after multiple washes.</p>
+      <h2>Trusted B2B Supplier for Retail Chains</h2>
+      <p>We supply Liva-certified kurtis to some of the largest retail chains and boutique owners in India, ensuring consistency in every batch we produce.</p>
+    `,
+    faqs: [
+      { question: "What is Liva rayon fabric?", answer: "Liva is a high-quality, eco-friendly rayon fabric known for its exceptional softness, breathability, and natural drape." }
+    ],
+    targetKeyword: "liva rayon kurtis manufacturer"
+  },
+  "digital-print-sarees-bulk": {
+    title: "Digital Print Sarees Bulk | Latest 2026 Georgette & Crepe",
+    h1: "Wholesale Digital Print Sarees: Vibrant & Trendy",
+    meta: "Shop digital print sarees in bulk at direct Surat factory prices. Ethnicaa offers thousands of modern designs on georgette, crepe, and organza fabrics.",
+    intro: "Digital printing has revolutionized the saree industry. Our Digital Print Sarees Bulk collection brings you the most intricate and vibrant patterns that traditional printing cannot achieve, perfect for the modern woman.",
+    content: `
+      <h2>High-Definition Printing on Luxury Fabrics</h2>
+      <p>We use state-of-the-art digital printing machines for our <strong>wholesale sarees</strong>. Whether it is floral motifs, abstract art, or traditional patterns, the clarity and color depth are unmatched.</p>
+      <h2>Fast Moving Inventory for Resellers</h2>
+      <p>Digital print sarees are lightweight and affordable, making them high-turnover items for resellers on WhatsApp and Instagram.</p>
+    `,
+    faqs: [
+      { question: "Which fabric is best for digital print sarees?", answer: "Crepe, Georgette, and Organza are the best fabrics for digital printing due to their smooth surface and color absorption." }
+    ],
+    targetKeyword: "digital print sarees bulk"
+  },
+  "wholesale-clothing-for-boutique-owners": {
+    title: "Wholesale Clothing for Boutique Owners | Premium Indian Ethnic",
+    h1: "Exclusive Wholesale Sourcing for Boutique Owners",
+    meta: "Ethnicaa is the preferred source of wholesale clothing for boutique owners in India and abroad. Get exclusive, high-margin ethnic wear direct from Surat.",
+    intro: "Running a boutique requires a unique product mix that sets you apart from mass-market retailers. Ethnicaa specializes in wholesale clothing for boutique owners, focusing on quality over quantity and exclusivity over commonality.",
+    content: `
+      <h2>Curated Collections for Your Boutique</h2>
+      <p>We understand that as a <strong>boutique owner</strong>, you need garments that tell a story. Our curated catalogs feature limited-edition designs with heavy hand-touch and premium fabrics.</p>
+      <h2>B2B Support and White Labeling</h2>
+      <p>We provide full support to our boutique partners, including professional product images for your social media and white-labeling options for your own brand identity.</p>
+    `,
+    faqs: [
+      { question: "How to source unique clothing for a boutique?", answer: "Ethnicaa offers non-catalog and limited-edition designer pieces that help boutique owners stay unique in a crowded market." }
+    ],
+    targetKeyword: "wholesale clothing for boutique owners"
+  }
+  },
+  "wholesale-indian-wear-canada": {
+    title: "Wholesale Indian Wear Canada | Direct Surat Factory Export",
+    h1: "Bulk Indian Ethnic Wear for Canada Boutiques",
+    meta: "Sourcing wholesale Indian wear in Canada? Ethnicaa offers direct factory export of Kurtis, Sarees, and Suits with express shipping to Toronto, Vancouver, and Calgary.",
+    intro: "Boutique owners in Canada need a reliable supply chain that understands both quality and customs. Ethnicaa specializes in Wholesale Indian Wear Canada, providing export-quality garments that are ready for the Canadian retail market.",
+    content: `
+      <h2>Direct Export to Toronto and Vancouver</h2>
+      <p>We are a leading <strong>Indian ethnic wear supplier for Canada</strong>. Our collections are designed to meet the high standards of the NRI community, featuring premium fabrics and elegant designs that sell fast in areas like Brampton and Surrey.</p>
+      <h2>Reliable International Shipping</h2>
+      <p>We use express carriers (DHL/FedEx) to ensure your bulk orders reach Canada within 7-10 business days, fully tracked and insured.</p>
+    `,
+    faqs: [
+      { question: "How to import wholesale Indian wear to Canada?", answer: "Ethnicaa provides a complete export solution, including customs documentation and door-to-door delivery across Canada." }
+    ],
+    targetKeyword: "wholesale indian wear canada"
+  },
+  "pakistani-suits-wholesale-uk": {
+    title: "Pakistani Suits Wholesale UK | Luxury Lawn & Organza Exports",
+    h1: "Wholesale Pakistani Suits for UK Boutique Owners",
+    meta: "Shop luxury Pakistani suits wholesale in UK. Ethnicaa provides direct Surat factory export of original-style lawn and organza suits to London, Birmingham, and Manchester.",
+    intro: "The UK market for Pakistani fashion is massive. As a specialized supplier, we offer Pakistani Suits Wholesale UK with a focus on high-end luxury replicas and original brand concepts that cater to the sophisticated UK retail market.",
+    content: `
+      <h2>Supplying to London and Birmingham</h2>
+      <p>We are the preferred <strong>Pakistani suit wholesaler for UK</strong> boutique owners. Our heavy organza and lawn collections are perfect for the festive seasons in London, Birmingham, and Leicester.</p>
+      <h2>Export Quality Guarantee</h2>
+      <p>Every suit undergoes a rigorous 3-layer quality check to ensure that your international customers receive only the best defect-free garments.</p>
+    `,
+    faqs: [
+      { question: "Can I buy Pakistani suits in wholesale for the UK?", answer: "Yes, Ethnicaa specializes in UK exports, providing express shipping and a wide range of luxury Pakistani concepts." }
+    ],
+    targetKeyword: "pakistani suits wholesale uk"
+  },
+  "ramadan-special-suits-wholesale": {
+    title: "Ramadan Special Suits Wholesale | Eid Collection 2026",
+    h1: "Wholesale Ramadan & Eid Suits Collection",
+    meta: "Prepare for the season with Ramadan special suits wholesale. Ethnicaa offers the latest 2026 Eid collections with heavy embroidery and luxury fabrics at factory rates.",
+    intro: "Ramadan and Eid are the peak seasons for ethnic wear. Our Ramadan Special Suits Wholesale collection is designed to help you capture this surge, featuring elegant, modest, and high-fashion designs that your customers will love.",
+    content: `
+      <h2>Exclusive Eid 2026 Catalogs</h2>
+      <p>We launch our <strong>wholesale Eid collection</strong> early to ensure you have stock ready for the peak shopping days. Our range includes heavy Anarkalis, Sharara sets, and luxury Pakistani lawn suits.</p>
+      <h2>High-Volume Seasonal Supply</h2>
+      <p>With our mass-manufacturing capacity in Surat, we can fulfill even the largest bulk orders for the Ramadan season, ensuring you never run out of stock.</p>
+    `,
+    faqs: [
+      { question: "When should I order wholesale for Ramadan?", answer: "We recommend ordering at least 4-6 weeks before Ramadan starts to ensure timely delivery and a wide selection of designs." }
+    ],
+    targetKeyword: "ramadan special suits wholesale"
+  },
+  "wedding-saree-wholesale-market-surat": {
+    title: "Wedding Saree Wholesale Market Surat | Bridal Bulk Suppliers",
+    h1: "Surat's Top Wedding Saree Wholesale Source",
+    meta: "Looking for wedding sarees in the Surat wholesale market? Ethnicaa offers premium bridal lehengas and sarees with heavy zari work at direct factory prices.",
+    intro: "The Indian wedding season is a multi-billion dollar industry. Gain a competitive edge by sourcing from the Wedding Saree Wholesale Market in Surat through Ethnicaa, your trusted partner for high-ticket bridal fashion.",
+    content: `
+      <h2>Premium Bridal and Bridesmaid Collections</h2>
+      <p>Our <strong>wholesale wedding sarees</strong> are crafted by master weavers in Surat. We use pure silk, velvet, and heavy georgette adorned with authentic zari and hand-work sequence.</p>
+      <h2>Luxury Packaging for Boutiques</h2>
+      <p>For bridal collections, we provide premium packaging options that add value to your boutique's presentation and customer experience.</p>
+    `,
+    faqs: [
+      { question: "Which is the best market for wedding sarees in Surat?", answer: "Ethnicaa provides the premium segment of the Surat wedding saree market online, with direct manufacturer rates and export-quality assurance." }
+    ],
+    targetKeyword: "wedding saree wholesale market surat"
+  },
+  "bulk-buy-kurtis-for-resale": {
+    title: "Bulk Buy Kurtis for Resale | High Margin B2B Supply",
+    h1: "Bulk Buy Kurtis: The Ultimate Reseller Program",
+    meta: "Looking to bulk buy kurtis for resale? Ethnicaa offers the best B2B rates on daily wear and designer kurtis, perfect for Instagram and WhatsApp resellers.",
+    intro: "Starting a reselling business has never been easier. When you bulk buy kurtis for resale from Ethnicaa, you get access to professional photography, verified catalogs, and the lowest possible factory prices to maximize your profits.",
+    content: `
+      <h2>Low Investment, High Returns</h2>
+      <p>Our <strong>bulk buy kurti program</strong> is designed for home-based resellers and small boutiques. You can start with a small MOQ and scale as your business grows.</p>
+      <h2>Marketing Support for Resellers</h2>
+      <p>We provide HD images and product descriptions for every catalog, making it easy for you to promote your collection on social media and WhatsApp groups.</p>
+    `,
+    faqs: [
+      { question: "How can I buy kurtis in bulk for resale?", answer: "Simply browse our catalogs online or contact our WhatsApp managers to get the latest wholesale price lists and start your order." }
+    ],
+    targetKeyword: "bulk buy kurtis for resale"
+  }
+];

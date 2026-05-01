@@ -25,9 +25,31 @@ export default async function KeywordLandingPage({ params }) {
   const page = keywordPages[params.slug];
   if (!page) return notFound();
 
-  // Fetch relevant products (sample 8 products for the landing page)
-  const productsSnap = await getDocs(query(collection(db, "products"), limit(12)));
-  const products = productsSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+  // Fetch relevant products based on the slug/keyword
+  let products = [];
+  try {
+    // Attempt to filter by keyword or category inferred from slug
+    const isSaree = params.slug.includes("saree");
+    const isKurti = params.slug.includes("kurti");
+    const isSuit = params.slug.includes("suit") || params.slug.includes("material");
+    
+    let q;
+    if (isSaree) q = query(collection(db, "products"), where("category", "==", "sarees"), limit(12));
+    else if (isKurti) q = query(collection(db, "products"), where("category", "==", "kurtis"), limit(12));
+    else if (isSuit) q = query(collection(db, "products"), where("category", "==", "pakistani-suits"), limit(12));
+    else q = query(collection(db, "products"), limit(12));
+
+    const productsSnap = await getDocs(q);
+    products = productsSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+    
+    // Fallback if no category matches
+    if (products.length === 0) {
+      const fallbackSnap = await getDocs(query(collection(db, "products"), limit(12)));
+      products = fallbackSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+    }
+  } catch (err) {
+    console.error("Product fetch error:", err);
+  }
 
   const internalLinks = Object.keys(keywordPages)
     .filter(slug => slug !== params.slug)

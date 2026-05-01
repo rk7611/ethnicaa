@@ -106,23 +106,63 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
   }, [initialBanners]);
 
   const homepageSEOContent = `
-    <h2>Surat Wholesale Market: Your Gateway to Direct Factory Prices — Ethnicaa</h2>
-    <p>Ethnicaa Wholesale is India’s fastest-growing B2B marketplace, designed specifically for resellers and boutique owners looking to source the latest ethnic wear directly from the heart of the Surat textile market. We bridge the gap between global retailers and Surat's most prominent manufacturers, providing 100% verified catalogs of Kurtis, Sarees, Pakistani Suits, Lehenga Choli, Gowns, and Designer Salwar Suits.</p>
-    
-    <h3>Why Choose Ethnicaa for Your Wholesale Sourcing?</h3>
-    <p>When you source from Ethnicaa, you are not just buying clothes; you are investing in a partnership that prioritizes your business growth. We understand the challenges of the reselling business, which is why we offer direct factory prices without any middleman commission. This ensures that you get the maximum possible profit margin on every piece you sell.</p>
-    
-    <ul>
-      <li><strong>Direct from Manufacturers:</strong> We work with top-tier Surat manufacturers to bring you fresh stock every single day.</li>
-      <li><strong>Verified Quality:</strong> Every catalog listed on our platform undergoes a quality check to ensure the fabric, embroidery, and stitching meet international standards.</li>
-      <li><strong>Global Shipping Hub:</strong> We have a robust logistics network shipping daily to the USA, UK, Canada, Australia, Malaysia, and over 50 other countries.</li>
-      <li><strong>Wholesale Support:</strong> Our dedicated wholesale managers are available on WhatsApp to help you with bulk enquiries, shipping estimates, and customs documentation.</li>
-    </ul>
+    <section>
+      <h2>Ethnicaa: India’s #1 Surat Wholesale Marketplace for Resellers</h2>
+      <p>Welcome to <strong>Ethnicaa Wholesale</strong>, the premier B2B platform connecting global fashion retailers and independent resellers directly with the manufacturing heart of India: <strong>Surat, Gujarat</strong>. In 2026, the ethnic wear market is more competitive than ever. To win, you don't just need products; you need a supply chain that provides factory-direct pricing, verified quality, and lightning-fast global logistics. Ethnicaa is that engine for your business.</p>
+      
+      <h3>The Surat Advantage: Why Source Directly from the Source?</h3>
+      <p>Surat is the undisputed textile capital of India, producing over 40% of the country's man-made fiber. By sourcing directly from our Surat-based marketplace, you eliminate up to 4 layers of middlemen (wholesalers, regional distributors, agents, and sub-agents). This allows you to access the <strong>true factory cost</strong>, giving you a 30-50% price advantage over your local competitors.</p>
+      
+      <h3>Profit Blueprint: How Our Resellers Earn ₹50,000+ Monthly</h3>
+      <p>We don't just sell catalogs; we enable entrepreneurship. Most of our resellers on platforms like Instagram, WhatsApp, and Facebook operate with a "High-Margin, Low-Inventory" model. Here is the Ethnicaa profit breakdown:</p>
+      <ul>
+        <li><strong>Daily Wear Kurtis:</strong> Sourcing at ₹250-₹450 -> Selling at ₹750-₹950 (100%+ Margin).</li>
+        <li><strong>Pakistani Suits & Lawn Collections:</strong> Sourcing at ₹800-₹1200 -> Selling at ₹1800-₹2500 (80%+ Margin).</li>
+        <li><strong>Premium Silk Sarees:</strong> Sourcing at ₹1500-₹3000 -> Selling at ₹4500+ (Premium Boutique Margins).</li>
+      </ul>
+      <p>By leveraging our professional photography and verified catalogs, you can start your reselling business from home with zero stock investment.</p>
 
-    <h3>Latest Collections in Kurtis, Sarees & Pakistani Suits</h3>
-    <p>Our catalog is updated daily with the trending designs of 2026. Whether you are looking for cotton kurtis for daily wear, heavy bridal lehengas for the wedding season, or authentic Pakistani lawn suits for festive occasions, Ethnicaa has it all. We feature premium brands and designers known for their craftsmanship and innovation in ethnic fashion.</p>
-    
-    <p>For resellers in Mumbai, Delhi, Jaipur, and Kolkata, we provide a centralized platform to access the Surat market without the need for travel. You can browse, enquire, and order from the comfort of your home, saving time and operational costs.</p>
+      <h3>Global Shipping & Export Expertise (USA, UK, Canada, UAE)</h3>
+      <p>Ethnicaa is a registered export-ready platform. We understand that our international clients in the <strong>USA, UK, Canada, Australia, and Malaysia</strong> require more than just low prices—they require reliability. We provide:</p>
+      <ul>
+        <li><strong>Express Doorstep Delivery:</strong> Via DHL, FedEx, and Aramex (5-7 business days global transit).</li>
+        <li><strong>Customs Assistance:</strong> We handle the documentation and export compliance for bulk shipments.</li>
+        <li><strong>Stitching Services:</strong> Professional customized tailoring for suits and blouses to make your products "Ready-to-Wear" for your end customers.</li>
+      </ul>
+
+      <h3>Our Minimum Order Quantity (MOQ) Policy</h3>
+      <p>To maintain factory-direct rates, we primarily operate on a <strong>Set-to-Set basis</strong>. This means you buy one complete catalog (usually 4-12 designs or sizes). For established boutiques and bulk wholesalers, we offer custom <strong>Bulk Discounts</strong> on orders exceeding ₹50,000. Contact our WhatsApp managers for a personalized quote.</p>
+
+      <h3>Surat Wholesale Market Guide 2026</h3>
+      <p>Navigating the Surat textile market can be overwhelming. Ethnicaa simplifies this by curating only the top-performing brands from markets like <strong>RKTM (Radha Krishna Textile Market), Shree Om Market, and Millennium Market</strong>. We do the ground research so you don't have to, ensuring you only receive trending, high-demand inventory.</p>
+    </section>
+
+    <section style="margin-top: 40px; padding: 20px; background: #fff8f8; border-radius: 12px; border: 1px solid #ffdada;">
+      <h2 style="color: #c62828;">🚨 Verified Supplier Notice</h2>
+      <p>Ethnicaa is a GST-registered entity. All transactions are secure, and we provide official invoices for all bulk and export orders. Beware of unverified agents on social media; always source through a verified marketplace to ensure your capital is safe and your quality is guaranteed.</p>
+    </section>
+
+    <section style="margin-top: 40px;">
+      <h3>Wholesale Product Categories</h3>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        <div>
+          <h4>Wholesale Kurtis in Surat</h4>
+          <p>From daily wear cotton kurtis to heavy party wear Rayon and Silk tunics, our Kurti collection is the largest in Surat. We feature brands like Kiana, Kajal Style, and more.</p>
+        </div>
+        <div>
+          <h4>Saree Manufacturers in Surat</h4>
+          <p>Explore the world of Lichi Silk, Organza, Banarasi, and Georgette sarees. We source directly from the looms to provide the best bulk rates.</p>
+        </div>
+        <div>
+          <h4>Pakistani Suits Wholesale India</h4>
+          <p>The craze for Pakistani lawn and velvet suits is at an all-time high. We provide authentic replicas and designer-inspired collections from brands like Shree Fabs and Vinay Fashion.</p>
+        </div>
+        <div>
+          <h4>Lehenga Choli Bulk Supplier</h4>
+          <p>Stunning bridal and bridesmaid lehengas with heavy embroidery and sequence work, perfect for wedding season boutiques.</p>
+        </div>
+      </div>
+    </section>
   `;
 
   const homeFaqs = [
