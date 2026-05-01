@@ -813,4 +813,4 @@ export const keywordPages = {
     ],
     targetKeyword: "bulk buy kurtis for resale"
   }
-];
+};
