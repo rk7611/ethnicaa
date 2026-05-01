@@ -18,8 +18,9 @@
       <p>Click the button below to get our full wholesale price list and catalog on WhatsApp. We provide professional images for your social media marketing.</p>
     `,
     faqs: [
-      { question: "Who is the best kurti wholesaler in Surat?", answer: "Ethnicaa is ranked as a top kurti wholesaler in Surat due to its direct manufacturer tie-ups and strict quality control for B2B exports." },
-      { question: "How can I get the wholesale price list for Surat kurtis?", answer: "You can click our WhatsApp button to receive the latest 2026 kurti catalog and wholesale price list instantly." }
+      { question: "Who is the best kurti wholesaler in Surat for 2026?", answer: "Ethnicaa is ranked as a top kurti wholesaler in Surat due to its direct manufacturer tie-ups, providing the latest Nyra Cut and Alia Cut designs at factory prices." },
+      { question: "How can I get the wholesale price list for Surat kurtis on WhatsApp?", answer: "You can click our WhatsApp button to receive the latest 2026 kurti catalog and daily price updates for your reselling business." },
+      { question: "Do you provide HD images for resellers?", answer: "Yes, we provide professional, high-resolution product photography for all our Surat kurti collections to help you sell on Instagram and WhatsApp." }
     ],
     targetKeyword: "kurti wholesalers surat"
   },
@@ -126,8 +127,9 @@
       <p>We provide full white-labeling and rebranding services for large bulk buyers. Contact us to get the latest luxury Pakistani suit price list.</p>
     `,
     faqs: [
-      { question: "Where to buy Pakistani suits wholesale in India?", answer: "Ethnicaa is the most trusted source for Pakistani suits in wholesale in India, providing direct Surat factory rates and export quality." },
-      { question: "Do you provide original Pakistani brands in wholesale?", answer: "We provide high-quality Surat-made luxury replicas that offer better margins for Indian resellers, as well as curated semi-original sets." }
+      { question: "Where to buy Pakistani suits wholesale in India with factory rates?", answer: "Ethnicaa is the most trusted source for Pakistani suits in wholesale in India, providing direct Surat factory rates on luxury lawn and organza sets." },
+      { question: "Are these original Pakistani brands or high-quality replicas?", answer: "We provide premium Surat-made luxury replicas that offer 50-80% better margins for Indian resellers compared to original imported brands." },
+      { question: "Do you ship Pakistani suits to the UK and USA?", answer: "Yes, we are a leading exporter of Pakistani suits, providing express door-to-door delivery to boutiques in London, New York, and Toronto." }
     ],
     targetKeyword: "pakistani suits wholesale india"
   },
@@ -654,8 +656,9 @@
       <p>We specialize in exporting heavy lehengas to the USA, UK, and Canada, ensuring secure packaging and insured express delivery.</p>
     `,
     faqs: [
-      { question: "Which is the best lehenga wholesale market in India?", answer: "Surat is the manufacturing hub. Ethnicaa provides the best of Surat's lehenga market online with direct manufacturer rates." },
-      { question: "Can I buy single pieces from a lehenga wholesaler?", answer: "We primarily deal in bulk/wholesale (sets), but we offer sample sets for bridal boutiques looking to establish long-term partnerships." }
+      { question: "Which is the best lehenga wholesale market in India for bridal wear?", answer: "Surat is the manufacturing hub. Ethnicaa provides the best of Surat's bridal lehenga market online with direct manufacturer rates and premium hand-work." },
+      { question: "Can I buy single bridal lehengas from a wholesaler?", answer: "We primarily deal in bulk/wholesale (sets), but we offer sample sets for bridal boutiques looking to establish long-term premium partnerships." },
+      { question: "Do you provide customization for wholesale lehengas?", answer: "Yes, for bulk orders, we offer custom stitching, color variations, and brand labeling services for global showrooms." }
     ],
     targetKeyword: "lehenga wholesalers india"
   },
