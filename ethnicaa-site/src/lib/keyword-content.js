@@ -652,7 +652,6 @@ export const keywordPages = {
       { question: "Where can I find Pakistani suits in wholesale in Delhi?", answer: "Chandni Chowk is a good place, but Ethnicaa offers direct manufacturer rates from Surat with higher quality control." }
     ],
     targetKeyword: "pakistani suits wholesale delhi"
-  }
   },
   "muslin-kurtis-wholesale": {
     title: "Muslin Kurtis Wholesale | Premium Soft Fabric Collections",
@@ -733,7 +732,6 @@ export const keywordPages = {
       { question: "How to source unique clothing for a boutique?", answer: "Ethnicaa offers non-catalog and limited-edition designer pieces that help boutique owners stay unique in a crowded market." }
     ],
     targetKeyword: "wholesale clothing for boutique owners"
-  }
   },
   "wholesale-indian-wear-canada": {
     title: "Wholesale Indian Wear Canada | Direct Surat Factory Export",
