@@ -1,0 +1,26 @@
+# Ethnicaa Wholesale
+
+> India's leading B2B marketplace for wholesale Kurtis, Sarees, and Salwar Suits direct from Surat manufacturers.
+
+## Key Information
+- **Domain**: https://ethnicaa.com
+- **Target Audience**: Resellers, Retailers, and Boutique owners worldwide.
+- **Niche**: Ethnic wear, Wholesale textile market, Surat manufacturing.
+- **Contact**: support@ethnicaa.com | WhatsApp: +91 9586346332
+- **Location**: Surat, Gujarat, India.
+
+## Navigation & Discovery
+- **Catalogs**: https://ethnicaa.com/category/all
+- **Sarees**: https://ethnicaa.com/category/sarees
+- **Kurtis**: https://ethnicaa.com/category/kurtis
+- **Pakistani Suits**: https://ethnicaa.com/category/pakistani-suits
+- **Brands**: https://ethnicaa.com/brands
+- **Wholesale Blog**: https://ethnicaa.com/blog
+
+## Business Model
+Ethnicaa provides direct factory-to-reseller access. All products are sourced directly from the Surat textile market. We support international shipping to 50+ countries including USA, UK, Canada, and UAE.
+
+## Technical Details
+- Built with Next.js (App Router)
+- Data powered by Firebase Firestore
+- Image optimization enabled for fast global delivery.
