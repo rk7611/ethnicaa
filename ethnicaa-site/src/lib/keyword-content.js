@@ -1,3 +1,4 @@
+export const keywordPages = {
   "kurti-wholesalers-surat": {
     title: "Kurti Wholesalers Surat | Direct Manufacturer Factory Prices 2026",
     h1: "Top Kurti Wholesalers in Surat: Shop at Direct Factory Price",
