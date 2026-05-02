@@ -23,6 +23,7 @@ import Link from "next/link";
 import Image from "next/image";
 import TrustBadges from "@/components/TrustBadges";
 import { isValidImageUrl } from "@/utils/imageUtils";
+import { buildProductFaqs } from "@/lib/commerce-seo-content";
 
 
 
@@ -148,25 +149,7 @@ useEffect(() => {
   if (loading) return <p style={{ padding: 40 }}>Loading...</p>;
   if (product === "not-found") return <p style={{ padding: 40 }}>Not found.</p>;
 
-  /* FAQ */
-  const faqs = [
-    {
-      q: `What is the fabric of ${product.name}?`,
-      a: Array.isArray(product.fabrics) ? product.fabrics.join(", ") : product.fabrics || "Fabric details provided above.",
-    },
-    {
-      q: `What is the dispatch time for ${product.name}?`,
-      a: product.dispatch || "Dispatch within 24–48 hours.",
-    },
-    {
-      q: `Is ${product.name} available at wholesale rates?`,
-      a: "Yes, all products on Ethnicaa are wholesale only.",
-    },
-    {
-      q: `How can I place a wholesale order for ${product.name}?`,
-      a: "Click on the WhatsApp button and share your order.",
-    },
-  ];
+  const faqs = buildProductFaqs(product);
 
   return (
     <div style={styles.container}>
@@ -340,8 +323,8 @@ useEffect(() => {
 
         {faqs.map((f, i) => (
           <div key={i} style={{ marginBottom: 14 }}>
-            <p style={{ fontWeight: 600 }}>{f.q}</p>
-            <p>{f.a}</p>
+            <p style={{ fontWeight: 600 }}>{f.question}</p>
+            <p>{f.answer}</p>
           </div>
         ))}
       </div>

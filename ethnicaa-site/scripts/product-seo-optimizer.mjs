@@ -1,9 +1,9 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, query, limit, updateDoc, doc } from "firebase/firestore";
-import dotenv from 'dotenv';
-dotenv.config({ path: '.env.local' });
+import { getFirestore, collection, getDocs, query, limit, orderBy } from "firebase/firestore";
+import dotenv from "dotenv";
 
-// Firebase Config
+dotenv.config({ path: ".env.local" });
+
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -16,53 +16,36 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-async function runSEOOptimizer() {
-  console.log("🚀 Agent 3: Starting Product SEO Optimizer...");
-  
-  const productsRef = collection(db, "products");
-  const snapshot = await getDocs(query(productsRef, limit(5))); // Proof of concept: 5 docs
-  
-  let updatedCount = 0;
+function buildSuggestedDescription(product = {}) {
+  const name = product.catalog || product.name || "this ethnic wear catalog";
+  const category = product.categoryNames?.[0] || product.category || product.categories?.[0]?.replace(/-/g, " ") || "ethnic wear";
+  const fabric = product.fabricNames?.[0] || product.fabric || product.fabrics?.[0]?.replace(/-/g, " ") || "premium fabric";
+  const price = product.offer_price || product.price || product.avg_price;
 
-  for (const productDoc of snapshot.docs) {
-    const p = productDoc.data();
-    const docRef = doc(db, "products", productDoc.id);
-    let updates = {};
-
-    // 1. Optimize Title
-    const originalName = p.catalog || p.name || "";
-    if (!originalName.toLowerCase().includes("wholesale") && !originalName.toLowerCase().includes("surat")) {
-      const optimizedName = `${originalName} Wholesale Surat Factory Price`.trim();
-      updates.seo_title = `${optimizedName} | Ethnicaa`;
-      // We don't overwrite p.name to keep original data, but we can update seo_title
-      console.log(`✅ Optimizing Title: ${originalName} -> ${optimizedName}`);
-    }
-
-    // 2. Auto-Tag Categories if missing
-    if (!p.categories || p.categories.length === 0) {
-      let guessedCat = [];
-      const name = originalName.toLowerCase();
-      if (name.includes("saree")) guessedCat.push("sarees");
-      if (name.includes("kurti")) guessedCat.push("kurtis");
-      if (name.includes("suit")) guessedCat.push("salwar-suits");
-      
-      if (guessedCat.length > 0) {
-        updates.categories = guessedCat;
-        console.log(`✅ Auto-Tagging Category: ${originalName} -> ${guessedCat}`);
-      }
-    }
-
-    // 3. Mark as Optimized
-    if (Object.keys(updates).length > 0) {
-      updates.seo_optimized = true;
-      updates.last_seo_update = new Date();
-      
-      await updateDoc(docRef, updates);
-      updatedCount++;
-    }
-  }
-
-  console.log(`\n🎉 Optimizer Finished! Updated ${updatedCount} products.`);
+  return [
+    `${name} is a wholesale ${category} catalog selected for boutiques, resellers, and bulk ethnic wear buyers.`,
+    `The catalog uses ${fabric} and is suitable for customers looking for stylish Indian ethnic wear with reliable Surat wholesale sourcing.`,
+    price ? `Current wholesale pricing starts around INR ${price} per piece, subject to live stock and quantity confirmation.` : "",
+    "Use this product for WhatsApp selling, boutique display, export buying, and fast-moving festive or daily wear inventory.",
+    "Confirm final price, stock, packing, and dispatch details with Ethnicaa before placing a bulk order.",
+  ].filter(Boolean).join(" ");
 }
 
-runSEOOptimizer().catch(console.error);
+async function previewSEODescriptions() {
+  console.log("Previewing buyer-focused descriptions for latest 100 products...");
+
+  const productsRef = collection(db, "products");
+  const snapshot = await getDocs(query(productsRef, orderBy("createdAt", "desc"), limit(100)));
+
+  for (const productDoc of snapshot.docs.slice(0, 10)) {
+    const p = productDoc.data();
+    console.log("\\n---");
+    console.log(`Product: ${p.catalog || p.name || productDoc.id}`);
+    console.log(buildSuggestedDescription(p));
+  }
+
+  console.log(`\\nGenerated description previews for ${Math.min(snapshot.size, 10)} of ${snapshot.size} latest products.`);
+  console.log("This script is read-only. Use the protected SEO agent in /admin/seo-agent to write approved updates.");
+}
+
+previewSEODescriptions().catch(console.error);

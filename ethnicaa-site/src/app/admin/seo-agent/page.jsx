@@ -76,7 +76,7 @@ export default function EthnicaaSEOAgent() {
         const q = query(
           collection(db, "products"), 
           orderBy("createdAt", "desc"),
-          limit(20) // Start with 20 for safety
+          limit(100)
         );
         const snap = await getDocs(q);
         const rawProducts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
@@ -160,6 +160,7 @@ export default function EthnicaaSEOAgent() {
         description: product.generated.productDescription,
         seo_title: product.generated.metaTitle,
         seo_description: product.generated.metaDescription,
+        seo_alt: product.generated.altText,
         seo_optimized: true,
         last_seo_update: new Date(),
         seo_keywords: product.generated.keywordsTargeted.join(", ")

@@ -1,6 +1,7 @@
 import CategoryClient from "./CategoryClient";
 import { doc, getDoc, collection, query, where, getDocs, limit, orderBy, getCountFromServer } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import { getCategorySeoContent } from "@/lib/commerce-seo-content";
 
 export const dynamic = "force-dynamic";
 
@@ -168,6 +169,7 @@ export default async function Page({ params, searchParams }) {
   
   if (!category) return notFound();
 
+  const categorySeo = getCategorySeoContent(categorySlug, category);
   const products = productsResult.products;
   const totalCount = productsResult.totalCount;
   const totalPages = Math.ceil(totalCount / PAGE_SIZE);
@@ -193,6 +195,19 @@ export default async function Page({ params, searchParams }) {
       ],
     }
   ];
+
+  schemaList.push({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: categorySeo.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  });
 
   if (products.length > 0) {
     schemaList.push({
@@ -227,6 +242,7 @@ export default async function Page({ params, searchParams }) {
         initialProducts={products}
         currentPage={page}
         totalPages={totalPages}
+        categorySeo={categorySeo}
       />
     </>
   );

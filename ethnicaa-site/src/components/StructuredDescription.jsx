@@ -1,5 +1,7 @@
 "use client";
 
+import { buildProductDescription } from "@/lib/commerce-seo-content";
+
 export default function StructuredDescription({ product = {} }) {
   if (!product) return null;
 
@@ -17,6 +19,7 @@ export default function StructuredDescription({ product = {} }) {
   } = product;
 
   const cleanDesc = (description || "").trim();
+  const buyerDescription = cleanDesc || buildProductDescription(product);
 
   return (
     <div style={styles.box}>
@@ -87,19 +90,14 @@ export default function StructuredDescription({ product = {} }) {
         )}
       </div>
 
-      {/* LONG DESCRIPTION BLOCK */}
-      {cleanDesc && (
-        <>
-          <h3 style={styles.subTitle}>Description</h3>
-          <div style={styles.desc}>
-            {cleanDesc.split("\n").map((line, i) => (
-              <p key={i} style={styles.descLine}>
-                {line}
-              </p>
-            ))}
-          </div>
-        </>
-      )}
+      <h3 style={styles.subTitle}>Description</h3>
+      <div style={styles.desc}>
+        {buyerDescription.split("\n").map((line, i) => (
+          <p key={i} style={styles.descLine}>
+            {line}
+          </p>
+        ))}
+      </div>
 
       {/* WHOLESALE SEO CONTENT BLOCK */}
       <div style={styles.seoBox}>

@@ -6,6 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "lint": "next lint",
+    "seo:audit": "node scripts/product-seo-agent.mjs",
+    "seo:preview-descriptions": "node scripts/product-seo-optimizer.mjs",
     "export": "next export",
     "start": "next start"
   },

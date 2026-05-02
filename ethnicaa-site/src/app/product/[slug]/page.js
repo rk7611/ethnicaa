@@ -2,6 +2,7 @@ import ProductClient from "./ProductClient";
 import { doc, getDoc, collection, query, where, getDocs, limit } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { notFound } from "next/navigation";
+import { buildProductDescription, buildProductFaqs } from "@/lib/commerce-seo-content";
 
 export const dynamic = "force-dynamic";
 
@@ -22,7 +23,7 @@ export async function generateMetadata({ params }) {
   const title = p.seo_title || `${brand} ${catalog} | Wholesale Surat Textile Market | Best Price`;
   
   // High-Conversion B2B Description Pattern
-  const description = p.seo_description || `Buy ${brand} ${catalog} ${category} at wholesale price direct from Surat. Best collection for resellers and retailers with global shipping to USA, UK, Canada. Contact for bulk export.`;
+  const description = p.seo_description || buildProductDescription({ ...p, id: slug }).slice(0, 160);
   
   const image = p.coverImage || p.images?.[0] || "https://ethnicaa.com/logo.png";
   const url = `https://ethnicaa.com/product/${slug}`;
@@ -87,12 +88,13 @@ export default async function Page({ params, searchParams }) {
   const p = snap.data();
   const product = { id: slug, ...p };
   const similar = await getSimilarProducts(product, slug);
+  const productFaqs = buildProductFaqs(product);
   const productSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.catalog || product.name,
     image: product.images || [],
-    description: product.seo_description || product.description || "",
+      description: product.seo_description || product.description || buildProductDescription(product),
     sku: (product.sku || product.id).toString().substring(0, 40),
     mpn: product.id.toString().substring(0, 40),
     brand: { "@type": "Brand", name: product.brand || "Ethnicaa" },
@@ -185,7 +187,19 @@ export default async function Page({ params, searchParams }) {
           item: `https://ethnicaa.com/product/${slug}`,
         },
       ],
-    }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: productFaqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer,
+        },
+      })),
+    },
   ];
 
   return (

@@ -1,9 +1,9 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, query, limit } from "firebase/firestore";
-import dotenv from 'dotenv';
-dotenv.config({ path: '.env.local' });
+import { getFirestore, collection, getDocs, query, limit, orderBy } from "firebase/firestore";
+import dotenv from "dotenv";
 
-// Firebase Config from Env
+dotenv.config({ path: ".env.local" });
+
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -17,64 +17,51 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 async function runSEOAudit() {
-  console.log("🚀 Agent 3: Starting Product SEO Audit...");
-  
+  console.log("Starting product SEO audit...");
+
   const productsRef = collection(db, "products");
-  const snapshot = await getDocs(query(productsRef, limit(500)));
-  
-  let stats = {
+  const snapshot = await getDocs(query(productsRef, orderBy("createdAt", "desc"), limit(100)));
+
+  const stats = {
     total: snapshot.size,
     thinDescription: 0,
     missingDescription: 0,
     missingFabric: 0,
     missingCategories: 0,
     nonOptimizedTitles: 0,
-    missingImages: 0
+    missingImages: 0,
   };
 
-  let index = 0;
-  for (const doc of snapshot.docs) {
-    const p = doc.data();
-    
-    // Check Description
+  for (const productDoc of snapshot.docs) {
+    const p = productDoc.data();
     const desc = p.description || "";
-    const isThin = desc.length < 150;
-    if (index < 5) console.log(`DEBUG Index ${index}: length=${desc.length}, isThin=${isThin}`);
 
     if (!p.description) {
       stats.missingDescription++;
       stats.thinDescription++;
-    } else if (isThin) {
+    } else if (desc.length < 150) {
       stats.thinDescription++;
     }
 
-    if (index < 5) console.log(`DEBUG: Index ${index}, missingDesc: ${stats.missingDescription}, thinDesc: ${stats.thinDescription}`);
-
-    // Check Fabric
-    if (!p.fabric) stats.missingFabric++;
-
-    // Check Categories
+    if (!p.fabric && (!Array.isArray(p.fabricNames) || p.fabricNames.length === 0)) stats.missingFabric++;
     if (!p.categories || p.categories.length === 0) stats.missingCategories++;
 
-    // Check Title
-    const title = (p.catalog || p.name || "").toLowerCase();
+    const title = (p.seo_title || p.catalog || p.name || "").toLowerCase();
     if (!title.includes("wholesale") && !title.includes("surat")) {
       stats.nonOptimizedTitles++;
     }
 
-    // Check Images
     if (!p.images || p.images.length === 0) stats.missingImages++;
-    index++;
   }
 
-  console.log("\n📊 SEO Health Report (First 500 Products):");
-  console.log(`Total Products Audited: ${stats.total}`);
-  console.log(`❌ Missing Description: ${stats.missingDescription}`);
-  console.log(`❌ Thin Descriptions (<150 chars): ${stats.thinDescription} (${Math.round(stats.thinDescription/stats.total*100)}%)`);
-  console.log(`❌ Missing Fabric Data: ${stats.missingFabric}`);
-  console.log(`❌ Missing Categories: ${stats.missingCategories}`);
-  console.log(`❌ Non-Optimized Titles: ${stats.nonOptimizedTitles}`);
-  console.log(`❌ Missing Images: ${stats.missingImages}`);
+  console.log("\\nSEO Health Report (Latest 100 Products):");
+  console.log(`Total products audited: ${stats.total}`);
+  console.log(`Missing descriptions: ${stats.missingDescription}`);
+  console.log(`Thin descriptions under 150 chars: ${stats.thinDescription}`);
+  console.log(`Missing fabric data: ${stats.missingFabric}`);
+  console.log(`Missing categories: ${stats.missingCategories}`);
+  console.log(`Non-optimized titles: ${stats.nonOptimizedTitles}`);
+  console.log(`Missing images: ${stats.missingImages}`);
 }
 
 runSEOAudit().catch(console.error);
