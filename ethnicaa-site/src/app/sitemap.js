@@ -4,6 +4,8 @@ import { blogs } from "@/lib/blog-data";
 import { keywordPages } from "@/lib/keyword-content";
 import { brandsData } from "@/lib/brands-data";
 
+export const revalidate = 21600;
+
 export default async function sitemap() {
   const baseUrl = "https://ethnicaa.com";
 
@@ -43,14 +45,14 @@ export default async function sitemap() {
     priority: 0.9,
   }));
 
-  // 3. PRODUCT PAGES (Optimized for 3000+ docs)
+  // 3. PRODUCT PAGES
   let productPages = [];
   try {
     const q = query(
         collection(db, "products"), 
         where("status", "==", "published"),
         orderBy("createdAt", "desc"),
-        limit(5000)
+        limit(1000)
     );
     const snap = await getDocs(q);
     productPages = snap.docs.map((doc) => {

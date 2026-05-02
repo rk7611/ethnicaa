@@ -1,7 +1,5 @@
 "use client";
 
-import { doc, updateDoc, increment } from "firebase/firestore";
-import { db } from "@/lib/firebase";
 import { trackEnquiry, trackWhatsAppClick } from "@/lib/analytics";
 
 export default function EnquireButton({ product }) {
@@ -28,13 +26,13 @@ Hello Ethnicaa,
 
 I am interested in the following product:
 
-• Product: ${name}
-• Category: ${category}
-• Product ID: ${slug}
-${isOffer ? `\n• Original Price: ~₹${originalPrice}~\n• OFFER PRICE: ₹${perPiece}` : `\n• Price per piece: ₹${perPiece}`}
-• PCS: ${pcs}
-• Full Price: ₹${fullPrice}
-• With GST (5%): ₹${gstPrice}
+- Product: ${name}
+- Category: ${category}
+- Product ID: ${slug}
+${isOffer ? `\n- Original Price: INR ${originalPrice}\n- OFFER PRICE: INR ${perPiece}` : `\n- Price per piece: INR ${perPiece}`}
+- PCS: ${pcs}
+- Full Price: INR ${fullPrice}
+- With GST (5%): INR ${gstPrice}
 
 Link: ${productUrl}
 
@@ -42,18 +40,6 @@ Please share more details.
   `.trim();
 
   const openWhatsApp = async () => {
-    // Increment WhatsApp Clips (NEW)
-    try {
-      if (slug) {
-        await updateDoc(doc(db, "products", slug), {
-          whatsapp_clicks: increment(1)
-        });
-      }
-    } catch (err) {
-      console.error("Failed to increment clicks:", err);
-    }
-
-    // Analytics (NEW)
     trackEnquiry(name);
     trackWhatsAppClick("Product Enquiry");
 
@@ -63,7 +49,6 @@ Please share more details.
 
   return (
     <button onClick={openWhatsApp} style={styles.button} className="pulse-button">
-      <span style={{ marginRight: 8 }}>💬</span>
       Enquire on WhatsApp
     </button>
   );
@@ -77,7 +62,7 @@ const styles = {
     width: "100%",
     padding: "14px 18px",
     borderRadius: 12,
-    background: "#25D366", // High-contrast WhatsApp Green
+    background: "#25D366",
     color: "#fff",
     textAlign: "center",
     fontSize: 17,

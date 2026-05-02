@@ -87,77 +87,81 @@ export default async function Page({ params, searchParams }) {
   const p = snap.data();
   const product = { id: slug, ...p };
   const similar = await getSimilarProducts(product, slug);
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.catalog || product.name,
+    image: product.images || [],
+    description: product.seo_description || product.description || "",
+    sku: (product.sku || product.id).toString().substring(0, 40),
+    mpn: product.id.toString().substring(0, 40),
+    brand: { "@type": "Brand", name: product.brand || "Ethnicaa" },
+    manufacturer: { "@type": "Organization", name: "Ethnicaa Surat" },
+    material: Array.isArray(product.fabricNames) ? product.fabricNames.join(", ") : product.fabricNames || "",
+    offers: {
+      "@type": "Offer",
+      "priceCurrency": "INR",
+      "price": (product.price || product.avgPrice || product.avg_price || "0").toString().replace(/[^0-9.]/g, ""),
+      "itemCondition": "https://schema.org/NewCondition",
+      "availability": "https://schema.org/InStock",
+      "url": `https://ethnicaa.com/product/${product.id}`,
+      "priceValidUntil": "2026-12-31",
+      "seller": { "@type": "Organization", "name": "Ethnicaa Wholesale" },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "IN",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 7,
+        "returnMethod": "https://schema.org/ReturnByMail",
+        "returnFees": "https://schema.org/FreeReturn"
+      },
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "INR"
+        },
+        "shippingDestination": [
+          {
+            "@type": "DefinedRegion",
+            "addressCountry": "IN"
+          },
+          {
+            "@type": "DefinedRegion",
+            "addressCountry": "US"
+          }
+        ],
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 1,
+            "maxValue": 2,
+            "unitCode": "d"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 2,
+            "maxValue": 5,
+            "unitCode": "d"
+          }
+        }
+      }
+    },
+  };
+
+  if (product.rating && product.reviewCount) {
+    productSchema.aggregateRating = {
+      "@type": "AggregateRating",
+      ratingValue: product.rating,
+      reviewCount: product.reviewCount,
+    };
+  }
 
   // SERVER-SIDE SCHEMA GENERATION (FOR #1 SEO)
   const schemaList = [
-    {
-      "@context": "https://schema.org",
-      "@type": "Product",
-      name: product.catalog || product.name,
-      image: product.images || [],
-      description: product.seo_description || product.description || "",
-      sku: (product.sku || product.id).toString().substring(0, 40),
-      mpn: product.id.toString().substring(0, 40),
-      brand: { "@type": "Brand", name: product.brand || "Ethnicaa" },
-      manufacturer: { "@type": "Organization", name: "Ethnicaa Surat" },
-      material: Array.isArray(product.fabricNames) ? product.fabricNames.join(", ") : product.fabricNames || "",
-      aggregateRating: {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "128"
-      },
-      offers: {
-        "@type": "Offer",
-        "priceCurrency": "INR",
-        "price": (product.price || product.avgPrice || product.avg_price || "0").toString().replace(/[^0-9.]/g, ""),
-        "itemCondition": "https://schema.org/NewCondition",
-        "availability": "https://schema.org/InStock",
-        "url": `https://ethnicaa.com/product/${product.id}`,
-        "priceValidUntil": "2026-12-31",
-        "seller": { "@type": "Organization", "name": "Ethnicaa Wholesale" },
-        "hasMerchantReturnPolicy": {
-          "@type": "MerchantReturnPolicy",
-          "applicableCountry": "IN",
-          "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-          "merchantReturnDays": 7,
-          "returnMethod": "https://schema.org/ReturnByMail",
-          "returnFees": "https://schema.org/FreeReturn"
-        },
-        "shippingDetails": {
-          "@type": "OfferShippingDetails",
-          "shippingRate": {
-            "@type": "MonetaryAmount",
-            "value": 0,
-            "currency": "INR"
-          },
-          "shippingDestination": [
-            {
-              "@type": "DefinedRegion",
-              "addressCountry": "IN"
-            },
-            {
-              "@type": "DefinedRegion",
-              "addressCountry": "US"
-            }
-          ],
-          "deliveryTime": {
-            "@type": "ShippingDeliveryTime",
-            "handlingTime": {
-              "@type": "QuantitativeValue",
-              "minValue": 1,
-              "maxValue": 2,
-              "unitCode": "d"
-            },
-            "transitTime": {
-              "@type": "QuantitativeValue",
-              "minValue": 2,
-              "maxValue": 5,
-              "unitCode": "d"
-            }
-          }
-        }
-      },
-    },
+    productSchema,
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",

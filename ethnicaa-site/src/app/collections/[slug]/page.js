@@ -4,6 +4,9 @@ import {
   generateCollectionTitle, 
   generateCollectionDescription 
 } from "@/lib/seo-utils";
+import { keywordPages } from "@/lib/keyword-content";
+import FAQSchema from "@/components/FAQSchema";
+import InternalLinking from "@/components/InternalLinking";
 import { collection, query, where, orderBy, limit, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
@@ -53,6 +56,18 @@ async function getCollectionProducts(slug) {
 
 export async function generateMetadata({ params }) {
   const slug = params.slug;
+  const keywordPage = keywordPages[slug];
+
+  if (keywordPage) {
+    return {
+      title: keywordPage.title,
+      description: keywordPage.meta,
+      alternates: {
+        canonical: `https://ethnicaa.com/collections/${slug}`,
+      },
+    };
+  }
+
   const components = parseCollectionSlug(slug);
   
   const title = generateCollectionTitle(components);
@@ -92,6 +107,14 @@ export async function generateMetadata({ params }) {
 export default async function Page({ params }) {
   const products = await getCollectionProducts(params.slug);
   const components = parseCollectionSlug(params.slug);
+  const keywordPage = keywordPages[params.slug];
+  const internalLinks = Object.keys(keywordPages)
+    .filter((slug) => slug !== params.slug)
+    .slice(0, 16)
+    .map((slug) => ({
+      href: `/collections/${slug}`,
+      label: keywordPages[slug].targetKeyword.toUpperCase(),
+    }));
 
   const schemaList = [
     {
@@ -144,6 +167,33 @@ export default async function Page({ params }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaList) }}
       />
       <CollectionsClient slug={params.slug} initialProducts={products} />
+      {keywordPage && (
+        <main style={{ maxWidth: 1000, margin: "0 auto", padding: "32px 20px" }}>
+          <h1 style={{ fontSize: 32, fontWeight: 800, marginBottom: 20 }}>
+            {keywordPage.h1}
+          </h1>
+          <p style={{ fontSize: 17, lineHeight: 1.8, color: "#444" }}>
+            {keywordPage.intro}
+          </p>
+          <section
+            style={{ marginTop: 32, lineHeight: 1.9, color: "#333" }}
+            dangerouslySetInnerHTML={{ __html: keywordPage.content }}
+          />
+          <section style={{ marginTop: 40 }}>
+            <h2 style={{ fontSize: 24, fontWeight: 700, marginBottom: 18 }}>
+              Frequently Asked Questions
+            </h2>
+            {keywordPage.faqs.map((faq, index) => (
+              <div key={index} style={{ marginBottom: 20 }}>
+                <h3 style={{ fontSize: 18, fontWeight: 700 }}>{faq.question}</h3>
+                <p style={{ color: "#555", lineHeight: 1.7 }}>{faq.answer}</p>
+              </div>
+            ))}
+          </section>
+          <FAQSchema faqs={keywordPage.faqs} />
+          <InternalLinking links={internalLinks} />
+        </main>
+      )}
     </>
   );
 }

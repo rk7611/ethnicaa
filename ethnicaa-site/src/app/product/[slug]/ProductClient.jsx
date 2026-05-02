@@ -10,8 +10,6 @@ import {
   limit,
   getDocs,
   orderBy,
-  updateDoc,
-  increment,
 } from "firebase/firestore";
 
 import { db } from "@/lib/firebase";
@@ -135,14 +133,6 @@ useEffect(() => {
 
       setLoading(false);
 
-      // INCREMENT VIEWS
-      try {
-        await updateDoc(doc(db, "products", slug), {
-          views: increment(1)
-        });
-      } catch (err) {
-        console.error("Failed to increment views:", err);
-      }
     }
 
     load();

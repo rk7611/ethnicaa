@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 
 export default function Login() {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const { login, loading } = useAuth();
@@ -12,7 +13,7 @@ export default function Login() {
     e.preventDefault();
     setError("");
 
-    const res = await login(password);
+    const res = await login(email, password);
     if (!res.success) {
       setError(res.message);
     } else {
@@ -28,11 +29,22 @@ export default function Login() {
 
         <form onSubmit={handleSubmit}>
           <input
+            type="email"
+            placeholder="Admin email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            style={styles.input}
+            autoComplete="username"
+            required
+          />
+          <input
             type="password"
-            placeholder="Enter admin password"
+            placeholder="Admin password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             style={styles.input}
+            autoComplete="current-password"
+            required
           />
 
           {error && <p style={styles.error}>{error}</p>}

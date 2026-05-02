@@ -1,5 +1,5 @@
 import CategoryClient from "./CategoryClient";
-import { doc, getDoc, collection, query, where, getDocs, limit, orderBy } from "firebase/firestore";
+import { doc, getDoc, collection, query, where, getDocs, limit, orderBy, getCountFromServer } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
 export const dynamic = "force-dynamic";
@@ -41,18 +41,18 @@ async function getProductsData(categorySlug, sort = "latest", page = 1) {
     const constraints = [where("status", "==", "published")];
     
     if (categorySlug !== "all-products") {
-      const tagMap = {
-        "sarees": "saree",
+      const categoryMap = {
+        "sarees": "sarees",
         "kurtis": "kurti",
         "gowns": "gown",
-        "lehenga": "lehenga",
-        "pakistani-suits": "pakistani",
-        "salwar-suits": "salwar suit",
-        "readymade-suits": "readymade",
-        "semi-stitched": "semi stitched"
+        "lehenga": "lahanga",
+        "pakistani-suits": "pakistani-suits",
+        "salwar-suits": "salwar-suits",
+        "readymade-suits": "readymade-salwar-suits",
+        "semi-stitched": "semi-stitched-salwar-suit"
       };
-      const tagQuery = tagMap[categorySlug] || categorySlug;
-      constraints.push(where("tags", "array-contains", tagQuery));
+      const categoryQuery = categoryMap[categorySlug] || categorySlug;
+      constraints.push(where("categories", "array-contains", categoryQuery));
     }
 
     let sortField = "createdAt";
@@ -75,7 +75,10 @@ async function getProductsData(categorySlug, sort = "latest", page = 1) {
       limit(page * PAGE_SIZE)
     );
 
-    const snap = await getDocs(q);
+    const [snap, countSnap] = await Promise.all([
+      getDocs(q),
+      getCountFromServer(query(collection(db, "products"), ...constraints)),
+    ]);
     const allDocs = snap.docs.map((d) => ({
       id: d.id,
       ...d.data(),
@@ -83,10 +86,13 @@ async function getProductsData(categorySlug, sort = "latest", page = 1) {
 
     // Slice for the specific page
     const start = (page - 1) * PAGE_SIZE;
-    return allDocs.slice(start, start + PAGE_SIZE);
+    return {
+      products: allDocs.slice(start, start + PAGE_SIZE),
+      totalCount: countSnap.data().count,
+    };
   } catch (error) {
     console.error("Error fetching products:", error);
-    return [];
+    return { products: [], totalCount: 0 };
   }
 }
 
@@ -155,14 +161,15 @@ export default async function Page({ params, searchParams }) {
   const sort = searchParams?.sort || "latest";
   const page = parseInt(searchParams?.page) || 1;
   
-  const [category, products] = await Promise.all([
+  const [category, productsResult] = await Promise.all([
     getCategoryData(categorySlug),
     getProductsData(categorySlug, sort, page)
   ]);
   
   if (!category) return notFound();
 
-  const totalCount = category.count || 0;
+  const products = productsResult.products;
+  const totalCount = productsResult.totalCount;
   const totalPages = Math.ceil(totalCount / PAGE_SIZE);
 
   // SERVER-SIDE SCHEMAS

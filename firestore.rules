@@ -1,26 +1,30 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null && request.auth.token.admin == true;
+    }
     
     // --- Public Read, Admin Write collections ---
     match /products/{document=**} {
       allow read: if true;
-      allow write: if request.auth != null;
+      allow write: if isAdmin();
     }
     
     match /categories/{document=**} {
       allow read: if true;
-      allow write: if request.auth != null;
+      allow write: if isAdmin();
     }
     
     match /banners/{document=**} {
       allow read: if true;
-      allow write: if request.auth != null;
+      allow write: if isAdmin();
     }
 
     // --- Protected collections (Settings, etc) ---
     match /settings/{document=**} {
-      allow read, write: if request.auth != null;
+      allow read: if true;
+      allow write: if isAdmin();
     }
 
     // --- Default: Deny everything else ---

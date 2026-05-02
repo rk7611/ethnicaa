@@ -1,11 +1,11 @@
 *.zip
 node_modules/
 .env
-*.json
-!package.json
-!composer.json
-!tsconfig.json
-!jsconfig.json
+*.local
+*.env
+firebase_key.json
+serviceAccount*.json
+*-service-account.json
 
 # Social Agent
 social_agent/temp_assets/

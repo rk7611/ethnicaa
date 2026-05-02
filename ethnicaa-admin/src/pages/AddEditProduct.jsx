@@ -74,6 +74,17 @@ function generateSearchKeywords(product) {
   return Array.from(keywords).slice(0, 150);
 }
 
+function getSourceWebsite(sourceUrl) {
+  const cleanUrl = (sourceUrl || "").trim();
+  if (!cleanUrl) return "manual";
+
+  try {
+    return new URL(cleanUrl).hostname || "manual";
+  } catch {
+    return "manual";
+  }
+}
+
 async function ensureCategoryDoc(prettyName) {
   if (!prettyName) return null;
   const slug = toSlug(prettyName);
@@ -253,15 +264,17 @@ export default function AddEditProduct({ mode }) {
     } catch {}
   };
 
-  const uploadImages = async () => {
-    if (!newImages.length) return;
+  const uploadImages = async (baseSlug = slug) => {
+    if (!newImages.length) return [];
     const uploaded = [];
     for (let file of newImages) {
-      const url = await uploadFile(`products/${slug}/${file.name}`, file, "image");
+      const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "-");
+      const url = await uploadFile(`products/${baseSlug}/${Date.now()}-${safeName}`, file, "image");
       uploaded.push(url);
     }
     setImages((prev) => [...prev, ...uploaded]);
     setNewImages([]);
+    return uploaded;
   };
 
   const removeImage = async (idx) => {
@@ -329,8 +342,10 @@ export default function AddEditProduct({ mode }) {
       }
     }
 
-    const cleanedPretty = [derivedCat];
-    const cleanedSlugs = [toSlug(derivedCat)];
+    const selectedPretty = [...new Set(categoryNames.map((c) => toPretty(c)).filter(Boolean))];
+    const cleanedPretty = selectedPretty.length ? selectedPretty : [derivedCat];
+    const cleanedSlugs = [...new Set(cleanedPretty.map((c) => toSlug(c)).filter(Boolean))];
+    const primaryCategory = cleanedPretty[0] || derivedCat;
     const fabPretty = [...new Set(fabricNames.map((c) => toPretty(c)).filter(Boolean))];
     const fabSlugs = [...new Set(fabPretty.map((c) => toSlug(c)).filter(Boolean))];
 
@@ -351,6 +366,8 @@ export default function AddEditProduct({ mode }) {
     try {
       let finalPdf = pdfUrl;
       let finalZip = zipUrl;
+      const uploadedImages = newImages.length ? await uploadImages(finalSlug) : [];
+      const finalImages = [...images, ...uploadedImages];
       if (pdfFile) finalPdf = await uploadFile(`products/${finalSlug}/catalog.pdf`, pdfFile, "PDF Catalog");
       if (zipFile) finalZip = await uploadFile(`products/${finalSlug}/images.zip`, zipFile, "ZIP Images");
 
@@ -364,7 +381,7 @@ export default function AddEditProduct({ mode }) {
         gst: Number(data.gst),
         categoryNames: cleanedPretty,
         categories: cleanedSlugs,
-        category: derivedCat,
+        category: primaryCategory,
         tags: tags,
         fabricNames: fabPretty,
         fabrics: fabSlugs,
@@ -379,12 +396,12 @@ export default function AddEditProduct({ mode }) {
         search_fabric: fabPretty.join(" ").toLowerCase(),
         search_text: `${data.name} ${data.catalog} ${cleanedPretty.join(" ")} ${fabPretty.join(" ")} ${data.description} ${data.rawSpecs}`.toLowerCase(),
         search_keywords,
-        images,
-        coverImage: images[coverIdx] || "",
+        images: finalImages,
+        coverImage: finalImages[coverIdx] || finalImages[0] || "",
         catalogAssets: { pdf: finalPdf, zip: finalZip },
         sourceMeta: {
-          original_url: data.sourceUrl || "",
-          website: data.sourceUrl ? new URL(data.sourceUrl).hostname : "manual"
+          original_url: (data.sourceUrl || "").trim(),
+          website: getSourceWebsite(data.sourceUrl)
         },
         status: publish ? "published" : "draft",
         updatedAt: serverTimestamp(),

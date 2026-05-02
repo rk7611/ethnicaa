@@ -125,6 +125,9 @@ export default function EthnicaaSEOAgent() {
       });
       
       const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result.error || `Request failed with ${response.status}`);
+      }
       if (result.error) throw new Error(result.error);
 
       setProducts(prev => prev.map(p => {
