@@ -22,6 +22,7 @@ const PAGE_SIZE = 50;
 export default function BulkEdit() {
   const [products, setProducts] = useState([]);
   const [editedProducts, setEditedProducts] = useState({}); // { id: { field: value } }
+  const [loading, setLoading] = useState(true);
   const [totalCount, setTotalCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [cursors, setCursors] = useState({});
