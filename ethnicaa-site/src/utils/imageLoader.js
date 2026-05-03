@@ -1,7 +1,7 @@
 export default function imageLoader({ src, width, quality }) {
   // If it's a local asset (starts with /), don't optimize through weserv
   if (src.startsWith("/")) {
-    return src;
+    return `${src}?w=${width}`;
   }
 
   // Use wsrv.nl (Weserv) as a free image optimizer

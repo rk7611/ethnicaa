@@ -39,7 +39,7 @@ export const revalidate = 3600;
 import { consolidateCategories } from "@/lib/category-utils";
 
 async function getHomeData(page = 1) {
-  const PAGE_SIZE = 12;
+  const PAGE_SIZE = 30;
   const bannersQuery = query(collection(db, "banners"), orderBy("order", "asc"));
   const categoriesQuery = query(collection(db, "categories"));
   

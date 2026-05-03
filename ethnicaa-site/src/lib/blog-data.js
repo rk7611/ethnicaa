@@ -5,12 +5,12 @@ export const blogs = [
     title: "सूरत थोक साड़ी बाजार 2026: कम कीमत में सीधा निर्माता से खरीदें",
     date: "April 23, 2026",
     excerpt: "सूरत से थोक साड़ी (wholesale saree Surat) खरीदने का पूरा गाइड। जानें कि सीधे फैक्ट्री से कैसे मंगवाएं और अपना रीसेलिंग बिजनेस शुरू करें।",
-    image: "https://storage.googleapis.com/ethnicaa-8402c.firebasestorage.app/products/1064-jute-crape-shop-trendy-kalamkali-saree-exports/e1105953-5ee9-4e26-a631-7118b0901bf1.jpeg",
+    image: "https://firebasestorage.googleapis.com/v0/b/ethnicaa-8402c.firebasestorage.app/o/products%2F1028-tissue-zari-rainbow-banarasi-saree-wholesaler%2F26bdbfcc-35af-4b32-97dc-3dcd6c886a5a.webp?alt=media",
     keywords: "थोक साड़ी सूरत, wholesale saree Surat Hindi, सूरत साड़ी फैक्ट्री, साड़ी रीसेलिंग बिजनेस",
     content: `
       <h2>सूरत: भारत का सबसे बड़ा कपड़ा बाजार</h2>
       <p>अगर आप अपना कपड़ों का बिजनेस शुरू करना चाहते हैं, तो <strong>सूरत थोक साड़ी बाजार</strong> से बेहतर कोई जगह नहीं है। 2026 में, तकनीक की मदद से अब आप घर बैठे सीधे सूरत की फैक्ट्रियों से जुड़ सकते हैं।</p>
-
+      
       <h2>सीधे निर्माता से खरीदने के फायदे</h2>
       <p>जब आप किसी बिचौलिये के बजाय सीधे निर्माता (Ethnicaa) से जुड़ते हैं, तो आपको मिलता है:</p>
       <ul>
@@ -32,7 +32,7 @@ export const blogs = [
     title: "How to Start a Saree Reselling Business from Home in 2026",
     date: "April 23, 2026",
     excerpt: "Learn how to start a saree reselling business in India with zero investment. Step-by-step 2026 guide to sourcing wholesale and selling on WhatsApp.",
-    image: "https://storage.googleapis.com/ethnicaa-8402c.firebasestorage.app/products/1064-jute-crape-shop-trendy-kalamkari-saree-exports/e1105953-5ee9-4e26-a631-7118b0901bf1.jpeg",
+    image: "https://firebasestorage.googleapis.com/v0/b/ethnicaa-8402c.firebasestorage.app/o/products%2F1033-kota-embroidery-work-saree-for-womens%2Fdc6ba267-6bb3-44e4-9806-ed54f0cab2e3.webp?alt=media",
     keywords: "how to start saree reselling business India, saree reselling from home, zero investment business for ladies, wholesale sarees for resellers, WhatsApp saree catalog",
     content: `
       <h2>The 2026 Saree Reselling Opportunity</h2>
@@ -66,7 +66,7 @@ export const blogs = [
     title: "Top 10 Wholesale Saree Suppliers in Surat for Resellers",
     date: "April 23, 2026",
     excerpt: "Find the best wholesale sarees Surat reseller hubs. Top 10 list of manufacturers and B2B platforms for the best margins in 2026.",
-    image: "https://storage.googleapis.com/ethnicaa-8402c.firebasestorage.app/products/1064-jute-crape-shop-trendy-kalamkari-saree-exports/e1105953-5ee9-4e26-a631-7118b0901bf1.jpeg",
+    image: "https://firebasestorage.googleapis.com/v0/b/ethnicaa-8402c.firebasestorage.app/o/products%2F1045-cotton-hit-design-saree-wholesaler%2F1f8e3f16-dfd6-4fd8-9661-b6429bbb635e.webp?alt=media",
     keywords: "wholesale sarees Surat reseller, best saree manufacturers Surat, top B2B saree platforms, Ring Road textile market, sourcing sarees Surat",
     content: `
       <h2>Why Sourcing from Surat is Essential</h2>
@@ -91,7 +91,7 @@ export const blogs = [
     title: "Wholesale Kurtis Price List 2026 — Factory Rates from Surat",
     date: "April 23, 2026",
     excerpt: "Get the latest wholesale kurtis price list Surat for 2026. Compare cotton, rayon, and designer kurti rates direct from factory.",
-    image: "https://storage.googleapis.com/ethnicaa-8402c.firebasestorage.app/products/1love-by-s4u-alia-cut-digital-printed-mul-cotton-readymade-anarkali-suit/0fa84bf0-7eae-4feb-b368-33dc014d638b.jpeg",
+    image: "https://firebasestorage.googleapis.com/v0/b/ethnicaa-8402c.firebasestorage.app/o/products%2F1000010-by-dt-devi-cotton-full-stitch-combo-kids-one-pieces-dress-online%2F09123b3d-06bd-437a-a56c-676f01747954.webp?alt=media",
     keywords: "wholesale kurtis price list Surat, factory rate kurtis, bulk kurtis online, Surat kurti manufacturers, cheap kurtis wholesale",
     content: `
       <h2>2026 Kurti Pricing Trends</h2>
@@ -118,7 +118,7 @@ export const blogs = [
     title: "Pakistani Suits Wholesale Guide — Everything Resellers Need to Know",
     date: "April 23, 2026",
     excerpt: "Everything you need to know about Pakistani suits wholesale India. Learn about lawn fabric, embroidery patches, and sourcing the best replicas in 2026.",
-    image: "https://storage.googleapis.com/ethnicaa-8402c.firebasestorage.app/products/20021-by-ziana-traditional-crunchy-silk-combo-pakistani-farsi-style-3pcs-dress/06b90adb-54d2-4ae8-bb0d-afba1ff147ba.jpeg",
+    image: "https://firebasestorage.googleapis.com/v0/b/ethnicaa-8402c.firebasestorage.app/o/products%2F10048-by-zorista-zimmi-choo-trendy-pakistani-plazzo-suits%2F9b611432-dc88-4f96-a1d4-a35596c6c7cf.webp?alt=media",
     keywords: "Pakistani suits wholesale India, lawn suits wholesale, Pakistani suit replicas Surat, embroidered Pakistani suits, bulk Pakistani suits",
     content: `
       <h2>The Boom of Pakistani Suits in India</h2>
@@ -139,7 +139,7 @@ export const blogs = [
     title: "How to Buy Ethnic Wear Wholesale from Surat Without Visiting",
     date: "April 23, 2026",
     excerpt: "Want to buy wholesale ethnic wear Surat online? Learn how to source directly from manufacturers without traveling to Surat in this 2026 guide.",
-    image: "https://storage.googleapis.com/ethnicaa-8402c.firebasestorage.app/products/1064-jute-crape-shop-trendy-kalamkari-saree-exports/e1105953-5ee9-4e26-a631-7118b0901bf1.jpeg",
+    image: "https://firebasestorage.googleapis.com/v0/b/ethnicaa-8402c.firebasestorage.app/o/products%2F1046-cotton-chanderi-pretty-look-sarees-online%2F9e7f875c-8b16-43e3-97af-ac8277cd4d9a.webp?alt=media",
     keywords: "buy wholesale ethnic wear Surat online, sourcing from Surat remotely, Surat B2B marketplace, online wholesale sarees Surat, virtual sourcing India",
     content: `
       <h2>The New Way to Source: Remote Wholesale Buying</h2>
@@ -165,7 +165,7 @@ export const blogs = [
     title: "Best Fabrics for Saree Reselling — What Sells Most in 2026",
     date: "April 23, 2026",
     excerpt: "Discover the best wholesale sarees for reselling in 2026. Guide to Organza, Georgette, and Cotton fabrics that guarantee high margins.",
-    image: "https://storage.googleapis.com/ethnicaa-8402c.firebasestorage.app/products/1064-jute-crape-shop-trendy-kalamkari-saree-exports/e1105953-5ee9-4e26-a631-7118b0901bf1.jpeg",
+    image: "https://firebasestorage.googleapis.com/v0/b/ethnicaa-8402c.firebasestorage.app/o/products%2F1056-chanderi-cotton-block-ajrakh-printed-sarees%2F04a4ce36-24df-4aec-99ef-4ada398d775e.webp?alt=media",
     keywords: "best wholesale sarees for reselling, top selling sarees 2026, organza sarees wholesale, georgette sarees for resellers, trending saree fabrics",
     content: `
       <h2>Fabric is Everything in Reselling</h2>
@@ -189,7 +189,7 @@ export const blogs = [
     title: "Minimum Order Quantity Guide for Wholesale Sarees and Kurtis",
     date: "April 23, 2026",
     excerpt: "Understand wholesale sarees minimum order rules in Surat. Learn about MOQs, set-wise buying, and how Ethnicaa supports small resellers.",
-    image: "https://storage.googleapis.com/ethnicaa-8402c.firebasestorage.app/products/1love-by-s4u-alia-cut-digital-printed-mul-cotton-readymade-anarkali-suit/0fa84bf0-7eae-4feb-b368-33dc014d638b.jpeg",
+    image: "https://firebasestorage.googleapis.com/v0/b/ethnicaa-8402c.firebasestorage.app/o/products%2F1057-kota-beautiful-simple-saree-tassels-pallu-work-with-bandhni-blouse-pcs%2F17bb69b4-29aa-4dfd-a9ef-5ce447b6aff3.webp?alt=media",
     keywords: "wholesale sarees minimum order, MOQ for resellers Surat, set-wise wholesale buying, buy single catalogs wholesale, bulk ordering guide",
     content: `
       <h2>What is MOQ?</h2>
@@ -210,7 +210,7 @@ export const blogs = [
     title: "How to Set Up a WhatsApp Catalog for Ethnic Wear Reselling",
     date: "April 23, 2026",
     excerpt: "Learn how to build a saree reseller WhatsApp catalog. 2026 guide to professional reselling using WhatsApp Business features and Ethnicaa data.",
-    image: "https://storage.googleapis.com/ethnicaa-8402c.firebasestorage.app/products/1064-jute-crape-shop-trendy-kalamkari-saree-exports/e1105953-5ee9-4e26-a631-7118b0901bf1.jpeg",
+    image: "https://firebasestorage.googleapis.com/v0/b/ethnicaa-8402c.firebasestorage.app/o/products%2F1058-crush-fabric-embroidery-work-beautiful-saree-with-unstitched-blouse-pcs%2Ffc665a56-e854-44d4-a3db-93e9e222f57b.webp?alt=media",
     keywords: "saree reseller WhatsApp catalog, how to sell on WhatsApp, WhatsApp Business for resellers, digital catalog for reselling, WhatsApp marketing sarees",
     content: `
       <h2>WhatsApp: Your Digital Storefront</h2>
@@ -234,7 +234,7 @@ export const blogs = [
     title: "Georgette vs Organza Sarees — Which Wholesale Better for Resellers?",
     date: "April 23, 2026",
     excerpt: "Detailed georgette organza sarees wholesale comparison for 2026. Find out which fabric offers better margins and faster turnover for your business.",
-    image: "https://storage.googleapis.com/ethnicaa-8402c.firebasestorage.app/products/1064-jute-crape-shop-trendy-kalamkari-saree-exports/e1105953-5ee9-4e26-a631-7118b0901bf1.jpeg",
+    image: "https://firebasestorage.googleapis.com/v0/b/ethnicaa-8402c.firebasestorage.app/o/products%2F1059-kota-doriya-embroided-saree-online%2Ff3da2c54-3a4b-4960-81e8-ea51081ebd91.webp?alt=media",
     keywords: "georgette organza sarees wholesale comparison, best fabric for reselling, organza vs georgette profit, trending sarees 2026, wholesale saree guide",
     content: `
       <h2>The Great Fabric Debate</h2>
@@ -260,7 +260,7 @@ export const blogs = [
     title: "Wholesale Lehenga Choli Buying Guide for Boutique Owners",
     date: "April 23, 2026",
     excerpt: "Professional lehenga choli wholesale for boutique owners. Guide to sourcing bridal and party wear lehengas from Surat manufacturers in 2026.",
-    image: "https://storage.googleapis.com/ethnicaa-8402c.firebasestorage.app/products/20021-by-ziana-traditional-crunchy-silk-combo-pakistani-farsi-style-3pcs-dress/06b90adb-54d2-4ae8-bb0d-afba1ff147ba.jpeg",
+    image: "https://firebasestorage.googleapis.com/v0/b/ethnicaa-8402c.firebasestorage.app/o/products%2F10061-by-dt-devi-cotton-moss-silk-fully-stitch-pakistani-3pcs-dress%2Fa5917f5a-8512-4013-8606-1aea5f285186.webp?alt=media",
     keywords: "lehenga choli wholesale for boutique, bridal lehenga wholesale Surat, semi-stitched lehenga bulk, designer lehenga choli Surat, wholesale lehenga price",
     content: `
       <h2>High-Ticket Sourcing: Lehengas</h2>
@@ -282,7 +282,7 @@ export const blogs = [
     title: "Pakistani Suits Wholesaler: The Ultimate Guide for Resellers in India",
     date: "April 29, 2026",
     excerpt: "Discover the best Pakistani wholesale clothes suppliers. Learn how to source premium Pakistani lawn suits and designer wear wholesale directly from Surat.",
-    image: "https://storage.googleapis.com/ethnicaa-8402c.firebasestorage.app/products/20021-by-ziana-traditional-crunchy-silk-combo-pakistani-farsi-style-3pcs-dress/06b90adb-54d2-4ae8-bb0d-afba1ff147ba.jpeg",
+    image: "https://firebasestorage.googleapis.com/v0/b/ethnicaa-8402c.firebasestorage.app/o/products%2F10067-by-zorista-full-stitch-fandy-silk-pakistani-3pcs-dress%2F7c06f8dc-ac4e-4c29-9044-0a820286382f.webp?alt=media",
     keywords: "pakistani suits wholesaler, pakistani clothes wholesale, pakistani wholesale clothes suppliers, pakistani clothes wholesalers in Surat, pakistan wholesale clothing online, pakistani wholesale dress, wholesale lawn suits in surat",
     content: `
       <h2>The Rise of Pakistani Wholesale Clothing</h2>
@@ -307,7 +307,7 @@ export const blogs = [
     title: "Wholesale Kurtis Online: Sourcing the Best Pakistani Kurtis in India",
     date: "April 29, 2026",
     excerpt: "Your complete guide to online wholesale clothes shopping in India. Find the best Pakistani kurti wholesale deals with fast delivery and daily new arrivals.",
-    image: "https://storage.googleapis.com/ethnicaa-8402c.firebasestorage.app/products/1love-by-s4u-alia-cut-digital-printed-mul-cotton-readymade-anarkali-suit/0fa84bf0-7eae-4feb-b368-33dc014d638b.jpeg",
+    image: "https://firebasestorage.googleapis.com/v0/b/ethnicaa-8402c.firebasestorage.app/o/products%2F10078-by-zorista-zimmy-choo-readymade-pakistani-3pcs-dress%2Fd58f844c-73f1-46d9-8c65-c302a95ca5d5.webp?alt=media",
     keywords: "pakistani kurti wholesale, pakistani kurtis wholesale online, online wholesale clothes shopping india, wholesale cloth in india, wholesale clothing in india online",
     content: `
       <h2>The Boom of Online Wholesale Clothes Shopping in India</h2>
@@ -332,7 +332,7 @@ export const blogs = [
     title: "Best Margins for Resellers: Why 5000+ Resellers Trust Ethnicaa",
     date: "April 29, 2026",
     excerpt: "Maximize your profits with the best margins for resellers. Learn why over 5000 resellers trust Ethnicaa for wholesale clothing in India.",
-    image: "https://storage.googleapis.com/ethnicaa-8402c.firebasestorage.app/products/1064-jute-crape-shop-trendy-kalamkari-saree-exports/e1105953-5ee9-4e26-a631-7118b0901bf1.jpeg",
+    image: "https://firebasestorage.googleapis.com/v0/b/ethnicaa-8402c.firebasestorage.app/o/products%2F10086-by-zorista-shop-trendy-readymade-zimmi-choo-pakistani-plazzo-dress%2F23991208-0929-4d43-85fd-6202d2bfa0c5.webp?alt=media",
     keywords: "wholesale clothing in india online, best margins for resellers, buy sarees online, ethnic wear wholesale india, reliable wholesale suppliers",
     content: `
       <h2>Achieving the Best Margins for Resellers</h2>

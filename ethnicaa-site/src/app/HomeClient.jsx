@@ -15,11 +15,11 @@ import { db } from "@/lib/firebase";
 import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-const BannerSlider = dynamic(() => import("@/components/BannerSlider"), { ssr: true });
-const EnquireButton = dynamic(() => import("@/components/EnquireButton"), { ssr: false });
-const Pagination = dynamic(() => import("@/components/Pagination"), { ssr: false });
-const TrustBadges = dynamic(() => import("@/components/TrustBadges"), { ssr: false });
-const FAQSchema = dynamic(() => import("@/components/FAQSchema"), { ssr: false });
+import BannerSlider from "@/components/BannerSlider";
+import EnquireButton from "@/components/EnquireButton";
+import Pagination from "@/components/Pagination";
+import TrustBadges from "@/components/TrustBadges";
+import FAQSchema from "@/components/FAQSchema";
 
 import { blogs } from "@/lib/blog-data";
 import { consolidateCategories } from "@/lib/category-utils";
@@ -201,11 +201,11 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
       )}
       */}
 
-      <TrustBadges />
-
       <h1 style={styles.pageH1}>Ethnicaa: Surat Wholesale Sarees, Kurtis & Pakistani Suits</h1>
 
-      {categories.length > 0 && (
+      {currentPage === 1 && <TrustBadges />}
+
+      {currentPage === 1 && categories.length > 0 && (
         <div style={styles.section}>
           <h2 style={styles.heading}>Shop by Category</h2>
           <div style={styles.categories}>
@@ -219,7 +219,7 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
         </div>
       )}
  
-      {brands.length > 0 && (
+      {currentPage === 1 && brands.length > 0 && (
         <div style={styles.section}>
           <h2 style={styles.heading}>Shop by Brand</h2>
           <div style={styles.brandsGrid}>
@@ -235,34 +235,13 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
         </div>
       )}
 
-      {/* WHOLESALE HUB - INTERNAL LINKING FOR INDEXING */}
-      <section className="py-16 bg-gray-50 border-t border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-8">Global Wholesale Sourcing Hub</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {Object.keys(keywordPages).slice(0, 24).map((slug) => (
-              <Link 
-                key={slug} 
-                href={`/collections/${slug}`}
-                className="text-sm text-gray-600 hover:text-black hover:underline"
-              >
-                {keywordPages[slug].targetKeyword.toUpperCase()}
-              </Link>
-            ))}
-          </div>
-          <div className="mt-8 text-center">
-            <p className="text-sm text-gray-500">
-              Ethnicaa is a verified manufacturer and global supplier of ethnic wear, serving retailers in Mumbai, Delhi, Jaipur, USA, UK, and Canada.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* Wholesale Hub removed as requested */}
 
       <div style={styles.section}>
         <h2 style={styles.heading}>Latest Arrivals</h2>
         <div style={styles.grid}>
             {loading && products.length === 0
-            ? Array(12).fill(0).map((_, i) => (
+            ? Array(30).fill(0).map((_, i) => (
                 <div key={i} style={styles.skeletonCard}>
                   <div style={styles.skeletonImg}></div>
                   <div style={styles.skeletonText}></div>
