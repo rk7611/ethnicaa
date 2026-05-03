@@ -12,6 +12,14 @@ export const metadata = {
   description:
     "Ethnicaa Wholesale is India's leading B2B marketplace for wholesale Kurtis, Sarees, and Salwar Suits direct from Surat manufacturers. Best pricing for resellers.",
 
+  authors: [{ name: "Ethnicaa Textiles", url: "https://ethnicaa.com" }],
+  
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+
   icons: {
     icon: "/favicon.ico",
     apple: "/apple-touch-icon.png",
@@ -22,9 +30,8 @@ export const metadata = {
     locale: "en_IN",
     url: "https://ethnicaa.com",
     siteName: "Ethnicaa Wholesale",
-    title: "Ethnicaa Wholesale",
-    description:
-      "India’s fastest growing wholesale ethnic wear marketplace for Sarees, Kurtis, Salwar Suits, Lehengas & more.",
+    title: "Ethnicaa Wholesale: B2B Ethnic Wear",
+    description: "Direct Surat manufacturer rates for B2B wholesale ethnic wear.",
     images: [
       {
         url: "https://ethnicaa.com/logo.png",
@@ -37,8 +44,10 @@ export const metadata = {
 
   twitter: {
     card: "summary_large_image",
+    site: "@ethnicaa",
+    creator: "@ethnicaa",
     title: "Ethnicaa Wholesale",
-    description: "Daily new arrivals of Surat wholesale ethnic wear. Factory prices for resellers.",
+    description: "Discover Ethnicaa Wholesale, your premier B2B source for Surat ethnic wear. Get factory-direct pricing on premium sarees, kurtis, and salwar suits with worldwide shipping.",
     images: ["https://ethnicaa.com/logo.png"],
   },
 

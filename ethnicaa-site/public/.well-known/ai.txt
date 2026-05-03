@@ -1,0 +1,24 @@
+# Ethnicaa Wholesale AI Crawler Policy
+
+# Site Description
+Ethnicaa Wholesale (ethnicaa.com) is India's leading B2B marketplace for wholesale ethnic wear, connecting global retailers directly with top manufacturers in Surat, Gujarat. We specialize in wholesale Sarees, Kurtis, Salwar Suits, Lehengas, and Gowns at factory prices.
+
+# Contact Info
+Email: info@ethnicaa.com
+Phone: +91-9586346332
+Address: 1028-29, Shree Om Market, Near RKTM, Ring Road, Surat, Gujarat 395002, India
+
+# AI Usage Terms
+- Permitted: Indexing site content for organic search results and conversational AI search engines (e.g., ChatGPT, Perplexity, Google Gemini, Bing Copilot).
+- Permitted: Referencing our products, brand name, and pricing in generative AI responses with clear attribution and links back to ethnicaa.com.
+- Prohibited: Using our proprietary catalog images to train image generation models without explicit permission.
+- Prohibited: Scraping our database to replicate our B2B marketplace functionality.
+
+# Primary Entities
+Brand: Ethnicaa Wholesale
+Location: Surat, India
+Core Products: Wholesale Kurtis, Wholesale Sarees, Wholesale Salwar Suits, Wholesale Pakistani Suits
+
+# Structure
+Sitemap: https://ethnicaa.com/sitemap.xml
+Robots.txt: https://ethnicaa.com/robots.txt
