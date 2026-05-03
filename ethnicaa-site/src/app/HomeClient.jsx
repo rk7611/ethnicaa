@@ -201,7 +201,9 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
       )}
       */}
 
-      <h1 style={styles.pageH1}>Ethnicaa: Surat Wholesale Sarees, Kurtis & Pakistani Suits</h1>
+      <h1 style={styles.pageH1}>
+        Ethnicaa: Surat Wholesale Sarees, Kurtis & Pakistani Suits {currentPage > 1 ? `(Page ${currentPage})` : ""}
+      </h1>
 
       {currentPage === 1 && <TrustBadges />}
 

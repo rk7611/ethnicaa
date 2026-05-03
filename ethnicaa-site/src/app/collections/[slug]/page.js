@@ -166,7 +166,11 @@ export default async function Page({ params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaList) }}
       />
-      <CollectionsClient slug={params.slug} initialProducts={products} />
+      <CollectionsClient 
+        slug={params.slug} 
+        initialProducts={products} 
+        titleTag={keywordPage ? "h2" : "h1"}
+      />
       {keywordPage && (
         <main style={{ maxWidth: 1000, margin: "0 auto", padding: "32px 20px" }}>
           <h1 style={{ fontSize: 32, fontWeight: 800, marginBottom: 20 }}>

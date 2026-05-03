@@ -19,7 +19,8 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 
 const PAGE_SIZE = 40;
 
-export default function CollectionsClient({ slug, initialProducts, lang = "en" }) {
+export default function CollectionsClient({ slug, initialProducts, lang = "en", titleTag = "h1" }) {
+  const TitleTag = titleTag;
   const components = parseCollectionSlug(slug, lang);
   const { fabric, category, city } = components;
 
@@ -62,7 +63,7 @@ export default function CollectionsClient({ slug, initialProducts, lang = "en" }
         ]} 
       />
 
-      <h1 style={styles.pageTitle}>
+      <TitleTag style={styles.pageTitle}>
         {lang !== "en" && VERNACULAR_MAP[lang]
           ? VERNACULAR_MAP[lang].title.replace("{category}", VERNACULAR_MAP[lang][category?.toLowerCase()] || category)
           : category && city 
@@ -70,7 +71,7 @@ export default function CollectionsClient({ slug, initialProducts, lang = "en" }
           : fabric && category 
           ? `Wholesale ${fabric} ${category} Collection`
           : components.label}
-      </h1>
+      </TitleTag>
 
       {cityData && (
         <div style={styles.introBox}>

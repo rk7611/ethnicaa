@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 
 import { notFound } from "next/navigation";
 
-const PAGE_SIZE = 80;
+const PAGE_SIZE = 40;
 
 const VALID_STATIC_CATEGORIES = [
   "sarees",
@@ -116,22 +116,30 @@ const CATEGORY_META = {
   }
 };
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata({ params, searchParams }) {
   const slug = params.name;
+  const page = parseInt(searchParams?.page) || 1;
   const name = decodeURIComponent(slug).toLowerCase();
   const category = await getCategoryData(slug);
   if (!category) return notFound();
   
   const custom = CATEGORY_META[name];
-  const title = category.category_seo_title || custom?.title || `${category.name} Wholesale Catalog 2026 — Factory Price Surat`;
+  const baseTitle = category.category_seo_title || custom?.title || `${category.name} Wholesale Catalog 2026 — Factory Price Surat`;
+  const title = page > 1 ? `Page ${page} | ${baseTitle}` : baseTitle;
+  
   const description = category.category_seo_description || custom?.description || `Buy ${category.name} at wholesale rates direct from Surat manufacturers. Perfect for bulk buyers & resellers with worldwide delivery.`;
-  const url = `https://ethnicaa.com/category/${slug}`;
+  const baseUrl = `https://ethnicaa.com/category/${slug}`;
+  const url = page > 1 ? `${baseUrl}/?page=${page}` : baseUrl;
 
   return {
     title,
     description,
     alternates: {
       canonical: url,
+      languages: {
+        "en-in": url,
+        "x-default": url,
+      },
     },
     openGraph: {
       title,
@@ -161,7 +169,7 @@ export default async function Page({ params, searchParams }) {
   const categorySlug = decodeURIComponent(params.name);
   const sort = searchParams?.sort || "latest";
   const page = parseInt(searchParams?.page) || 1;
-  
+
   const [category, productsResult] = await Promise.all([
     getCategoryData(categorySlug),
     getProductsData(categorySlug, sort, page)

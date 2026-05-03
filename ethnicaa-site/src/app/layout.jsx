@@ -145,9 +145,7 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://assets.apollo.io" />
         <link rel="dns-prefetch" href="https://assets.apollo.io" />
         
-        {/* Hreflang for Regional SEO */}
-        <link rel="alternate" href="https://ethnicaa.com" hrefLang="en-in" />
-        <link rel="alternate" href="https://ethnicaa.com" hrefLang="x-default" />
+
 
         {/* Global Schema */}
         <script

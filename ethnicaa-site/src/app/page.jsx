@@ -4,35 +4,49 @@ import { db } from "@/lib/firebase";
 import { isValidImageUrl } from "@/utils/imageUtils";
 import { brandsData } from "@/lib/brands-data";
 
-export const metadata = {
-  title: "Ethnicaa: Surat Wholesale Sarees, Kurtis & Pakistani Suits",
-  description: "Ethnicaa: Buy wholesale Kurtis, Sarees & Suits direct from Surat manufacturers. Best pricing & fast global shipping for resellers.",
-  keywords: "Surat textile market wholesale, ethnic wear wholesale Surat, wholesale sarees Surat, wholesale kurtis Surat, Pakistani suits wholesale price, direct factory wholesale, Surat catalog wholesale, B2B clothing suppliers India, ethnic wear for resellers",
-  alternates: {
-    canonical: "https://ethnicaa.com",
-  },
-  openGraph: {
-    title: "Ethnicaa: Surat Wholesale Sarees, Kurtis & Pakistani Suits",
-    description: "Shop wholesale sarees, kurtis & Pakistani suits direct from Surat manufacturers. Best B2B prices, verified catalogs, dispatch in 24-48hrs.",
-    url: "https://ethnicaa.com",
-    siteName: "Ethnicaa Wholesale",
-    images: [
-      {
-        url: "https://ethnicaa.com/logo.png",
-        width: 800,
-        height: 600,
-        alt: "Ethnicaa Wholesale",
+export async function generateMetadata({ searchParams }) {
+  const page = parseInt(searchParams?.page) || 1;
+  const baseUrl = "https://ethnicaa.com";
+  const url = page > 1 ? `${baseUrl}/?page=${page}` : baseUrl;
+  
+  const title = page > 1 
+    ? `Page ${page} | Ethnicaa: Surat Wholesale Sarees, Kurtis & Pakistani Suits` 
+    : "Ethnicaa: Surat Wholesale Sarees, Kurtis & Pakistani Suits";
+
+  return {
+    title,
+    description: "Ethnicaa: Buy wholesale Kurtis, Sarees & Suits direct from Surat manufacturers. Best pricing & fast global shipping for resellers.",
+    keywords: "Surat textile market wholesale, ethnic wear wholesale Surat, wholesale sarees Surat, wholesale kurtis Surat, Pakistani suits wholesale price, direct factory wholesale, Surat catalog wholesale, B2B clothing suppliers India, ethnic wear for resellers",
+    alternates: {
+      canonical: url,
+      languages: {
+        "en-in": url,
+        "x-default": url,
       },
-    ],
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Ethnicaa: Surat Wholesale Sarees, Kurtis & Pakistani Suits",
-    description: "Shop wholesale sarees, kurtis & Pakistani suits direct from Surat manufacturers. Best B2B prices.",
-    images: ["https://ethnicaa.com/logo.png"],
-  },
-};
+    },
+    openGraph: {
+      title,
+      description: "Shop wholesale sarees, kurtis & Pakistani suits direct from Surat manufacturers. Best B2B prices, verified catalogs, dispatch in 24-48hrs.",
+      url,
+      siteName: "Ethnicaa Wholesale",
+      images: [
+        {
+          url: "https://ethnicaa.com/logo.png",
+          width: 800,
+          height: 600,
+          alt: "Ethnicaa Wholesale",
+        },
+      ],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: "Shop wholesale sarees, kurtis & Pakistani suits direct from Surat manufacturers. Best B2B prices.",
+      images: ["https://ethnicaa.com/logo.png"],
+    },
+  };
+}
 
 export const revalidate = 3600;
 

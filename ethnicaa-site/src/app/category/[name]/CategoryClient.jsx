@@ -83,7 +83,9 @@ export default function CategoryClient({
     <div style={styles.container}>
       <Breadcrumbs items={[{ name: category?.name || categorySlug.replace(/-/g, " "), url: "" }]} />
 
-      <h1 style={styles.pageTitle}>{seoContent.title}</h1>
+      <h1 style={styles.pageTitle}>
+        {seoContent.title} {currentPage > 1 ? `(Page ${currentPage})` : ""}
+      </h1>
 
       <div style={styles.introBox}>
         <p style={styles.introText}>{seoContent.intro}</p>

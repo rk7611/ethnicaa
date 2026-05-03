@@ -20,6 +20,11 @@ export default async function sitemap() {
     "/privacy-policy",
     "/shipping-policy",
     "/refund-cancellation",
+    "/terms-conditions",
+    "/how-to-order",
+    "/faq",
+    "/wholesale-manufacturers-in-surat",
+    "/surat-wholesale-market-guide",
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
