@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { db } from "../firebase";
-import { collection, query, where, getDocs, doc, updateDoc, serverTimestamp, writeBatch, orderBy, limit, startAfter } from "firebase/firestore";
+import { collection, query, where, getDocs, doc, updateDoc, serverTimestamp, writeBatch, orderBy, limit, startAfter, getCountFromServer } from "firebase/firestore";
 import AdminLayout from "../components/AdminLayout";
+import Pagination from "../components/Pagination";
 import { useNavigate } from "react-router-dom";
 
 /* -----------------------------------------------------------
@@ -21,26 +22,21 @@ const PAGE_SIZE = 50;
 export default function BulkEdit() {
   const [products, setProducts] = useState([]);
   const [editedProducts, setEditedProducts] = useState({}); // { id: { field: value } }
-  const [loading, setLoading] = useState(true);
-  const [loadingMore, setLoadingMore] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
+  const [totalCount, setTotalCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [cursors, setCursors] = useState({});
   const [saving, setSaving] = useState(false);
   const [filter, setFilter] = useState("all"); // all, draft, published
-  const lastDoc = useRef(null);
   const [previewProduct, setPreviewProduct] = useState(null);
   const nav = useNavigate();
 
   useEffect(() => {
-    fetchProducts();
+    fetchProducts(1);
   }, [filter]);
 
-  const fetchProducts = async (isMore = false) => {
-    if (isMore) setLoadingMore(true);
-    else {
-      setLoading(true);
-      setProducts([]);
-      lastDoc.current = null;
-    }
+  const fetchProducts = async (page = 1) => {
+    setLoading(true);
+    setCurrentPage(page);
 
     try {
       let q = collection(db, "products");
@@ -48,10 +44,16 @@ export default function BulkEdit() {
         q = query(q, where("status", "==", filter));
       }
       
+      if (page === 1) {
+        const countSnap = await getCountFromServer(q);
+        setTotalCount(countSnap.data().count);
+        setCursors({});
+      }
+
       q = query(q, orderBy("createdAt", "desc"));
       
-      if (isMore && lastDoc.current) {
-        q = query(q, startAfter(lastDoc.current));
+      if (page > 1 && cursors[page - 1]) {
+        q = query(q, startAfter(cursors[page - 1]));
       }
       
       q = query(q, limit(PAGE_SIZE));
@@ -59,21 +61,19 @@ export default function BulkEdit() {
       const snap = await getDocs(q);
       const list = snap.docs.map(d => ({ id: d.id, ...d.data() }));
       
-      if (isMore) {
-        setProducts(prev => [...prev, ...list]);
-      } else {
-        setProducts(list);
-        setEditedProducts({}); // Reset local changes only on initial fetch
+      setProducts(list);
+      setEditedProducts({}); // Reset local changes on fetch
+      
+      if (snap.docs.length > 0) {
+        setCursors(prev => ({
+          ...prev,
+          [page]: snap.docs[snap.docs.length - 1]
+        }));
       }
-      
-      lastDoc.current = snap.docs[snap.docs.length - 1];
-      setHasMore(snap.docs.length === PAGE_SIZE);
-      
     } catch (err) {
       console.error(err);
     } finally {
       setLoading(false);
-      setLoadingMore(false);
     }
   };
 
@@ -116,7 +116,7 @@ export default function BulkEdit() {
       }
       await batch.commit();
       alert(`Successfully updated ${idsToUpdate.length} products!`);
-      fetchProducts();
+      fetchProducts(currentPage);
     } catch (err) {
       alert("Error saving changes: " + err.message);
     } finally {
@@ -253,17 +253,11 @@ export default function BulkEdit() {
         </div>
       )}
 
-      {hasMore && (
-        <div style={styles.loadMoreContainer}>
-          <button 
-            style={styles.loadMoreBtn} 
-            onClick={() => fetchProducts(true)} 
-            disabled={loadingMore}
-          >
-            {loadingMore ? "Loading..." : "Load More Products"}
-          </button>
-        </div>
-      )}
+      <Pagination 
+        totalPages={Math.ceil(totalCount / PAGE_SIZE)}
+        currentPage={currentPage}
+        onPageChange={fetchProducts}
+      />
 
       {/* PREVIEW MODAL */}
       {previewProduct && (
