@@ -6,13 +6,14 @@ import Image from "next/image";
 import Link from "next/link";
 import EnquireButton from "@/components/EnquireButton";
 import FAQSchema from "@/components/FAQSchema";
+import { cleanTitle } from "@/lib/metadata-utils";
 
 export async function generateMetadata({ params }) {
   const brand = brandsData[params.brandSlug];
   if (!brand) return {};
 
   return {
-    title: brand.title || `${brand.name} Wholesale | Latest 2026 Collections | Ethnicaa`,
+    title: cleanTitle(brand.title || `${brand.name} Wholesale | Latest 2026 Collections`),
     description: brand.description,
     alternates: {
       canonical: `https://ethnicaa.com/brands/${params.brandSlug}`,

@@ -88,7 +88,7 @@ useEffect(() => {
 
   /* LOAD PRODUCT (only if not provided) */
   useEffect(() => {
-    if (initialProduct && product && product.id === slug) return;
+    if (initialProduct) return;
 
     async function load() {
       setLoading(true);

@@ -202,7 +202,9 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
       */}
 
       <h1 style={styles.pageH1}>
-        Ethnicaa: Surat Wholesale Sarees, Kurtis & Pakistani Suits {currentPage > 1 ? `(Page ${currentPage})` : ""}
+        {currentPage > 1
+          ? `Page ${currentPage} — Wholesale Ethnic Wear Direct from Surat Manufacturers`
+          : "Buy Wholesale Sarees, Kurtis & Suits Direct from Surat — Factory Price, Pan-India Shipping"}
       </h1>
 
       {currentPage === 1 && <TrustBadges />}

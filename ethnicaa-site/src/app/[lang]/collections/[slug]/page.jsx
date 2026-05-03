@@ -8,24 +8,20 @@ import {
 } from "@/lib/seo-utils";
 import CollectionsClient from "@/app/collections/[slug]/CollectionsClient";
 import { notFound } from "next/navigation";
+import { cleanTitle, collectionLanguageAlternates } from "@/lib/metadata-utils";
 
 export async function generateMetadata({ params }) {
   const { lang, slug } = params;
   if (!LANGUAGES[lang]) return {};
 
   const components = parseCollectionSlug(slug, lang);
-  const title = generateCollectionTitle(components, lang);
+  const title = cleanTitle(generateCollectionTitle(components, lang));
   const description = generateCollectionDescription(components, lang);
 
   // hreflang alternates
   const alternates = {
     canonical: `https://ethnicaa.com/${lang}/collections/${slug}`,
-    languages: {
-      "en": `https://ethnicaa.com/collections/${slug}`,
-      "hi": `https://ethnicaa.com/hi/collections/${slug}`,
-      "te": `https://ethnicaa.com/te/collections/${slug}`,
-      "ta": `https://ethnicaa.com/ta/collections/${slug}`,
-    }
+    languages: collectionLanguageAlternates(slug),
   };
 
   return {

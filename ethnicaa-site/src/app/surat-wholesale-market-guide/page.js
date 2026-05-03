@@ -3,7 +3,7 @@ import TrustBadges from "@/components/TrustBadges";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const metadata = {
-  title: "Ultimate Guide to Surat Wholesale Market: Top Fabrics & Markets 2026",
+  title: "Surat Wholesale Market Guide 2026",
   description: "Explore the complete guide to Surat textile wholesale market. Learn about the best markets (Ring Road, Millennium) and top fabrics like Silk, Organza, and Georgette.",
   alternates: {
     canonical: "https://ethnicaa.com/surat-wholesale-market-guide",

@@ -10,7 +10,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import { parseCollectionSlug, CITY_CONTENT } from "@/lib/seo-utils";
+import { parseCollectionSlug, CITY_CONTENT, VERNACULAR_MAP } from "@/lib/seo-utils";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -83,7 +83,7 @@ export default function CollectionsClient({ slug, initialProducts, lang = "en", 
       <div style={styles.grid}>
         {!loading && products.map((p) => (
           <div key={p.id} className="premium-card" style={styles.card}>
-            <Link href={`/product/${p.slug}`}>
+            <Link href={`/product/${p.slug || p.id}`}>
               <div style={styles.imgWrapper}>
                 <Image
                   src={p.images?.[0] || "https://ethnicaa.com/logo.png"}

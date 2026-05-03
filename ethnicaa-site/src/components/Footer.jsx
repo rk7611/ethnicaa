@@ -58,8 +58,6 @@ export default function Footer() {
               <li style={{ marginTop: 15 }}>
                 <div style={{ display: "flex", gap: 15 }}>
                   <a href="https://instagram.com/rk7611" target="_blank" rel="noopener noreferrer" style={styles.link} aria-label="Instagram">Instagram</a>
-                  <a href="https://facebook.com/ethnicaa" target="_blank" rel="noopener noreferrer" style={styles.link} aria-label="Facebook">Facebook</a>
-                  <a href="https://linkedin.com/company/ethnicaa" target="_blank" rel="noopener noreferrer" style={styles.link} aria-label="LinkedIn">LinkedIn</a>
                 </div>
               </li>
             </ul>

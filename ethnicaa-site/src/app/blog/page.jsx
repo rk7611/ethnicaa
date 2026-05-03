@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 export const metadata = {
-  title: "Ethnicaa Blog — Wholesale Reselling Guide & Surat Market News",
+  title: "Wholesale Blog & Surat Market Guides",
   description: "Learn how to grow your reselling business. Expert guides on the Surat textile market, latest ethnic wear trends, and business tips for boutique owners.",
   keywords: "wholesale business blog, Surat textile market news, ethnic wear trends 2026, reselling business India, clothing wholesale tips",
   alternates: {

@@ -39,6 +39,11 @@ export function middleware(request) {
     }
   }
 
+  if (url.pathname === "/en" || url.pathname.startsWith("/en/")) {
+    url.pathname = url.pathname.replace(/^\/en\/?/, "/");
+    return NextResponse.redirect(url, 301);
+  }
+
   // If host starts with www. redirect to non-www
   if (host && host.startsWith("www.")) {
     const newHost = host.replace("www.", "");

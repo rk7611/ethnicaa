@@ -3,6 +3,7 @@ import { collection, query, where, orderBy, limit, getDocs, getCountFromServer }
 import { db } from "@/lib/firebase";
 import { isValidImageUrl } from "@/utils/imageUtils";
 import { brandsData } from "@/lib/brands-data";
+import { cleanTitle } from "@/lib/metadata-utils";
 
 export async function generateMetadata({ searchParams }) {
   const page = parseInt(searchParams?.page) || 1;
@@ -14,7 +15,7 @@ export async function generateMetadata({ searchParams }) {
     : "Ethnicaa: Surat Wholesale Sarees, Kurtis & Pakistani Suits";
 
   return {
-    title,
+    title: cleanTitle(title),
     description: "Ethnicaa: Buy wholesale Kurtis, Sarees & Suits direct from Surat manufacturers. Best pricing & fast global shipping for resellers.",
     keywords: "Surat textile market wholesale, ethnic wear wholesale Surat, wholesale sarees Surat, wholesale kurtis Surat, Pakistani suits wholesale price, direct factory wholesale, Surat catalog wholesale, B2B clothing suppliers India, ethnic wear for resellers",
     alternates: {
@@ -25,7 +26,7 @@ export async function generateMetadata({ searchParams }) {
       },
     },
     openGraph: {
-      title,
+      title: cleanTitle(title),
       description: "Shop wholesale sarees, kurtis & Pakistani suits direct from Surat manufacturers. Best B2B prices, verified catalogs, dispatch in 24-48hrs.",
       url,
       siteName: "Ethnicaa Wholesale",
@@ -41,7 +42,7 @@ export async function generateMetadata({ searchParams }) {
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: cleanTitle(title),
       description: "Shop wholesale sarees, kurtis & Pakistani suits direct from Surat manufacturers. Best B2B prices.",
       images: ["https://ethnicaa.com/logo.png"],
     },
@@ -51,6 +52,10 @@ export async function generateMetadata({ searchParams }) {
 export const revalidate = 3600;
 
 import { consolidateCategories } from "@/lib/category-utils";
+
+function toPlain(value) {
+  return JSON.parse(JSON.stringify(value));
+}
 
 async function getHomeData(page = 1) {
   const PAGE_SIZE = 30;
@@ -128,10 +133,10 @@ export default async function Home({ searchParams }) {
 
   return (
     <HomeClient 
-      initialBanners={banners} 
-      initialCategories={categories} 
-      initialProducts={products} 
-      initialBrands={brands}
+      initialBanners={toPlain(banners)}
+      initialCategories={toPlain(categories)}
+      initialProducts={toPlain(products)}
+      initialBrands={toPlain(brands)}
       currentPage={page}
       totalPages={totalPages}
     />

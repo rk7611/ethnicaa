@@ -9,8 +9,13 @@ import FAQSchema from "@/components/FAQSchema";
 import InternalLinking from "@/components/InternalLinking";
 import { collection, query, where, orderBy, limit, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import { cleanTitle, collectionLanguageAlternates } from "@/lib/metadata-utils";
 
 export const dynamic = "force-dynamic";
+
+function toPlain(value) {
+  return JSON.parse(JSON.stringify(value));
+}
 
 async function getCollectionProducts(slug) {
   const components = parseCollectionSlug(slug);
@@ -60,17 +65,18 @@ export async function generateMetadata({ params }) {
 
   if (keywordPage) {
     return {
-      title: keywordPage.title,
+      title: cleanTitle(keywordPage.title),
       description: keywordPage.meta,
       alternates: {
         canonical: `https://ethnicaa.com/collections/${slug}`,
+        languages: collectionLanguageAlternates(slug),
       },
     };
   }
 
   const components = parseCollectionSlug(slug);
   
-  const title = generateCollectionTitle(components);
+  const title = cleanTitle(generateCollectionTitle(components));
   const description = generateCollectionDescription(components);
   const url = `https://ethnicaa.com/collections/${slug}`;
 
@@ -79,6 +85,7 @@ export async function generateMetadata({ params }) {
     description,
     alternates: {
       canonical: url,
+      languages: collectionLanguageAlternates(slug),
     },
     openGraph: {
       title,
@@ -168,7 +175,7 @@ export default async function Page({ params }) {
       />
       <CollectionsClient 
         slug={params.slug} 
-        initialProducts={products} 
+        initialProducts={toPlain(products)}
         titleTag={keywordPage ? "h2" : "h1"}
       />
       {keywordPage && (

@@ -2,6 +2,7 @@ import { blogs } from "@/lib/blog-data";
 import BlogPost from "@/app/blog/[slug]/page";
 import { LANGUAGES } from "@/lib/seo-utils";
 import { notFound } from "next/navigation";
+import { blogLanguageAlternates, cleanTitle } from "@/lib/metadata-utils";
 
 export async function generateMetadata({ params }) {
   const { lang, slug } = params;
@@ -9,13 +10,11 @@ export async function generateMetadata({ params }) {
   if (!post) return {};
 
   return {
-    title: `${post.title} | Ethnicaa`,
+    title: cleanTitle(post.title),
     description: post.excerpt,
     alternates: {
-      languages: {
-        "en": `https://ethnicaa.com/blog/${slug}`,
-        [lang]: `https://ethnicaa.com/${lang}/blog/${slug}`,
-      }
+      canonical: `https://ethnicaa.com/${lang}/blog/${slug}`,
+      languages: blogLanguageAlternates(slug, lang),
     }
   };
 }

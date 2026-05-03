@@ -41,8 +41,7 @@ export default async function sitemap() {
     "salwar-suits",
     "lehenga",
     "gowns",
-    "all-products",
-    "offers"
+    "all-products"
   ].map((cat) => ({
     url: `${baseUrl}/category/${cat}`,
     lastModified: new Date(),
@@ -63,13 +62,14 @@ export default async function sitemap() {
     productPages = snap.docs.map((doc) => {
       const data = doc.data();
       const lastMod = data.updatedAt?.seconds ? new Date(data.updatedAt.seconds * 1000) : new Date();
+      const slug = data.slug || doc.id;
       return {
-        url: `${baseUrl}/product/${data.slug || doc.id}`,
+        url: `${baseUrl}/product/${slug}`,
         lastModified: lastMod,
         changeFrequency: "weekly",
         priority: 0.7,
       };
-    });
+    }).filter((page) => !page.url.endsWith("/product/"));
   } catch (error) {
     console.error("Sitemap product fetch error:", error);
   }

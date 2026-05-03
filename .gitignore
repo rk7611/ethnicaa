@@ -16,3 +16,4 @@ social_agent/.env
 
 # Crawler & Data
 KAPAD_CRAWLER/
+scratch/

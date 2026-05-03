@@ -3,15 +3,20 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { blogLanguageAlternates, cleanTitle } from "@/lib/metadata-utils";
 
 export async function generateMetadata({ params }) {
   const post = blogs.find((b) => b.slug === params.slug);
   if (!post) return {};
 
   return {
-    title: `${post.title} | Ethnicaa Blog`,
+    title: cleanTitle(post.title),
     description: post.excerpt,
     keywords: post.keywords,
+    alternates: {
+      canonical: `https://ethnicaa.com/blog/${params.slug}`,
+      languages: blogLanguageAlternates(params.slug),
+    },
     openGraph: {
       title: post.title,
       description: post.excerpt,

@@ -2,12 +2,17 @@ import CategoryClient from "./CategoryClient";
 import { doc, getDoc, collection, query, where, getDocs, limit, orderBy, getCountFromServer } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { getCategorySeoContent } from "@/lib/commerce-seo-content";
+import { cleanTitle } from "@/lib/metadata-utils";
 
 export const dynamic = "force-dynamic";
 
 import { notFound } from "next/navigation";
 
 const PAGE_SIZE = 40;
+
+function toPlain(value) {
+  return JSON.parse(JSON.stringify(value));
+}
 
 const VALID_STATIC_CATEGORIES = [
   "sarees",
@@ -103,15 +108,15 @@ const CATEGORY_META = {
     description: "Buy wholesale sarees in Surat at factory prices. Silk, georgette, organza, cotton & designer catalogs. Best rates for resellers & boutique owners. COD available."
   },
   "kurtis": {
-    title: "Wholesale Kurtis from Surat Manufacturers | Ethnicaa Wholesale",
+    title: "Wholesale Kurtis from Surat Manufacturers",
     description: "Wholesale kurtis from Surat manufacturers. Cotton, rayon, georgette & anarkali styles. Bulk pricing for resellers, boutique owners & retailers across India."
   },
   "pakistani-suits": {
-    title: "Wholesale Pakistani Suits Surat | Direct Factory Price | Ethnicaa",
+    title: "Wholesale Pakistani Suits Surat | Factory Price",
     description: "Wholesale Pakistani suits from Surat — lawn, cotton, embroidered readymade sets. Direct factory price, pan-India delivery. Best B2B rates for resellers."
   },
   "salwar-suits": {
-    title: "Wholesale Salwar Suits Catalog Surat | Ethnicaa B2B Marketplace",
+    title: "Wholesale Salwar Suits Surat | Ethnicaa B2B",
     description: "Wholesale salwar suits catalog from Surat. Designer, printed & embroidered collections for bulk buyers. Reseller-friendly pricing, fast dispatch."
   }
 };
@@ -125,7 +130,7 @@ export async function generateMetadata({ params, searchParams }) {
   
   const custom = CATEGORY_META[name];
   const baseTitle = category.category_seo_title || custom?.title || `${category.name} Wholesale Catalog 2026 — Factory Price Surat`;
-  const title = page > 1 ? `Page ${page} | ${baseTitle}` : baseTitle;
+  const title = cleanTitle(page > 1 ? `Page ${page} | ${baseTitle}` : baseTitle);
   
   const description = category.category_seo_description || custom?.description || `Buy ${category.name} at wholesale rates direct from Surat manufacturers. Perfect for bulk buyers & resellers with worldwide delivery.`;
   const baseUrl = `https://ethnicaa.com/category/${slug}`;
@@ -246,8 +251,8 @@ export default async function Page({ params, searchParams }) {
       <CategoryClient 
         name={params.name} 
         searchParams={searchParams}
-        initialCategory={category}
-        initialProducts={products}
+        initialCategory={toPlain(category)}
+        initialProducts={toPlain(products)}
         currentPage={page}
         totalPages={totalPages}
         categorySeo={categorySeo}

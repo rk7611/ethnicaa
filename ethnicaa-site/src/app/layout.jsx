@@ -6,7 +6,7 @@ export const metadata = {
 
   title: {
     default: "Ethnicaa Wholesale | Surat Wholesale Market - Kurtis, Sarees & Suits",
-    template: "%s | Ethnicaa Wholesale",
+    template: "%s | Ethnicaa",
   },
 
   description:
@@ -77,8 +77,7 @@ const globalSchema = {
       },
       "sameAs": [
         "https://wa.me/9586346332",
-        "https://www.instagram.com/rk7611",
-        "https://www.facebook.com/ethnicaa"
+        "https://www.instagram.com/rk7611"
       ]
     },
     {
@@ -142,32 +141,10 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
-        <link rel="preconnect" href="https://assets.apollo.io" />
-        <link rel="dns-prefetch" href="https://assets.apollo.io" />
-        
-
-
         {/* Global Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(globalSchema) }}
-        />
-
-        {/* Apollo Tracking Script - Delayed for Performance */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              setTimeout(function(){
-                var n=Math.random().toString(36).substring(7),
-                o=document.createElement("script");
-                o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,
-                o.async=!0,
-                o.defer=!0,
-                o.onload=function(){window.trackingFunctions.onLoad({appId:"69edb47dfe097c000d29d3cd"})},
-                document.head.appendChild(o)
-              }, 3000);
-            `,
-          }}
         />
       </head>
 

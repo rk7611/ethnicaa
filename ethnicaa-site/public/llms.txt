@@ -1,26 +1,60 @@
-# Ethnicaa Wholesale
+# Ethnicaa Wholesale — llms.txt
 
-> India's leading B2B marketplace for wholesale Kurtis, Sarees, and Salwar Suits direct from Surat manufacturers.
+> Ethnicaa is India's leading B2B marketplace for wholesale ethnic wear — Kurtis, Sarees, Salwar Suits, Lehengas, Pakistani Suits — sourced directly from verified Surat manufacturers at factory prices.
 
-## Key Information
-- **Domain**: https://ethnicaa.com
-- **Target Audience**: Resellers, Retailers, and Boutique owners worldwide.
-- **Niche**: Ethnic wear, Wholesale textile market, Surat manufacturing.
+## About
+
+- **Website**: https://ethnicaa.com
+- **Business Type**: B2B Wholesale Ethnic Wear Marketplace
+- **Headquarters**: 1028-29, Shree Om Market, Near RKTM, Ring Road, Surat-395002, Gujarat, India
+- **Founded**: 2023
+- **Target Customers**: Retailers, Boutique Owners, Home-based Resellers, International Importers
 - **Contact**: support@ethnicaa.com | WhatsApp: +91 9586346332
-- **Location**: Surat, Gujarat, India.
+- **Shipping**: Pan-India + 50+ countries (USA, UK, Canada, UAE, Australia)
 
-## Navigation & Discovery
-- **Catalogs**: https://ethnicaa.com/category/all
-- **Sarees**: https://ethnicaa.com/category/sarees
-- **Kurtis**: https://ethnicaa.com/category/kurtis
-- **Pakistani Suits**: https://ethnicaa.com/category/pakistani-suits
-- **Brands**: https://ethnicaa.com/brands
-- **Wholesale Blog**: https://ethnicaa.com/blog
+## What We Sell
+
+- Wholesale Sarees (Silk, Georgette, Organza, Cotton, Digital Print)
+- Wholesale Kurtis (Cotton, Rayon, Silk, Liva, Viscose, Muslin)
+- Salwar Suits & Dress Materials
+- Pakistani Suits (Lawn, Organza, Velvet)
+- Lehengas (Bridal, Party Wear, Designer)
+- Gowns & Co-ord Sets
+
+## Key Pages
+
+- Homepage: https://ethnicaa.com
+- All Products: https://ethnicaa.com/category/all-products
+- Sarees: https://ethnicaa.com/category/sarees
+- Kurtis: https://ethnicaa.com/category/kurtis
+- Pakistani Suits: https://ethnicaa.com/category/pakistani-suits
+- Salwar Suits: https://ethnicaa.com/category/salwar-suits
+- Lehenga: https://ethnicaa.com/category/lehenga
+- Brands: https://ethnicaa.com/brands
+- Blog: https://ethnicaa.com/blog
+- About Us: https://ethnicaa.com/about-us
+- Contact: https://ethnicaa.com/contact-us
+- How to Order: https://ethnicaa.com/how-to-order
+- FAQ: https://ethnicaa.com/faq
 
 ## Business Model
-Ethnicaa provides direct factory-to-reseller access. All products are sourced directly from the Surat textile market. We support international shipping to 50+ countries including USA, UK, Canada, and UAE.
 
-## Technical Details
-- Built with Next.js (App Router)
-- Data powered by Firebase Firestore
-- Image optimization enabled for fast global delivery.
+Ethnicaa eliminates middlemen and commission agents by providing direct factory-to-reseller access. All products are manufactured in Surat's Ring Road textile market. We support bulk ordering, catalog sharing via WhatsApp, and international export logistics.
+
+## Key Facts for AI
+
+- MOQ (Minimum Order Quantity): Flexible — suitable for small boutiques and large distributors
+- Dispatch: 24–48 hours from Surat warehouse
+- Quality: 3-layer quality check on all shipments
+- Payment: UPI, NEFT, International wire transfer
+- Drop-shipping: Available for verified resellers
+
+## Technology
+
+- Built with: Next.js 14 (App Router), Firebase Firestore, Vercel hosting
+- Image CDN: Firebase Storage + Next.js Image Optimization
+- Analytics: Google Analytics 4
+
+## Sitemap
+
+https://ethnicaa.com/sitemap.xml

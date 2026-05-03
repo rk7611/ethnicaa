@@ -3,24 +3,53 @@ import { doc, getDoc, collection, query, where, getDocs, limit } from "firebase/
 import { db } from "@/lib/firebase";
 import { notFound } from "next/navigation";
 import { buildProductDescription, buildProductFaqs } from "@/lib/commerce-seo-content";
+import { cleanTitle } from "@/lib/metadata-utils";
 
 export const dynamic = "force-dynamic";
 
+async function getProductBySlug(slug) {
+  const snap = await getDoc(doc(db, "products", slug));
+  if (snap.exists()) return { id: snap.id, ...snap.data() };
+
+  const slugQuery = query(
+    collection(db, "products"),
+    where("slug", "==", slug),
+    limit(1)
+  );
+  const slugSnap = await getDocs(slugQuery);
+  if (slugSnap.empty) return null;
+
+  const found = slugSnap.docs[0];
+  return { id: found.id, ...found.data() };
+}
+
+function slimProduct(product) {
+  const images = Array.isArray(product.images) ? product.images.slice(0, 12) : [];
+
+  return {
+    ...product,
+    images,
+    description: product.description ? String(product.description).slice(0, 1200) : product.description,
+  };
+}
+
+function toPlain(value) {
+  return JSON.parse(JSON.stringify(value));
+}
+
 export async function generateMetadata({ params }) {
   const slug = params.slug;
-  const snap = await getDoc(doc(db, "products", slug));
+  const p = await getProductBySlug(slug);
 
-  if (!snap.exists()) {
+  if (!p) {
     return notFound();
   }
 
-  const p = snap.data();
   const brand = p.brand || "Ethnicaa";
   const catalog = p.catalog || p.name;
-  const category = p.categoryNames?.[0] || "Ethnic Wear";
   
   // High-Conversion B2B Title Pattern
-  const title = p.seo_title || `${brand} ${catalog} | Wholesale Surat Textile Market | Best Price`;
+  const title = cleanTitle(p.seo_title || `${brand} ${catalog} | Wholesale Surat Textile Market`);
   
   // High-Conversion B2B Description Pattern
   const description = p.seo_description || buildProductDescription({ ...p, id: slug }).slice(0, 160);
@@ -73,28 +102,27 @@ async function getSimilarProducts(product, slug) {
   const snap = await getDocs(q);
   return snap.docs
     .map((d) => ({ id: d.id, ...d.data() }))
-    .filter((p) => p.slug !== slug)
+    .filter((p) => (p.slug || p.id) !== slug)
     .slice(0, 6);
 }
 
 export default async function Page({ params, searchParams }) {
   const slug = params.slug;
-  const snap = await getDoc(doc(db, "products", slug));
+  const found = await getProductBySlug(slug);
   
-  if (!snap.exists()) {
+  if (!found) {
     return notFound();
   }
 
-  const p = snap.data();
-  const product = { id: slug, ...p };
+  const product = slimProduct(found);
   const similar = await getSimilarProducts(product, slug);
   const productFaqs = buildProductFaqs(product);
   const productSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.catalog || product.name,
-    image: product.images || [],
-      description: product.seo_description || product.description || buildProductDescription(product),
+    image: (product.images || []).slice(0, 6),
+      description: (product.seo_description || product.description || buildProductDescription(product)).slice(0, 500),
     sku: (product.sku || product.id).toString().substring(0, 40),
     mpn: product.id.toString().substring(0, 40),
     brand: { "@type": "Brand", name: product.brand || "Ethnicaa" },
@@ -106,7 +134,7 @@ export default async function Page({ params, searchParams }) {
       "price": (product.price || product.avgPrice || product.avg_price || "0").toString().replace(/[^0-9.]/g, ""),
       "itemCondition": "https://schema.org/NewCondition",
       "availability": "https://schema.org/InStock",
-      "url": `https://ethnicaa.com/product/${product.id}`,
+      "url": `https://ethnicaa.com/product/${slug}`,
       "priceValidUntil": "2026-12-31",
       "seller": { "@type": "Organization", "name": "Ethnicaa Wholesale" },
       "hasMerchantReturnPolicy": {
@@ -211,8 +239,8 @@ export default async function Page({ params, searchParams }) {
       <ProductClient 
         slug={params.slug} 
         searchParams={searchParams}
-        initialProduct={product}
-        initialSimilar={similar}
+        initialProduct={toPlain(product)}
+        initialSimilar={toPlain(similar)}
       />
     </>
   );

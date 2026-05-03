@@ -2,8 +2,10 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function ProductCard({ product }) {
+  const productPath = `/product/${product.slug || product.id}`;
+
   return (
-    <Link href={`/product/${product.slug}`} style={styles.card}>
+    <Link href={productPath} style={styles.card}>
       <div style={styles.imageWrapper}>
         <Image
           src={product.cover || product.images?.[0]}
