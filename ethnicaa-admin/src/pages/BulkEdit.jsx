@@ -1,9 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { db } from "../firebase";
 import { collection, query, where, getDocs, doc, updateDoc, serverTimestamp, writeBatch, orderBy, limit, startAfter, getCountFromServer } from "firebase/firestore";
 import AdminLayout from "../components/AdminLayout";
 import Pagination from "../components/Pagination";
-import { useNavigate } from "react-router-dom";
 
 /* -----------------------------------------------------------
    HELPERS
@@ -29,7 +28,6 @@ export default function BulkEdit() {
   const [saving, setSaving] = useState(false);
   const [filter, setFilter] = useState("all"); // all, draft, published
   const [previewProduct, setPreviewProduct] = useState(null);
-  const nav = useNavigate();
 
   useEffect(() => {
     fetchProducts(1);
