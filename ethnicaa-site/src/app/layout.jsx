@@ -138,6 +138,7 @@ import WhatsAppPopup from "@/components/WhatsAppPopup";
 const inter = Inter({ subsets: ["latin"] });
 
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export default function RootLayout({ children }) {
   return (
@@ -163,6 +164,7 @@ export default function RootLayout({ children }) {
         <main>{children}</main>
         <Footer />
         <WhatsAppPopup />
+        <SpeedInsights />
       </body>
     </html>
   );
