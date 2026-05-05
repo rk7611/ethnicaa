@@ -1,4 +1,4 @@
-export default function FAQSchema({ faqs = [] }) {
+export default function FAQSchema({ faqs = [], id = "faq-schema" }) {
   if (!faqs || faqs.length === 0) return null;
 
   const schema = {
@@ -16,6 +16,7 @@ export default function FAQSchema({ faqs = [] }) {
 
   return (
     <script
+      id={id}
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />

@@ -167,6 +167,21 @@ export default async function Page({ params }) {
     }
   ];
 
+  if (keywordPage) {
+    schemaList.push({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": keywordPage.faqs.map((faq) => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.answer
+        }
+      }))
+    });
+  }
+
   return (
     <>
       <script
@@ -201,7 +216,6 @@ export default async function Page({ params }) {
               </div>
             ))}
           </section>
-          <FAQSchema faqs={keywordPage.faqs} />
           <InternalLinking links={internalLinks} />
         </main>
       )}

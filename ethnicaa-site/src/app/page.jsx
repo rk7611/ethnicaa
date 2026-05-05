@@ -4,6 +4,26 @@ import { db } from "@/lib/firebase";
 import { isValidImageUrl } from "@/utils/imageUtils";
 import { brandsData } from "@/lib/brands-data";
 import { cleanTitle } from "@/lib/metadata-utils";
+import FAQSchema from "@/components/FAQSchema";
+
+const homeFaqs = [
+  {
+    question: "How do I buy wholesale from Ethnicaa?",
+    answer: "Buying wholesale is easy! Browse our catalogs for Kurtis, Sarees, and Suits. Once you find a product you like, click the 'Enquire on WhatsApp' button to get live stock availability and the best bulk pricing direct from our Surat warehouse."
+  },
+  {
+    question: "Do you ship internationally?",
+    answer: "Yes, Ethnicaa ships to over 50+ countries including USA, UK, Canada, Australia, and UAE. We use express shipping partners to ensure your wholesale orders reach you safely and quickly."
+  },
+  {
+    question: "What is the minimum order quantity (MOQ)?",
+    answer: "Most of our catalogs are available as full sets (one of each size/color in a design). For many items, we also support custom bulk orders. Contact our wholesale managers on WhatsApp for specific product MOQs."
+  },
+  {
+    question: "Are these direct factory prices from Surat?",
+    answer: "Absolutely. Ethnicaa is based in the heart of the Surat textile market. We work directly with manufacturers to bring you factory-direct rates, eliminating middlemen and helping you maximize your margins."
+  }
+];
 
 export async function generateMetadata({ searchParams }) {
   const page = parseInt(searchParams?.page) || 1;
@@ -132,13 +152,17 @@ export default async function Home({ searchParams }) {
   const { banners, categories, products, totalPages, brands } = await getHomeData(page);
 
   return (
-    <HomeClient 
-      initialBanners={toPlain(banners)}
-      initialCategories={toPlain(categories)}
-      initialProducts={toPlain(products)}
-      initialBrands={toPlain(brands)}
-      currentPage={page}
-      totalPages={totalPages}
-    />
+    <>
+      <FAQSchema faqs={homeFaqs} id="home-faq-schema" />
+      <HomeClient 
+        initialBanners={toPlain(banners)}
+        initialCategories={toPlain(categories)}
+        initialProducts={toPlain(products)}
+        initialBrands={toPlain(brands)}
+        homeFaqs={homeFaqs}
+        currentPage={page}
+        totalPages={totalPages}
+      />
+    </>
   );
 }

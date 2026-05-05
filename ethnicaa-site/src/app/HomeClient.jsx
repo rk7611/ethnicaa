@@ -19,7 +19,6 @@ import BannerSlider from "@/components/BannerSlider";
 import EnquireButton from "@/components/EnquireButton";
 import Pagination from "@/components/Pagination";
 import TrustBadges from "@/components/TrustBadges";
-import FAQSchema from "@/components/FAQSchema";
 
 import { blogs } from "@/lib/blog-data";
 import { consolidateCategories } from "@/lib/category-utils";
@@ -54,7 +53,7 @@ async function getBanners() {
 
 
 
-export default function HomePage({ initialBanners, initialCategories, initialProducts, initialBrands, currentPage, totalPages }) {
+export default function HomePage({ initialBanners, initialCategories, initialProducts, initialBrands, homeFaqs = [], currentPage, totalPages }) {
   const [loading, setLoading] = useState(!initialProducts);
 
   const [products, setProducts] = useState(initialProducts || []);
@@ -166,24 +165,7 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
     </section>
   `;
 
-  const homeFaqs = [
-    {
-      question: "How do I buy wholesale from Ethnicaa?",
-      answer: "Buying wholesale is easy! Browse our catalogs for Kurtis, Sarees, and Suits. Once you find a product you like, click the 'Enquire on WhatsApp' button to get live stock availability and the best bulk pricing direct from our Surat warehouse."
-    },
-    {
-      question: "Do you ship internationally?",
-      answer: "Yes, Ethnicaa ships to over 50+ countries including USA, UK, Canada, Australia, and UAE. We use express shipping partners to ensure your wholesale orders reach you safely and quickly."
-    },
-    {
-      question: "What is the minimum order quantity (MOQ)?",
-      answer: "Most of our catalogs are available as full sets (one of each size/color in a design). For many items, we also support custom bulk orders. Contact our wholesale managers on WhatsApp for specific product MOQs."
-    },
-    {
-      question: "Are these direct factory prices from Surat?",
-      answer: "Absolutely. Ethnicaa is based in the heart of the Surat textile market. We work directly with manufacturers to bring you factory-direct rates, eliminating middlemen and helping you maximize your margins."
-    }
-  ];
+
 
   return (
     <div style={styles.container}>
@@ -341,7 +323,6 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
             </div>
           ))}
         </div>
-        <FAQSchema faqs={homeFaqs} />
       </div>
 
       <div style={styles.seoBox}>
