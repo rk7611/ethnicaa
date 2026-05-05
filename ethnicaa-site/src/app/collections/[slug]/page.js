@@ -2,7 +2,8 @@ import CollectionsClient from "./CollectionsClient";
 import { 
   parseCollectionSlug, 
   generateCollectionTitle, 
-  generateCollectionDescription 
+  generateCollectionDescription,
+  CITY_CONTENT
 } from "@/lib/seo-utils";
 import { keywordPages } from "@/lib/keyword-content";
 import FAQSchema from "@/components/FAQSchema";
@@ -114,6 +115,7 @@ export async function generateMetadata({ params }) {
 export default async function Page({ params }) {
   const products = await getCollectionProducts(params.slug);
   const components = parseCollectionSlug(params.slug);
+  const cityData = components.city ? CITY_CONTENT[components.city] : null;
   const keywordPage = keywordPages[params.slug];
   const internalLinks = Object.keys(keywordPages)
     .filter((slug) => slug !== params.slug)
@@ -167,16 +169,24 @@ export default async function Page({ params }) {
     }
   ];
 
-  if (keywordPage) {
+  if (keywordPage || cityData?.faqs) {
+    const faqs = [];
+    if (keywordPage) {
+      keywordPage.faqs.forEach(f => faqs.push({ q: f.question, a: f.answer }));
+    }
+    if (cityData?.faqs) {
+      cityData.faqs.forEach(f => faqs.push({ q: f.q, a: f.a }));
+    }
+
     schemaList.push({
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      "mainEntity": keywordPage.faqs.map((faq) => ({
+      "mainEntity": faqs.map((faq) => ({
         "@type": "Question",
-        "name": faq.question,
+        "name": faq.q,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": faq.answer
+          "text": faq.a
         }
       }))
     });

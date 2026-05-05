@@ -33,28 +33,10 @@ export default function CollectionsClient({ slug, initialProducts, lang = "en", 
     // ... existing loadProducts logic (if needed for client-side navigation)
   }, [slug, initialProducts]);
 
-  // Schema for FAQ
-  const faqSchema = cityData?.faqs ? {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": cityData.faqs.map(f => ({
-      "@type": "Question",
-      "name": f.q,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": f.a
-      }
-    }))
-  } : null;
+  // Schema for FAQ moved to server-side page.js
 
   return (
     <div style={styles.container}>
-      {faqSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
-      )}
 
       <Breadcrumbs 
         items={[
