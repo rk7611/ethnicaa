@@ -91,8 +91,10 @@ export default function useProducts() {
 
       if (fabric) q = query(q, where("fabrics", "array-contains", fabric.toLowerCase().replace(/\s+/g, "-")));
 
+      const hasClientFilter = search || minPrice || maxPrice;
+
       // Get Total Count (Only on first page or filter change)
-      if (page === 1) {
+      if (!hasClientFilter && page === 1) {
         const countSnap = await getCountFromServer(q);
         setTotalCount(countSnap.data().count);
         setCursors({}); // Reset cursors on new search
@@ -110,39 +112,49 @@ export default function useProducts() {
           break;
       }
 
-      // Pagination logic
-      if (page > 1 && cursors[page - 1]) {
-        q = query(q, startAfter(cursors[page - 1]));
+      // Pagination logic (Server-side only if no client filter)
+      if (!hasClientFilter) {
+        if (page > 1 && cursors[page - 1]) {
+          q = query(q, startAfter(cursors[page - 1]));
+        }
+        q = query(q, limit(PAGE_SIZE));
       }
-
-      q = query(q, limit(PAGE_SIZE));
 
       const snapshot = await getDocs(q);
-      const list = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+      let list = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
 
-      // Client-side Filters
-      const filteredList = list.filter(p => {
-        const matchesSearch = !search || 
-          p.name?.toLowerCase().includes(search.toLowerCase()) ||
-          p.slug?.toLowerCase().includes(search.toLowerCase()) ||
-          p.brand?.toLowerCase().includes(search.toLowerCase());
-        
-        const matchesPrice =
-          (minPrice ? p.price >= Number(minPrice) : true) &&
-          (maxPrice ? p.price <= Number(maxPrice) : true);
+      // Client-side Filters & Pagination
+      if (hasClientFilter) {
+        list = list.filter(p => {
+          const matchesSearch = !search || 
+            p.name?.toLowerCase().includes(search.toLowerCase()) ||
+            p.slug?.toLowerCase().includes(search.toLowerCase()) ||
+            p.brand?.toLowerCase().includes(search.toLowerCase());
+          
+          const matchesPrice =
+            (minPrice ? p.price >= Number(minPrice) : true) &&
+            (maxPrice ? p.price <= Number(maxPrice) : true);
 
-        return matchesSearch && matchesPrice;
-      });
+          return matchesSearch && matchesPrice;
+        });
 
-      setProducts(filteredList);
+        if (page === 1) {
+          setTotalCount(list.length);
+        }
 
-      // Save cursor for NEXT page
-      if (snapshot.docs.length > 0) {
-        setCursors(prev => ({
-          ...prev,
-          [page]: snapshot.docs[snapshot.docs.length - 1]
-        }));
+        const startIndex = (page - 1) * PAGE_SIZE;
+        list = list.slice(startIndex, startIndex + PAGE_SIZE);
+      } else {
+        // Save cursor for NEXT page
+        if (snapshot.docs.length > 0) {
+          setCursors(prev => ({
+            ...prev,
+            [page]: snapshot.docs[snapshot.docs.length - 1]
+          }));
+        }
       }
+
+      setProducts(list);
 
     } catch (err) {
       console.error("Load products error:", err);
