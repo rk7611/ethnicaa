@@ -13,9 +13,9 @@ const HomeSEOContent = () => {
         <h3>Profit Blueprint: How Our Resellers Earn ₹50,000+ Monthly</h3>
         <p>We don't just sell catalogs; we enable entrepreneurship. Most of our resellers on platforms like Instagram, WhatsApp, and Facebook operate with a "High-Margin, Low-Inventory" model. Here is the Ethnicaa profit breakdown:</p>
         <ul>
-          <li><strong>Daily Wear Kurtis:</strong> Sourcing at ₹250-₹450 -> Selling at ₹750-₹950 (100%+ Margin).</li>
-          <li><strong>Pakistani Suits & Lawn Collections:</strong> Sourcing at ₹800-₹1200 -> Selling at ₹1800-₹2500 (80%+ Margin).</li>
-          <li><strong>Premium Silk Sarees:</strong> Sourcing at ₹1500-₹3000 -> Selling at ₹4500+ (Premium Boutique Margins).</li>
+          <li><strong>Daily Wear Kurtis:</strong> Sourcing at ₹250-₹450 &rarr; Selling at ₹750-₹950 (100%+ Margin).</li>
+          <li><strong>Pakistani Suits & Lawn Collections:</strong> Sourcing at ₹800-₹1200 &rarr; Selling at ₹1800-₹2500 (80%+ Margin).</li>
+          <li><strong>Premium Silk Sarees:</strong> Sourcing at ₹1500-₹3000 &rarr; Selling at ₹4500+ (Premium Boutique Margins).</li>
         </ul>
         <p>By leveraging our professional photography and verified catalogs, you can start your reselling business from home with zero stock investment.</p>
 
