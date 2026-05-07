@@ -4,14 +4,14 @@ const HomeSEOContent = () => {
   return (
     <div style={styles.seoBox}>
       <section>
-        <h2>Ethnicaa: India’s #1 Surat Wholesale Marketplace for Resellers</h2>
-        <p>Welcome to <strong>Ethnicaa Wholesale</strong>, the premier B2B platform connecting global fashion retailers and independent resellers directly with the manufacturing heart of India: <strong>Surat, Gujarat</strong>. In 2026, the ethnic wear market is more competitive than ever. To win, you don't just need products; you need a supply chain that provides factory-direct pricing, verified quality, and lightning-fast global logistics. Ethnicaa is that engine for your business.</p>
+        <h2>Ethnicaa: India&apos;s #1 Surat Wholesale Marketplace for Resellers</h2>
+        <p>Welcome to <strong>Ethnicaa Wholesale</strong>, the premier B2B platform connecting global fashion retailers and independent resellers directly with the manufacturing heart of India: <strong>Surat, Gujarat</strong>. In 2026, the ethnic wear market is more competitive than ever. To win, you don&apos;t just need products; you need a supply chain that provides factory-direct pricing, verified quality, and lightning-fast global logistics. Ethnicaa is that engine for your business.</p>
         
         <h3>The Surat Advantage: Why Source Directly from the Source?</h3>
-        <p>Surat is the undisputed textile capital of India, producing over 40% of the country's man-made fiber. By sourcing directly from our Surat-based marketplace, you eliminate up to 4 layers of middlemen (wholesalers, regional distributors, agents, and sub-agents). This allows you to access the <strong>true factory cost</strong>, giving you a 30-50% price advantage over your local competitors.</p>
+        <p>Surat is the undisputed textile capital of India, producing over 40% of the country&apos;s man-made fiber. By sourcing directly from our Surat-based marketplace, you eliminate up to 4 layers of middlemen (wholesalers, regional distributors, agents, and sub-agents). This allows you to access the <strong>true factory cost</strong>, giving you a 30-50% price advantage over your local competitors.</p>
         
         <h3>Profit Blueprint: How Our Resellers Earn ₹50,000+ Monthly</h3>
-        <p>We don't just sell catalogs; we enable entrepreneurship. Most of our resellers on platforms like Instagram, WhatsApp, and Facebook operate with a "High-Margin, Low-Inventory" model. Here is the Ethnicaa profit breakdown:</p>
+        <p>We don&apos;t just sell catalogs; we enable entrepreneurship. Most of our resellers on platforms like Instagram, WhatsApp, and Facebook operate with a &quot;High-Margin, Low-Inventory&quot; model. Here is the Ethnicaa profit breakdown:</p>
         <ul>
           <li><strong>Daily Wear Kurtis:</strong> Sourcing at ₹250-₹450 &rarr; Selling at ₹750-₹950 (100%+ Margin).</li>
           <li><strong>Pakistani Suits & Lawn Collections:</strong> Sourcing at ₹800-₹1200 &rarr; Selling at ₹1800-₹2500 (80%+ Margin).</li>
@@ -24,14 +24,14 @@ const HomeSEOContent = () => {
         <ul>
           <li><strong>Express Doorstep Delivery:</strong> Via DHL, FedEx, and Aramex (5-7 business days global transit).</li>
           <li><strong>Customs Assistance:</strong> We handle the documentation and export compliance for bulk shipments.</li>
-          <li><strong>Stitching Services:</strong> Professional customized tailoring for suits and blouses to make your products "Ready-to-Wear" for your end customers.</li>
+          <li><strong>Stitching Services:</strong> Professional customized tailoring for suits and blouses to make your products &quot;Ready-to-Wear&quot; for your end customers.</li>
         </ul>
 
         <h3>Our Minimum Order Quantity (MOQ) Policy</h3>
         <p>To maintain factory-direct rates, we primarily operate on a <strong>Set-to-Set basis</strong>. This means you buy one complete catalog (usually 4-12 designs or sizes). For established boutiques and bulk wholesalers, we offer custom <strong>Bulk Discounts</strong> on orders exceeding ₹50,000. Contact our WhatsApp managers for a personalized quote.</p>
 
         <h3>Surat Wholesale Market Guide 2026</h3>
-        <p>Navigating the Surat textile market can be overwhelming. Ethnicaa simplifies this by curating only the top-performing brands from markets like <strong>RKTM (Radha Krishna Textile Market), Shree Om Market, and Millennium Market</strong>. We do the ground research so you don't have to, ensuring you only receive trending, high-demand inventory.</p>
+        <p>Navigating the Surat textile market can be overwhelming. Ethnicaa simplifies this by curating only the top-performing brands from markets like <strong>RKTM (Radha Krishna Textile Market), Shree Om Market, and Millennium Market</strong>. We do the ground research so you don&apos;t have to, ensuring you only receive trending, high-demand inventory.</p>
       </section>
 
       <section style={{ marginTop: 40, padding: 20, background: "#fff8f8", borderRadius: 12, border: "1px solid #ffdada" }}>
