@@ -55,6 +55,25 @@ Ethnicaa eliminates middlemen and commission agents by providing direct factory-
 - Image CDN: Firebase Storage + Next.js Image Optimization
 - Analytics: Google Analytics 4
 
+## Key Pages
+
+- [All Products](https://ethnicaa.com/category/all-products): Full wholesale catalog — 400+ SKUs
+- [Sarees](https://ethnicaa.com/category/saree): Wholesale saree collection from Surat manufacturers
+- [Kurtis](https://ethnicaa.com/category/kurti): Wholesale kurti collection
+- [Pakistani Suits](https://ethnicaa.com/category/pakistani-suits): Wholesale Pakistani suit sets
+- [Blog](https://ethnicaa.com/blog/): Reselling guides and Surat textile market tutorials
+- [FAQ](https://ethnicaa.com/faq): Wholesale buyer questions — MOQ, shipping, payments, returns
+- [Contact](https://ethnicaa.com/contact): WhatsApp, email, Surat showroom address
+
+## Notes
+
+- All products priced at factory-direct wholesale rates; not for retail end-consumers
+- Minimum order is one full set (4–8 pieces per design); per-piece wholesale pricing available
+- GST invoicing provided for Indian business buyers
+- International shipping via DHL and FedEx; 5–7 business days internationally
+- Image usage rights included with purchase for reseller social media marketing
+- Physical showroom: 1028-29, Shree Om Market, Near RKTM, Ring Road, Surat 395002
+
 ## Sitemap
 
 https://ethnicaa.com/sitemap.xml

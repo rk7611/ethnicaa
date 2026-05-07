@@ -86,11 +86,14 @@ const globalSchema = {
       },
       "sameAs": [
         "https://wa.me/9586346332",
-        "https://www.instagram.com/rk7611"
+        "https://www.instagram.com/rk7611",
+        "", // LinkedIn
+        "", // YouTube
+        ""  // IndiaMart
       ]
     },
     {
-      "@type": "LocalBusiness",
+      "@type": "ClothingStore",
       "@id": "https://ethnicaa.com/#localbusiness",
       "name": "Ethnicaa Wholesale",
       "image": "https://ethnicaa.com/logo.png",

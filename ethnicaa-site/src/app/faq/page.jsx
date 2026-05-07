@@ -3,6 +3,8 @@ export const metadata = {
   description: "Find answers to commonly asked questions about wholesale pricing, MOQs, and shipping on Ethnicaa.",
 };
 
+import FAQSchema from "@/components/FAQSchema";
+
 export default function FAQPage() {
   const faqs = [
     {
@@ -41,6 +43,10 @@ export default function FAQPage() {
 
   return (
     <div style={styles.container}>
+      <FAQSchema 
+        faqs={faqs.map(f => ({ question: f.q, answer: f.a }))} 
+        id="faq-page-schema" 
+      />
       <h1 style={styles.title}>Frequently Asked Questions</h1>
       
       <div style={styles.content}>

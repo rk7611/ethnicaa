@@ -4,6 +4,19 @@ Disallow: /admin/
 Disallow: /api/
 Disallow: /login
 
+# AI Crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
 User-agent: Googlebot
 Allow: /
 
