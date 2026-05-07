@@ -71,6 +71,41 @@ export async function generateMetadata({ searchParams }) {
 
 export const revalidate = 3600;
 
+    description: "Ethnicaa: Buy wholesale Kurtis, Sarees & Suits direct from Surat manufacturers. Best pricing & fast global shipping for resellers.",
+    keywords: "Surat textile market wholesale, ethnic wear wholesale Surat, wholesale sarees Surat, wholesale kurtis Surat, Pakistani suits wholesale price, direct factory wholesale, Surat catalog wholesale, B2B clothing suppliers India, ethnic wear for resellers",
+    alternates: {
+      canonical: url,
+      languages: {
+        "en-in": url,
+        "x-default": url,
+      },
+    },
+    openGraph: {
+      title: cleanTitle(title),
+      description: "Shop wholesale sarees, kurtis & Pakistani suits direct from Surat manufacturers. Best B2B prices, verified catalogs, dispatch in 24-48hrs.",
+      url,
+      siteName: "Ethnicaa Wholesale",
+      images: [
+        {
+          url: "https://ethnicaa.com/logo.png",
+          width: 800,
+          height: 600,
+          alt: "Ethnicaa Wholesale",
+        },
+      ],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: cleanTitle(title),
+      description: "Shop wholesale sarees, kurtis & Pakistani suits direct from Surat manufacturers. Best B2B prices.",
+      images: ["https://ethnicaa.com/logo.png"],
+    },
+  };
+}
+
+export const revalidate = 3600;
+
 import { consolidateCategories } from "@/lib/category-utils";
 
 function toPlain(value) {
@@ -79,39 +114,32 @@ function toPlain(value) {
 
 async function getHomeData(page = 1) {
   const PAGE_SIZE = 30;
-  const bannersQuery = query(collection(db, "banners"), orderBy("order", "asc"));
-  const categoriesQuery = query(collection(db, "categories"));
   
-  const totalCountQuery = query(
-    collection(db, "products"),
-    where("status", "in", ["published", "active"])
-  );
-
-  const offersCountQuery = query(
-    collection(db, "products"),
-    where("status", "in", ["published", "active"]),
-    where("offer", "==", true)
-  );
-
+  // Parallel fetch for counts and initial data
   const [bannersSnap, catsSnap, countSnap, offersSnap] = await Promise.all([
-    getDocs(bannersQuery),
-    getDocs(categoriesQuery),
-    getCountFromServer(totalCountQuery),
-    getCountFromServer(offersCountQuery)
+    getDocs(query(collection(db, "banners"), orderBy("order", "asc"))),
+    getDocs(collection(db, "categories")),
+    getCountFromServer(query(collection(db, "products"), where("status", "in", ["published", "active"]))),
+    getCountFromServer(query(collection(db, "products"), where("status", "in", ["published", "active"]), where("offer", "==", true)))
   ]);
 
   const totalProductsCount = countSnap.data().count;
   const totalOffersCount = offersSnap.data().count;
   const totalPages = Math.ceil(totalProductsCount / PAGE_SIZE);
 
+  // Optimized Product Query: 
+  // Since we can't easily use startAfter without a snapshot in a stateless SSR,
+  // we fetch just what we need for the current page if possible, 
+  // or use the current offset-like limit.
   const productsQuery = query(
     collection(db, "products"),
     where("status", "in", ["published", "active"]),
     orderBy("createdAt", "desc"),
-    limit(page * PAGE_SIZE)
+    limit(page * PAGE_SIZE) 
   );
 
   const prodsSnap = await getDocs(productsQuery);
+  
   const banners = bannersSnap.docs
     .map(d => ({ id: d.id, ...d.data() }))
     .filter(b => isValidImageUrl(b.imageURL));
@@ -128,24 +156,25 @@ async function getHomeData(page = 1) {
 
   const categories = consolidateCategories(rawCategories, totalProductsCount, totalOffersCount);
 
-  const allProducts = prodsSnap.docs.map(d => {
+  // Only take the slice for the current page to keep the initial state small
+  const start = (page - 1) * PAGE_SIZE;
+  const allFetchedProducts = prodsSnap.docs.map(d => {
     const data = d.data();
     const createdAt = data.createdAt?.seconds || data.updatedAt?.seconds || data.timestamp || 0;
     return { id: d.id, ...data, _order: createdAt };
   });
-  
-  // Slice for current page
-  const start = (page - 1) * PAGE_SIZE;
-  const products = allProducts.slice(start, start + PAGE_SIZE);
+  const products = allFetchedProducts.slice(start, start + PAGE_SIZE);
 
   const brands = Object.entries(brandsData).map(([slug, data]) => ({
     slug,
     name: data.name,
     image: data.image || "/logo.png"
-  })).slice(0, 10); // Show top 10 brands
+  })).slice(0, 10);
 
   return { banners, categories, products, totalPages, totalProductsCount, brands };
 }
+
+import HomeSEOContent from "@/components/HomeSEOContent";
 
 export default async function Home({ searchParams }) {
   const page = parseInt(searchParams?.page) || 1;
@@ -162,7 +191,9 @@ export default async function Home({ searchParams }) {
         homeFaqs={homeFaqs}
         currentPage={page}
         totalPages={totalPages}
-      />
+      >
+        {page === 1 && <HomeSEOContent />}
+      </HomeClient>
     </>
   );
 }
