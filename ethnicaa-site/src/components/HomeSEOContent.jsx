@@ -9,6 +9,9 @@ const HomeSEOContent = () => {
         
         <h3>The Surat Advantage: Why Source Directly from the Source?</h3>
         <p>Surat is the undisputed textile capital of India, producing over 40% of the country&apos;s man-made fiber. By sourcing directly from our Surat-based marketplace, you eliminate up to 4 layers of middlemen (wholesalers, regional distributors, agents, and sub-agents). This allows you to access the <strong>true factory cost</strong>, giving you a 30-50% price advantage over your local competitors.</p>
+
+        <h3>Where to Buy Saree and Kurti Wholesale in Surat?</h3>
+        <p>If you are looking for the <strong>best place to buy sarees and kurtis wholesale in Surat</strong>, the Ring Road textile market area is the primary hub. <strong>Ethnicaa Wholesale</strong> is located at 1028-29, Shree Om Market, which is just minutes away from RKTM and Millennium Market. We are the trusted destination for boutique owners and resellers who want to buy <strong>authentic Surat sarees and kurtis</strong> at direct factory-to-retail rates.</p>
         
         <h3>Profit Blueprint: How Our Resellers Earn ₹50,000+ Monthly</h3>
         <p>We don&apos;t just sell catalogs; we enable entrepreneurship. Most of our resellers on platforms like Instagram, WhatsApp, and Facebook operate with a &quot;High-Margin, Low-Inventory&quot; model. Here is the Ethnicaa profit breakdown:</p>

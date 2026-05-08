@@ -20,6 +20,10 @@ const homeFaqs = [
     answer: "Most of our catalogs are available as full sets (one of each size/color in a design). For many items, we also support custom bulk orders. Contact our wholesale managers on WhatsApp for specific product MOQs."
   },
   {
+    question: "Where can I buy sarees and kurtis wholesale in Surat?",
+    answer: "For the best wholesale sarees and kurtis in Surat, visit Ethnicaa Wholesale at Shree Om Market, Ring Road. We provide direct factory-access to the latest catalogs, eliminating middlemen to give you the best profit margins. You can also browse and order online via our website with pan-India and global shipping."
+  },
+  {
     question: "Are these direct factory prices from Surat?",
     answer: "Absolutely. Ethnicaa is based in the heart of the Surat textile market. We work directly with manufacturers to bring you factory-direct rates, eliminating middlemen and helping you maximize your margins."
   }
