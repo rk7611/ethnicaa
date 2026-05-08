@@ -127,6 +127,13 @@ export default function StructuredDescription({ product = {} }) {
               <a href="/category/kurtis" style={styles.seoLink}> Wholesale Kurtis</a>, and 
               <a href="/category/pakistani-suits" style={styles.seoLink}> Pakistani Suits</a>.
           </p>
+          <div style={{ marginTop: 20, padding: 15, background: "#f8f9fa", borderRadius: 10, borderLeft: "4px solid #D4AF37" }}>
+              <p style={{ margin: 0, fontSize: 14 }}>
+                  🆕 <b>New to Sourcing?</b> Check out our 
+                  <a href="/surat-wholesale-market-guide" style={{ color: "#d32f2f", fontWeight: 700, marginLeft: 5 }}>Surat Wholesale Market Guide 2026</a> 
+                  to learn about the best markets and fabrics.
+              </p>
+          </div>
       </div>
     </div>
   );

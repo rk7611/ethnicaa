@@ -22,7 +22,18 @@ export default function SuratWholesaleGuide() {
         </p>
       </section>
 
-      <section style={styles.content}>
+      <section style={styles.toc}>
+        <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 12 }}>In this Guide:</h3>
+        <ul style={styles.tocList}>
+          <li><a href="#markets" style={styles.tocLink}>1. Top Sourcing Markets (Ring Road, Millennium)</a></li>
+          <li><a href="#fabrics" style={styles.tocLink}>2. Trending Fabrics for 2026</a></li>
+          <li><a href="#logistics" style={styles.tocLink}>3. Shipping & Logistics from Surat</a></li>
+          <li><a href="#timings" style={styles.tocLink}>4. Market Timings & Best Visit Times</a></li>
+          <li><a href="#faq" style={styles.tocLink}>5. Surat Wholesale FAQs</a></li>
+        </ul>
+      </section>
+
+      <section style={styles.content} id="markets">
         <h2 style={styles.sectionTitle}>Top Wholesale Markets in Surat</h2>
         <p style={styles.text}>
           Surat is home to over 50,000 textile traders and thousands of manufacturers. If you are a reseller or boutique owner, these are the legendary markets you must know:
@@ -30,20 +41,20 @@ export default function SuratWholesaleGuide() {
         
         <div style={styles.marketGrid}>
           <div style={styles.marketCard} className="premium-card">
-            <h3>1. Ring Road Market</h3>
-            <p>The core hub for traditional sarees and dress materials. It includes towers like Pashupati Market and Surat Textile Market (STM). Best for middle-range bulk orders.</p>
+            <h3>1. Ring Road Market (The Saree Hub)</h3>
+            <p>The core hub for traditional sarees and dress materials. It includes towers like <strong>Pashupati Market</strong>, <strong>Shree Om Market</strong>, and <strong>Radha Krishna Textile Market (RKTM)</strong>. Best for middle-range bulk orders and direct weaver catalogs.</p>
           </div>
           <div style={styles.marketCard} className="premium-card">
-            <h3>2. Millennium Market</h3>
-            <p>A more modern market complex famous for high-quality Kurtis, designer Suits, and premium catalogs. Highly recommended for boutique owners.</p>
+            <h3>2. Millennium Market (Kurti Capital)</h3>
+            <p>A modern complex famous for high-quality Kurtis, designer Suits, and premium branded catalogs. This is where most premium boutique owners source their exclusive collections.</p>
           </div>
           <div style={styles.marketCard} className="premium-card">
-            <h3>3. Bombay Market</h3>
-            <p>Known for bridal wear and heavy embroidered lehengas. If you are looking for premium wedding collections, this is the place.</p>
+            <h3>3. Bombay Market (Wedding Wear)</h3>
+            <p>Known for bridal wear and heavy embroidered lehengas. If you are looking for premium wedding collections with heavy Zardosi and Sequence work, this is the place.</p>
           </div>
         </div>
 
-        <h2 style={styles.sectionTitle}>Premium Fabrics to Source in 2026</h2>
+        <h2 style={styles.sectionTitle} id="fabrics">Premium Fabrics to Source in 2026</h2>
         <p style={styles.text}>
           Surat manufacturers are masters of both synthetic and natural fibers. Here is what is trending for the current season:
         </p>
@@ -54,24 +65,43 @@ export default function SuratWholesaleGuide() {
             <Link href="/collections/organza-sarees" style={styles.inlineLink}>View Wholesale Organza Collection</Link>
           </li>
           <li>
-            <strong>Pure Georgette:</strong> Known for its &quot;fall&quot; and durability. Ideal for heavy embroidery and Swarovski work.
-            <Link href="/collections/georgette-suits" style={styles.inlineLink}>Explore Georgette Suits</Link>
+            <strong>Pure Georgette & Liva Rayon:</strong> High-breathability fabrics ideal for summer Kurtis and semi-formal suits.
+            <Link href="/collections/cotton-kurtis" style={styles.inlineLink}>Shop Liva Rayon Kurtis</Link>
           </li>
           <li>
-            <strong>Tusser Silk &amp; Banarasi:</strong> Timeless classics that always have a high demand in the South Indian and NRI markets.
+            <strong>Banarasi & Jacquard:</strong> Essential for traditional wedding wear and heavy silk sarees.
             <Link href="/collections/silk-sarees" style={styles.inlineLink}>Browse Silk Catalog</Link>
-          </li>
-          <li>
-            <strong>Cotton &amp; Rayon:</strong> The go-to fabrics for daily wear Kurtis. High breathability and perfect for the Indian climate.
-            <Link href="/collections/cotton-kurtis" style={styles.inlineLink}>Shop Cotton Kurtis</Link>
           </li>
         </ul>
 
-        <div style={styles.infoBox}>
-          <h3>Pro Tip for Resellers</h3>
+        <div style={styles.infoBox} id="logistics">
+          <h3>Logistics & Quality Check</h3>
           <p>
-            When sourcing from Surat, pay attention to the &quot;Cut&quot; size and &quot;Fabric GSM.&quot; Many local wholesalers may provide shorter cuts to lower the price. At Ethnicaa, we guarantee standard factory cuts and verified fabric quality.
+            One of the biggest challenges for resellers is <strong>logistics</strong>. When sourcing through Ethnicaa, we handle the 3-layer quality check and consolidate your orders from multiple Surat manufacturers into a single express shipment via DHL, FedEx, or Aramex.
           </p>
+        </div>
+
+        <h2 style={styles.sectionTitle} id="timings">Market Timings & Visit Tips</h2>
+        <p style={styles.text}>
+            Most Surat wholesale markets are open from <strong>10:00 AM to 8:30 PM</strong>. However, Sundays are usually holidays for the majority of the Ring Road markets. If you plan a visit, we recommend coming between Tuesday and Friday to avoid the weekend rush and secure the best attention from wholesalers.
+        </p>
+
+        <div id="faq" style={{ marginTop: 60, padding: 30, background: "#f9f9f9", borderRadius: 20 }}>
+            <h2 style={styles.sectionTitle}>Frequently Asked Questions (Surat Market)</h2>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+                <div>
+                    <h4 style={{ fontWeight: 700 }}>Can I buy single pieces from Surat markets?</h4>
+                    <p style={{ color: "#555" }}>Most markets operate on a &quot;Set-to-Set&quot; basis (4-12 pieces per design). However, at Ethnicaa, we support small boutique owners by offering smaller MOQs than typical market agents.</p>
+                </div>
+                <div>
+                    <h4 style={{ fontWeight: 700 }}>How do I identify a genuine manufacturer?</h4>
+                    <p style={{ color: "#555" }}>Genuine manufacturers always have GST-registered invoices and specific warehouse locations. Avoid unverified social media agents who don&apos;t have a physical presence in Surat.</p>
+                </div>
+                <div>
+                    <h4 style={{ fontWeight: 700 }}>Is cash on delivery (COD) available for bulk orders?</h4>
+                    <p style={{ color: "#555" }}>For most wholesale exports and large bulk orders, payment is via NEFT or UPI. Some verified catalogs on Ethnicaa may support partial COD for domestic Indian orders.</p>
+                </div>
+            </div>
         </div>
       </section>
 
@@ -105,4 +135,7 @@ const styles = {
   internalLinkSection: { marginTop: 60, padding: 40, background: "#111", color: "#fff", borderRadius: 24, textAlign: "center" },
   linkGrid: { display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 15, marginTop: 25 },
   bigLink: { background: "rgba(255,255,255,0.1)", padding: "12px 24px", borderRadius: 30, color: "#fff", textDecoration: "none", fontWeight: 600, border: "1px solid rgba(255,255,255,0.2)" },
+  toc: { background: "#f8f9fa", padding: 25, borderRadius: 20, marginBottom: 40, border: "1px solid #eee" },
+  tocList: { listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 10 },
+  tocLink: { color: "#d32f2f", textDecoration: "none", fontWeight: 500, fontSize: 15 },
 };
