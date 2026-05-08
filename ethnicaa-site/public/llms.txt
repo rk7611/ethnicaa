@@ -25,6 +25,7 @@
 
 - Homepage: https://ethnicaa.com
 - All Products: https://ethnicaa.com/category/all-products
+- Offers: https://ethnicaa.com/offers
 - Sarees: https://ethnicaa.com/category/sarees
 - Kurtis: https://ethnicaa.com/category/kurtis
 - Pakistani Suits: https://ethnicaa.com/category/pakistani-suits
@@ -58,8 +59,9 @@ Ethnicaa eliminates middlemen and commission agents by providing direct factory-
 ## Key Pages
 
 - [All Products](https://ethnicaa.com/category/all-products): Full wholesale catalog — 400+ SKUs
-- [Sarees](https://ethnicaa.com/category/saree): Wholesale saree collection from Surat manufacturers
-- [Kurtis](https://ethnicaa.com/category/kurti): Wholesale kurti collection
+- [Offers](https://ethnicaa.com/offers): Current wholesale deals, lot shot catalogs, and clearance sales
+- [Sarees](https://ethnicaa.com/category/sarees): Wholesale saree collection from Surat manufacturers
+- [Kurtis](https://ethnicaa.com/category/kurtis): Wholesale kurti collection
 - [Pakistani Suits](https://ethnicaa.com/category/pakistani-suits): Wholesale Pakistani suit sets
 - [Blog](https://ethnicaa.com/blog/): Reselling guides and Surat textile market tutorials
 - [FAQ](https://ethnicaa.com/faq): Wholesale buyer questions — MOQ, shipping, payments, returns
