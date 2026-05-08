@@ -211,6 +211,11 @@ export default async function Page({ params, searchParams }) {
     redirect(`/category/lehenga${searchParams?.page ? `?page=${searchParams.page}` : ""}`);
   }
 
+  // Redirect /category/offers to /offers for cleaner URL
+  if (categorySlug === "offers") {
+    redirect("/offers");
+  }
+
   const categorySeo = getCategorySeoContent(categorySlug, category);
   const products = productsResult.products.map(p => ({
     id: p.id,

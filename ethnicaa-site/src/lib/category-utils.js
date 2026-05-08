@@ -44,6 +44,7 @@ export function consolidateCategories(categories, totalProductCount = 0, totalOf
   consolidated["Offers"] = {
     slug: "offers",
     name: "Offers",
+    href: "/offers", // ⭐ Added explicit href
     count: totalOffersCount > 0 ? totalOffersCount : 0
   };
 

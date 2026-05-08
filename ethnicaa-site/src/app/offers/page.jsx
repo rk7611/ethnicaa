@@ -18,8 +18,7 @@ async function getOfferProducts() {
     const q = query(
       collection(db, "products"),
       where("status", "in", ["published", "active"]),
-      where("offer", "==", true),
-      orderBy("createdAt", "desc")
+      where("offer", "==", true)
     );
     const snap = await getDocs(q);
     return snap.docs.map(d => ({ id: d.id, ...d.data() }));
