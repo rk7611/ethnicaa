@@ -23,8 +23,17 @@ export default function StructuredDescription({ product = {} }) {
 
   return (
     <div style={styles.box}>
-      <h3 style={styles.title}>Product Details</h3>
+      {/* ⭐ AI HIGHLIGHTS SECTION (LLMO/GEO) */}
+      <h3 style={styles.title}>Catalog Highlights</h3>
+      <ul style={styles.list}>
+          <li><b>Product:</b> {product.catalog || product.name}</li>
+          <li><b>Pricing:</b> Direct Factory Wholesale Rates</li>
+          <li><b>Quality:</b> 3-Layer Quality Checked</li>
+          <li><b>Shipping:</b> Global Express Dispatch from Surat</li>
+      </ul>
 
+      {/* ⭐ STRUCTURED DATA TABLE (AEO) */}
+      <h3 style={styles.subTitle}>Technical Specifications</h3>
       <div style={styles.list}>
         {/* FABRICS */}
         {Array.isArray(fabrics) && fabrics.length > 0 && (
@@ -90,7 +99,7 @@ export default function StructuredDescription({ product = {} }) {
         )}
       </div>
 
-      <h3 style={styles.subTitle}>Description</h3>
+      <h3 style={styles.subTitle}>Full Description</h3>
       <div style={styles.desc}>
         {buyerDescription.split("\n").map((line, i) => (
           <p key={i} style={styles.descLine}>
@@ -99,7 +108,7 @@ export default function StructuredDescription({ product = {} }) {
         ))}
       </div>
 
-      {/* WHOLESALE SEO CONTENT BLOCK */}
+      {/* ⭐ SEMANTIC SEO CONTENT BLOCK */}
       <div style={styles.seoBox}>
           <h3 style={styles.subTitle}>Wholesale & Bulk Ordering Info</h3>
           <p style={styles.descLine}>
