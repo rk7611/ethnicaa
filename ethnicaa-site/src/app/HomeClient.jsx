@@ -175,7 +175,7 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
                   <div style={{...styles.skeletonText, width: '60%', marginTop: 8}}></div>
                 </div>
                 ))
-            : products.map((p) => (
+            : products.map((p, index) => (
                 <div key={p.id} className="premium-card" style={styles.card}>
                     <Link href={`/product/${p.slug}`} style={{ textDecoration: "none", color: "inherit" }}>
                     <div style={styles.imgContainer}>

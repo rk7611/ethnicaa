@@ -103,7 +103,7 @@ export default function CategoryClient({
       </select>
 
       <div style={styles.grid}>
-        {products.map((p) => (
+        {products.map((p, i) => (
           <div key={p.id} className="premium-card" style={styles.card}>
             <Link href={`/product/${p.slug}`}>
               {isValidImageUrl(p.images?.[0]) && (
