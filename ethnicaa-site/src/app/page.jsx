@@ -41,7 +41,7 @@ export async function generateMetadata({ searchParams }) {
     alternates: {
       canonical: url,
       languages: {
-        "en-in": url,
+        "en-IN": url,
         "x-default": url,
       },
     },
@@ -127,7 +127,17 @@ async function getHomeData(page = 1) {
     const createdAt = data.createdAt?.seconds || data.updatedAt?.seconds || data.timestamp || 0;
     return { id: d.id, ...data, _order: createdAt };
   });
-  const products = allFetchedProducts.slice(start, start + PAGE_SIZE);
+  const products = allFetchedProducts.slice(start, start + PAGE_SIZE).map(p => ({
+    id: p.id,
+    slug: p.slug || p.id,
+    name: p.name || "",
+    catalog: p.catalog || "",
+    images: p.images?.slice(0, 1) || [],
+    price: p.price || 0,
+    offer_price: p.offer_price || 0,
+    offer: p.offer || false,
+    discount_percent: p.discount_percent || 0,
+  }));
 
   const brands = Object.entries(brandsData).map(([slug, data]) => ({
     slug,
@@ -141,7 +151,7 @@ async function getHomeData(page = 1) {
 import HomeSEOContent from "@/components/HomeSEOContent";
 
 export default async function Home({ searchParams }) {
-  const page = parseInt(searchParams?.page) || 1;
+  const page = Math.min(parseInt(searchParams?.page) || 1, 50); // Prevent deep-crawl timeouts
   const { banners, categories, products, totalPages, brands } = await getHomeData(page);
 
   return (

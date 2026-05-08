@@ -6,7 +6,7 @@ import { cleanTitle } from "@/lib/metadata-utils";
 
 export const dynamic = "force-dynamic";
 
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 const PAGE_SIZE = 40;
 
@@ -16,11 +16,21 @@ function toPlain(value) {
 
 const VALID_STATIC_CATEGORIES = [
   "sarees",
+  "saree",
   "kurtis",
+  "kurti",
   "pakistani-suits",
+  "pakistani-suit",
   "salwar-suits",
+  "salwar-suit",
+  "readymade-salwar-suit",
+  "readymade-suits",
   "lehenga",
+  "lahanga",
   "gowns",
+  "gown",
+  "designer-gowns",
+  "designer-gown",
   "all-products",
   "offers"
 ];
@@ -46,14 +56,25 @@ async function getProductsData(categorySlug, sort = "latest", page = 1) {
   try {
     const constraints = [where("status", "==", "published")];
     
-    if (categorySlug !== "all-products") {
+    if (categorySlug === "offers") {
+      constraints.push(where("offer", "==", true));
+    } else if (categorySlug !== "all-products") {
       const categoryMap = {
         "sarees": "sarees",
+        "saree": "sarees",
         "kurtis": "kurti",
+        "kurti": "kurti",
         "gowns": "gown",
+        "gown": "gown",
+        "designer-gowns": "gown",
+        "designer-gown": "gown",
         "lehenga": "lahanga",
+        "lahanga": "lahanga",
         "pakistani-suits": "pakistani-suits",
+        "pakistani-suit": "pakistani-suits",
         "salwar-suits": "salwar-suits",
+        "salwar-suit": "salwar-suits",
+        "readymade-salwar-suit": "readymade-salwar-suits",
         "readymade-suits": "readymade-salwar-suits",
         "semi-stitched": "semi-stitched-salwar-suit"
       };
@@ -133,7 +154,10 @@ export async function generateMetadata({ params, searchParams }) {
   const title = cleanTitle(page > 1 ? `Page ${page} | ${baseTitle}` : baseTitle);
   
   const description = category.category_seo_description || custom?.description || `Buy ${category.name} at wholesale rates direct from Surat manufacturers. Perfect for bulk buyers & resellers with worldwide delivery.`;
-  const baseUrl = `https://ethnicaa.com/category/${slug}`;
+  
+  // Normalize canonical URL to /category/lehenga for SEO consistency
+  const canonicalSlug = slug === "lahanga" ? "lehenga" : slug;
+  const baseUrl = `https://ethnicaa.com/category/${canonicalSlug}`;
   const url = page > 1 ? `${baseUrl}/?page=${page}` : baseUrl;
 
   return {
@@ -142,7 +166,7 @@ export async function generateMetadata({ params, searchParams }) {
     alternates: {
       canonical: url,
       languages: {
-        "en-in": url,
+        "en-IN": url,
         "x-default": url,
       },
     },
@@ -173,7 +197,7 @@ export async function generateMetadata({ params, searchParams }) {
 export default async function Page({ params, searchParams }) {
   const categorySlug = decodeURIComponent(params.name);
   const sort = searchParams?.sort || "latest";
-  const page = parseInt(searchParams?.page) || 1;
+  const page = Math.min(parseInt(searchParams?.page) || 1, 50); // Hard limit to prevent Firestore timeouts
 
   const [category, productsResult] = await Promise.all([
     getCategoryData(categorySlug),
@@ -182,8 +206,23 @@ export default async function Page({ params, searchParams }) {
   
   if (!category) return notFound();
 
+  // Redirect /category/lahanga to /category/lehenga for SEO and to fix broken links
+  if (categorySlug === "lahanga") {
+    redirect(`/category/lehenga${searchParams?.page ? `?page=${searchParams.page}` : ""}`);
+  }
+
   const categorySeo = getCategorySeoContent(categorySlug, category);
-  const products = productsResult.products;
+  const products = productsResult.products.map(p => ({
+    id: p.id,
+    slug: p.slug || p.id,
+    name: p.name || "",
+    catalog: p.catalog || "",
+    images: p.images?.slice(0, 1) || [],
+    price: p.price || 0,
+    offer: p.offer || false,
+    discount_percent: p.discount_percent || 0,
+  }));
+
   const totalCount = productsResult.totalCount;
   const totalPages = Math.ceil(totalCount / PAGE_SIZE);
 

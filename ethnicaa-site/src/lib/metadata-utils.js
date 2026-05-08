@@ -1,6 +1,6 @@
 export const SITE_URL = "https://ethnicaa.com";
 
-const MAX_TITLE_LENGTH = 58;
+const MAX_TITLE_LENGTH = 48;
 
 export function absoluteUrl(path = "") {
   if (!path) return SITE_URL;

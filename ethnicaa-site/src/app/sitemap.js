@@ -56,7 +56,7 @@ export default async function sitemap() {
         collection(db, "products"), 
         where("status", "==", "published"),
         orderBy("createdAt", "desc"),
-        limit(1000)
+        limit(5000)
     );
     const snap = await getDocs(q);
     productPages = snap.docs.map((doc) => {

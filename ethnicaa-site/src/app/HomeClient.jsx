@@ -187,7 +187,8 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
                           height={380} 
                           sizes="(max-width: 480px) 45vw, (max-width: 768px) 30vw, 250px"
                           style={styles.cardImg} 
-                          loading="lazy"
+                          priority={index < 4}
+                          fetchPriority={index < 4 ? "high" : "auto"}
                         />
                       )}
                       {p.offer && p.discount_percent > 0 && (

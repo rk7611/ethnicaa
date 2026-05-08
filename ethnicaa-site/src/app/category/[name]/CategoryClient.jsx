@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { collection, getDocs, getDoc, doc } from "firebase/firestore";
+import { collection, getDocs, getDoc, doc, query, limit } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
 import Link from "next/link";
@@ -68,7 +68,7 @@ export default function CategoryClient({
 
   useEffect(() => {
     async function loadAllCategories() {
-      const snap = await getDocs(collection(db, "categories"));
+      const snap = await getDocs(query(collection(db, "categories"), limit(20)));
       const list = snap.docs.map((d) => ({
         slug: d.id,
         name: d.data().name || d.id.replace(/-/g, " "),
@@ -112,9 +112,9 @@ export default function CategoryClient({
                   alt={generateProductAlt(p)}
                   width={300}
                   height={380}
-                  quality={100}
+                  quality={90}
                   style={styles.cardImg}
-                  loading="lazy"
+                  priority={i < 4}
                 />
               )}
             </Link>

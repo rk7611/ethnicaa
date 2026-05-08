@@ -102,6 +102,15 @@ export default function Footer() {
               <Link href="/collections/sarees-in-kolkata" style={styles.link}>Wholesale Sarees in Kolkata</Link>
             </div>
           </div>
+          <div style={styles.seoColumn}>
+            <h4 style={styles.seoTitle}>Top Brands</h4>
+            <div style={styles.seoLinks}>
+              <Link href="/brands/vasundhara" style={styles.link}>Vasundhara Wholesale</Link>
+              <Link href="/brands/suryajyoti" style={styles.link}>Suryajyoti Kurtis</Link>
+              <Link href="/brands/deepsy" style={styles.link}>Deepsy Suits</Link>
+              <Link href="/brands/karissa" style={styles.link}>Karissa Designer</Link>
+            </div>
+          </div>
         </div>
         
         <div style={styles.bottomBar}>
@@ -184,7 +193,7 @@ const styles = {
     paddingTop: 30,
     marginTop: 20,
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", // ⭐ Changed from 250px to 200px to fit 5 columns
     gap: 30,
     paddingBottom: 20,
   },
