@@ -46,6 +46,10 @@ export default function StartBusinessPage() {
             <h4>Trusted Surat Sourcing</h4>
             <p>Skip the confusing market agents. Source directly from a verified B2B marketplace.</p>
           </div>
+          <div style={{ ...styles.benefit, borderBottom: "none", background: "#f8f9fa", padding: 20, borderRadius: 15 }}>
+            <h4 style={{ color: "#d32f2f" }}>Free Branded Website</h4>
+            <p>We help beginners grow by starting a professional ecommerce website with <strong>your business name</strong> and <strong>your contact details</strong>.</p>
+          </div>
         </div>
       </section>
 
