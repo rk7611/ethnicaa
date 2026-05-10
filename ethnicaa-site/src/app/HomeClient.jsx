@@ -146,21 +146,7 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
         </div>
       )}
  
-      {currentPage === 1 && brands.length > 0 && (
-        <div style={styles.section}>
-          <h2 style={styles.heading}>Shop by Brand</h2>
-          <div style={styles.brandsGrid}>
-            {brands.map((b) => (
-              <Link key={b.slug} href={`/brands/${b.slug}`} className="premium-card" style={styles.brandCard}>
-                <div style={styles.brandImgWrapper}>
-                  <Image src={b.image} alt={b.name} fill sizes="100px" style={{ objectFit: "contain" }} />
-                </div>
-                <div style={styles.brandName}>{b.name}</div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
+
 
       {currentPage === 1 && (
         <section style={styles.partnerCTA}>
@@ -251,6 +237,22 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
             ))}
         </div>
       </div>
+
+      {currentPage === 1 && brands.length > 0 && (
+        <div style={styles.section}>
+          <h2 style={styles.heading}>Shop by Brand</h2>
+          <div style={styles.brandsGrid}>
+            {brands.map((b) => (
+              <Link key={b.slug} href={`/brands/${b.slug}`} className="premium-card" style={styles.brandCard}>
+                <div style={styles.brandImgWrapper}>
+                  <Image src={b.image} alt={b.name} fill sizes="100px" style={{ objectFit: "contain" }} />
+                </div>
+                <div style={styles.brandName}>{b.name}</div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
 
       <InternalLinking 
         links={[
