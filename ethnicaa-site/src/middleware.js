@@ -23,8 +23,23 @@ function isAuthorized(request) {
 
 export function middleware(request) {
   const url = request.nextUrl.clone();
-  const host = request.headers.get("host");
+  const host = request.headers.get("host") || "";
 
+  // --- SUBDOMAIN ROUTING (Multi-Tenancy) ---
+  const isDevelopment = host.includes("localhost") || host.includes("127.0.0.1");
+  const mainDomain = isDevelopment ? "localhost:3000" : "ethnicaa.com";
+  
+  // Extract subdomain (e.g., 'zara' from 'zara.ethnicaa.com')
+  const subdomain = host.endsWith(`.${mainDomain}`) 
+    ? host.replace(`.${mainDomain}`, "") 
+    : null;
+
+  if (subdomain && subdomain !== "www" && subdomain !== "admin") {
+    // Internal rewrite to /storefront/[subdomain]/[path]
+    return NextResponse.rewrite(new URL(`/storefront/${subdomain}${url.pathname}`, request.url));
+  }
+
+  // --- EXISTING LOGIC ---
   if (
     request.nextUrl.pathname.startsWith("/admin/seo-agent") ||
     request.nextUrl.pathname.startsWith("/api/seo/")
