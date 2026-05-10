@@ -19,12 +19,14 @@ export default function PartnerApplicationPage() {
         businessName: formData.get("businessName"),
         whatsapp: formData.get("whatsapp"),
         status: formData.get("status"),
-        // Conditional fields
-        storeName: formData.get("storeName") || "",
-        fullAddress: formData.get("fullAddress") || "",
+        // Location fields (Mandatory for everyone)
         city: formData.get("city") || "",
         state: formData.get("state") || "",
         country: formData.get("country") || "",
+        
+        // Conditional fields
+        storeName: formData.get("storeName") || "",
+        fullAddress: formData.get("fullAddress") || "",
         // Influencer fields
         instagram: formData.get("instagram") || "",
         facebook: formData.get("facebook") || "",
@@ -114,6 +116,22 @@ export default function PartnerApplicationPage() {
                 </select>
              </div>
 
+             {/* Global Location Fields (Now Mandatory for Everyone) */}
+             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 15 }}>
+                <div style={styles.inputGroup}>
+                   <label>City *</label>
+                   <input name="city" type="text" style={styles.input} required />
+                </div>
+                <div style={styles.inputGroup}>
+                   <label>State *</label>
+                   <input name="state" type="text" style={styles.input} required />
+                </div>
+             </div>
+             <div style={styles.inputGroup}>
+                <label>Country *</label>
+                <input name="country" type="text" defaultValue="India" style={styles.input} required />
+             </div>
+
              {/* Conditional Fields for Existing Shop */}
              {status === "Existing Retailer" && (
                <>
@@ -145,26 +163,6 @@ export default function PartnerApplicationPage() {
                      </p>
                   </div>
                 </>
-             )}
-
-             {/* Conditional Fields for New Startup/Reseller */}
-             {(status === "New Startup" || status === "Home-Based Reseller") && (
-               <>
-                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 15 }}>
-                    <div style={styles.inputGroup}>
-                       <label>City *</label>
-                       <input name="city" type="text" style={styles.input} required />
-                    </div>
-                    <div style={styles.inputGroup}>
-                       <label>State *</label>
-                       <input name="state" type="text" style={styles.input} required />
-                    </div>
-                 </div>
-                 <div style={styles.inputGroup}>
-                    <label>Country *</label>
-                    <input name="country" type="text" defaultValue="India" style={styles.input} required />
-                 </div>
-               </>
              )}
 
              <div style={styles.inputGroup}>
