@@ -25,6 +25,9 @@ export default function PartnerApplicationPage() {
         city: formData.get("city") || "",
         state: formData.get("state") || "",
         country: formData.get("country") || "",
+        // Influencer fields
+        instagram: formData.get("instagram") || "",
+        facebook: formData.get("facebook") || "",
         
         message: formData.get("message"),
         stage: "Application Received",
@@ -43,7 +46,7 @@ export default function PartnerApplicationPage() {
     return (
       <div style={{ textAlign: "center", padding: "100px 20px" }}>
         <h1 style={{ fontSize: 40 }}>Application Received! 🚀</h1>
-        <p style={{ fontSize: 18, color: "#666", marginTop: 20 }}>Our team is reviewing your business profile. You will receive a WhatsApp message once your ecommerce website is ready for design.</p>
+        <p style={{ fontSize: 18, color: "#666", marginTop: 20 }}>Our team is reviewing your profile. You will receive a WhatsApp message once your branded storefront is ready for design.</p>
         <Link href="/" style={{ display: "inline-block", marginTop: 40, color: "#d32f2f", fontWeight: 700 }}>Return to Home</Link>
       </div>
     );
@@ -112,7 +115,7 @@ export default function PartnerApplicationPage() {
              </div>
 
              {/* Conditional Fields for Existing Shop */}
-             {status === "Existing Retailer" ? (
+             {status === "Existing Retailer" && (
                <>
                  <div style={styles.inputGroup}>
                     <label>Store Name *</label>
@@ -123,7 +126,29 @@ export default function PartnerApplicationPage() {
                     <textarea name="fullAddress" style={{...styles.input, height: 80}} placeholder="Door No, Street, Landmark, Pincode" required></textarea>
                  </div>
                </>
-             ) : (
+             )}
+
+             {/* Conditional Fields for Influencer */}
+             {status === "Social Media Influencer" && (
+                <>
+                  <div style={styles.inputGroup}>
+                     <label>Instagram Profile Link *</label>
+                     <input name="instagram" type="url" placeholder="https://instagram.com/yourname" style={styles.input} required />
+                  </div>
+                  <div style={styles.inputGroup}>
+                     <label>Facebook Profile/Page Link *</label>
+                     <input name="facebook" type="url" placeholder="https://facebook.com/yourname" style={styles.input} required />
+                  </div>
+                  <div style={{...styles.inputGroup, background: "#fdf8e6", padding: 15, borderRadius: 10, border: "1px solid #faead1" }}>
+                     <p style={{ fontSize: 13, color: "#856404", margin: 0 }}>
+                       💡 <strong>Tip:</strong> If you have more links (YouTube, TikTok, etc.), please submit them on our WhatsApp number <strong>9586346332</strong> after applying.
+                     </p>
+                  </div>
+                </>
+             )}
+
+             {/* Conditional Fields for New Startup/Reseller */}
+             {(status === "New Startup" || status === "Home-Based Reseller") && (
                <>
                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 15 }}>
                     <div style={styles.inputGroup}>
