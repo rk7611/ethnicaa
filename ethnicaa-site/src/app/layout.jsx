@@ -76,7 +76,37 @@ const globalSchema = {
       "legalName": "Ethnicaa Textiles",
       "url": "https://ethnicaa.com",
       "logo": "https://ethnicaa.com/logo.png",
-      "description": "India's premier B2B marketplace for wholesale ethnic wear, connecting global retailers directly with Surat's top manufacturers.",
+      "description": "India's premier B2B textile marketplace, connecting global retailers directly with Surat's top manufacturers for bulk sourcing and custom manufacturing.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "B2B Wholesale Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Bulk Wholesale Sourcing",
+              "description": "Direct manufacturer rates for high-volume retailers and distributors."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom Manufacturing (Make-to-Order)",
+              "description": "Private label manufacturing starting from 25 pieces per design."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Global Export Logistics",
+              "description": "Secure door-to-door international shipping to USA, UK, Canada, and 50+ countries."
+            }
+          }
+        ]
+      },
       "contactPoint": {
         "@type": "ContactPoint",
         "telephone": "+91-9586346332",

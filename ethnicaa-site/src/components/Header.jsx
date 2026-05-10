@@ -24,6 +24,10 @@ export default function Header() {
           <Link href="/offers" style={styles.offerLink}>
             🔥 Offers
           </Link>
+          <div style={styles.funnelLinks}>
+            <Link href="/retailers" style={styles.navLink}>For Retailers</Link>
+            <Link href="/start-business" style={styles.navLink}>Start Business</Link>
+          </div>
         </div>
 
         <form onSubmit={handleSubmit} style={styles.searchForm}>
@@ -75,6 +79,18 @@ const styles = {
     background: "rgba(198, 40, 40, 0.08)",
     padding: "6px 12px",
     borderRadius: 20,
+    whiteSpace: "nowrap",
+  },
+  funnelLinks: {
+    display: "flex",
+    gap: 15,
+    marginLeft: 15,
+  },
+  navLink: {
+    fontSize: 13,
+    fontWeight: 600,
+    color: "#555",
+    textDecoration: "none",
     whiteSpace: "nowrap",
   },
 

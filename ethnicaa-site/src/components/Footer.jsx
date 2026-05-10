@@ -24,42 +24,36 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 2 */}
+          {/* Column 2 - B2B FUNNEL */}
           <div>
-            <h3 style={styles.title}>Company</h3>
+            <h3 style={styles.title}>Wholesale Services</h3>
             <ul style={styles.list}>
-              <li><Link href="/about-us" style={styles.link}>About Us</Link></li>
-              <li><Link href="/contact-us" style={styles.link}>Contact Us</Link></li>
-              <li><Link href="/faq" style={styles.link}>FAQs</Link></li>
-              <li><Link href="/wholesale-manufacturers-in-surat" style={styles.link}>Surat Manufacturers</Link></li>
+              <li><Link href="/retailers" style={styles.link}>For Retailers & Boutiques</Link></li>
+              <li><Link href="/wholesale-manufacturers-in-surat" style={styles.link}>Manufacturer Network</Link></li>
               <li><Link href="/surat-wholesale-market-guide" style={styles.link}>Market Guide 2026</Link></li>
+              <li><Link href="/contact-us" style={styles.link}>Bulk Order Support</Link></li>
             </ul>
           </div>
 
           {/* Column 3 */}
           <div>
-            <h3 style={styles.title}>Legal & Policies</h3>
+            <h3 style={styles.title}>Company</h3>
             <ul style={styles.list}>
+              <li><Link href="/about-us" style={styles.link}>About Ethnicaa</Link></li>
               <li><Link href="/privacy-policy" style={styles.link}>Privacy Policy</Link></li>
               <li><Link href="/terms-conditions" style={styles.link}>Terms & Conditions</Link></li>
-              <li><Link href="/refund-cancellation" style={styles.link}>Refund & Cancellation</Link></li>
               <li><Link href="/shipping-policy" style={styles.link}>Shipping Policy</Link></li>
             </ul>
           </div>
 
-          {/* Column 4 */}
+          {/* Column 4 - BEGINNER FUNNEL */}
           <div>
-            <h3 style={styles.title}>Support</h3>
+            <h3 style={styles.title}>For Resellers</h3>
             <ul style={styles.list}>
+              <li><Link href="/start-business" style={styles.link}>Start Your Business</Link></li>
               <li><Link href="/how-to-order" style={styles.link}>How to Order</Link></li>
+              <li><Link href="/faq" style={styles.link}>Reseller FAQs</Link></li>
               <li><Link href="/blog" style={styles.link}>Wholesale Blog</Link></li>
-              <li><a href="https://wa.me/9586346332" target="_blank" rel="noopener noreferrer" style={styles.link}>WhatsApp: +91 9586346332</a></li>
-              <li><a href="mailto:support@ethnicaa.com" style={styles.link}>support@ethnicaa.com</a></li>
-              <li style={{ marginTop: 15 }}>
-                <div style={{ display: "flex", gap: 15 }}>
-                  <a href="https://instagram.com/rk7611" target="_blank" rel="noopener noreferrer" style={styles.link} aria-label="Instagram">Instagram</a>
-                </div>
-              </li>
             </ul>
           </div>
         </div>
