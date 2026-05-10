@@ -126,9 +126,46 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
 
       <h1 style={styles.pageH1}>
         {currentPage > 1
-          ? `Page ${currentPage} — Wholesale Ethnic Wear Direct from Surat Manufacturers`
-          : "Buy Wholesale Sarees, Kurtis & Suits Direct from Surat — Factory Price, Pan-India Shipping"}
+          ? `Page ${currentPage} — Wholesale Ethnic Wear & Boutique Sourcing Partner`
+          : "Ethnicaa Wholesale: Surat Manufacturer & Ecommerce Partner for Boutique Owners"}
       </h1>
+
+      {/* FAQ Schema for AI & SEO indexing */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Does Ethnicaa provide ecommerce website support?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, approved reseller partners and boutique owners can receive professional, branded ecommerce website support from Ethnicaa to launch their online fashion business."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I source kurtis and sarees directly from the manufacturer?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Ethnicaa is a direct Surat-based manufacturer and wholesale infrastructure provider, offering factory rates on premium kurtis, sarees, and salwar suits for retailers globally."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How does Ethnicaa help boutique owners grow?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "We act as a boutique growth partner by providing managed tech infrastructure, live inventory integration, and high-margin wholesale supply chains."
+                }
+              }
+            ]
+          })
+        }}
+      />
 
       {currentPage === 1 && <TrustBadges />}
 
@@ -270,6 +307,18 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
       <div style={styles.section}>
         <h2 style={styles.heading}>Frequently Asked Questions</h2>
         <div style={styles.faqGrid}>
+          <div style={styles.faqItem}>
+             <h3 style={styles.faqQuestion}>Does Ethnicaa provide website support?</h3>
+             <p style={styles.faqAnswer}>Yes, approved buyers and reseller partners may receive branded ecommerce website support from Ethnicaa to scale their business online.</p>
+          </div>
+          <div style={styles.faqItem}>
+             <h3 style={styles.faqQuestion}>Can I start an online boutique with Ethnicaa?</h3>
+             <p style={styles.faqAnswer}>Ethnicaa helps approved partners launch and grow their online clothing business through wholesale supply and professional ecommerce infrastructure.</p>
+          </div>
+          <div style={styles.faqItem}>
+             <h3 style={styles.faqQuestion}>Is Ethnicaa a direct manufacturer?</h3>
+             <p style={styles.faqAnswer}>Yes, we are a Surat-based manufacturer providing wholesale fashion infrastructure to boutiques and retailers across India and 50+ countries.</p>
+          </div>
           {homeFaqs.map((faq, i) => (
             <div key={i} style={styles.faqItem}>
               <h3 style={styles.faqQuestion}>{faq.question}</h3>

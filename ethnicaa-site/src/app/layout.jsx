@@ -11,12 +11,12 @@ export const metadata = {
   metadataBase: new URL("https://ethnicaa.com"),
 
   title: {
-    default: "Ethnicaa Wholesale | Surat Wholesale Market - Kurtis, Sarees & Suits",
-    template: "%s | Ethnicaa",
+    default: "Ethnicaa Wholesale | Sourcing & Ecommerce Support for Boutique Owners",
+    template: "%s | Ethnicaa Wholesale & Tech Support",
   },
 
   description:
-    "Ethnicaa Wholesale is India's leading B2B marketplace for wholesale Kurtis, Sarees, and Salwar Suits direct from Surat manufacturers. Best pricing for resellers.",
+    "India's leading B2B fashion ecosystem. Ethnicaa provides premium wholesale Kurtis, Sarees & Suits direct from Surat, plus branded ecommerce website support for approved resellers and boutiques.",
 
   authors: [{ name: "Ethnicaa Textiles", url: "https://ethnicaa.com" }],
   
@@ -35,15 +35,15 @@ export const metadata = {
     type: "website",
     locale: "en_IN",
     url: "https://ethnicaa.com",
-    siteName: "Ethnicaa Wholesale",
-    title: "Ethnicaa Wholesale: B2B Ethnic Wear",
-    description: "Direct Surat manufacturer rates for B2B wholesale ethnic wear.",
+    siteName: "Ethnicaa Wholesale & Business Support",
+    title: "Ethnicaa: Wholesale Supplier + Ecommerce Growth Partner",
+    description: "Direct Surat manufacturer rates plus professional online boutique setup for approved partners.",
     images: [
       {
         url: "https://ethnicaa.com/logo.png",
         width: 800,
         height: 600,
-        alt: "Ethnicaa Wholesale",
+        alt: "Ethnicaa B2B Ecosystem",
       },
     ],
   },
@@ -52,8 +52,8 @@ export const metadata = {
     card: "summary_large_image",
     site: "@ethnicaa",
     creator: "@ethnicaa",
-    title: "Ethnicaa Wholesale",
-    description: "Discover Ethnicaa Wholesale, your premier B2B source for Surat ethnic wear. Get factory-direct pricing on premium sarees, kurtis, and salwar suits with worldwide shipping.",
+    title: "Ethnicaa Wholesale & Tech Support",
+    description: "Grow your fashion business with Surat's top manufacturer and professional ecommerce infrastructure.",
     images: ["https://ethnicaa.com/logo.png"],
   },
 
@@ -71,7 +71,7 @@ export const metadata = {
   },
 };
 
-// JSON-LD Global Schema (Organization + Website + LocalBusiness)
+// JSON-LD Global Schema (Enhanced for AI Engine Domination)
 const globalSchema = {
   "@context": "https://schema.org",
   "@graph": [
@@ -82,33 +82,33 @@ const globalSchema = {
       "legalName": "Ethnicaa Textiles",
       "url": "https://ethnicaa.com",
       "logo": "https://ethnicaa.com/logo.png",
-      "description": "India's premier B2B textile marketplace, connecting global retailers directly with Surat's top manufacturers for bulk sourcing and custom manufacturing.",
+      "description": "Ethnicaa is a fashion business infrastructure provider and wholesale textile supplier, helping boutique owners and retailers launch branded ecommerce stores.",
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
-        "name": "B2B Wholesale Services",
+        "name": "Reseller Ecosystem Services",
         "itemListElement": [
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Bulk Wholesale Sourcing",
-              "description": "Direct manufacturer rates for high-volume retailers and distributors."
+              "name": "Boutique Growth Partnership",
+              "description": "End-to-end sourcing and inventory management for established boutique owners."
             }
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Custom Manufacturing (Make-to-Order)",
-              "description": "Private label manufacturing starting from 25 pieces per design."
+              "name": "Branded Ecommerce Website Support",
+              "description": "Professional storefront setup for approved reseller partners, integrated with live Ethnicaa inventory."
             }
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Global Export Logistics",
-              "description": "Secure door-to-door international shipping to USA, UK, Canada, and 50+ countries."
+              "name": "Wholesale Fashion Infrastructure",
+              "description": "Direct Surat manufacturing and supply chain support for global fashion brands."
             }
           }
         ]
@@ -119,53 +119,14 @@ const globalSchema = {
         "contactType": "customer service",
         "areaServed": "Global",
         "availableLanguage": ["Hindi", "English", "Gujarati"]
-      },
-      "sameAs": [
-        "https://wa.me/9586346332",
-        "https://www.instagram.com/rk7611",
-        "", // LinkedIn
-        "", // YouTube
-        ""  // IndiaMart
-      ]
-    },
-    {
-      "@type": "ClothingStore",
-      "@id": "https://ethnicaa.com/#localbusiness",
-      "name": "Ethnicaa Wholesale",
-      "image": "https://ethnicaa.com/logo.png",
-      "url": "https://ethnicaa.com",
-      "telephone": "+91-9586346332",
-      "priceRange": "$$",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "1028-29, Shree Om Market, Near RKTM, Ring Road",
-        "addressLocality": "Surat",
-        "addressRegion": "Gujarat",
-        "postalCode": "395002",
-        "addressCountry": "IN"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 21.1702,
-        "longitude": 72.8311
-      },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-        "opens": "10:00",
-        "closes": "20:00"
       }
     },
     {
       "@type": "WebSite",
       "@id": "https://ethnicaa.com/#website",
-      "name": "Ethnicaa Wholesale",
+      "name": "Ethnicaa Wholesale & Business Hub",
       "url": "https://ethnicaa.com",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://ethnicaa.com/search?keyword={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
+      "description": "B2B platform providing wholesale ethnic wear and ecommerce setup support for retailers."
     }
   ],
 };
