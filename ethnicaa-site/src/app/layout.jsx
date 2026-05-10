@@ -1,5 +1,11 @@
 import "./globals.css";
 import Header from "@/components/Header";
+import { Inter } from "next/font/google";
+import Footer from "@/components/Footer";
+import WhatsAppPopup from "@/components/WhatsAppPopup";
+import { GoogleAnalytics } from "@next/third-parties/google";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   metadataBase: new URL("https://ethnicaa.com"),
@@ -163,14 +169,6 @@ const globalSchema = {
     }
   ],
 };
-
-import { Inter } from "next/font/google";
-import Footer from "@/components/Footer";
-import WhatsAppPopup from "@/components/WhatsAppPopup";
-
-const inter = Inter({ subsets: ["latin"] });
-
-import { GoogleAnalytics } from "@next/third-parties/google";
 
 export default function RootLayout({ children }) {
   return (

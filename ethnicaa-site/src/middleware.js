@@ -24,48 +24,39 @@ function isAuthorized(request) {
 export function middleware(request) {
   const url = request.nextUrl.clone();
   const host = request.headers.get("host") || "";
+  const { pathname } = request.nextUrl;
+
+  // Log for debugging (Check your terminal!)
+  console.log(`[Middleware] Host: ${host}, Path: ${pathname}`);
 
   // --- SUBDOMAIN ROUTING (Multi-Tenancy) ---
   const isDevelopment = host.includes("localhost") || host.includes("127.0.0.1");
   const mainDomain = isDevelopment ? "localhost:3000" : "ethnicaa.com";
-  
-  // Extract subdomain (e.g., 'zara' from 'zara.ethnicaa.com')
-  const subdomain = host.endsWith(`.${mainDomain}`) 
-    ? host.replace(`.${mainDomain}`, "") 
-    : null;
 
-  if (subdomain && subdomain !== "www" && subdomain !== "admin") {
-    // Internal rewrite to /storefront/[subdomain]/[path]
-    return NextResponse.rewrite(new URL(`/storefront/${subdomain}${url.pathname}`, request.url));
+  if (host !== mainDomain && host.endsWith(`.${mainDomain}`)) {
+    const subdomain = host.replace(`.${mainDomain}`, "");
+    if (subdomain && subdomain !== "www" && subdomain !== "admin") {
+      console.log(`[Middleware] Rewriting to Storefront: ${subdomain}`);
+      return NextResponse.rewrite(new URL(`/storefront/${subdomain}${pathname}`, request.url));
+    }
   }
 
   // --- EXISTING LOGIC ---
-  if (
-    request.nextUrl.pathname.startsWith("/admin/seo-agent") ||
-    request.nextUrl.pathname.startsWith("/api/seo/")
-  ) {
+  if (pathname.startsWith("/admin/seo-agent") || pathname.startsWith("/api/seo/")) {
     if (!isAuthorized(request)) {
       return new NextResponse("Authentication required", {
         status: 401,
-        headers: {
-          "WWW-Authenticate": 'Basic realm="Ethnicaa SEO Agent"',
-        },
+        headers: { "WWW-Authenticate": 'Basic realm="Ethnicaa SEO Agent"' },
       });
     }
   }
 
-  if (url.pathname === "/en" || url.pathname.startsWith("/en/")) {
-    url.pathname = url.pathname.replace(/^\/en\/?/, "/");
-    return NextResponse.redirect(url, 301);
+  if (pathname === "/en" || pathname.startsWith("/en/")) {
+    return NextResponse.redirect(new URL(pathname.replace(/^\/en\/?/, "/"), request.url), 301);
   }
 
-  // If host starts with www. redirect to non-www
-  if (host && host.startsWith("www.")) {
-    const newHost = host.replace("www.", "");
-    url.host = newHost;
-    
-    // Perform a 301 Permanent Redirect
-    return NextResponse.redirect(url, 301);
+  if (host.startsWith("www.")) {
+    return NextResponse.redirect(new URL(url.href.replace("www.", "")), 301);
   }
 
   return NextResponse.next();
