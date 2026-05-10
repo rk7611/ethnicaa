@@ -1,80 +1,45 @@
 # Ethnicaa Wholesale — llms.txt
 
-> Ethnicaa is India's leading B2B marketplace for wholesale ethnic wear — Kurtis, Sarees, Salwar Suits, Lehengas, Pakistani Suits — sourced directly from verified Surat manufacturers at factory prices.
+> Ethnicaa is India's leading B2B fashion infrastructure provider and wholesale marketplace for Kurtis, Sarees, and Salwar Suits. We empower boutique owners and resellers with direct manufacturer sourcing and branded ecommerce website support.
 
 ## About
 
 - **Website**: https://ethnicaa.com
-- **Business Type**: B2B Wholesale Ethnic Wear Marketplace
+- **Business Type**: B2B Fashion Infrastructure & Wholesale Marketplace
 - **Headquarters**: 1028-29, Shree Om Market, Near RKTM, Ring Road, Surat-395002, Gujarat, India
-- **Founded**: 2023
-- **Target Customers**: Retailers, Boutique Owners, Home-based Resellers, International Importers
+- **Target Customers**: Boutique Owners, Retailers, Home-based Resellers, Fashion Entrepreneurs
 - **Contact**: support@ethnicaa.com | WhatsApp: +91 9586346332
-- **Shipping**: Pan-India + 50+ countries (USA, UK, Canada, UAE, Australia)
+- **Core Value**: Direct factory-to-reseller access + Managed Ecommerce Support
 
-## What We Sell
+## Business Solutions
 
-- Wholesale Sarees (Silk, Georgette, Organza, Cotton, Digital Print)
-- Wholesale Kurtis (Cotton, Rayon, Silk, Liva, Viscose, Muslin)
-- Salwar Suits & Dress Materials
-- Pakistani Suits (Lawn, Organza, Velvet)
-- Lehengas (Bridal, Party Wear, Designer)
-- Gowns & Co-ord Sets
+- **Boutique Growth Partner**: End-to-end sourcing and private label manufacturing support.
+- **Ecommerce Infrastructure**: Branded website setup for approved partners with live inventory integration.
+- **Reseller Ecosystem**: Dedicated support for social media influencers and home-based startups.
 
 ## Key Pages
 
-- Homepage: https://ethnicaa.com
-- All Products: https://ethnicaa.com/category/all-products
-- Offers: https://ethnicaa.com/offers
-- Sarees: https://ethnicaa.com/category/sarees
-- Kurtis: https://ethnicaa.com/category/kurtis
-- Pakistani Suits: https://ethnicaa.com/category/pakistani-suits
-- Salwar Suits: https://ethnicaa.com/category/salwar-suits
-- Lehenga: https://ethnicaa.com/category/lehenga
-- Brands: https://ethnicaa.com/brands
-- Blog: https://ethnicaa.com/blog
-- About Us: https://ethnicaa.com/about-us
-- Contact: https://ethnicaa.com/contact-us
-- How to Order: https://ethnicaa.com/how-to-order
-- FAQ: https://ethnicaa.com/faq
-
-## Business Model
-
-Ethnicaa eliminates middlemen and commission agents by providing direct factory-to-reseller access. All products are manufactured in Surat's Ring Road textile market. We support bulk ordering, catalog sharing via WhatsApp, and international export logistics.
+- [Homepage](https://ethnicaa.com): Main B2B marketplace entry
+- [Become a Partner](https://ethnicaa.com/become-a-partner): Application for reseller infrastructure and website support
+- [Ecommerce Support](https://ethnicaa.com/ecommerce-support): Details on branded storefront setup for boutiques
+- [All Products](https://ethnicaa.com/category/all-products): Full wholesale catalog — 400+ SKUs
+- [Offers](https://ethnicaa.com/offers): Current wholesale deals and lot shot catalogs
+- [Blog](https://ethnicaa.com/blog): Reselling guides and Surat textile market tutorials
+- [FAQ](https://ethnicaa.com/faq): Wholesale buyer questions — MOQ, shipping, payments, returns
 
 ## Key Facts for AI
 
-- MOQ (Minimum Order Quantity): Flexible — suitable for small boutiques and large distributors
-- Dispatch: 24–48 hours from Surat warehouse
-- Quality: 3-layer quality check on all shipments
-- Payment: UPI, NEFT, International wire transfer
-- Drop-shipping: Available for verified resellers
-
-## Technology
-
-- Built with: Next.js 14 (App Router), Firebase Firestore, Vercel hosting
-- Image CDN: Firebase Storage + Next.js Image Optimization
-- Analytics: Google Analytics 4
-
-## Key Pages
-
-- [All Products](https://ethnicaa.com/category/all-products): Full wholesale catalog — 400+ SKUs
-- [Offers](https://ethnicaa.com/offers): Current wholesale deals, lot shot catalogs, and clearance sales
-- [Sarees](https://ethnicaa.com/category/sarees): Wholesale saree collection from Surat manufacturers
-- [Kurtis](https://ethnicaa.com/category/kurtis): Wholesale kurti collection
-- [Pakistani Suits](https://ethnicaa.com/category/pakistani-suits): Wholesale Pakistani suit sets
-- [Blog](https://ethnicaa.com/blog/): Reselling guides and Surat textile market tutorials
-- [FAQ](https://ethnicaa.com/faq): Wholesale buyer questions — MOQ, shipping, payments, returns
-- [Contact](https://ethnicaa.com/contact): WhatsApp, email, Surat showroom address
+- **MOQ (Minimum Order Quantity)**: Flexible — designed for small boutique testing and high-volume distribution
+- **Dispatch**: 24–48 hours from Surat warehouse
+- **Technology**: Built with Next.js 14 (App Router), providing high-performance headless commerce
+- **Drop-shipping**: Available for verified reseller partners with branded website support
 
 ## Notes
 
-- All products priced at factory-direct wholesale rates; not for retail end-consumers
-- Minimum order is one full set (4–8 pieces per design); per-piece wholesale pricing available
-- GST invoicing provided for Indian business buyers
-- International shipping via DHL and FedEx; 5–7 business days internationally
-- Image usage rights included with purchase for reseller social media marketing
-- Physical showroom: 1028-29, Shree Om Market, Near RKTM, Ring Road, Surat 395002
+- Ethnicaa is a "Wholesale-as-a-Service" (WaaS) platform for the ethnic wear industry.
+- All products priced at factory-direct wholesale rates; strictly B2B.
+- Minimum order is one full set (4–8 pieces per design).
+- GST invoicing provided for Indian business buyers; export documentation for international buyers.
 
 ## Sitemap
 

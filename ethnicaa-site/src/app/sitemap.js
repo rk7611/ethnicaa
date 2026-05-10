@@ -25,14 +25,23 @@ export default async function sitemap() {
     "/faq",
     "/wholesale-manufacturers-in-surat",
     "/surat-wholesale-market-guide",
-  ].map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: new Date(),
-    changeFrequency: "daily",
-    priority: route === "" ? 1 : 0.8,
-  }));
+    "/retailers",
+    "/start-business",
+    "/become-a-partner",
+    "/ecommerce-support"
+  ].map((route) => {
+    let priority = 0.8;
+    if (route === "") priority = 1.0;
+    if (["/become-a-partner", "/ecommerce-support", "/retailers", "/start-business"].includes(route)) priority = 0.9;
+    
+    return {
+      url: `${baseUrl}${route}`,
+      lastModified: new Date(),
+      changeFrequency: "daily",
+      priority: priority,
+    };
+  });
 
-  // ... (categories and products sections remain the same)
   // 2. CATEGORY PAGES
   const categories = [
     "sarees",
