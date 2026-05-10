@@ -24,14 +24,14 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 2 - B2B FUNNEL */}
+          {/* Column 2 - BUSINESS HUB */}
           <div>
-            <h3 style={styles.title}>Wholesale Services</h3>
+            <h3 style={styles.title}>Business Hub</h3>
             <ul style={styles.list}>
               <li><Link href="/retailers" style={styles.link}>For Retailers & Boutiques</Link></li>
-              <li><Link href="/wholesale-manufacturers-in-surat" style={styles.link}>Manufacturer Network</Link></li>
-              <li><Link href="/surat-wholesale-market-guide" style={styles.link}>Market Guide 2026</Link></li>
-              <li><Link href="/contact-us" style={styles.link}>Bulk Order Support</Link></li>
+              <li><Link href="/become-a-partner" style={styles.link}>Partner Program</Link></li>
+              <li><Link href="/ecommerce-support" style={styles.link}>Ecommerce Support</Link></li>
+              <li><Link href="/start-business" style={styles.link}>Start Your Business</Link></li>
             </ul>
           </div>
 
@@ -46,14 +46,14 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 4 - BEGINNER FUNNEL */}
+          {/* Column 4 - RESOURCES */}
           <div>
-            <h3 style={styles.title}>For Resellers</h3>
+            <h3 style={styles.title}>Resources</h3>
             <ul style={styles.list}>
-              <li><Link href="/start-business" style={styles.link}>Start Your Business</Link></li>
               <li><Link href="/how-to-order" style={styles.link}>How to Order</Link></li>
               <li><Link href="/faq" style={styles.link}>Reseller FAQs</Link></li>
               <li><Link href="/blog" style={styles.link}>Wholesale Blog</Link></li>
+              <li><Link href="/surat-wholesale-market-guide" style={styles.link}>Market Guide 2026</Link></li>
             </ul>
           </div>
         </div>

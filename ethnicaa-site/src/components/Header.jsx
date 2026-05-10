@@ -24,11 +24,6 @@ export default function Header() {
           <Link href="/offers" style={styles.offerLink}>
             🔥 Offers
           </Link>
-          <div style={styles.funnelLinks}>
-            <Link href="/retailers" style={styles.navLink}>For Retailers</Link>
-            <Link href="/start-business" style={styles.navLink}>Start Business</Link>
-            <Link href="/become-a-partner" style={{...styles.navLink, color: "#d32f2f", fontWeight: 800}}>Partner Program</Link>
-          </div>
         </div>
 
         <form onSubmit={handleSubmit} style={styles.searchForm}>
