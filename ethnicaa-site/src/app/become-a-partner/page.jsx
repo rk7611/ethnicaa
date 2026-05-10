@@ -115,7 +115,7 @@ export default function PartnerApplicationPage() {
            <div style={styles.flowItem}><span>2</span><p>Admin Review</p></div>
            <div style={styles.flowItem}><span>3</span><p>Branding Design</p></div>
            <div style={styles.flowItem}><span>4</span><p>Demo Link</p></div>
-           <div style={styles.flowItem} style={{ color: "#d32f2f", fontWeight: 700 }}><span>5</span><p>Site Live!</p></div>
+           <div style={{ ...styles.flowItem, color: "#d32f2f", fontWeight: 700 }}><span>5</span><p>Site Live!</p></div>
         </div>
       </section>
     </div>
