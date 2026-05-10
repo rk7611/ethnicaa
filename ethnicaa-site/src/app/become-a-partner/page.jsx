@@ -7,6 +7,7 @@ import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 export default function PartnerApplicationPage() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [status, setStatus] = useState("Existing Retailer");
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -18,13 +19,21 @@ export default function PartnerApplicationPage() {
         businessName: formData.get("businessName"),
         whatsapp: formData.get("whatsapp"),
         status: formData.get("status"),
+        // Conditional fields
+        storeName: formData.get("storeName") || "",
+        fullAddress: formData.get("fullAddress") || "",
+        city: formData.get("city") || "",
+        state: formData.get("state") || "",
+        country: formData.get("country") || "",
+        
         message: formData.get("message"),
         stage: "Application Received",
         createdAt: serverTimestamp(),
       });
       setSuccess(true);
     } catch (err) {
-      alert("Error submitting application. Please try again.");
+      console.error("Submission error:", err);
+      alert("Error submitting application. Please try again. (Check console for details)");
     } finally {
       setLoading(false);
     }
@@ -52,7 +61,7 @@ export default function PartnerApplicationPage() {
         <div style={styles.vCard}>
           <div style={styles.icon}>🌐</div>
           <h3>Branded Website</h3>
-          <p>Get a professional, mobile-responsive storefront under your own business name (e.g., <strong>yourname.ethnicaa.com</strong>).</p>
+          <p>Get a professional, mobile-responsive storefront under your own business name.</p>
         </div>
         <div style={styles.vCard}>
           <div style={styles.icon}>📦</div>
@@ -81,23 +90,63 @@ export default function PartnerApplicationPage() {
                 <label>Proposed Business/Store Name *</label>
                 <input name="businessName" type="text" placeholder="e.g. Zara Boutique" style={styles.input} required />
              </div>
+             
              <div style={styles.inputGroup}>
                 <label>Your WhatsApp Number (For Inquiries) *</label>
                 <input name="whatsapp" type="tel" placeholder="+91" style={styles.input} required />
              </div>
+
              <div style={styles.inputGroup}>
                 <label>Current Business Status</label>
-                <select name="status" style={styles.input}>
-                   <option>Existing Retailer</option>
-                   <option>Home-Based Reseller</option>
-                   <option>New Startup</option>
-                   <option>Social Media Influencer</option>
+                <select 
+                   name="status" 
+                   style={styles.input} 
+                   value={status} 
+                   onChange={(e) => setStatus(e.target.value)}
+                >
+                   <option value="Existing Retailer">Existing Retailer (Shop Owner)</option>
+                   <option value="Home-Based Reseller">Home-Based Reseller</option>
+                   <option value="New Startup">New Startup (Ready to launch)</option>
+                   <option value="Social Media Influencer">Social Media Influencer</option>
                 </select>
              </div>
+
+             {/* Conditional Fields for Existing Shop */}
+             {status === "Existing Retailer" ? (
+               <>
+                 <div style={styles.inputGroup}>
+                    <label>Store Name *</label>
+                    <input name="storeName" type="text" placeholder="Full name of your existing shop" style={styles.input} required />
+                 </div>
+                 <div style={styles.inputGroup}>
+                    <label>Full Shop Address *</label>
+                    <textarea name="fullAddress" style={{...styles.input, height: 80}} placeholder="Door No, Street, Landmark, Pincode" required></textarea>
+                 </div>
+               </>
+             ) : (
+               <>
+                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 15 }}>
+                    <div style={styles.inputGroup}>
+                       <label>City *</label>
+                       <input name="city" type="text" style={styles.input} required />
+                    </div>
+                    <div style={styles.inputGroup}>
+                       <label>State *</label>
+                       <input name="state" type="text" style={styles.input} required />
+                    </div>
+                 </div>
+                 <div style={styles.inputGroup}>
+                    <label>Country *</label>
+                    <input name="country" type="text" defaultValue="India" style={styles.input} required />
+                 </div>
+               </>
+             )}
+
              <div style={styles.inputGroup}>
                 <label>Why do you want to partner with Ethnicaa? *</label>
                 <textarea name="message" style={{...styles.input, height: 100}} placeholder="Tell us about your customer base and growth plans..." required></textarea>
              </div>
+
              <button type="submit" style={styles.btn} disabled={loading}>
                 {loading ? "Submitting..." : "Submit Application for Review"}
              </button>
