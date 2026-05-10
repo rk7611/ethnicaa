@@ -162,6 +162,16 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
         </div>
       )}
 
+      {currentPage === 1 && (
+        <section style={styles.partnerCTA}>
+          <div style={styles.partnerOverlay}>
+            <h2 style={styles.partnerHeading}>Start Your Own Fashion Business</h2>
+            <p style={styles.partnerSub}>Get a professionally branded, mobile-ready website powered by Ethnicaa inventory. We handle the technology; you handle the brand.</p>
+            <Link href="/become-a-partner" style={styles.partnerBtn}>Become a Partner</Link>
+          </div>
+        </section>
+      )}
+
       {/* Wholesale Hub removed as requested */}
 
       <div style={styles.section}>
@@ -370,4 +380,26 @@ const styles = {
   blogCard: { padding: 16, background: "#fff", borderRadius: 16, boxShadow: "0 4px 12px rgba(0,0,0,0.03)" },
   blogImageWrapper: { position: "relative", width: "100%", height: 180, marginBottom: 12 },
   blogTitle: { fontSize: 17, fontWeight: 700 },
+  partnerCTA: { 
+    background: "linear-gradient(135deg, #000 0%, #333 100%)", 
+    borderRadius: 30, 
+    padding: "60px 20px", 
+    marginBottom: 50, 
+    textAlign: "center",
+    boxShadow: "0 20px 40px rgba(0,0,0,0.2)"
+  },
+  partnerOverlay: { maxWidth: 700, margin: "0 auto" },
+  partnerHeading: { color: "#fff", fontSize: 28, fontWeight: 800, marginBottom: 15 },
+  partnerSub: { color: "#ccc", fontSize: 16, lineHeight: 1.6, marginBottom: 30 },
+  partnerBtn: { 
+    display: "inline-block", 
+    background: "#fff", 
+    color: "#000", 
+    padding: "15px 40px", 
+    borderRadius: 15, 
+    textDecoration: "none", 
+    fontWeight: 800, 
+    fontSize: 16,
+    transition: "0.2s"
+  }
 };
