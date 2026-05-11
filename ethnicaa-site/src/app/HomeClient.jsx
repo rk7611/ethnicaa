@@ -132,12 +132,6 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
           : "Ethnicaa Wholesale: Surat Manufacturer & Ecommerce Partner for Boutique Owners"}
       </h1>
 
-      {currentPage === 1 && (
-        <div style={{ minHeight: 140 }}>
-          <TrustBadges />
-        </div>
-      )}
-
       {currentPage === 1 && categories.length > 0 && (
         <div style={styles.section}>
           <h2 style={styles.heading}>Shop by Category</h2>
@@ -339,6 +333,12 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
           </div>
         </div>
       </div>
+
+      {currentPage === 1 && (
+        <div style={{ marginTop: 40, marginBottom: 20 }}>
+          <TrustBadges />
+        </div>
+      )}
 
       <a href="https://wa.me/9586346332?text=Hi, I want to enquire about wholesale sarees" target="_blank" rel="noopener noreferrer" className="pulsing-whatsapp" aria-label="Chat on WhatsApp">💬</a>
     </div>
