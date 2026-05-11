@@ -67,7 +67,7 @@ const homeFaqs = [
   }
 ];
 
-const globalSchema = {
+const ethnicaaGlobalSchema = {
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -251,7 +251,7 @@ export default async function Home({ searchParams }) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([globalSchema, itemListSchema]) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([ethnicaaGlobalSchema, itemListSchema]) }}
       />
       <FAQSchema faqs={homeFaqs} id="home-faq-schema" />
       <HomeClient
