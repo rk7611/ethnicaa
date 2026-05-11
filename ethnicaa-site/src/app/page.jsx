@@ -65,6 +65,26 @@ const homeFaqs = [
   }
 ];
 
+const globalSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://ethnicaa.com/#organization",
+      "name": "Ethnicaa Wholesale",
+      "url": "https://ethnicaa.com",
+      "logo": "https://ethnicaa.com/logo.png",
+      "description": "Ethnicaa is a leading Surat-based manufacturer and B2B infrastructure provider for ethnic wear boutiques and resellers.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Surat",
+        "addressRegion": "Gujarat",
+        "addressCountry": "IN"
+      }
+    }
+  ]
+};
+
 export async function generateMetadata({ searchParams }) {
   const page = parseInt(searchParams?.page) || 1;
   const baseUrl = "https://ethnicaa.com";
