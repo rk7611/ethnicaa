@@ -66,6 +66,10 @@ export default function BlogPost({ params }) {
       { key: "Salwar Suits", url: "/category/salwar-suits" },
       { key: "Lehengas", url: "/category/lehenga" },
       { key: "Surat", url: "/wholesale-manufacturers-in-surat" },
+      { key: "reseller support", url: "/start-business" },
+      { key: "ecommerce support", url: "/ecommerce-support" },
+      { key: "boutique growth", url: "/retailers" },
+      { key: "partner program", url: "/become-a-partner" },
     ];
 
     map.forEach(({ key, url }) => {

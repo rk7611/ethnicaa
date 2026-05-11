@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import { Inter } from "next/font/google";
 import Footer from "@/components/Footer";
 import WhatsAppPopup from "@/components/WhatsAppPopup";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -138,6 +138,10 @@ export default function RootLayout({ children }) {
         {/* Preconnect & DNS Prefetch for Speed */}
         <link rel="preconnect" href="https://firebasestorage.googleapis.com" />
         <link rel="dns-prefetch" href="https://firebasestorage.googleapis.com" />
+        <link rel="preconnect" href="https://ethnicaa-8402c.firebasestorage.app" />
+        <link rel="dns-prefetch" href="https://ethnicaa-8402c.firebasestorage.app" />
+        <link rel="preconnect" href="https://wsrv.nl" />
+        <link rel="dns-prefetch" href="https://wsrv.nl" />
         
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
@@ -150,7 +154,22 @@ export default function RootLayout({ children }) {
       </head>
 
       <body className={inter.className}>
-        <GoogleAnalytics gaId="G-XF0XGW58DX" />
+        {/* Google Analytics - Loaded lazily to prioritize LCP */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-XF0XGW58DX"
+          strategy="lazyOnload"
+        />
+        <Script id="google-analytics" strategy="lazyOnload">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-XF0XGW58DX', {
+              page_path: window.location.pathname,
+            });
+          `}
+        </Script>
+
         <Header />
         <main>{children}</main>
         <Footer />

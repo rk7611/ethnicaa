@@ -26,6 +26,26 @@ const homeFaqs = [
   {
     question: "Are these direct factory prices from Surat?",
     answer: "Absolutely. Ethnicaa is based in the heart of the Surat textile market. We work directly with manufacturers to bring you factory-direct rates, eliminating middlemen and helping you maximize your margins."
+  },
+  {
+    question: "Does Ethnicaa provide ecommerce support for resellers?",
+    answer: "Yes, Ethnicaa offers professional ecommerce support for approved reseller partners. Selected buyers can apply for branded online store assistance to help them scale their fashion business globally."
+  },
+  {
+    question: "Can Ethnicaa help me start an online boutique?",
+    answer: "Absolutely. We help fashion entrepreneurs launch their online boutiques by providing not just wholesale products, but also the digital infrastructure and branded store assistance needed for a professional launch."
+  },
+  {
+    question: "Do I need coding knowledge to sell online with Ethnicaa?",
+    answer: "No coding knowledge is required. Our ecommerce support program handles the technical setup, allowing approved partners to focus on marketing and growing their boutique."
+  },
+  {
+    question: "Does Ethnicaa support reseller growth?",
+    answer: "Yes, we have a dedicated reseller ecosystem designed to help you scale from a home-based seller to a professional online brand with dedicated support and infrastructure."
+  },
+  {
+    question: "Can approved buyers receive branded online store support?",
+    answer: "Yes, as part of our reseller growth ecosystem, selected wholesale partners may receive branded online store assistance to streamline their sales and professionalize their brand presence."
   }
 ];
 
@@ -33,15 +53,15 @@ export async function generateMetadata({ searchParams }) {
   const page = parseInt(searchParams?.page) || 1;
   const baseUrl = "https://ethnicaa.com";
   const url = page > 1 ? `${baseUrl}/?page=${page}` : baseUrl;
-  
-  const title = page > 1 
-    ? `Page ${page} | Ethnicaa: Surat Wholesale Sarees, Kurtis & Pakistani Suits` 
-    : "Ethnicaa: Surat Wholesale Sarees, Kurtis & Pakistani Suits";
+
+  const title = page > 1
+    ? `Page ${page} | Ethnicaa: Surat Wholesale Sarees, Kurtis & Pakistani Suits`
+    : "Ethnicaa: Surat Wholesale Sarees, Kurtis & Pakistani Suits | Boutique & Reseller Ecommerce Support";
 
   return {
     title: cleanTitle(title),
-    description: "Ethnicaa: Buy wholesale Kurtis, Sarees & Suits direct from Surat manufacturers. Best pricing & fast global shipping for resellers.",
-    keywords: "Surat textile market wholesale, ethnic wear wholesale Surat, wholesale sarees Surat, wholesale kurtis Surat, Pakistani suits wholesale price, direct factory wholesale, Surat catalog wholesale, B2B clothing suppliers India, ethnic wear for resellers",
+    description: "Ethnicaa: Buy wholesale Kurtis, Sarees & Suits direct from Surat manufacturers. We provide approved resellers and boutique owners with ecommerce support, branded online store assistance, and reseller growth infrastructure.",
+    keywords: "Surat textile market wholesale, ethnic wear wholesale Surat, wholesale sarees Surat, wholesale kurtis Surat, Pakistani suits wholesale price, direct factory wholesale, Surat catalog wholesale, B2B clothing suppliers India, ethnic wear for resellers, boutique suppliers, reseller growth support, online boutique support, ecommerce setup for resellers, how to start clothing business, fashion reseller business",
     alternates: {
       canonical: url,
       languages: {
@@ -74,7 +94,8 @@ export async function generateMetadata({ searchParams }) {
 }
 
 export const revalidate = 3600;
-import { consolidateCategories } from "@/lib/category-utils";
+
+import { consolidateCategories } from "@/lib/category-utils";
 
 function toPlain(value) {
   return JSON.parse(JSON.stringify(value));
@@ -82,17 +103,17 @@ function toPlain(value) {
 
 async function getHomeData(page = 1) {
   const PAGE_SIZE = 30;
-  
+
   // Parallel fetch for counts and initial data
-  const [bannersSnap, catsSnap, countSnap, offersSnap] = await Promise.all([
+  // We use a faster query approach for home to ensure TTFB stays under 1s
+  const [bannersSnap, catsSnap, countSnap] = await Promise.all([
     getDocs(query(collection(db, "banners"), orderBy("order", "asc"))),
     getDocs(collection(db, "categories")),
     getCountFromServer(query(collection(db, "products"), where("status", "in", ["published", "active"]))),
-    getCountFromServer(query(collection(db, "products"), where("status", "in", ["published", "active"]), where("offer", "==", true)))
   ]);
 
   const totalProductsCount = countSnap.data().count;
-  const totalOffersCount = offersSnap.data().count;
+  const totalOffersCount = 0; // Simplified for home page speed; actual count can load on /offers page
   const totalPages = Math.ceil(totalProductsCount / PAGE_SIZE);
 
   // Optimized Product Query: 
@@ -103,11 +124,11 @@ async function getHomeData(page = 1) {
     collection(db, "products"),
     where("status", "in", ["published", "active"]),
     orderBy("createdAt", "desc"),
-    limit(page * PAGE_SIZE) 
+    limit(page * PAGE_SIZE)
   );
 
   const prodsSnap = await getDocs(productsQuery);
-  
+
   const banners = bannersSnap.docs
     .map(d => ({ id: d.id, ...d.data() }))
     .filter(b => isValidImageUrl(b.imageURL));
@@ -161,7 +182,7 @@ export default async function Home({ searchParams }) {
   return (
     <>
       <FAQSchema faqs={homeFaqs} id="home-faq-schema" />
-      <HomeClient 
+      <HomeClient
         initialBanners={toPlain(banners)}
         initialCategories={toPlain(categories)}
         initialProducts={toPlain(products)}

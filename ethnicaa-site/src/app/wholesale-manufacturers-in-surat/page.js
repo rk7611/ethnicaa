@@ -29,7 +29,7 @@ export default function SuratManufacturersPage() {
         <div style={styles.textBlock}>
           <h2 style={styles.sectionTitle}>Why Source From Surat with Ethnicaa?</h2>
           <p style={styles.text}>
-            Surat is the heart of India&apos;s textile industry. However, finding reliable manufacturers and managing quality can be challenging. 
+            Surat is the heart of India&apos;s textile industry. However, finding reliable manufacturers and managing quality can be challenging.
             Ethnicaa acts as your **boots-on-the-ground partner**, aggregating products from over 100+ verified factories in Ring Road, Millennium Market, and Pashupati Market.
           </p>
           <ul style={styles.featList}>
@@ -49,14 +49,14 @@ export default function SuratManufacturersPage() {
           Join 5,000+ happy buyers who source their inventory directly through our Surat-based network.
         </p>
         <div style={styles.ctaActions}>
-             <EnquireButton product={{ name: "Surat Manufacturer Inquiry", slug: "surat-manufacturers" }} />
+          <EnquireButton product={{ name: "Surat Manufacturer Inquiry", slug: "surat-manufacturers" }} />
         </div>
       </section>
 
       <section style={styles.seoFooter}>
         <h3 style={styles.smallTitle}>About Surat Wholesale Market</h3>
         <p style={styles.smallText}>
-          The Surat wholesale market is famous for its vibrant sarees, premium salwar suits, and designer kurtis. 
+          The Surat wholesale market is famous for its vibrant sarees, premium salwar suits, and designer kurtis.
           By sourcing from manufacturers in Surat via Ethnicaa, you gain a competitive edge with the latest fashion trends and 50-70% higher margins compared to local wholesalers.
         </p>
       </section>

@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata = {
-  title: "About Ethnicaa | India's Leading B2B Textile Marketplace",
-  description: "Ethnicaa is a premier B2B textile marketplace based in Surat, Gujarat. We connect global retailers directly with verified Surat manufacturers.",
+  title: "About Ethnicaa | India's Leading B2B Textile Marketplace & Boutique Growth Ecosystem",
+  description: "Ethnicaa is a premier B2B textile marketplace and boutique growth partner based in Surat. We connect global retailers directly with verified Surat manufacturers and provide ecommerce support for approved fashion resellers.",
   alternates: {
     canonical: "https://ethnicaa.com/about-us",
   },
@@ -13,19 +13,19 @@ export default function AboutUs() {
   return (
     <div style={styles.container}>
       <h1 style={styles.h1}>Ethnicaa: Your Scalable Wholesale Textile Partner</h1>
-      
+
       <div style={styles.content}>
         <p>Born in the heart of Surat—India&apos;s textile capital—Ethnicaa is built on a single promise: <strong>To make high-quality Surat fashion accessible to every scale of business.</strong> Whether you are an established retail chain sourcing in bulk or a home-based reseller starting your first boutique, we provide the manufacturing backbone you need to succeed.</p>
-        
+
         <div style={styles.funnelBox}>
           <div style={styles.funnelItem}>
             <h3>For Retailers & Wholesalers</h3>
-            <p>We provide professional B2B services including bulk sourcing, export logistics, and make-to-order manufacturing for shop owners globally.</p>
+            <p>We provide professional B2B services including bulk sourcing, export logistics, and <strong>branded online store assistance</strong> for approved partners.</p>
             <Link href="/retailers" style={styles.link}>Explore B2B Services &rarr;</Link>
           </div>
           <div style={styles.funnelItem}>
             <h3>For Resellers & Startups</h3>
-            <p>Launch your business with zero investment and low MOQs. We provide the support and direct factory pricing to help you scale.</p>
+            <p>Launch your business with factory-direct pricing and <strong>ecommerce growth support</strong>. We help you scale from social media selling to a professional online brand.</p>
             <Link href="/start-business" style={styles.link}>Start Your Business &rarr;</Link>
           </div>
         </div>
@@ -35,6 +35,9 @@ export default function AboutUs() {
 
         <h2>Global Export & Reliability</h2>
         <p>From our 3-layer quality check at the Surat warehouse to secure international shipping via DHL and FedEx, we handle the technical logistics so you can focus on your customers. We currently serve businesses in 50+ countries including USA, UK, Canada, and UAE.</p>
+
+        <h2>Wholesale + Ecommerce Ecosystem</h2>
+        <p>Ethnicaa has evolved from a traditional wholesale textile supplier into a comprehensive <strong>Wholesale + Ecommerce + Boutique Growth Ecosystem</strong>. We partner with 500+ verified manufacturers to ensure you get the true factory cost, while our tech team provides the digital tools to help you sell online efficiently.</p>
       </div>
 
       <div style={styles.stats}>

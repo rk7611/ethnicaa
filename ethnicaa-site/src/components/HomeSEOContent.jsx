@@ -6,13 +6,13 @@ const HomeSEOContent = () => {
       <section>
         <h2>Ethnicaa: India&apos;s #1 Surat Wholesale Marketplace for Resellers</h2>
         <p>Welcome to <strong>Ethnicaa Wholesale</strong>, the premier B2B platform connecting global fashion retailers and independent resellers directly with the manufacturing heart of India: <strong>Surat, Gujarat</strong>. In 2026, the ethnic wear market is more competitive than ever. To win, you don&apos;t just need products; you need a supply chain that provides factory-direct pricing, verified quality, and lightning-fast global logistics. Ethnicaa is that engine for your business.</p>
-        
+
         <h3>The Surat Advantage: Why Source Directly from the Source?</h3>
         <p>Surat is the undisputed textile capital of India, producing over 40% of the country&apos;s man-made fiber. By sourcing directly from our Surat-based marketplace, you eliminate up to 4 layers of middlemen (wholesalers, regional distributors, agents, and sub-agents). This allows you to access the <strong>true factory cost</strong>, giving you a 30-50% price advantage over your local competitors.</p>
 
         <h3>Where to Buy Saree and Kurti Wholesale in Surat?</h3>
         <p>If you are looking for the <strong>best place to buy sarees and kurtis wholesale in Surat</strong>, the Ring Road textile market area is the primary hub. <strong>Ethnicaa Wholesale</strong> is located at 1028-29, Shree Om Market, which is just minutes away from RKTM and Millennium Market. We are the trusted destination for boutique owners and resellers who want to buy <strong>authentic Surat sarees and kurtis</strong> at direct factory-to-retail rates.</p>
-        
+
         <h3>Profit Blueprint: How Our Resellers Earn ₹50,000+ Monthly</h3>
         <p>We don&apos;t just sell catalogs; we enable entrepreneurship. Most of our resellers on platforms like Instagram, WhatsApp, and Facebook operate with a &quot;High-Margin, Low-Inventory&quot; model. Here is the Ethnicaa profit breakdown:</p>
         <ul>
@@ -35,6 +35,19 @@ const HomeSEOContent = () => {
 
         <h3>Surat Wholesale Market Guide 2026</h3>
         <p>Navigating the Surat textile market can be overwhelming. Ethnicaa simplifies this by curating only the top-performing brands from markets like <strong>RKTM (Radha Krishna Textile Market), Shree Om Market, and Millennium Market</strong>. We do the ground research so you don&apos;t have to, ensuring you only receive trending, high-demand inventory.</p>
+
+        <h3>Ethnicaa: More Than Just a Wholesale Supplier</h3>
+        <p>Unlike traditional wholesale suppliers that only provide products, Ethnicaa serves as a comprehensive <strong>Boutique Growth Partner</strong> and <strong>Reseller Ecosystem</strong>. We understand that launching a fashion business requires more than just inventory; it requires infrastructure.</p>
+
+        <h3>Ecommerce Support for Approved Partners</h3>
+        <p>Ethnicaa helps fashion entrepreneurs launch and grow their online clothing business faster. Approved reseller partners and selected buyers may receive <strong>branded online store assistance</strong> and <strong>ecommerce growth infrastructure</strong>. This helps our partners avoid technical challenges like:</p>
+        <ul>
+          <li>Website coding and technical store setup</li>
+          <li>Complex ecommerce design and configuration</li>
+          <li>Automated product and inventory integration</li>
+          <li>Mobile-friendly online launch infrastructure</li>
+        </ul>
+        <p>Our goal is to allow you to focus 100% on marketing and scaling your brand while we handle the backend technicalities of your online fashion store.</p>
       </section>
 
       <section style={{ marginTop: 40, padding: 20, background: "#fff8f8", borderRadius: 12, border: "1px solid #ffdada" }}>

@@ -125,20 +125,20 @@ async function getProductsData(categorySlug, sort = "latest", page = 1) {
 
 const CATEGORY_META = {
   "sarees": {
-    title: "Wholesale Sarees in Surat | Factory Prices | Ethnicaa B2B",
-    description: "Buy wholesale sarees in Surat at factory prices. Silk, georgette, organza, cotton & designer catalogs. Best rates for resellers & boutique owners. COD available."
+    title: "Wholesale Sarees in Surat | Factory Prices & Boutique Support | Ethnicaa",
+    description: "Buy wholesale sarees in Surat at factory prices. Silk, georgette & designer catalogs. Approved resellers get branded ecommerce support and boutique growth infrastructure."
   },
   "kurtis": {
-    title: "Wholesale Kurtis from Surat Manufacturers",
-    description: "Wholesale kurtis from Surat manufacturers. Cotton, rayon, georgette & anarkali styles. Bulk pricing for resellers, boutique owners & retailers across India."
+    title: "Wholesale Kurtis from Surat | Reseller Ecommerce Support | Ethnicaa",
+    description: "Wholesale kurtis from Surat manufacturers. Cotton, rayon & designer styles. We provide branded online store assistance for approved fashion resellers."
   },
   "pakistani-suits": {
-    title: "Wholesale Pakistani Suits Surat | Factory Price",
-    description: "Wholesale Pakistani suits from Surat — lawn, cotton, embroidered readymade sets. Direct factory price, pan-India delivery. Best B2B rates for resellers."
+    title: "Wholesale Pakistani Suits Surat | Boutique Growth Infrastructure",
+    description: "Wholesale Pakistani suits from Surat — lawn, cotton, embroidered sets. Direct factory price. Scale your boutique with our branded ecommerce support."
   },
   "salwar-suits": {
-    title: "Wholesale Salwar Suits Surat | Ethnicaa B2B",
-    description: "Wholesale salwar suits catalog from Surat. Designer, printed & embroidered collections for bulk buyers. Reseller-friendly pricing, fast dispatch."
+    title: "Wholesale Salwar Suits Surat | Reseller Growth Ecosystem",
+    description: "Wholesale salwar suits from Surat. Designer & printed collections for bulk buyers. Join our reseller ecosystem for branded online selling support."
   }
 };
 

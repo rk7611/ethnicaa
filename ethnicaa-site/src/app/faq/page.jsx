@@ -38,20 +38,40 @@ export default function FAQPage() {
     {
       q: "Can I use your photos to sell on Instagram/WhatsApp?",
       a: "Yes, once you become a customer, you are fully authorized to use our high-quality catalog images for your own social media marketing and reselling."
+    },
+    {
+      q: "Does Ethnicaa provide ecommerce support?",
+      a: "Yes, Ethnicaa provides professional ecommerce support and branded online store assistance for approved reseller partners and selected buyers."
+    },
+    {
+      q: "Can Ethnicaa help me start an online boutique?",
+      a: "Absolutely. We are a boutique growth partner. We help fashion entrepreneurs launch their online businesses by providing both wholesale products and the necessary digital infrastructure."
+    },
+    {
+      q: "Do I need coding knowledge to sell online with Ethnicaa?",
+      a: "No coding knowledge is required. Our ecommerce support program handles the technical store setup, product integration, and configuration for you."
+    },
+    {
+      q: "Does Ethnicaa support reseller growth?",
+      a: "Yes, we have a dedicated reseller ecosystem designed to help you scale from a home-based seller to a professional online brand with dedicated support and infrastructure."
+    },
+    {
+      q: "Can approved buyers receive branded online store support?",
+      a: "Yes, selected wholesale partners and approved boutique owners may receive branded online store assistance to streamline their operations and professionalize their brand presence."
     }
   ];
 
   return (
     <div style={styles.container}>
-      <FAQSchema 
-        faqs={faqs.map(f => ({ question: f.q, answer: f.a }))} 
-        id="faq-page-schema" 
+      <FAQSchema
+        faqs={faqs.map(f => ({ question: f.q, answer: f.a }))}
+        id="faq-page-schema"
       />
       <h1 style={styles.title}>Frequently Asked Questions</h1>
-      
+
       <div style={styles.content}>
         <p>If you have a question that isn&apos;t answered here, please don&apos;t hesitate to reach out to our WhatsApp support.</p>
-        
+
         <div style={styles.faqList}>
           {faqs.map((faq, index) => (
             <div key={index} style={styles.faqItem}>

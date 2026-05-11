@@ -41,9 +41,10 @@ export function isValidImageUrl(url) {
         "lh3.googleusercontent.com",
         "kapdavilla.com",
         "www.kapdavilla.com",
-        "cdn.kapdavilla.com"
+        "cdn.kapdavilla.com",
+        "wsrv.nl"
       ];
-      return allowedHosts.some(host => parsed.hostname === host || parsed.hostname.endsWith("." + host));
+      return allowedHosts.some(host => parsed.hostname === host || parsed.hostname.endsWith(host));
     } catch (e) {
       return false;
     }

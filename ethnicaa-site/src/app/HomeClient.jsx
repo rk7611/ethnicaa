@@ -212,16 +212,16 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
                 <div key={p.id} className="premium-card" style={styles.card}>
                     <Link href={`/product/${p.slug}`} style={{ textDecoration: "none", color: "inherit" }}>
                     <div style={styles.imgContainer}>
-                      {isValidImageUrl(p.images?.[0]) && (
+                      {(index < 10 || isValidImageUrl(p.images?.[0])) && (
                         <Image 
-                          src={p.images[0]} 
+                          src={p.images[0] || "/logo.png"} 
                           alt={generateProductAlt(p)} 
                           width={300} 
                           height={380} 
                           sizes="(max-width: 480px) 45vw, (max-width: 768px) 30vw, 250px"
                           style={styles.cardImg} 
-                          priority={index < 4}
-                          fetchPriority={index < 4 ? "high" : "auto"}
+                          priority={index < 10}
+                          fetchPriority={index < 10 ? "high" : "auto"}
                         />
                       )}
                       {p.offer && p.discount_percent > 0 && (

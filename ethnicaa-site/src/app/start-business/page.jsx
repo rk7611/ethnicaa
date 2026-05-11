@@ -50,6 +50,10 @@ export default function StartBusinessPage() {
             <h4 style={{ color: "#d32f2f" }}>Free Branded Website</h4>
             <p>We help beginners grow by starting a professional ecommerce website with <strong>your business name</strong> and <strong>your contact details</strong>.</p>
           </div>
+          <div style={{ ...styles.benefit, borderBottom: "none", background: "#fff5f5", padding: 20, borderRadius: 15, border: "1px solid #ffdada" }}>
+            <h4 style={{ color: "#d32f2f" }}>Boutique Ecommerce Infrastructure</h4>
+            <p>Approved partners can access professional <strong>branded online store assistance</strong> and <strong>reseller growth support</strong> to scale faster.</p>
+          </div>
         </div>
       </section>
 

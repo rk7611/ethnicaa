@@ -13,7 +13,7 @@ export default function PartnerApplicationPage() {
     e.preventDefault();
     setLoading(true);
     const formData = new FormData(e.target);
-    
+
     try {
       await addDoc(collection(db, "partner_applications"), {
         businessName: formData.get("businessName"),
@@ -23,14 +23,14 @@ export default function PartnerApplicationPage() {
         city: formData.get("city") || "",
         state: formData.get("state") || "",
         country: formData.get("country") || "",
-        
+
         // Conditional fields
         storeName: formData.get("storeName") || "",
         fullAddress: formData.get("fullAddress") || "",
         // Influencer fields
         instagram: formData.get("instagram") || "",
         facebook: formData.get("facebook") || "",
-        
+
         message: formData.get("message"),
         stage: "Application Received",
         createdAt: serverTimestamp(),
@@ -48,7 +48,7 @@ export default function PartnerApplicationPage() {
     return (
       <div style={{ textAlign: "center", padding: "100px 20px" }}>
         <h1 style={{ fontSize: 40 }}>Application Received! 🚀</h1>
-        <p style={{ fontSize: 18, color: "#666", marginTop: 20 }}>Our team is reviewing your profile. You will receive a WhatsApp message once your branded storefront is ready for design.</p>
+        <p style={{ fontSize: 18, color: "#666", marginTop: 20 }}>Our team is reviewing your profile for partner approval. You will receive a WhatsApp message once your boutique growth support and branded storefront are ready for the next stage.</p>
         <Link href="/" style={{ display: "inline-block", marginTop: 40, color: "#d32f2f", fontWeight: 700 }}>Return to Home</Link>
       </div>
     );
@@ -57,31 +57,31 @@ export default function PartnerApplicationPage() {
   return (
     <div style={styles.container}>
       <header style={styles.header}>
-        <span style={styles.badge}>Exclusive Opportunity</span>
-        <h1 style={styles.h1}>Launch Your Branded Fashion Business in 24 Hours</h1>
-        <p style={styles.sub}>We don&apos;t just provide inventory. We provide the <strong>entire digital infrastructure</strong> for your fashion brand.</p>
+        <span style={styles.badge}>Approved Partner Program</span>
+        <h1 style={styles.h1}>Join the Ethnicaa Reseller Growth Ecosystem</h1>
+        <p style={styles.sub}>We don&apos;t just provide inventory. We provide the <strong>entire digital infrastructure</strong> and <strong>ecommerce growth support</strong> for approved fashion entrepreneurs and boutiques.</p>
       </header>
 
       <section style={styles.valueGrid}>
         <div style={styles.vCard}>
           <div style={styles.icon}>🌐</div>
-          <h3>Branded Website</h3>
-          <p>Get a professional, mobile-responsive storefront under your own business name.</p>
+          <h3>Branded Online Store Assistance</h3>
+          <p>Get professional website setup support under your own business name, tailored for fashion retail.</p>
         </div>
         <div style={styles.vCard}>
           <div style={styles.icon}>📦</div>
-          <h3>Live Inventory</h3>
-          <p>Your website comes pre-loaded with our latest catalogs. No manual product uploading required.</p>
+          <h3>Reseller Growth Support</h3>
+          <p>Sync with our live inventory and receive direct factory pricing to maximize your business margins.</p>
         </div>
         <div style={styles.vCard}>
           <div style={styles.icon}>💬</div>
-          <h3>Direct WhatsApp Sales</h3>
-          <p>Every inquiry from your website goes directly to <strong>your WhatsApp number</strong>, not ours.</p>
+          <h3>Boutique Support</h3>
+          <p>Direct WhatsApp integration ensures all customer inquiries reach you instantly for high conversion.</p>
         </div>
         <div style={styles.vCard}>
           <div style={styles.icon}>⚙️</div>
-          <h3>Managed Tech</h3>
-          <p>We handle the hosting, security, and updates. You focus 100% on marketing and customer service.</p>
+          <h3>Ecommerce Infrastructure</h3>
+          <p>We manage the technical configuration and hosting. You focus 100% on marketing and customer growth.</p>
         </div>
       </section>
 
@@ -89,90 +89,90 @@ export default function PartnerApplicationPage() {
         <div style={styles.formCard}>
           <h2>Apply for Partner Approval</h2>
           <p style={{ color: "#666", marginBottom: 30 }}>Our team reviews every application to ensure business quality and location exclusivity.</p>
-          
+
           <form style={styles.form} onSubmit={handleSubmit}>
-             <div style={styles.inputGroup}>
-                <label>Proposed Business/Store Name *</label>
-                <input name="businessName" type="text" placeholder="e.g. Zara Boutique" style={styles.input} required />
-             </div>
-             
-             <div style={styles.inputGroup}>
-                <label>Your WhatsApp Number (For Inquiries) *</label>
-                <input name="whatsapp" type="tel" placeholder="+91" style={styles.input} required />
-             </div>
+            <div style={styles.inputGroup}>
+              <label>Proposed Business/Store Name *</label>
+              <input name="businessName" type="text" placeholder="e.g. Zara Boutique" style={styles.input} required />
+            </div>
 
-             <div style={styles.inputGroup}>
-                <label>Current Business Status</label>
-                <select 
-                   name="status" 
-                   style={styles.input} 
-                   value={status} 
-                   onChange={(e) => setStatus(e.target.value)}
-                >
-                   <option value="Existing Retailer">Existing Retailer (Shop Owner)</option>
-                   <option value="Home-Based Reseller">Home-Based Reseller</option>
-                   <option value="New Startup">New Startup (Ready to launch)</option>
-                   <option value="Social Media Influencer">Social Media Influencer</option>
-                </select>
-             </div>
+            <div style={styles.inputGroup}>
+              <label>Your WhatsApp Number (For Inquiries) *</label>
+              <input name="whatsapp" type="tel" placeholder="+91" style={styles.input} required />
+            </div>
 
-             {/* Global Location Fields (Now Mandatory for Everyone) */}
-             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 15 }}>
+            <div style={styles.inputGroup}>
+              <label>Current Business Status</label>
+              <select
+                name="status"
+                style={styles.input}
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+              >
+                <option value="Existing Retailer">Existing Retailer (Shop Owner)</option>
+                <option value="Home-Based Reseller">Home-Based Reseller</option>
+                <option value="New Startup">New Startup (Ready to launch)</option>
+                <option value="Social Media Influencer">Social Media Influencer</option>
+              </select>
+            </div>
+
+            {/* Global Location Fields (Now Mandatory for Everyone) */}
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 15 }}>
+              <div style={styles.inputGroup}>
+                <label>City *</label>
+                <input name="city" type="text" style={styles.input} required />
+              </div>
+              <div style={styles.inputGroup}>
+                <label>State *</label>
+                <input name="state" type="text" style={styles.input} required />
+              </div>
+            </div>
+            <div style={styles.inputGroup}>
+              <label>Country *</label>
+              <input name="country" type="text" defaultValue="India" style={styles.input} required />
+            </div>
+
+            {/* Conditional Fields for Existing Shop */}
+            {status === "Existing Retailer" && (
+              <>
                 <div style={styles.inputGroup}>
-                   <label>City *</label>
-                   <input name="city" type="text" style={styles.input} required />
+                  <label>Store Name *</label>
+                  <input name="storeName" type="text" placeholder="Full name of your existing shop" style={styles.input} required />
                 </div>
                 <div style={styles.inputGroup}>
-                   <label>State *</label>
-                   <input name="state" type="text" style={styles.input} required />
+                  <label>Full Shop Address *</label>
+                  <textarea name="fullAddress" style={{ ...styles.input, height: 80 }} placeholder="Door No, Street, Landmark, Pincode" required></textarea>
                 </div>
-             </div>
-             <div style={styles.inputGroup}>
-                <label>Country *</label>
-                <input name="country" type="text" defaultValue="India" style={styles.input} required />
-             </div>
+              </>
+            )}
 
-             {/* Conditional Fields for Existing Shop */}
-             {status === "Existing Retailer" && (
-               <>
-                 <div style={styles.inputGroup}>
-                    <label>Store Name *</label>
-                    <input name="storeName" type="text" placeholder="Full name of your existing shop" style={styles.input} required />
-                 </div>
-                 <div style={styles.inputGroup}>
-                    <label>Full Shop Address *</label>
-                    <textarea name="fullAddress" style={{...styles.input, height: 80}} placeholder="Door No, Street, Landmark, Pincode" required></textarea>
-                 </div>
-               </>
-             )}
+            {/* Conditional Fields for Influencer */}
+            {status === "Social Media Influencer" && (
+              <>
+                <div style={styles.inputGroup}>
+                  <label>Instagram Profile Link *</label>
+                  <input name="instagram" type="url" placeholder="https://instagram.com/yourname" style={styles.input} required />
+                </div>
+                <div style={styles.inputGroup}>
+                  <label>Facebook Profile/Page Link *</label>
+                  <input name="facebook" type="url" placeholder="https://facebook.com/yourname" style={styles.input} required />
+                </div>
+                <div style={{ ...styles.inputGroup, background: "#fdf8e6", padding: 15, borderRadius: 10, border: "1px solid #faead1" }}>
+                  <p style={{ fontSize: 13, color: "#856404", margin: 0 }}>
+                    💡 <strong>Tip:</strong> If you have more links (YouTube, TikTok, etc.), please submit them on our WhatsApp number <strong>9586346332</strong> after applying.
+                  </p>
+                </div>
+              </>
+            )}
 
-             {/* Conditional Fields for Influencer */}
-             {status === "Social Media Influencer" && (
-                <>
-                  <div style={styles.inputGroup}>
-                     <label>Instagram Profile Link *</label>
-                     <input name="instagram" type="url" placeholder="https://instagram.com/yourname" style={styles.input} required />
-                  </div>
-                  <div style={styles.inputGroup}>
-                     <label>Facebook Profile/Page Link *</label>
-                     <input name="facebook" type="url" placeholder="https://facebook.com/yourname" style={styles.input} required />
-                  </div>
-                  <div style={{...styles.inputGroup, background: "#fdf8e6", padding: 15, borderRadius: 10, border: "1px solid #faead1" }}>
-                     <p style={{ fontSize: 13, color: "#856404", margin: 0 }}>
-                       💡 <strong>Tip:</strong> If you have more links (YouTube, TikTok, etc.), please submit them on our WhatsApp number <strong>9586346332</strong> after applying.
-                     </p>
-                  </div>
-                </>
-             )}
+            <div style={styles.inputGroup}>
+              <label>Why do you want to partner with Ethnicaa? *</label>
+              <textarea name="message" style={{ ...styles.input, height: 100 }} placeholder="Tell us about your customer base and growth plans..." required></textarea>
+            </div>
 
-             <div style={styles.inputGroup}>
-                <label>Why do you want to partner with Ethnicaa? *</label>
-                <textarea name="message" style={{...styles.input, height: 100}} placeholder="Tell us about your customer base and growth plans..." required></textarea>
-             </div>
-
-             <button type="submit" style={styles.btn} disabled={loading}>
-                {loading ? "Submitting..." : "Submit Application for Review"}
-             </button>
+            <button type="submit" style={styles.btn} disabled={loading}>
+              {loading ? "Submitting..." : "Submit Application for Review"}
+            </button>
           </form>
           <p style={{ textAlign: "center", fontSize: 13, color: "#999", marginTop: 20 }}>
             By submitting, you agree to Ethnicaa&apos;s Partner Terms & Conditions.
@@ -183,11 +183,11 @@ export default function PartnerApplicationPage() {
       <section style={styles.statusFlow}>
         <h2>How Your Website Goes Live</h2>
         <div style={styles.flowGrid}>
-           <div style={styles.flowItem}><span>1</span><p>Submit App</p></div>
-           <div style={styles.flowItem}><span>2</span><p>Admin Review</p></div>
-           <div style={styles.flowItem}><span>3</span><p>Branding Design</p></div>
-           <div style={styles.flowItem}><span>4</span><p>Demo Link</p></div>
-           <div style={{ ...styles.flowItem, color: "#d32f2f", fontWeight: 700 }}><span>5</span><p>Site Live!</p></div>
+          <div style={styles.flowItem}><span>1</span><p>Submit App</p></div>
+          <div style={styles.flowItem}><span>2</span><p>Admin Review</p></div>
+          <div style={styles.flowItem}><span>3</span><p>Branding Design</p></div>
+          <div style={styles.flowItem}><span>4</span><p>Demo Link</p></div>
+          <div style={{ ...styles.flowItem, color: "#d32f2f", fontWeight: 700 }}><span>5</span><p>Site Live!</p></div>
         </div>
       </section>
     </div>

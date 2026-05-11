@@ -2,8 +2,8 @@ import Link from "next/link";
 import TrustBadges from "@/components/TrustBadges";
 
 export const metadata = {
-  title: "Ethnicaa for Retailers & Boutique Owners | B2B Wholesale Sourcing",
-  description: "Scale your ethnic wear business with Ethnicaa. We provide bulk sourcing, make-to-order services, and verified quality control for retail shop owners and boutique chains.",
+  title: "Ethnicaa for Retailers & Boutique Owners | B2B Wholesale Sourcing & Ecommerce Growth Support",
+  description: "Scale your ethnic wear business with Ethnicaa. We provide bulk sourcing, make-to-order services, and branded online store assistance for boutique owners and retail chains.",
 };
 
 export default function RetailersPage() {
@@ -28,6 +28,10 @@ export default function RetailersPage() {
             <h3>Global Export Expertise</h3>
             <p>Full support for international retail buyers. We handle export documentation, GST compliance, and secure sea/air freight logistics to 50+ countries.</p>
           </div>
+          <div style={styles.card}>
+            <h3>Boutique Growth Ecosystem</h3>
+            <p>Selected wholesale partners may receive **branded ecommerce support** and **online selling infrastructure** to help scale their boutique brand globally.</p>
+          </div>
         </div>
       </section>
 
@@ -38,6 +42,7 @@ export default function RetailersPage() {
           <li><strong>Verified QC:</strong> 3-layer quality check ensures 0% defect rate at your store.</li>
           <li><strong>Price Advantage:</strong> Direct-from-loom rates give you a 20-30% higher margin.</li>
           <li><strong>Trend Leadership:</strong> Weekly catalog updates from the heart of Surat.</li>
+          <li><strong>Ecommerce Growth Support:</strong> Exclusive access to digital infrastructure for approved partners.</li>
         </ul>
         <div style={styles.ctaBox}>
           <p>Looking for a high-volume sourcing partner?</p>
