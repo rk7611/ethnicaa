@@ -146,6 +146,13 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
+        {/* Inline Critical CSS to fix 2.4s LCP Render Delay */}
+        <style dangerouslySetInnerHTML={{ __html: `
+          h1 { visibility: visible !important; opacity: 1 !important; display: block !important; }
+          .lcp-heading { font-family: sans-serif; font-weight: 800; text-align: center; margin-bottom: 30px; margin-top: 10px; font-size: 26px; }
+          @media (max-width: 600px) { .lcp-heading { font-size: 22px !important; } }
+        `}} />
+
         {/* Global Schema */}
         <script
           type="application/ld+json"
