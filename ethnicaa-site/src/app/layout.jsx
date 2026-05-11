@@ -158,7 +158,7 @@ export default function RootLayout({ children }) {
         {/* Global Schema */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(globalSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(rootLayoutSchema) }}
         />
       </head>
 
