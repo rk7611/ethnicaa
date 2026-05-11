@@ -169,7 +169,11 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
         }}
       />
 
-      {currentPage === 1 && <TrustBadges />}
+      {currentPage === 1 && (
+        <div style={{ minHeight: 140 }}>
+          <TrustBadges />
+        </div>
+      )}
 
       {currentPage === 1 && categories.length > 0 && (
         <div style={styles.section}>
@@ -293,18 +297,20 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
         </div>
       )}
 
-      <InternalLinking 
-        links={[
-          { href: "/collections/kurti-wholesale-surat", label: "Kurti Wholesale Surat" },
-          { href: "/collections/saree-manufacturer-surat", label: "Saree Manufacturer Surat" },
-          { href: "/collections/kurti-wholesaler-mumbai", label: "Mumbai Wholesale Market" },
-          { href: "/collections/kurti-market-delhi", label: "Delhi Kurti Market" },
-          { href: "/collections/jaipuri-kurtis-wholesale", label: "Jaipuri Kurtis" },
-          { href: "/collections/wholesale-pakistani-suits", label: "Pakistani Suits" },
-          { href: "/collections/best-kurti-wholesaler-surat", label: "Best Wholesalers" },
-          { href: "/collections/wholesale-sarees-usa", label: "Export Sarees USA" },
-        ]} 
-      />
+      <div style={{ minHeight: 350 }}>
+        <InternalLinking 
+          links={[
+            { href: "/collections/kurti-wholesale-surat", label: "Kurti Wholesale Surat" },
+            { href: "/collections/saree-manufacturer-surat", label: "Saree Manufacturer Surat" },
+            { href: "/collections/kurti-wholesaler-mumbai", label: "Mumbai Wholesale Market" },
+            { href: "/collections/kurti-market-delhi", label: "Delhi Kurti Market" },
+            { href: "/collections/jaipuri-kurtis-wholesale", label: "Jaipuri Kurtis" },
+            { href: "/collections/wholesale-pakistani-suits", label: "Pakistani Suits" },
+            { href: "/collections/best-kurti-wholesaler-surat", label: "Best Wholesalers" },
+            { href: "/collections/wholesale-sarees-usa", label: "Export Sarees USA" },
+          ]} 
+        />
+      </div>
 
       <div style={styles.section}>
         <h2 style={styles.heading}>Frequently Asked Questions</h2>
@@ -408,8 +414,8 @@ const styles = {
   categoryCount: { fontSize: 13, color: "#777", marginTop: 4 },
   grid: { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: 16 },
   card: { background: "#fff", borderRadius: 16, padding: 12, boxShadow: "0 4px 12px rgba(0,0,0,0.05)" },
-  cardImg: { width: "100%", height: "auto", borderRadius: 12, aspectRatio: "4/5", objectFit: "cover" },
-  imgContainer: { position: "relative" },
+  cardImg: { width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s ease" },
+  imgContainer: { position: "relative", width: "100%", aspectRatio: "300 / 380", background: "#f9f9f9", borderRadius: 12, overflow: "hidden" },
   cardText: { marginTop: 10, textAlign: "center", fontWeight: 700, fontSize: 14 },
   price: { marginTop: 6, fontSize: 15, fontWeight: 800, textAlign: "center", color: "#B8860B" },
   priceOffer: { fontSize: 15, fontWeight: 800, textAlign: "center", color: "#d32f2f" },
