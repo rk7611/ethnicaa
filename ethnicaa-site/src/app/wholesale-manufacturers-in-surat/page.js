@@ -18,7 +18,7 @@ export default function SuratManufacturersPage() {
       <Breadcrumbs items={[{ name: "Surat Manufacturers", url: "" }]} />
 
       <section style={styles.hero}>
-        <h1 style={styles.heroTitle}>Direct From Surat&apos;s Leading Manufacturers</h1>
+        <h1 style={styles.heroTitle} className="lcp-heading">Direct From Surat&apos;s Leading Manufacturers</h1>
         <p style={styles.heroSub}>
           Ethnicaa is your primary bridge to the world-renowned Surat Textile Market. Skip the middlemen and source ethnic wear at authentic factory prices.
         </p>

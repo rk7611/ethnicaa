@@ -1,9 +1,11 @@
 import "./globals.css";
 import Header from "@/components/Header";
 import { Inter } from "next/font/google";
-import Footer from "@/components/Footer";
-import WhatsAppPopup from "@/components/WhatsAppPopup";
 import Script from "next/script";
+import dynamic from "next/dynamic";
+
+const Footer = dynamic(() => import("@/components/Footer"), { ssr: true });
+const WhatsAppPopup = dynamic(() => import("@/components/WhatsAppPopup"), { ssr: false });
 
 const inter = Inter({ subsets: ["latin"] });
 

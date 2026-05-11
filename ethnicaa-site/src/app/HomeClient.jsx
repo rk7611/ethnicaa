@@ -15,16 +15,18 @@ import { db } from "@/lib/firebase";
 import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import BannerSlider from "@/components/BannerSlider";
-import EnquireButton from "@/components/EnquireButton";
-import Pagination from "@/components/Pagination";
-import TrustBadges from "@/components/TrustBadges";
+const BannerSlider = dynamic(() => import("@/components/BannerSlider"), { ssr: false });
+const Pagination = dynamic(() => import("@/components/Pagination"), { ssr: true });
 
 import { blogs } from "@/lib/blog-data";
 import { consolidateCategories } from "@/lib/category-utils";
 import { isValidImageUrl, generateProductAlt } from "@/utils/imageUtils";
 import { keywordPages } from "@/lib/keyword-content";
-import InternalLinking from "@/components/InternalLinking";
+
+// Lazy load below-the-fold components to improve LCP/FCP
+const InternalLinking = dynamic(() => import("@/components/InternalLinking"), { ssr: false });
+const TrustBadges = dynamic(() => import("@/components/TrustBadges"), { ssr: true });
+const EnquireButton = dynamic(() => import("@/components/EnquireButton"), { ssr: false });
 
 /* ============================================================
     FETCH BANNERS

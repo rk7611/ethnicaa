@@ -97,11 +97,16 @@ export const revalidate = 3600;
 
 import { consolidateCategories } from "@/lib/category-utils";
 
-function toPlain(value) {
-  return JSON.parse(JSON.stringify(value));
-}
+let homeCache = null;
+let lastCacheUpdate = 0;
+const CACHE_DURATION = 600 * 1000; // 10 minutes
 
 async function getHomeData(page = 1) {
+  // Simple in-memory cache for the first page to ensure blazing fast TTFB
+  if (page === 1 && homeCache && Date.now() - lastCacheUpdate < CACHE_DURATION) {
+    return homeCache;
+  }
+
   const PAGE_SIZE = 30;
 
   // Parallel fetch for counts and initial data
@@ -170,7 +175,18 @@ async function getHomeData(page = 1) {
     image: data.image || "/logo.png"
   })).slice(0, 10);
 
-  return { banners, categories, products, totalPages, totalProductsCount, brands };
+  const result = { banners, categories, products, totalPages, totalProductsCount, brands };
+  
+  if (page === 1) {
+    homeCache = result;
+    lastCacheUpdate = Date.now();
+  }
+
+  return result;
+}
+
+function toPlain(value) {
+  return JSON.parse(JSON.stringify(value));
 }
 
 import HomeSEOContent from "@/components/HomeSEOContent";
