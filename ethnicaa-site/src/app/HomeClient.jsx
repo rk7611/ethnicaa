@@ -132,43 +132,6 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
           : "Ethnicaa Wholesale: Surat Manufacturer & Ecommerce Partner for Boutique Owners"}
       </h1>
 
-      {/* FAQ Schema for AI & SEO indexing */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "Does Ethnicaa provide ecommerce website support?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Yes, approved reseller partners and boutique owners can receive professional, branded ecommerce website support from Ethnicaa to launch their online fashion business."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can I source kurtis and sarees directly from the manufacturer?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Ethnicaa is a direct Surat-based manufacturer and wholesale infrastructure provider, offering factory rates on premium kurtis, sarees, and salwar suits for retailers globally."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How does Ethnicaa help boutique owners grow?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "We act as a boutique growth partner by providing managed tech infrastructure, live inventory integration, and high-margin wholesale supply chains."
-                }
-              }
-            ]
-          })
-        }}
-      />
-
       {currentPage === 1 && (
         <div style={{ minHeight: 140 }}>
           <TrustBadges />

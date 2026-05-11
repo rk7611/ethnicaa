@@ -24,6 +24,22 @@ const homeFaqs = [
     answer: "For the best wholesale sarees and kurtis in Surat, visit Ethnicaa Wholesale at Shree Om Market, Ring Road. We provide direct factory-access to the latest catalogs, eliminating middlemen to give you the best profit margins. You can also browse and order online via our website with pan-India and global shipping."
   },
   {
+    question: "How can I start a boutique business with Ethnicaa?",
+    answer: "Ethnicaa provides end-to-end support for new boutiques, including direct Surat manufacturer pricing and managed ecommerce infrastructure for approved partners."
+  },
+  {
+    question: "Does Ethnicaa provide ecommerce website support for resellers?",
+    answer: "Yes, we help approved partners launch their own branded online stores with live inventory integration and tech support."
+  },
+  {
+    question: "How to source wholesale kurtis and sarees directly from Surat?",
+    answer: "Ethnicaa is a direct Surat-based manufacturer. You can source premium ethnic wear at factory rates through our partner onboarding program."
+  },
+  {
+    question: "What is the minimum order quantity for wholesale?",
+    answer: "Ethnicaa focuses on supporting boutiques and resellers, offering flexible wholesale volumes to help businesses scale without massive inventory risk."
+  },
+  {
     question: "Are these direct factory prices from Surat?",
     answer: "Absolutely. Ethnicaa is based in the heart of the Surat textile market. We work directly with manufacturers to bring you factory-direct rates, eliminating middlemen and helping you maximize your margins."
   },
@@ -90,6 +106,21 @@ export async function generateMetadata({ searchParams }) {
       description: "Shop wholesale sarees, kurtis & Pakistani suits direct from Surat manufacturers. Best B2B prices.",
       images: ["https://ethnicaa.com/logo.png"],
     },
+  };
+}
+
+function buildItemListSchema(products) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "numberOfItems": products.length,
+    "itemListElement": products.map((p, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "url": `https://ethnicaa.com/product/${p.slug}`,
+      "name": p.catalog || p.name,
+      "image": p.images?.[0] || ""
+    }))
   };
 }
 
@@ -193,10 +224,16 @@ import HomeSEOContent from "@/components/HomeSEOContent";
 
 export default async function Home({ searchParams }) {
   const page = Math.min(parseInt(searchParams?.page) || 1, 50); // Prevent deep-crawl timeouts
-  const { banners, categories, products, totalPages, brands } = await getHomeData(page);
+  const { banners, categories, products, totalPages, brands, totalProductsCount } = await getHomeData(page);
+
+  const itemListSchema = buildItemListSchema(products);
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([globalSchema, itemListSchema]) }}
+      />
       <FAQSchema faqs={homeFaqs} id="home-faq-schema" />
       <HomeClient
         initialBanners={toPlain(banners)}
@@ -206,6 +243,7 @@ export default async function Home({ searchParams }) {
         homeFaqs={homeFaqs}
         currentPage={page}
         totalPages={totalPages}
+        totalProductsCount={totalProductsCount}
       >
         {page === 1 && <HomeSEOContent />}
       </HomeClient>
