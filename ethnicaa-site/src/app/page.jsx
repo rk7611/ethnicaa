@@ -5,6 +5,8 @@ import { isValidImageUrl } from "@/utils/imageUtils";
 import { brandsData } from "@/lib/brands-data";
 import { cleanTitle } from "@/lib/metadata-utils";
 import FAQSchema from "@/components/FAQSchema";
+import HomeSEOContent from "@/components/HomeSEOContent";
+import { consolidateCategories } from "@/lib/category-utils";
 
 const homeFaqs = [
   {
@@ -130,6 +132,7 @@ export async function generateMetadata({ searchParams }) {
 }
 
 function buildItemListSchema(products) {
+  if (!products || !Array.isArray(products)) return null;
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -146,105 +149,101 @@ function buildItemListSchema(products) {
 
 export const revalidate = 3600;
 
-import { consolidateCategories } from "@/lib/category-utils";
-
 let homeCache = null;
 let lastCacheUpdate = 0;
 const CACHE_DURATION = 600 * 1000; // 10 minutes
 
 async function getHomeData(page = 1) {
-  // Simple in-memory cache for the first page to ensure blazing fast TTFB
   if (page === 1 && homeCache && Date.now() - lastCacheUpdate < CACHE_DURATION) {
     return homeCache;
   }
 
   const PAGE_SIZE = 30;
 
-  // Parallel fetch for counts and initial data
-  // We use a faster query approach for home to ensure TTFB stays under 1s
-  const [bannersSnap, catsSnap, countSnap] = await Promise.all([
-    getDocs(query(collection(db, "banners"), orderBy("order", "asc"))),
-    getDocs(collection(db, "categories")),
-    getCountFromServer(query(collection(db, "products"), where("status", "in", ["published", "active"]))),
-  ]);
+  try {
+    const [bannersSnap, catsSnap, countSnap] = await Promise.all([
+      getDocs(query(collection(db, "banners"), orderBy("order", "asc"))),
+      getDocs(collection(db, "categories")),
+      getCountFromServer(query(collection(db, "products"), where("status", "==", "published"))),
+    ]);
 
-  const totalProductsCount = countSnap.data().count;
-  const totalOffersCount = 0; // Simplified for home page speed; actual count can load on /offers page
-  const totalPages = Math.ceil(totalProductsCount / PAGE_SIZE);
+    const totalProductsCount = countSnap.data().count;
+    const totalOffersCount = 0;
+    const totalPages = Math.ceil(totalProductsCount / PAGE_SIZE);
 
-  // Optimized Product Query: 
-  // Since we can't easily use startAfter without a snapshot in a stateless SSR,
-  // we fetch just what we need for the current page if possible, 
-  // or use the current offset-like limit.
-  const productsQuery = query(
-    collection(db, "products"),
-    where("status", "in", ["published", "active"]),
-    orderBy("createdAt", "desc"),
-    limit(page * PAGE_SIZE)
-  );
+    const productsQuery = query(
+      collection(db, "products"),
+      where("status", "==", "published"),
+      orderBy("createdAt", "desc"),
+      limit(page * PAGE_SIZE)
+    );
 
-  const prodsSnap = await getDocs(productsQuery);
+    const prodsSnap = await getDocs(productsQuery);
 
-  const banners = bannersSnap.docs
-    .map(d => ({ id: d.id, ...d.data() }))
-    .filter(b => isValidImageUrl(b.imageURL));
+    const banners = bannersSnap.docs
+      .map(d => ({ id: d.id, ...d.data() }))
+      .filter(b => isValidImageUrl(b.imageURL));
 
-  const rawCategories = catsSnap.docs.map(d => {
-    const cat = d.data();
-    return {
-      slug: d.id,
-      name: cat.name ?? d.id.replace(/-/g, " "),
-      cover: isValidImageUrl(cat.cover) ? cat.cover : null,
-      count: cat.count || 0,
-    };
-  });
+    const rawCategories = catsSnap.docs.map(d => {
+      const cat = d.data();
+      return {
+        slug: d.id,
+        name: cat.name ?? d.id.replace(/-/g, " "),
+        cover: isValidImageUrl(cat.cover) ? cat.cover : null,
+        count: cat.count || 0,
+      };
+    });
 
-  const categories = consolidateCategories(rawCategories, totalProductsCount, totalOffersCount);
+    const categories = consolidateCategories(rawCategories, totalProductsCount, totalOffersCount);
 
-  // Only take the slice for the current page to keep the initial state small
-  const start = (page - 1) * PAGE_SIZE;
-  const allFetchedProducts = prodsSnap.docs.map(d => {
-    const data = d.data();
-    const createdAt = data.createdAt?.seconds || data.updatedAt?.seconds || data.timestamp || 0;
-    return { id: d.id, ...data, _order: createdAt };
-  });
-  const products = allFetchedProducts.slice(start, start + PAGE_SIZE).map(p => ({
-    id: p.id,
-    slug: p.slug || p.id,
-    name: p.name || "",
-    catalog: p.catalog || "",
-    images: p.images?.slice(0, 1) || [],
-    price: p.price || 0,
-    offer_price: p.offer_price || 0,
-    offer: p.offer || false,
-    discount_percent: p.discount_percent || 0,
-  }));
+    const start = (page - 1) * PAGE_SIZE;
+    const allFetchedProducts = prodsSnap.docs.map(d => {
+      const data = d.data();
+      const createdAt = data.createdAt?.seconds || data.updatedAt?.seconds || data.timestamp || 0;
+      return { id: d.id, ...data, _order: createdAt };
+    });
+    
+    const products = allFetchedProducts.slice(start, start + PAGE_SIZE).map(p => ({
+      id: p.id,
+      slug: p.slug || p.id,
+      name: p.name || "",
+      catalog: p.catalog || "",
+      images: p.images?.slice(0, 1) || [],
+      price: p.price || 0,
+      offer_price: p.offer_price || 0,
+      offer: p.offer || false,
+      discount_percent: p.discount_percent || 0,
+    }));
 
-  const brands = Object.entries(brandsData).map(([slug, data]) => ({
-    slug,
-    name: data.name,
-    image: data.image || "/logo.png"
-  })).slice(0, 10);
+    const brands = Object.entries(brandsData).map(([slug, data]) => ({
+      slug,
+      name: data.name,
+      image: data.image || "/logo.png"
+    })).slice(0, 10);
 
-  const result = { banners, categories, products, totalPages, totalProductsCount, brands };
-  
-  if (page === 1) {
-    homeCache = result;
-    lastCacheUpdate = Date.now();
+    const result = { banners, categories, products, totalPages, totalProductsCount, brands };
+    
+    if (page === 1) {
+      homeCache = result;
+      lastCacheUpdate = Date.now();
+    }
+
+    return result;
+  } catch (error) {
+    console.error("Home Data Fetch Error:", error);
+    return { banners: [], categories: [], products: [], totalPages: 0, totalProductsCount: 0, brands: [] };
   }
-
-  return result;
 }
 
 function toPlain(value) {
+  if (!value) return value;
   return JSON.parse(JSON.stringify(value));
 }
 
-import HomeSEOContent from "@/components/HomeSEOContent";
-
 export default async function Home({ searchParams }) {
-  const page = Math.min(parseInt(searchParams?.page) || 1, 50); // Prevent deep-crawl timeouts
-  const { banners, categories, products, totalPages, brands, totalProductsCount } = await getHomeData(page);
+  const page = Math.min(parseInt(searchParams?.page) || 1, 50);
+  const data = await getHomeData(page);
+  const { banners, categories, products, totalPages, brands, totalProductsCount } = data;
 
   const itemListSchema = buildItemListSchema(products);
 
