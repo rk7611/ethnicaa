@@ -74,7 +74,7 @@ export const metadata = {
 };
 
 // JSON-LD Global Schema (Enhanced for AI Engine Domination)
-const globalSchema = {
+const rootLayoutSchema = {
   "@context": "https://schema.org",
   "@graph": [
     {
