@@ -214,7 +214,7 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
                     <div style={styles.imgContainer}>
                       {(index < 10 || isValidImageUrl(p.images?.[0])) && (
                         <Image 
-                          src={p.images[0] || "/logo.png"} 
+                          src={index < 4 ? `${p.images[0]}?noproc=1` : (p.images[0] || "/logo.png")} 
                           alt={generateProductAlt(p)} 
                           width={300} 
                           height={380} 

@@ -1,11 +1,16 @@
 export default function imageLoader({ src, width, quality }) {
-  // If it's a local asset (starts with /), don't optimize through weserv
+  // 1. If it's a local asset (starts with /), don't optimize through weserv
   if (src.startsWith("/")) {
     return `${src}?w=${width}`;
   }
 
-  // Use wsrv.nl (Weserv) as a free image optimizer
-  // It resizes, converts to webp, and caches images for free.
+  // 2. PROXY BYPASS FOR LCP: If src contains 'noproc=1', return the raw URL.
+  // This saves the DNS/Connection hop for the most critical above-the-fold images.
+  if (src.includes("noproc=1")) {
+    return src.replace(/[?&]noproc=1/, "");
+  }
+
+  // 3. Use wsrv.nl (Weserv) as a free image optimizer for all other images.
   const url = new URL("https://wsrv.nl/");
   url.searchParams.set("url", src);
   url.searchParams.set("w", width);
