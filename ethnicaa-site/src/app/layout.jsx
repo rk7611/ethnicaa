@@ -84,33 +84,33 @@ const rootLayoutSchema = {
       "legalName": "Ethnicaa Textiles",
       "url": "https://ethnicaa.com",
       "logo": "https://ethnicaa.com/logo.png",
-      "description": "Ethnicaa is a fashion business infrastructure provider and wholesale textile supplier, helping boutique owners and retailers launch branded ecommerce stores.",
+      "description": "Ethnicaa is a premier Surat-based textile manufacturer and global B2B export hub, providing wholesale ethnic wear and ecommerce infrastructure to boutiques and resellers in 50+ countries.",
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
-        "name": "Reseller Ecosystem Services",
+        "name": "Global Wholesale & Export Services",
         "itemListElement": [
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Boutique Growth Partnership",
-              "description": "End-to-end sourcing and inventory management for established boutique owners."
+              "name": "International Boutique Sourcing",
+              "description": "Bulk ethnic wear supply with express global shipping to USA, UK, Canada, Australia, and UAE."
             }
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Branded Ecommerce Website Support",
-              "description": "Professional storefront setup for approved reseller partners, integrated with live Ethnicaa inventory."
+              "name": "Surat Factory-Direct Export",
+              "description": "Direct manufacturing rates for sarees, kurtis, and Pakistani suits, bypassing middlemen for maximum retail margins."
             }
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Wholesale Fashion Infrastructure",
-              "description": "Direct Surat manufacturing and supply chain support for global fashion brands."
+              "name": "Managed B2B Ecommerce Support",
+              "description": "Professional online store setup and inventory management for approved international reseller partners."
             }
           }
         ]
@@ -118,17 +118,17 @@ const rootLayoutSchema = {
       "contactPoint": {
         "@type": "ContactPoint",
         "telephone": "+91-9586346332",
-        "contactType": "customer service",
-        "areaServed": "Global",
+        "contactType": "wholesale sales",
+        "areaServed": ["IN", "US", "GB", "CA", "AU", "AE"],
         "availableLanguage": ["Hindi", "English", "Gujarati"]
       }
     },
     {
       "@type": "WebSite",
       "@id": "https://ethnicaa.com/#website",
-      "name": "Ethnicaa Wholesale & Business Hub",
+      "name": "Ethnicaa: Global Wholesale Fashion Hub",
       "url": "https://ethnicaa.com",
-      "description": "B2B platform providing wholesale ethnic wear and ecommerce setup support for retailers."
+      "description": "Digital B2B marketplace for Surat wholesale sarees, kurtis, and salwar suits with worldwide express delivery."
     }
   ],
 };

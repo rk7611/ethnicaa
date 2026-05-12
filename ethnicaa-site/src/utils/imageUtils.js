@@ -5,16 +5,18 @@
  * It also filters out hostnames that are not configured in next.config.js to prevent runtime crashes.
  */
 /**
- * Generates SEO-optimized Alt Text for product images
+ * Generates SEO-optimized Alt Text for product images (High-Intent B2B)
  */
 export function generateProductAlt(product) {
-  if (!product) return "Ethnicaa Wholesale Surat Manufacturer";
+  if (!product) return "Ethnicaa: Surat Wholesale Manufacturer & Boutique Export Hub";
   
   const name = product.catalog || product.name || "Product";
   const category = (product.categories && product.categories[0]) || (product.categoryNames && product.categoryNames[0]) || "";
+  const brand = product.brand || "Ethnicaa";
   const fabric = product.fabric || (product.fabricNames && product.fabricNames[0]) || "";
   
-  return `Buy ${name} ${category} ${fabric} Wholesale Surat Manufacturer - Ethnicaa`.trim().replace(/\s+/g, ' ');
+  // High-Conversion B2B String Pattern
+  return `${brand} ${name} ${category} ${fabric} Wholesale Surat Manufacturer - B2B Supplier & Boutique Export Hub`.trim().replace(/\s+/g, ' ');
 }
 
 export function isValidImageUrl(url) {
