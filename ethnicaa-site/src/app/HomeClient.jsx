@@ -135,9 +135,9 @@ export default function HomePage({ initialBanners, initialCategories, initialPro
       {currentPage === 1 && categories.length > 0 && (
         <div style={styles.section}>
           <h2 style={styles.heading}>Shop by Category</h2>
-          <div style={styles.categories}>
+          <div className="category-scroll-container" style={styles.categories}>
             {categories.map((c) => (
-              <Link key={c.slug} href={c.href || `/category/${c.slug}`} className="premium-card" style={styles.categoryCard}>
+              <Link key={c.slug} href={c.href || `/category/${c.slug}`} className="premium-card category-scroll-item" style={styles.categoryCard}>
                 <div style={styles.categoryTitle}>{c.name}</div>
                 <div style={styles.categoryCount}>{c.count} items</div>
               </Link>
