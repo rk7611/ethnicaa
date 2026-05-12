@@ -78,7 +78,7 @@ export default function Header() {
             </nav>
 
             <div style={styles.sidebarFooter}>
-              <p style={{ fontSize: 12, color: "#777" }}>Surat's #1 Wholesale B2B Marketplace</p>
+              <p style={{ fontSize: 12, color: "#777" }}>Surat&apos;s #1 Wholesale B2B Marketplace</p>
             </div>
           </div>
         </div>
