@@ -600,7 +600,6 @@ export const blogs = [
       <p><strong>Ready to transform your boutique?</strong><br/>
       👉 <a href="/retailers">Explore Boutique Growth Services →</a></p>
     `
-  }
   },
   {
     slug: "finding-reliable-kurti-manufacturers-india-wholesale-guide",
